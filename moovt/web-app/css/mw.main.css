@@ -1,0 +1,273 @@
+@charset "utf-8";
+
+html {
+	font-family: "Lucida", "Lucida Sans Unicode", Verdana, Arial, Helvetica,
+		sans-serif;
+}
+
+.clIndexFloatLeft {
+	display: inline;
+	float: left;
+}
+
+.clIndexTopControls {
+
+/*border: dotted 1px #b7ddf2;*/
+}
+
+
+.clDivSignin {
+	display: block;
+	min-height:31px;
+	text-align: right;
+    /*border: dotted 1px green;*/
+}   
+
+.divMainMenu {
+	display: block;
+} 
+
+.clImage {
+	padding: 0px;
+	margin: 0px;
+	max-width:45px; 
+	max-height:45px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto
+	/*border: thin dotted blue;*/
+}
+
+.clEmptyRow {
+	margin-bottom: 3px;
+	display: block;
+	/*border: dotted 1px #b7ddf2;*/
+}
+
+.clDoubleEmptyRow {
+	display: block;
+	height: 12px;
+	
+}
+
+
+.clBottomStatus {
+	background-color: #e3e3e3;
+	color: #2e2e2e;
+	height: 1.2em;
+}
+
+.clTab {
+	height: 40em;
+}
+
+.clCloseTab {
+	background-repeat: no-repeat;
+	background-image: url(./images/dialog-close-5.png);
+	background-position:left bottom;
+	opacity:0.3;
+	filter:alpha(opacity=30); /* For IE8 and earlier */
+}  
+
+.clCloseTab:hover {
+	background-repeat: no-repeat;
+	background-image: url(./images/dialog-close-5.png);
+	background-position:left bottom;
+	opacity:1.0;
+	filter:alpha(opacity=100); /* For IE8 and earlier */
+	
+}  
+
+
+
+.clNewsImage {
+	display: inline;
+	margin: 65px;
+	float: left;
+}
+
+.clNewsText {
+	float: left;
+	display: inline;
+	margin: 65px;
+	width: 700px;
+}
+
+.clForm {
+	padding: 30px;
+	background: #ebf4fb;
+	font-size: 12px;
+}
+
+.clFormTitle {
+	padding-bottom: 10px;
+	font-family: arial, helvetica, sans-serif;
+	font-size: 16px;
+}
+
+.clFormRow {
+	margin-bottom: 10px;
+	/*border: dotted 1px #b7ddf2;*/
+}
+
+.clSigninRow {
+	/*border: dotted 1px #b7ddf2;*/
+}
+
+.clFormField {
+	display: inline-block;
+	margin-right: 5px;
+	vertical-align: middle;
+	/*border: dotted 1px #b7ddf2;*/
+}
+
+.clFormField label {
+	display: block;
+	padding-bottom: 5px;
+	font-weight: bold;
+	color: #666;
+}
+
+.clFormField span {
+	display: inline-block;
+	margin-left: 5px;
+	font-size: 10px;
+	vertical-align: middle;
+}
+
+.clFormField input:hover {
+	background-color: #FFFBCF; /* light yellow */
+	border: 1px solid #999;
+}
+
+.clFormField input:focus {
+	background-color: #FFFBCF; /* light yellow */
+	border: 1px solid #999;
+}
+
+.clFormField button:hover,.clFormField input[type="button"]:hover,.clFormField input[type="submit"]:hover {
+	border-color: #a99f9a;
+	background-color: #a99f9a
+}
+
+.clFormField button:focus,.clFormField input[type="button"]:focus, .clFormField input[type="submit"]:focus {
+	border-color: #a99f9a;
+	background-color: #a99f9a
+}
+
+.clFormField button,.clFormField input[type="button"],.clFormField input[type="submit"] {
+	font-family: "Lucida", "Lucida Sans Unicode", Verdana, Arial, Helvetica,
+		sans-serif;
+	font-size: 14px;	
+	float: left;
+}
+
+/* Input sizes */
+.clInputTiny {
+	width: 25px;
+}
+
+.clInputShort {
+	width: 75px;
+}
+
+.clInputNormal {
+	width: 150px;
+}
+
+.clInputMedium {
+	width: 200px;
+}
+
+.clInputLarge {
+	width: 275px;
+}
+
+.clInputLong {
+	width: 350px;
+}
+
+.clProfile {
+	height: 35px;
+}
+
+.clSigninForm {
+	display: inline;
+	float: left;
+	margin-top: 150px;
+	margin-left: 250px;
+	padding: 30px;
+	background: #ebf4fb;
+	font-size: 12px;
+
+}
+
+.clCheckbox {
+	display: inline;
+	float: left;
+	padding-top: 5px;
+	padding-left: 20px;
+	/*border: thin dotted blue;*/
+}
+
+.clCheckbox label {
+    display: block;
+    display: inline;
+	float: left;
+	padding-top: 3px;
+	padding-left: 20px;
+    text-indent: -15px;
+}
+.clCheckbox  input {
+    width: 30px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    vertical-align: bottom;
+    position: relative;
+    top: -1px;
+    overflow: hidden;
+}
+
+.clMessage {
+	color: red;
+	padding-left: 5px;
+	width: 275px;
+	/*border: thin dotted blue;*/
+}
+
+.clSigninMessage {
+	color: red;
+	padding-top: 3px;
+	padding-left: 802px;
+	font-size: small;
+	text-align: left;
+	/*border: thin dotted blue;*/
+}
+
+.clTopRightUser {
+	padding-top: 4px;
+}
+.clDashboard {
+	
+	padding: 20px;
+}
+
+.clNewCustomerWelcomeMessage {
+	border: black;
+	padding: 10px;
+	background-color: rgb(238,238,238);
+	box-shadow: 5px 5px 3px #888888;
+	font-size: 14px;
+}
+
+
+.clCloseWelcomeMessage{
+	background-repeat: no-repeat;
+	background-image: url(./images/window-close-4.png);
+	background-position:left bottom;
+	opacity:1.0;
+	filter:alpha(opacity=100); /* For IE8 and earlier */
+	cursor: hand; cursor: pointer; 
+	
+}  

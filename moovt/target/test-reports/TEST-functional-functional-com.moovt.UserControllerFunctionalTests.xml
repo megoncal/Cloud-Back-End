@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="USWPCOGONSALED1" name="com.moovt.UserControllerFunctionalTests" tests="2" time="1.562" timestamp="2013-02-08T16:12:17">
+  <properties />
+  <testcase classname="com.moovt.UserControllerFunctionalTests" name="testCreateUserInExistingTenantBadTenantEnglish" time="1.5" />
+  <testcase classname="com.moovt.UserControllerFunctionalTests" name="testCreateUserInExistingTenantBadMessage" time="0.062" />
+  <system-out><![CDATA[--Output from testCreateUserInExistingTenantBadTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "TheBadTenant", "username": "moovieGoer", "password":"moovieGoer", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"code":"ERROR","msg":"This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user."}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"code":"ERROR","msg":"A JSONObject text must begin with '{' at character 0 of "}
+================================================================================
+#
+]]></system-out>
+  <system-err><![CDATA[--Output from testCreateUserInExistingTenantBadTenantEnglish--
+--Output from testCreateUserInExistingTenantBadMessage--
+]]></system-err>
+</testsuite>

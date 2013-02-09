@@ -1,0 +1,52 @@
+Testsuite: com.moovt.UserControllerFunctionalTests
+Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 1.562 sec
+------------- Standard Output ---------------
+--Output from testCreateUserInExistingTenantBadTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "TheBadTenant", "username": "moovieGoer", "password":"moovieGoer", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"code":"ERROR","msg":"This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user."}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"code":"ERROR","msg":"A JSONObject text must begin with '{' at character 0 of "}
+================================================================================
+#
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+--Output from testCreateUserInExistingTenantBadTenantEnglish--
+--Output from testCreateUserInExistingTenantBadMessage--
+------------- ---------------- ---------------
+
+Testcase: testCreateUserInExistingTenantBadTenantEnglish took 1.5 sec
+Testcase: testCreateUserInExistingTenantBadMessage took 0.062 sec
