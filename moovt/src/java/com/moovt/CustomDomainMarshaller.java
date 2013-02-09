@@ -34,7 +34,7 @@ import org.springframework.beans.BeanWrapperImpl;
  * @author Siegfried Puchbauer, Eduardo Goncalves
  * @since 1.1
  */
-public class OldCustomDomainMarshaller implements ObjectMarshaller<JSON> {
+public class CustomDomainMarshaller implements ObjectMarshaller<JSON> {
 
     private boolean includeVersion = false;
     private ProxyHandler proxyHandler;
@@ -42,11 +42,11 @@ public class OldCustomDomainMarshaller implements ObjectMarshaller<JSON> {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
     
-    public OldCustomDomainMarshaller(boolean includeVersion, GrailsApplication application) {
+    public CustomDomainMarshaller(boolean includeVersion, GrailsApplication application) {
         this(includeVersion, new DefaultProxyHandler(), application);
     }
 
-    public OldCustomDomainMarshaller(boolean includeVersion, ProxyHandler proxyHandler, GrailsApplication application) {
+    public CustomDomainMarshaller(boolean includeVersion, ProxyHandler proxyHandler, GrailsApplication application) {
         this.includeVersion = includeVersion;
         this.proxyHandler = proxyHandler;
         this.application = application;

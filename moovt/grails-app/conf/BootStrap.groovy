@@ -11,7 +11,7 @@ class BootStrap {
 	def init = {
 		
  	  servletContext ->
-		JSON.registerObjectMarshaller(new OldCustomDomainMarshaller(true, grailsApplication),1)
+		JSON.registerObjectMarshaller(new CustomDomainMarshaller(true, grailsApplication),1)
 
 		def moovtTenant = Tenant.findByName('Moovt') ?: new Tenant(name: 'Moovt').save(failOnError: true)
 		def naSavassiTenant = Tenant.findByName('naSavassi') ?: new Tenant(name: 'naSavassi').save(failOnError: true)
