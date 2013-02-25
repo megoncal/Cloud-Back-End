@@ -40,6 +40,10 @@ class ItemController {
 	*	latitude (Double)
 	*	longitude (Double)
 	*
+	*	Sample call: http://localhost:8080/moovt/item/retrieveItemsByTypeAndRecency
+	*
+	*   Sample input: {"type":"com.moovt.Item.type.Bar"}
+	*
 	*/
    @Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
    def retrieveItemsByTypeAndRecency() {
@@ -75,15 +79,16 @@ class ItemController {
 			   eq("type", type)
 		   }
 		   maxResults(10)
-		   order("lastUpdateDate", "desc")
+		   order("lastUpdated", "desc")
 	   }
-		   
-
+	
+	   	   
+	   	
 		if(!items) {
-			def error = ['error':"No Items Found"]
-			render "${params.callback}(${error as JSON})"
+			def error = ['error':'No Items Found']
+			render "${error as JSON}"
 		} else {
-			render "${params.callback}(${items as JSON})"
+			render "{\"items\":" + items.encodeAsJSON() + "}"
 		}
    }
 	
@@ -97,14 +102,14 @@ class ItemController {
 
 		def c = Item.createCriteria();
 
-		def assets = c.list (QueryUtils.c_c(params));
+		def items = c.list (QueryUtils.c_c(params));
 
-		if(!assets) {
+		if(!items) {
 			def error = ['error':"No Items Found"]
 			render "${params.callback}(${error as JSON})"
 		} else {
 			log.warn(params)
-			render "${params.callback}(${assets as JSON})"
+			render "${params.callback}(${items as JSON})"
 		}
 	}
 
@@ -133,42 +138,42 @@ class ItemController {
 			log.info("JSON Object to update is " + jsonObject + " with id " + id + " and version " + version + ".");
 
 
-			//Create a new asset or retrieve the asset from the database
-			Item assetInstance = null;
+			//Create a new item or retrieve the item from the database
+			Item itemInstance = null;
 
 			if ((id.equals(null)) || (id.equals(''))) {
-				log.info("Creating a new asset");
-				assetInstance = new Item();
+				log.info("Creating a new item");
+				itemInstance = new Item();
 			} else {
-				log.info("Updating and existing asset");
-				assetInstance = Item.get(id);
+				log.info("Updating and existing item");
+				itemInstance = Item.get(id);
 			}
 
 			//Check for optimistic locking
-			//TODO: Add a user to asset and indicate which user updated the version
+			//TODO: Add a user to item and indicate which user updated the version
 			if (!version.equals(null)) {
-				if (assetInstance.version > version) {
-					assetInstance.CRUDMessage="Another user udpate this record"''
+				if (itemInstance.version > version) {
+					itemInstance.CRUDMessage="Another user udpate this record"''
 				}
 			}
 
-			assetInstance.properties = jsonObject;
+			itemInstance.properties = jsonObject;
 
 
 			//Validate and if valid save
-			//This method returns the saved asset to the client
-			if (assetInstance.validate()) {
-				assetInstance.save(flush: true);
-				assetInstance.CRUDMessage = 'OK';
-				returnItems.add(assetInstance);
+			//This method returns the saved item to the client
+			if (itemInstance.validate()) {
+				itemInstance.save(flush: true);
+				itemInstance.CRUDMessage = 'OK';
+				returnItems.add(itemInstance);
 			} else {
 				//TODO: Create descriptive message
-				assetInstance.CRUDMessage = 'NOK';
+				itemInstance.CRUDMessage = 'NOK';
 			}
 			
 		}			
 		
-		log.info("Rendering saved asset as JSON Array " + "${params.callback}(${returnItems as JSON})");
+		log.info("Rendering saved item as JSON Array " + "${params.callback}(${returnItems as JSON})");
 		render "${params.callback}(${returnItems as JSON})";
 
 
@@ -201,31 +206,31 @@ class ItemController {
 		log.info("JSON Object to delete is " + jsonObject + " with id " + id + " and version " + version + ".");
 
 
-		//Create a new asset or retrieve the asset from the database
-		Item assetInstance = Item.get(id);
+		//Create a new item or retrieve the item from the database
+		Item itemInstance = Item.get(id);
 
-		if (!assetInstance) {
-			def error = ['error':"Item invalid " + assetInstance.toString()]
+		if (!itemInstance) {
+			def error = ['error':"Item invalid " + itemInstance.toString()]
 			render "${params.callback}(${error as JSON})"
 		}
 
 		//Check for optimistic locking
-		//TODO: Add a user to asset and indicate which user updated the version
+		//TODO: Add a user to item and indicate which user updated the version
 		if (!version.equals(null)) {
-			if (assetInstance.version > version) {
+			if (itemInstance.version > version) {
 				def error = ['error':"Another user udpate "]
 				render "${params.callback}(${error as JSON})"
 			}
 		}
 
 
-		//If we got to this point, delete asset
+		//If we got to this point, delete item
 		try {
-			assetInstance.delete(flush: true)
-			render "${params.callback}(${assetInstance as JSON})"
+			itemInstance.delete(flush: true)
+			render "${params.callback}(${itemInstance as JSON})"
 		}
 		catch (DataIntegrityViolationException e) {
-			def error = ['error':"Item invalid " + assetInstance.toString()]
+			def error = ['error':"Item invalid " + itemInstance.toString()]
 			render "${params.callback}(${error as JSON})"
 		}
 

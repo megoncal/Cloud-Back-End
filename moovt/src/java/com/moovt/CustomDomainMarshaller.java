@@ -62,24 +62,24 @@ public class CustomDomainMarshaller implements ObjectMarshaller<JSON> {
 
     public boolean supports(Object object) {
         String name = ConverterUtil.trimProxySuffix(object.getClass().getName());
-        log.info("Marshalling object from json ");
         return application.isArtefactOfType(DomainClassArtefactHandler.TYPE, name);
 
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void marshalObject(Object value, JSON json) throws ConverterException {
-    	log.info("Marshalling json from object " + value);
+    	
+    	log.info("TODO: MARSHALLING");
         JSONWriter writer = json.getWriter();
         value = proxyHandler.unwrapIfProxy(value);
         Class<?> clazz = value.getClass();
 
         GrailsDomainClass domainClass = (GrailsDomainClass)application.getArtefact(
-              DomainClassArtefactHandler.TYPE, ConverterUtil.trimProxySuffix(clazz.getName()));
+             DomainClassArtefactHandler.TYPE, ConverterUtil.trimProxySuffix(clazz.getName()));
         BeanWrapper beanWrapper = new BeanWrapperImpl(value);
 
         writer.object();
-        writer.key("class").value(domainClass.getClazz().getName());
+        //writer.key("class").value(domainClass.getClazz().getName());
 
         GrailsDomainClassProperty id = domainClass.getIdentifier();
         Object idValue = extractValue(value, id);
@@ -175,7 +175,6 @@ public class CustomDomainMarshaller implements ObjectMarshaller<JSON> {
     protected void asShortObject(Object refObj, JSON json, GrailsDomainClassProperty idProperty, GrailsDomainClass referencedDomainClass) throws ConverterException {
 
         Object idValue;
-        log.info("Marshalling object from json ");
         
         if (proxyHandler instanceof EntityProxyHandler) {
             idValue = ((EntityProxyHandler) proxyHandler).getProxyIdentifier(refObj);
@@ -188,6 +187,7 @@ public class CustomDomainMarshaller implements ObjectMarshaller<JSON> {
         }
         JSONWriter writer = json.getWriter();
         writer.object();
+        log.info("TO DO: MARSHALLING");
         writer.key("class").value(referencedDomainClass.getName());
         writer.key("id").value(idValue);
         writer.endObject();
@@ -195,12 +195,10 @@ public class CustomDomainMarshaller implements ObjectMarshaller<JSON> {
 
     protected Object extractValue(Object domainObject, GrailsDomainClassProperty property) {
         BeanWrapper beanWrapper = new BeanWrapperImpl(domainObject);
-        log.info("Marshalling object from json ");
         return beanWrapper.getPropertyValue(property.getName());
     }
 
     protected boolean isRenderDomainClassRelations() {
-    	log.info("Marshalling object from json ");
         return false;
     }
 }

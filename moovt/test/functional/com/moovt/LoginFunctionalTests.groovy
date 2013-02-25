@@ -2,7 +2,7 @@ package com.moovt
 
 import com.grailsrocks.functionaltest.*
 
-class LoginunctionalTests extends BrowserTestCase {
+class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginBadMessage() {
 		post('/login/authenticateUser') {
 			body {

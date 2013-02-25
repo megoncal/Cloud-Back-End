@@ -7,7 +7,7 @@ import org.springframework.validation.FieldError
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import grails.converters.*
 import com.moovt.QueryUtils
-
+import grails.validation.ValidationException
 import java.util.UUID
 import grails.plugins.springsecurity.Secured
 
@@ -20,79 +20,85 @@ class UserController {
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def main() {
 	}
-	
+
 	/*
-	* createUserInExistingTenant
-	* Input
-	*		tenantname (naSavassi)
-	*		username
-	* 		password
-	*      locale
-	*
-	*
-	* Output
-	*		code (SUCCESS or ERROR)
-	*		msg
-	*/
-   def createUserInExistingTenant() {
-	   String model = request.reader.getText();
-	   log.info(this.actionName + " params are: " + params + " and model is : " + model);
-	   JSONObject jsonObject = null;
-	   try {
-		   jsonObject = new JSONObject(model);
-	   } catch (Exception e) {
-		   render([code: "ERROR", msg: e.message ] as JSON);
-		   return;
-	   }
-	   
-	   User aUser = new User(jsonObject);
-	   
-	   
-	   //Verify if the tenant exists
-	   log.info("Verify if the tenant exists");
-	   Tenant aTenant = Tenant.findByName(aUser.tenantname);
-	   if (!aTenant) {
-		   String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ aUser.tenantname ], locale: aUser.locale)
-		   log.warn (msgTenantDoesNotExist)
-		   render([code: "ERROR", msg: msgTenantDoesNotExist ] as JSON);
-		   return;
-	   }
+	 * createUserInExistingTenant
+	 * Input
+	 *		tenantname (naSavassi)
+	 *		username
+	 * 		password
+	 *      locale
+	 *
+	 *
+	 * Output
+	 *		code (SUCCESS or ERROR)
+	 *		msg
+	 *
+	 * http://localhost:8080/moovt/user/createUserInExistingTenant
+	 * 
+	 * {"tenantname":"naSavassi","username":"movieGoer","password":"movieGoer","locale":"pt_BR"}
+	 */
+	def createUserInExistingTenant() {
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render([code: "ERROR", msg: e.message ] as JSON);
+			return;
+		}
 
-	   //Assign the tenantId and Create the user
-	   aUser.tenantId = aTenant.id;
-	   aUser.enabled = true;
-	   User guestUser = aUser.save();
-	   if (!guestUser) {
-		   String message ="";
-		   def locale = Locale.getDefault()
-		   for (fieldErrors in aUser.errors) {
-			   for (error in fieldErrors.allErrors) {
-				   //TODO: Investigate Field Error Handling
-				   message = messageSource.getMessage(error, aUser.locale)
-			   }
-		   }
-		   render([code: "ERROR", msg: message ] as JSON);
-		   return
-	   }
+		User guestUser = new User(jsonObject);
 
-	   //Assign guest role
-	   //TODO: Embend tenant id in every query
-	   //TODO: Handle error
-	   def guestRole = Role.findByTenantIdAndAuthority(aTenant.id, 'ROLE_GUEST')
 
-	   UserRole.create guestUser, guestRole
+		//Verify if the tenant exists
+		Tenant aTenant = Tenant.findByName(guestUser.tenantname);
+		if (!aTenant) {
+			String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ guestUser.tenantname ])
+			log.warn (msgTenantDoesNotExist)
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist) as JSON);
+			return;
+		} 
 
-	   log.info("TEST");
-	   
-	   String msg = message(code: 'default.created.message',
-		   args: [message(code: 'User.label', default: 'User', locale:guestUser.locale), guestUser.username],
-	   locale: guestUser.locale)
+		User.withTransaction { status ->
+			try {
+				guestUser.enabled = true;
+				guestUser.tenantId = aTenant.id;
+				guestUser.createdBy = 1
+				guestUser.lastUpdatedBy = 1
+				guestUser.save(flush:true, failOnError:true)
 
-	   render([code: "SUCCESS", msg: msg ] as JSON);
 
-   }
+				//Update the createdBy and lastUpdatedBy to self
+				guestUser.createdBy = guestUser.id;
+				guestUser.lastUpdatedBy = guestUser.id;
+				guestUser.save(flush:true, failOnError:true)
 
-	
+
+				// Assign the guest role
+				def guestRole = Role.findByTenantIdAndAuthority(aTenant.id, 'ROLE_GUEST')
+				UserRole.create (guestUser.tenantId, guestUser, guestRole, guestUser.createdBy, guestUser.lastUpdatedBy);
+
+				String msg = message(code: 'default.created.message',
+						args: [message(code: 'User.label', default: 'User', locale:guestUser.locale), guestUser.username],
+						locale: guestUser.locale)
+				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+				return;
+
+			} catch (ValidationException  e) {
+				render(CallResult.getCallResultFromErrors (e.getErrors(), guestUser.locale) as JSON);
+				return
+			} catch (Throwable e) {
+				status.setRollbackOnly()
+				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+				throw e;
+			}
+			
+		}
+	}
+
+
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def search() {
 
@@ -112,7 +118,7 @@ class UserController {
 			render "${params.callback}(${users as JSON})"
 		}
 	}
-
+ 
 	//This method updates or insert an array of JSON objects
 	@Secured([
 		'ROLE_ADMIN',
@@ -234,21 +240,21 @@ class UserController {
 			if (!adminUser.authorities.contains(adminRole)) {
 				UserRole.create adminUser, adminRole
 			}
-			
+
 			//
-			
-			
+
+
 		}
 
 		String msg = messageSource.getMessage(code: 'default.created.message', args: [
-			messageSource.getMessage(code: 'User.label', default: 'User', locale: aUser.locale),
+			messageSource.getMessage(code: 'User.label', default: 'User', locale: guestUser.locale),
 			userInstance.username
-		], locale: aUser.locale)
+		], locale: guestUser.locale)
 		render([code: "SUCCESS", msg: msg ] as JSON);
 
 	}
 
-	
+
 	@Secured(['ROLE_ADMIN',	'IS_AUTHENTICATED_FULLY'])
 	def delete() {
 		log.info("Delete with params:" + params + "and request: " + request.reader.getText());

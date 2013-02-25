@@ -1,19 +1,25 @@
 package com.moovt
 
 
-
-/**
- * TODO: Implement me!
- *
- * @see http://multi-tenant.github.com/grails-multi-tenant-single-db/
- */
 class Tenant{
 
-    String name
+	def domainService;
+	
+	String name
+	
+	Long createdBy;
+	Long lastUpdatedBy;
+	Date dateCreated;
+	Date lastUpdated;
+	
     
     static constraints = {
         name blank: false, unique: true
     }
+	
+	def beforeValidate () {
+		domainService.setTenantAuditAttributes(this);
+	}
     
     Integer tenantId() {
         return this.id

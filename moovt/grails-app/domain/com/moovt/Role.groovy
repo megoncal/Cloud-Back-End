@@ -1,17 +1,26 @@
 package com.moovt
 
+import java.util.Date;
+
+@MultiTenantAudit
 class Role {
 
-	Integer tenantId
+	def domainService;
+	
 	String authority
-
+	
 	static mapping = {
 		cache true
 	}
 
+	
 	static constraints = {
-		tenantId nullable: false
 		authority blank: false, unique: ['tenantId']
 		
 	}
+	
+	
+	def beforeValidate () {
+		domainService.setAuditAttributes(this);
+	} 
 }

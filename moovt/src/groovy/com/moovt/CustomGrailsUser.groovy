@@ -6,14 +6,14 @@ import org.springframework.security.core.userdetails.User
 
 class CustomGrailsUser extends GrailsUser {
 
-   final Integer tenantId
+   final Long tenantId
    final Locale locale
 
    CustomGrailsUser(String username, String password, boolean enabled,
                  boolean accountNonExpired, boolean credentialsNonExpired,
                  boolean accountNonLocked,
                  Collection<GrantedAuthority> authorities,
-                 long id, Integer tenantId, Locale locale) {
+                 long id, Long tenantId, Locale locale) {
       super(username, password, enabled, accountNonExpired,
             credentialsNonExpired, accountNonLocked, authorities, id)
 

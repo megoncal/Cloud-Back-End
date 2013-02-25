@@ -3,20 +3,24 @@ package com.moovt
 import org.apache.commons.lang.builder.HashCodeBuilder
 
 
-
+@MultiTenantAudit
 class UserRole implements Serializable {
 
-	Integer tenantId
+	def domainService;
+	
 	User user
 	Role role
 
 	static constraints = {
-		tenantId nullable: false
 		user nullable: false
 		role nullable: false
 
 	}
-	
+
+	def beforeValidate () {
+		domainService.setAuditAttributes(this);
+	}	
+		
 	boolean equals(other) {
 		if (!(other instanceof UserRole)) {
 			return false
@@ -38,6 +42,10 @@ class UserRole implements Serializable {
 			[userId: userId, roleId: roleId]
 	}
 
+	static UserRole create(Long tenantId, User user, Role role, Long createdBy, Long lastUpdatedBy, boolean flush = false) {
+		new UserRole(tenantId: tenantId, user: user, role: role, createdBy: createdBy, lastUpdatedBy: lastUpdatedBy).save(flush: flush, insert: true)
+	}
+	
 	static UserRole create(Long tenantId, User user, Role role, boolean flush = false) {
 		new UserRole(tenantId: tenantId, user: user, role: role).save(flush: flush, insert: true)
 	}

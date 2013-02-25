@@ -27,17 +27,19 @@ class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 	protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = AUTH_HOLDER.get()
 
-		String url = super.determineTargetUrl(request, response)
+		String url = "" 
+		
+		//super.determineTargetUrl(request, response)
 
-		if (auth instanceof TenantAuthenticationToken) {
-			TenantAuthenticationToken authentication = auth
-			if (authentication.organizationName == 'Org1') {
-				url = 'http://yahoo.com'
-			}
-			else if (authentication.organizationName == 'Org2') {
-				url = 'http://google.com'
-			}
-		}
+//		if (auth instanceof TenantAuthenticationToken) {
+//			TenantAuthenticationToken authentication = auth
+//			if (authentication.organizationName == 'Org1') {
+//				url = 'http://yahoo.com'
+//			}
+//			else if (authentication.organizationName == 'Org2') {
+//				url = 'http://google.com'
+//			}
+//		}
 
 		url
 	}

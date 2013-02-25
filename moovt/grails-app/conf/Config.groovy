@@ -117,12 +117,18 @@ log4j = {
 
 		// other shared config
 	root {
-			info  'org.codehaus.groovy.grails.web.servlet',
-			  'com.moovt'
+			info com.moovt
 	}
 			
 }
 
+grails.stamp.audit.createdBy = createdBy
+
+grails.stamp.audit.lastUpdatedBy = lastUpdatedBy
+
+grails.stamp.audit.lastUpdated = lastUpdated
+
+grails.stamp.audit.createdDate = createdDate
 
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.moovt.User'
@@ -130,7 +136,13 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.moovt.Use
 grails.plugins.springsecurity.authority.className = 'com.moovt.Role'
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugins.springsecurity.password.encodeHashAsBase64 = true
-//grails.plugins.springsecurity.providerNames = ['tenantAuthenticationProvider','anonymousAuthenticationProvider','rememberMeAuthenticationProvider']
+grails.plugins.springsecurity.filterChain.filterNames = [
+   'securityContextPersistenceFilter', 'logoutFilter',
+   'authenticationProcessingFilter', 'securityContextHolderAwareRequestFilter',
+   'anonymousAuthenticationFilter', 'rememberMeAuthenticationFilter', 
+   'exceptionTranslationFilter', 'filterInvocationInterceptor'
+]
 
+grails.gorm.save.failOnError = true
 
 

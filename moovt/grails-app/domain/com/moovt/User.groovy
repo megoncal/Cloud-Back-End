@@ -1,33 +1,33 @@
 package com.moovt
-
+ 
+import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
-class User {
+@MultiTenantAudit
+class User  {     
+	          
+	transient  springSecurityService
+	def domainService
 	
-	transient springSecurityService
-
 	//DB properties
-	//TODO: [java.lang.Integer] and doesn't support constraint [blank]
-	Integer tenantId
 	String username
-	String password
+	String password 
+	String email
 	boolean enabled
 	boolean accountExpired
-	boolean accountLocked
+	boolean accountLocked 
 	boolean passwordExpired
 	Locale locale
-	
-	//Transient properties
+	 
+	//Transient properties 
 	String tenantname
+	static transients = [ "tenantname"]  ; 
 
-	static transients = [ "tenantname" ];
-	
-
-	static constraints = {
-		tenantId nullable: false
-		username nullable:false, blank: false, unique: ['tenantId']
+		static constraints = {
+		username nullable:false, blank: false, unique: ['tenantId'] 
 		password nullable:false, blank: false
+		email nullable:false, blank: false, unique: true
 		tenantname bindable: true
 	}
 
@@ -35,6 +35,11 @@ class User {
 		password column: '`password`'
 	}
 
+	
+	def beforeValidate () {
+		domainService.setAuditAttributes(this);
+	}
+	
 	Set<Role> getAuthorities() {
 		log.info("Getting Authorities " + UserRole.findAllByTenantIdAndUser(tenantId,this));
 		UserRole.findAllByTenantIdAndUser(tenantId, this).collect { it.role } as Set

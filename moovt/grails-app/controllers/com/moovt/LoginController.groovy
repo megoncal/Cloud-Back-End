@@ -77,18 +77,18 @@ class LoginController {
 			redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
 		}
 		else {
-			redirect action: 'auth', params: params
+			redirect action: 'signinTab', params: params
 		}
 	}
 
 	/**
 	 * Show the login page.
 	 */
-	def auth = {
-
-		//log.info("An attempt to access an unauthorized request was made");
-		//response.sendError HttpServletResponse.SC_UNAUTHORIZED
-	}
+//	def signinTab = {
+//		
+//		log.info("An attempt to access an unauthorized request was made");
+//		response.sendError HttpServletResponse.SC_UNAUTHORIZED
+//	}
 	
    
 	/**
@@ -116,7 +116,7 @@ class LoginController {
 	 */
 	def full = {
 		def config = SpringSecurityUtils.securityConfig
-		render view: 'auth', params: params,
+		render view: 'signinTab', params: params,
 			model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
 					postUrl: "${request.contextPath}${config.apf.filterProcessesUrl}"]
 	}
@@ -152,7 +152,7 @@ class LoginController {
 		}
 		else {
 			flash.message = msg
-			redirect action: 'auth', params: params
+			redirect action: 'signinTab', params: params
 		}
 	}
 
@@ -172,75 +172,52 @@ class LoginController {
 		log.error ("ajaxDenied");
 		render([error: 'access denied'] as JSON)
 	}
-	
+
+	/*
+	 * This method authenticate a User using an authentication Service like Facebook or Self
+	 * 
+	 * http://localhost:8080/moovt/login/authenticateUser
+	 * 
+	 * {"type":"Self","tenantname":"naSavassi","username":"admin","password":"admin"}	
+	 */
 	def authenticateUser = {
+		//Make sure we have a session
 		String sessionId = session.getId();
-		log.info("Session ID " + sessionId);
 		String model = request.reader.getText();
-		//TODO: Error Handling if unable to retrieve models
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render([code: "ERROR", msg: e.message ] as JSON);
+			return;
+		}
+		
 		log.info("Authenticating user with params:" + params + "and model: " + model);
-		JSONObject jsonObject = new JSONObject(model);
 		User userInstance = new User(jsonObject);
 
-		//def theTenant = Customer.findByName(userInstance.tenantname)
-		log.info("0");
-		log.info("1" + userInstance.username + "-"+ userInstance.password);
 		TenantAuthenticationToken token = new TenantAuthenticationToken(userInstance.username, userInstance.password,userInstance.tenantname);
-		log.info("2");
-		//getAuthenticationManager().authenticate(authentication)
-		Authentication auth = null;
+
+		Authentication signinTab = null;
 		try {
-			auth = authenticationManager.authenticate(token);
+			signinTab = authenticationManager.authenticate(token);
 		} catch (AuthenticationException e) {
 			render([code: "ERROR", msg: e.message ] as JSON);
 			return;
 		}
-		log.info("3 " + auth);
-		SecurityContextHolder.getContext().setAuthentication(auth);
+		
+		SecurityContextHolder.getContext().setAuthentication(signinTab);
 		Authentication tes = SecurityContextHolder.getContext().getAuthentication();
-		log.info("Authentication " + tes.isAuthenticated() + tes.getPrincipal());
-		log.info("Is logged in " +springSecurityService.isLoggedIn())
+		
 		log.info("User has been successfully authenticated")
-		//log.info(springSecurityService.getAuthenticationTrustResolver());
 		
 		
 		//Change the default language to the user's language
-		Locale.setDefault(auth.getPrincipal().locale)
+		Locale.setDefault(signinTab.getPrincipal().locale)
 		
 		render([code: "SUCCESS", msg: message(code: 'com.moovt.Login.success'), JSESSIONID: sessionId ] as JSON);
 		return
 		
-		//springSecurityService.reauthenticate(userInstance.username, userInstance.password )
-		//springSecurityService.a
-		
-		//Lookup user 
-		//List results = User.withCriteria {
-		//	and {
-		//	  eq('userTenantId', userInstance.userTenantId)	
-		//	  eq('username', userInstance.username)
-		//	  eq('password', userInstance.password)
-	//		}
-		//  }
-
-		//switch (results.size()) {
-		//int tempvar = 0;
-//		switch (tempvar) {
-//		case 0:
-//			render([code: "ERROR", msg: "Sorry. Unable to find user matching this company, user and password" ] as JSON);
-//			break;
-//		case 1:
-//			log.info("User has been successfully validated")
-//			log.info(springSecurityService.getAuthenticationTrustResolver());
-//			
-//			render([code: "SUCCESS", msg: "Login successfull" ] as JSON);
-//			break;
-//		default:	 
-//			render([code: "ERROR", msg: "Login was not successfull. Please contact your Administrator." ] as JSON);
-//			break;
-//		}
-		//return;
-
-		}
+	}
 		
 }
 

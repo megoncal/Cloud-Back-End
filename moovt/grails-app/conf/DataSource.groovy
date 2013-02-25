@@ -14,7 +14,7 @@ environments {
  development {
   dataSource {
    dbCreate = "create-drop" // one of 'create', 'create-drop','update'
-   url = "jdbc:mysql://localhost/MWORKSDEV?useUnicode=yes&characterEncoding=UTF-8"
+   url = "jdbc:mysql://localhost/MOOVTDEV?useUnicode=yes&characterEncoding=UTF-8"
    username = "dev"
    password = "devpw"
   }
@@ -25,7 +25,7 @@ environments {
  test {
   dataSource {
    dbCreate = "create-drop" // one of 'create', 'create-drop','update'
-   url = "jdbc:mysql://localhost/MWORKSTEST?useUnicode=yes&characterEncoding=UTF-8"
+   url = "jdbc:mysql://localhost/MOOVTTEST?useUnicode=yes&characterEncoding=UTF-8"
    username = "test"
    password = "testpw"
   }
@@ -33,7 +33,7 @@ environments {
  production {
   dataSource {
    dbCreate = "create-drop"
-   url = "jdbc:mysql://localhost/MWORKSPROD?useUnicode=yes&characterEncoding=UTF-8"
+   url = "jdbc:mysql://localhost/MOOVTPROD?useUnicode=yes&characterEncoding=UTF-8"
    username = "prod"
    password = "prodpw"
   }
