@@ -4,6 +4,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.GormUserDetailsService
 import org.codehaus.groovy.grails.plugins.springsecurity.GrailsUser
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.context.MessageSource
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.dao.SaltSource
@@ -13,6 +14,10 @@ import org.springframework.security.core.AuthenticationException
 import org.springframework.security.core.authority.GrantedAuthorityImpl
 import org.springframework.security.core.userdetails.UserDetailsChecker
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.codehaus.groovy.grails.commons.ApplicationHolder
+
+import com.moovt.common.Tenant;
+import com.moovt.common.User;
 
 class TenantAuthenticationProvider implements AuthenticationProvider {
 
@@ -22,34 +27,42 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 	SaltSource saltSource
 	UserDetailsChecker preAuthenticationChecks
 	UserDetailsChecker postAuthenticationChecks
-
+	
+	
 	Authentication authenticate(Authentication auth) throws AuthenticationException {
 		TenantAuthenticationToken authentication = auth
 
 		String password = authentication.credentials
 		String username = authentication.name
 		String tenantName = authentication.tenantName
+		//The local variable locale will be used to get messages from Message Source
+		Locale locale = LocaleUtils.stringToLocale(authentication.locale);
+		
+		MessageSource messageSource = ApplicationHolder.application.mainContext.getBean('messageSource')
 		
 		log.info("Authenticating user: " + username + " tenant: " + tenantName + " password: " + password);
 
 		if (tenantName == "") {
-			log.warn "Company is blank. Please enter your company name or sign up for your company."
-			throw new TenantUserPasswordAuthenticationException("Company is blank. Please enter your company name or sign up for your company.")
+			String [] args = {};
+			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.blank.company", args, "Company/Tenant is blank", locale));
 		}
 		
 		Tenant tenant = Tenant.findByName (tenantName);
 		
 		if (!tenant) {
-			// TODO customize 'springSecurity.errors.login.fail' i18n message in app's messages.properties with org name
-			log.warn "$tenantName not found. Your can signup for this company."
-			throw new TenantUserPasswordAuthenticationException("Company not found: ", tenantName)
+			String [] args = [ tenantName ];
+			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.company.notFound", args, "Company/Tenant not found", locale));
 		}
 
 		if (username == "") {
-			log.warn "Username is blank. Please enter a user name to sign in."
-			throw new TenantUserPasswordAuthenticationException("Username is blank. Please enter a user name to sign in.")
+			String [] args = {};
+			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.blank.username", args, "Username is blank", locale));
 		}
 
+		if (password == "") {
+			String [] args = {};
+			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.blank.password", args, "Password is blank", locale));
+		}
 		
 		CustomGrailsUser userDetails
 		def authorities
@@ -59,9 +72,8 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 		User user = User.findByTenantIdAndUsername(tenant.id, username)
 
 		if (!user) {
-			// TODO customize 'springSecurity.errors.login.fail' i18n message in app's messages.properties with org name
-			log.warn "$username not found in company $tenantName"
-			throw new UsernameNotFoundException("$username not found in company $tenantName")
+			String [] args = {};
+			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.invalid.usernamepassword", args, "User was not found", locale));
 		}
 
 			authorities = user.authorities.collect { new GrantedAuthorityImpl(it.authority) }
@@ -84,12 +96,17 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 
 	protected void additionalAuthenticationChecks(GrailsUser userDetails,
 			  TenantAuthenticationToken authentication) throws AuthenticationException {
+			  
+			  
+	    MessageSource messageSource = ApplicationHolder.application.mainContext.getBean('messageSource');
+		//The local variable locale will be used to get messages from Message Source
+		Locale locale = LocaleUtils.stringToLocale(authentication.locale);
 
 		def salt = saltSource.getSalt(userDetails)
 
 		if (authentication.credentials == null) {
-			log.warn 'Authentication failed because no password was provided. Please enter a password.'
-			throw new BadCredentialsException('Authentication failed because no password was provided. Please enter a password.', userDetails)
+			String [] args = {};
+			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.invalid.usernamepassword", args, "User was not found", locale));
 		}
 
 		String presentedPassword = authentication.credentials
@@ -97,9 +114,8 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 		log.info ("Checking password. Presented password is " + presentedPassword + " vs. Stored password " + userDetails.password + " with salt as " + salt);
 		
 		if (!passwordEncoder.isPasswordValid(userDetails.password, presentedPassword, salt)) {
-			log.warn 'Authentication failed because password does not match the stored value.'
-
-			throw new BadCredentialsException('Authentication failed because password does not match the stored value.', userDetails)
+			String [] args = {};
+			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.invalid.usernamepassword", args, "User was not found", locale));
 		}
 	}
 

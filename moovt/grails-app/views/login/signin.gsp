@@ -70,6 +70,8 @@
 
 		/**
 		 * Handle the Sign In Response 
+		 *
+		 * This is used from the signin form (this) as well as signup 
 		 */
 		function handleSigninResponse(data, textStatus) {
 
@@ -79,12 +81,13 @@
 			var tabStrip = $("#tbsMain").data("kendoTabStrip");
 
 			if (data.code == "ERROR") {
-				$("#signinMessageArea").text(data.msg);
+				$("#signinMessageArea").text(data.message);
 			}
 
 			if (data.code == "SUCCESS") {
 				removeTab("signin");
 				removeTab("news");
+				removeTab("signup");
 				addTab("Dashboard","dashboard","${g.createLink(controller:'login',action:'dashboard')}");
 				refreshSigninDiv();
 				refreshMenuDiv();

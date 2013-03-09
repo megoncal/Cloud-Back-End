@@ -113,11 +113,11 @@ log4j = {
 						file: "/usr/share/tomcat6/logs/mworksStackTrace.log"
 			}
 		}
-}
+	}
 
 		// other shared config
 	root {
-			info com.moovt
+			info '*'
 	}
 			
 }

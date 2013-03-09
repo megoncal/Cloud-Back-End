@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="MNEGONCALVES" name="com.moovt.UserFunctionalTests" tests="14" time="1.407" timestamp="2013-02-27T20:32:06">
+  <properties />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantDuplicateEmailPortuguese" time="0.191" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantDuplicateUsernameEnglish" time="0.069" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantNoPasswordEnglish" time="0.131" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantDuplicateUsernamePortuguese" time="0.076" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantBadTenantEnglish" time="0.079" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantSuccessPortuquese" time="0.161" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantDuplicateEmailEnglish" time="0.096" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantNoUserNamePortuguese" time="0.11" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantNoPasswordPortuguese" time="0.07" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantNoUserNameEnglish" time="0.052" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantNoEmailPortuguese" time="0.075" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantBadMessage" time="0.114" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantSuccessEnglish" time="0.082" />
+  <testcase classname="com.moovt.UserFunctionalTests" name="testCreateUserInExistingTenantNoEmailEnglish" time="0.085" />
+  <system-out><![CDATA[--Output from testCreateUserInExistingTenantDuplicateEmailPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieLover", "locale": "pt_BR"}				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Este email (existingEmail@test.com) já existe.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantDuplicateUsernameEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestEnglish@test.com", "username": "duplicateUser", "password":"moovieGoer", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"This user (duplicateUser) already exists.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantNoPasswordEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"The password must be provided.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantDuplicateUsernamePortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestPortuguese@test.com", "username": "duplicateUser", "password":"moovieLover", "locale": "pt_BR"}				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Este usuário (duplicateUser) já existe.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantBadTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user.","type":"SYSTEM"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantSuccessPortuquese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "locale": "pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"SUCCESS","message":"Usuário moovieLover criado","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantDuplicateEmailEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"This email (existingEmail@test.com) already exists.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantNoUserNamePortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "locale": "pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"O nome do usuário deve ser preenchido.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantNoPasswordPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "locale": "pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"A senha deve ser preenchida.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantNoUserNameEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"The user name must be provided.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantNoEmailPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"", "locale": "pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"O email deve ser preenchido.","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantSuccessEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"SUCCESS","message":"User moovieGoer created","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserInExistingTenantNoEmailEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUserInExistingTenant parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"", "locale": "en_US"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"The email must be provided.","type":"USER"}
+================================================================================
+#
+]]></system-out>
+  <system-err><![CDATA[--Output from testCreateUserInExistingTenantDuplicateEmailPortuguese--
+--Output from testCreateUserInExistingTenantDuplicateUsernameEnglish--
+--Output from testCreateUserInExistingTenantNoPasswordEnglish--
+--Output from testCreateUserInExistingTenantDuplicateUsernamePortuguese--
+--Output from testCreateUserInExistingTenantBadTenantEnglish--
+--Output from testCreateUserInExistingTenantSuccessPortuquese--
+--Output from testCreateUserInExistingTenantDuplicateEmailEnglish--
+--Output from testCreateUserInExistingTenantNoUserNamePortuguese--
+--Output from testCreateUserInExistingTenantNoPasswordPortuguese--
+--Output from testCreateUserInExistingTenantNoUserNameEnglish--
+--Output from testCreateUserInExistingTenantNoEmailPortuguese--
+--Output from testCreateUserInExistingTenantBadMessage--
+--Output from testCreateUserInExistingTenantSuccessEnglish--
+--Output from testCreateUserInExistingTenantNoEmailEnglish--
+]]></system-err>
+</testsuite>

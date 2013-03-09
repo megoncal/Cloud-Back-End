@@ -1,25 +1,30 @@
 <!-- Top  -->
 <sec:ifLoggedIn>
 	<ul id="mnMainMenu" data-role="menu"
+	
 		class="k-widget k-reset k-header k-menu k-menu-horizontal">
+	    <sec:ifAnyGranted roles="ROLE_ADMIN">	
 		<li id="menuItemId" class="k-item k-state-default"><a
 			class="k-link" href="" id="aUserMenu"
 			onClick="handleUserMenu();return false;">User</a></li>
+		</sec:ifAnyGranted>
+		<sec:ifAnyGranted roles="ROLE_ITEM_MGR">
 		<li id="menuItemId" class="k-item k-state-default"><a
-			class="k-link" href="" id="aAssetMenu"
-			onClick="handleAssetMenu();return false;">Asset</a></li>
+			class="k-link" href="" id="aItemMenu"
+			onClick="handleItemMenu();return false;">Item</a></li>
+		</sec:ifAnyGranted>
 		<li id="menuItemId" class="k-item k-state-default"><a
 			class="k-link" href="" id="aTestMenu"
-			onClick="handleTestMenu();return false;">Test</a></li>
+			onClick="handleTestMenu();return false;">Test</a></li> 
 	</ul>
 	<script>
 	   /**
 	    *
 	    */
-	    function handleAssetMenu() {
-				log.info("Asset menu clicked");
-				if (!(doesTabExists("assetMain"))) {
-					addTab("Assets &nbsp;<a class=\"clCloseTab\" onclick='removeTab($(this).closest(\"li\").attr(\"id\"))'>&nbsp;&nbsp;&nbsp;&nbsp;</a>","assetMain","${g.createLink(controller:'asset',action:'main')}");
+	    function handleItemMenu() {
+				log.info("Item menu clicked");
+				if (!(doesTabExists("itemMain"))) {
+					addTab("Items &nbsp;<a class=\"clCloseTab\" onclick='removeTab($(this).closest(\"li\").attr(\"id\"))'>&nbsp;&nbsp;&nbsp;&nbsp;</a>","itemMain","${g.createLink(controller:'item',action:'main')}");
 			}
 
 		}
@@ -34,22 +39,18 @@
 			}
 
 		}
-	   
-		
+
+		/*public class Address {
+			String street;
+		}
+		public class Person {
+			String text;
+			Address address;
+			}
+		*/
 		function handleTestMenu() {
-			//alert('Test menu clicked');
-			$.ajax({
-				url : "http://localhost:8080/mworks/asset/test",
-				type : 'POST',
-				dataType : 'jsonp',
-				contentType : 'application/json',
-				data : 'xxxxxxxxxxxxxx',
-				success : function(data) {
-					log.info('Read');
-					;
-					alert('data is ' + data);
-				}
-			});
+			log.info ("Test menu clicked")
+			//var obj = new Address("Test");
 
 		}
 	</script>

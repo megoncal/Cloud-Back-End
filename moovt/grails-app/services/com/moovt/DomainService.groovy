@@ -13,7 +13,6 @@ class DomainService {
 
 	public setAuditAttributes(Object aDomainObject) {
 		
-		log.info("((((((((" + aDomainObject);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		CustomGrailsUser principal = null;
 		if (auth) {

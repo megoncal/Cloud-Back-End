@@ -5,6 +5,7 @@ import com.grailsrocks.functionaltest.*
 class UserFunctionalTests extends BrowserTestCase {
 	void testCreateUserInExistingTenantBadMessage() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 			}
 		}
@@ -31,6 +32,7 @@ class UserFunctionalTests extends BrowserTestCase {
 
 	void testCreateUserInExistingTenantSuccessEnglish() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
 				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "locale": "en_US"}
@@ -45,6 +47,7 @@ class UserFunctionalTests extends BrowserTestCase {
 	
 	void testCreateUserInExistingTenantSuccessPortuquese() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
 				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "locale": "pt_BR"}
@@ -54,14 +57,15 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
-		assertContentContains "Usuário moovieGoer criado"
+		assertContentContains "Usuário moovieLover criado"
 	}
 
 	void testCreateUserInExistingTenantNoUserNameEnglish() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "", "password":"moovieGoer", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "locale": "en_US"}
 				"""
 			}
 		}
@@ -73,9 +77,10 @@ class UserFunctionalTests extends BrowserTestCase {
 
 	void testCreateUserInExistingTenantNoUserNamePortuguese() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "", "password":"moovieGoer", "locale": "pt_BR"}
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "locale": "pt_BR"}
 				"""
 			}
 		}
@@ -87,9 +92,10 @@ class UserFunctionalTests extends BrowserTestCase {
 	
 	void testCreateUserInExistingTenantNoPasswordEnglish() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "movieFan", "password":"", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "locale": "en_US"}
 				"""
 			}
 		}
@@ -99,8 +105,24 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "The password must be provided"
 	}
 	
+	void testCreateUserInExistingTenantNoPasswordPortuguese() {
+		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "locale": "pt_BR"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "ERROR"
+		assertContentContains "USER"
+		assertContentContains "A senha deve ser preenchida."
+	}
+	
 	void testCreateUserInExistingTenantNoEmailEnglish() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
 				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"", "locale": "en_US"}
@@ -115,6 +137,7 @@ class UserFunctionalTests extends BrowserTestCase {
 	
 	void testCreateUserInExistingTenantNoEmailPortuguese() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
 				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"", "locale": "pt_BR"}
@@ -129,56 +152,60 @@ class UserFunctionalTests extends BrowserTestCase {
 
 	void testCreateUserInExistingTenantDuplicateUsernameEnglish() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestEnglish@test.com", "username": "duplicateUser", "password":"moovieGoer", "locale": "en_US"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "This user (moovieGoer) already exist"
+		assertContentContains "This user (duplicateUser) already exist"
 	}
 
 	void testCreateUserInExistingTenantDuplicateUsernamePortuguese() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "locale": "pt_BR"}				"""
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestPortuguese@test.com", "username": "duplicateUser", "password":"moovieLover", "locale": "pt_BR"}				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Este usuário já existe"
+		assertContentContains "Este usuário (duplicateUser) já existe"
 	}
 
 	void testCreateUserInExistingTenantDuplicateEmailEnglish() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "locale": "en_US"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "This email (movieGoer@test.com) already exists"
+		assertContentContains "This email (existingEmail@test.com) already exists"
 	}
 
 	void testCreateUserInExistingTenantDuplicateEmailPortuguese() {
 		post('/user/createUserInExistingTenant') {
+			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "userWithSameEmail", "password":"moovieLover", "locale": "pt_BR"}				"""
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieLover", "locale": "pt_BR"}				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Este email (movieLover@test.com) já existe"
+		assertContentContains "Este email (existingEmail@test.com) já existe"
 	}
 
 	
