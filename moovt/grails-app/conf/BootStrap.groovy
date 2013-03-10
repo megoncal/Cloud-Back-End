@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat
 import java.util.Date;
 
 
@@ -10,6 +11,8 @@ import com.moovt.common.UserRole;
 import com.moovt.taxi.Driver
 import com.moovt.taxi.CarType
 import com.moovt.taxi.Passenger
+import com.moovt.taxi.Ride
+import com.moovt.taxi.RideStatus
 import com.moovt.common.AddressType;
 
 import grails.converters.JSON;
@@ -20,9 +23,68 @@ class BootStrap {
 
 	def init = {
 
+		//A couple of Marshallers
+		
+		
 		servletContext ->
-		JSON.registerObjectMarshaller(new CustomDomainMarshaller(true, grailsApplication),1)
+			JSON.registerObjectMarshaller(Ride) {
+				def returnArray = [:]
+				returnArray['id'] = it.id
+				returnArray['rideStatus'] = it.rideStatus.toString()
+				returnArray['driver'] = it.driver
+				returnArray['passenger'] = it.passenger
+				returnArray['pickupDateTime'] = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(it.pickupDateTime)
+				returnArray['pickUpAddress'] = it.pickUpAddress
+				returnArray['dropOffAddress'] = it.dropOffAddress
+				returnArray['rating'] = it.rating
+				returnArray['comments'] = it.comments
+				return returnArray
+		}
+			JSON.registerObjectMarshaller(Address) {
+				def returnArray = [:]
+				returnArray['street'] = it.street
+				returnArray['city'] = it.city
+				returnArray['state'] = it.state
+				returnArray['zip'] = it.zip
+				returnArray['addressType'] = it.addressType.toString()
+				return returnArray
+		}
+			JSON.registerObjectMarshaller(Passenger) {
+				def returnArray = [:]
+				String firstName
+				String lastName
+				String phone
+				String email
+				returnArray['firstName'] = it.firstName
+				returnArray['lastName'] = it.lastName
+				returnArray['phone'] = it.phone
+				returnArray['email'] = it.email
+				returnArray['address'] = it.address
+				return returnArray
+		}
 
+			JSON.registerObjectMarshaller(Driver) {
+				def returnArray = [:]
+				String firstName
+				String lastName
+				String phone
+				String email
+				returnArray['firstName'] = it.firstName
+				returnArray['lastName'] = it.lastName
+				returnArray['phone'] = it.email
+				returnArray['zip'] = it.email
+				returnArray['servedMetro'] = it.servedMetro
+				returnArray['carType'] = it.carType.toString()
+				return returnArray
+		}
+			
+					
+		//servletContext ->
+		//JSON.registerObjectMarshaller(new CustomDomainMarshaller(true, grailsApplication),1)
+		
+
+		//grailsApplication.mainContext.getBean("customObjectMarshallers" ).register();
+		
 		//Moovt		
 		def moovtAdminUser = new User(
 				tenantId: 1,
@@ -127,6 +189,11 @@ class BootStrap {
 		def worldTaxiDriverRole = Role.findByTenantIdAndAuthority(worldTaxiTenant.id, 'ROLE_DRIVER') ?: new Role(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, authority: 'ROLE_DRIVER').save(failOnError: true);
 		def worldTaxiPassengerRole = Role.findByTenantIdAndAuthority(worldTaxiTenant.id, 'ROLE_PASSENGER') ?: new Role(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, authority: 'ROLE_PASSENGER').save(failOnError: true);
 		
+		if (!worldTaxiAdminUser.authorities.contains(worldTaxiAdminRole)) {
+			UserRole.create ( worldTaxiTenant.id, worldTaxiAdminUser, worldTaxiAdminRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
+		}
+		
+		
 		Address address = new Address (street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME);
 				
 		def woldTaxiPassenger = Passenger.findByTenantIdAndUsername(worldTaxiTenant.id, 'jgoodrider') ?: new Passenger(
@@ -169,6 +236,19 @@ class BootStrap {
 				if (!woldTaxiDriver.authorities.contains(worldTaxiRideMgrRole)) {
 					UserRole.create ( worldTaxiTenant.id, woldTaxiDriver, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
 				}
+			
+		Address pickUpAddress = new Address (street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME);
+		Address dropOffAddress = new Address (street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME);
+				
+		def ride = new Ride(
+			tenantId: worldTaxiTenant.id,
+			createdBy: worldTaxiAdminUser.id,
+			lastUpdatedBy: worldTaxiAdminUser.id,
+			passenger: woldTaxiPassenger,
+			pickupDateTime: new Date(),
+			pickUpAddress: pickUpAddress,
+			dropOffAddress: dropOffAddress,
+			rideStatus: RideStatus.UNASSIGNED).save(failOnError: true);
 			
 //		if (Item.count()==0) {
 //			Item item = new Item (

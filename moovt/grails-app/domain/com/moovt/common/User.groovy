@@ -10,6 +10,7 @@ import com.moovt.MultiTenantAudit;
 class User  {     
 	          
 	transient  springSecurityService
+	//TODO: Should this be transient
 	def domainService
 	
 	//DB properties

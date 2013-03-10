@@ -10,12 +10,14 @@ enum RideStatus {
 @MultiTenantAudit
 class Ride {
 
+	def domainService
+	
     RideStatus rideStatus  
 	Driver driver
 	Passenger passenger
 	Date pickupDateTime
 	Address pickUpAddress
-	//Address dropOffAddress
+	Address dropOffAddress
 	Double rating
 	String comments
 	
@@ -25,9 +27,19 @@ class Ride {
 		comments nullable: true
 	}
 	
+	//TODO: Check Custom Hibernate Types
+	
 	static mapping = {
-		pickUpAddress cascade: 'all'
-
+		//pickUpAddress cascade: 'all'
+		//dropOffAddress cascade: 'all'
+		pickUpAddress fetch: 'join', cascade: 'all'
+		dropOffAddress fetch: 'join', cascade: 'all'
+		driver fetch: 'join'
+		passenger fetch: 'join'
+	}
+	
+	def beforeValidate () {
+		domainService.setAuditAttributes(this);
 	}
 	
 }

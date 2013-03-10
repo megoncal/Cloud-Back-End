@@ -134,12 +134,16 @@ public class CustomDomainMarshaller implements ObjectMarshaller<JSON> {
                     else {
                         GrailsDomainClass referencedDomainClass = property.getReferencedDomainClass();
 
+                        log.info(">>>>>> " + referencedDomainClass + ">>>>>>" + referenceObject);
+                        
                         // Embedded are now always fully rendered
                         if (referencedDomainClass == null || property.isEmbedded() || GrailsClassUtils.isJdk5Enum(property.getType())) {
                             json.convertAnother(referenceObject);
                         }
                         else if (property.isOneToOne() || property.isManyToOne() || property.isEmbedded()) {
-                            asShortObject(referenceObject, json, referencedDomainClass.getIdentifier(), referencedDomainClass);
+                        	log.info("HERE ");
+                            //asShortObject(referenceObject, json, referencedDomainClass.getIdentifier(), referencedDomainClass);
+                        	 json.convertAnother(referenceObject);
                         }
                         else {
                             GrailsDomainClassProperty referencedIdProperty = referencedDomainClass.getIdentifier();

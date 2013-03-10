@@ -13,13 +13,13 @@ class Address {
     }
 	
 	public Address(String street, String city, String state, String zip,
-			String type) {
+			AddressType addressType) {
 		super();
 		this.street = street;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
-		this.type = type;
+		this.addressType = addressType;
 	}
 
 	String street
@@ -27,6 +27,7 @@ class Address {
 	String state
 	String zip
 	AddressType addressType
+	//String type
 	
 	String toString(){
 		dump();
