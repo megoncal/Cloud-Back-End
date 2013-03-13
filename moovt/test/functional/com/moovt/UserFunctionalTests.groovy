@@ -215,7 +215,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"Sedan","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
 				"""
 			}
 		}
@@ -255,7 +255,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"version":"2","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygooxdarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
 				"""
 			}
 		}
@@ -280,7 +280,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"version":"2","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
 				"""
 			}
 		}
@@ -290,8 +290,81 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "User jverygoodarm updated"
 	}
 
+	void testRetrieveAllUsersrEnglish() {
+		
+		post('/login/authenticateUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
+				"""
+			}
+		}
+		
+		post('user/retrieveAllUsers') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "users"
+		assertContentContains "lastName\":\"Goodrider"
+		assertContentContains "users"
+		assertContentContains "lastName\":\"Goodarm"
+	}
+
+	void testRetrieveUserDetailByIdEnglish() {
+		
+		post('/login/authenticateUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
+				"""
+			}
+		}
+		
+		post('user/retrieveUserDetailById') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"id":"6"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "user"
+		assertContentContains "lastName\":\"Goodarm"
+	}
 	
 	
+	void testRetrieveLoggedUserDetailsIdEnglish() {
+		
+		post('/login/authenticateUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				"""
+			}
+		}
+		
+		post('user/retrieveLoggedUserDetails') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "user"
+		assertContentContains "lastName\":\"Goodrider"
+	}
+		
 }
 
 

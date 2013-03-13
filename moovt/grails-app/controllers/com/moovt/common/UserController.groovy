@@ -55,7 +55,7 @@ class UserController {
 			def users = c.list (QueryUtils.c_c(params));
 
 			if(!users) {
-				render(new CallResult(CallResult.USER,CallResult.ERROR,"No users found") as JSON);		
+				render(new CallResult(CallResult.USER,CallResult.ERROR,"No users found") as JSON);
 			} else {
 				render "{\"users\":" + users.encodeAsJSON() + "}"
 			}
@@ -273,35 +273,30 @@ class UserController {
 				//Handle Driver type
 				JSONObject driverJSON = userJsonObject.opt("driver");
 				if (driverJSON) {
-					log.info("000");
-					Driver driver = new Driver (driverJSON);
-					log.info("222 " + driver.dump());
-					driver.id = user.id;
-					driver.tenantId = tenant.id;
-					driver.createdBy = user.id;
-					driver.lastUpdatedBy = user.id;
-					driver.save(flush:true, failOnError:true)
-					log.info("45454");
-					// Assign the driver role
+					user.driver = new Driver (driverJSON);
+					user.driver.tenantId = tenant.id;
+					user.driver.createdBy = user.id;
+					user.driver.lastUpdatedBy = user.id;
+
 					def driverRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_DRIVER')
-					UserRole.create (tenant.id, user, driverRole, driver.createdBy, driver.lastUpdatedBy);
-					log.info("333");
+					UserRole.create (tenant.id, user, driverRole, user.createdBy, user.lastUpdatedBy);
 				}
 
 				//Handle Passenger type
 				JSONObject passengerJSON = userJsonObject.opt("passenger");
 				if (passengerJSON) {
-					Passenger passenger = new Passenger (passengerJSON);
-					passenger.id = user.id;
-					passenger.tenantId = tenant.id;
-					passenger.createdBy = user.id;
-					passenger.lastUpdatedBy = user.id;
-					passenger.save(flush:true, failOnError:true)
+					user.passenger = new Passenger (passengerJSON);
+					user.passenger.tenantId = tenant.id;
+					user.passenger.createdBy = user.id;
+					user.passenger.lastUpdatedBy = user.id;
 
 					// Assign the passenger role
 					def passengerRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_PASSENGER')
-					UserRole.create (tenant.id, user, passengerRole, driver.createdBy, driver.lastUpdatedBy);
+					UserRole.create (tenant.id, user, passengerRole, user.createdBy, user.lastUpdatedBy);
 				}
+
+				user.save(flush:true, failOnError:true);
+
 				String msg = message(code: 'default.created.message',
 				args: [message(code: 'User.label', default: 'User'), user.username ])
 				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
@@ -355,12 +350,9 @@ class UserController {
 		//Obtain version from the json object
 		Long version = userJsonObject.optLong("version",0);
 
-		//The Driver
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		CustomGrailsUser principal = auth.getPrincipal();
 		Tenant tenant = Tenant.get(principal.tenantId);
-
-		log.info(">>>>" + principal.dump());
 
 
 		//Start a transaction to update based on the existence of an id
@@ -369,32 +361,25 @@ class UserController {
 				User user = User.get(principal.id);
 				assert user != null, "Because this method is secured, a principal/user always exist at this point of the code"
 
+				log.info("Retrieved User " + user.dump());
+
 				//Before updating - check for concurrency
 				if (user.version > version) {
 					render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
 					return;
 				}
 				user.properties = userJsonObject;
-				user.lastUpdatedBy = user.id; //In the taxi app, the user updates itself
-				user.save(flush:true, failOnError:true);
-
 
 				//Handle Driver type
 				JSONObject driverJSON = userJsonObject.opt("driver");
 				if (driverJSON) {
-					Driver driver = Driver.get(principal.id);
-
-					log.info("llllllllllllllllll" + driver.activeStatus);
-
-					if (!driver) {
-						driver = new Driver();
+					if (!user.driver) {
+						user.driver = new Driver();
 					}
-					driver.properties = driverJSON
-					driver.id = user.id;
-					log.info("llllllllllllllllll" + driver.dump());
-					driver.save(flush:true, failOnError:true)
+					user.driver.properties = driverJSON
 
-					// Assign the driver role
+
+					Assign the driver role
 					def driverRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_DRIVER')
 					if (!user.authorities.contains(driverRole)) {
 						UserRole.create ( tenant.id, user, driverRole)
@@ -405,13 +390,11 @@ class UserController {
 				//Handle Passenger type
 				JSONObject passengerJSON = userJsonObject.opt("passenger");
 				if (passengerJSON) {
-					Passenger passenger = Passenger.get(principal.id);
-					if (!passenger) {
-						passenger = new Passenger();
+					if (!user.passenger) {
+						user.passenger = new Passenger();
 					}
 					passenger.properties = passengerJSON
-					passenger.id = user.id;
-					passenger.save(flush:true, failOnError:true)
+
 
 					// Assign the passenger role
 					def passengerRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_PASSENGER')
@@ -419,6 +402,9 @@ class UserController {
 						UserRole.create ( tenanat.id, user, passengerRole)
 					}
 				}
+
+				log.info("Prior to Saving")
+				user.save(flush:true, failOnError:true)
 
 				String msg = message(code: 'default.updated.message',
 				args: [message(code: 'User.label', default: 'User'), user.username])
@@ -442,15 +428,15 @@ class UserController {
 
 		}
 	}
-	
+
 	/*
 	 * user/retrieveAllUsers
 	 *
 	 * Retrieves all users and associated information about the user type (e.g. driver, passenger, etc
 	 * 
 	 * An example JSON input is {}
-	*/
-	
+	 */
+
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def retrieveAllUsers() {
 
@@ -464,9 +450,20 @@ class UserController {
 			throw e;
 		}
 
-		try {
-			def users = User.list();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		CustomGrailsUser principal = auth.getPrincipal();
+		Tenant tenant = Tenant.get(principal.tenantId);
 
+		try {
+			def c = User.createCriteria();
+
+			def users = c.list {
+				and {
+					eq("tenantId",tenant.id)
+				}
+				order("lastUpdated", "desc")
+			}
+ 
 			if(!users) {
 				def error = ['error':'No Users Found']
 				render "${error as JSON}"
@@ -486,8 +483,8 @@ class UserController {
 	 * Retrieves all users and associated information about the user type (e.g. driver, passenger, etc
 	 * 
 	 * An example JSON input is {"id","1"}
-	*/
-	
+	 */
+
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def retrieveUserDetailById() {
 
@@ -501,10 +498,25 @@ class UserController {
 			throw e;
 		}
 
-		try {
-			Long id = jsonObject.optLong("id",0);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		CustomGrailsUser principal = auth.getPrincipal();
+		Tenant tenant = Tenant.get(principal.tenantId);
 
-			User user = User.get(id);
+		try {
+			
+			Long id = jsonObject.optLong("id",0);
+			
+			def c = User.createCriteria();
+
+			def user = c.get {
+				and {
+					eq("tenantId",tenant.id)
+					eq("id",id)
+				}
+				order("lastUpdated", "desc")
+			}
+			
+		
 			if(!user) {
 				def error = ['error':'No User Found']
 				render "${error as JSON}"
@@ -526,8 +538,8 @@ class UserController {
 	 * Retrieves all the details about the user currently logged in
 	 * 
 	 * An example JSON input is {}
-	*/
-	
+	 */
+
 	@Secured(['ROLE_DRIVER','ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'	])
 	def retrieveLoggedUserDetails() {
 
@@ -547,7 +559,7 @@ class UserController {
 		CustomGrailsUser principal = auth.getPrincipal();
 
 		try {
-			
+
 			User user = User.get(principal.id);
 			assert user != null, "Because this method is secured, a principal always exist at this point of the code"
 

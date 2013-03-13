@@ -18,16 +18,19 @@ class Driver {
 
 	def domainService
 	
-	Long id
 	ActiveStatus activeStatus = ActiveStatus.ENABLED
 	CarType carType
 	String servedMetro
-
+	static belongsTo = [ user: User ]
+	
 	static constraints = {
 	}
+	
 	static mapping = {
-		id generator: 'assigned'
-	}	
+		id column: 'user_id', generator: 'foreign',
+			params: [ property: 'user' ]
+		user insertable: false, updateable: false
+	}
 	def beforeValidate () {
 		domainService.setAuditAttributes(this);
 	}

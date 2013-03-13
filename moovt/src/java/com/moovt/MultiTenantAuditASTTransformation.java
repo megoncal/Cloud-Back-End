@@ -40,20 +40,20 @@ public class MultiTenantAuditASTTransformation implements ASTTransformation {
 						java.util.Date.class),
 						MethodCallExpression.NO_ARGUMENTS);
 				classNode.addProperty(tenantIdField, Modifier.PUBLIC,
-						new ClassNode(Long.class), new ConstantExpression(0),
+						new ClassNode(Long.class), null,
 						null, null);
 				classNode.addProperty(createdByField, Modifier.PUBLIC,
-						new ClassNode(Long.class), new ConstantExpression(0),
+						new ClassNode(Long.class), null,
 						null, null);
 				classNode.addProperty(lastUpdatedByField, Modifier.PUBLIC,
-						new ClassNode(Long.class), new ConstantExpression(0),
+						new ClassNode(Long.class), null,
 						null, null);
 				classNode.addProperty(dateCreatedField, Modifier.PUBLIC,
-						new ClassNode(java.util.Date.class), now, null, null);
+						new ClassNode(java.util.Date.class), null, null, null);
 				classNode.addProperty(lastUpdatedField, Modifier.PUBLIC,
-						new ClassNode(java.util.Date.class), now, null, null);
+						new ClassNode(java.util.Date.class), null, null, null);
 				classNode.addProperty(CRUDMessageField, Modifier.PUBLIC,
-						new ClassNode(java.lang.String.class), now, null, null);
+						new ClassNode(java.lang.String.class), null, null, null);
 
 				//Make CRUD Message Transient
 				

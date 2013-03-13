@@ -5,6 +5,8 @@ import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import com.moovt.MultiTenantAudit;
+import com.moovt.taxi.Passenger;
+import com.moovt.taxi.Driver;
 
 @MultiTenantAudit
 class User  {     
@@ -26,7 +28,11 @@ class User  {
 	boolean passwordExpired = false
 	String locale = "en_US"
 	
-	
+	//0 or 1 relationship with he possible user types
+	//TODO: Make this more scalable
+	static hasOne = [ passenger: Passenger,
+						driver: Driver ]
+				     
 	 
 	//Transient properties 
 	String tenantname
@@ -37,10 +43,14 @@ class User  {
 		password nullable:false, blank: false
 		email nullable:false, blank: false, unique: true
 		tenantname bindable: true
+		passenger nullable:true,blank: true
+		driver nullable:true,blank: true
+		//TODO: Other user types
 	}
 
 	static mapping = {
 		password column: '`password`'
+		
 	}
 
 	

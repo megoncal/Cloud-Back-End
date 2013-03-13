@@ -9,11 +9,13 @@ class Passenger {
 
 	def domainService
 	
-	Long id
+	static belongsTo = [ user: User ]
 	
 	static mapping = {
-		id generator: 'assigned'
-	}
+        id column: 'user_id', generator: 'foreign',
+            params: [ property: 'user' ]
+        user insertable: false, updateable: false
+    }
 	
 	def beforeValidate () {
 		domainService.setAuditAttributes(this);

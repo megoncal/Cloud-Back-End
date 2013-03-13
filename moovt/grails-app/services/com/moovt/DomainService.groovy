@@ -16,7 +16,7 @@ class DomainService {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		CustomGrailsUser principal = null;
 		if (auth) {
-			if (auth.getPrincipal().getClass() instanceof CustomGrailsUser) {
+			if (auth.getPrincipal() instanceof CustomGrailsUser) {
 				principal = auth.getPrincipal();
 			}
 		}

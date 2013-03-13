@@ -18,7 +18,9 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import grails.plugins.springsecurity.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-
+/**
+ * The RideController is responsible for managing the lifecycle of a <code>Ride</code>
+ */
 class RideController {
 
 	def springSecurityService;
@@ -26,25 +28,16 @@ class RideController {
 	def index() { }
 
 	/*
-	 * createRide
+	 * This API creates a <code>Ride</code> for the <code>Passenger</code> currently logged in. Please note that a <code>User</code> 
+	 * registered as a <code>Passenger</code> must be logged in. Otherwise a Not Authorized exception will be returned.
 	 * 
-	 *  localhost:8080/moovt/passenger/createOrUpdatePassengerUser
+	 *  Example: <server-name>/moovt/ride/createRide
 	 * 
-	 * 	{"tenantname":"WorldTaxi","firstName":"John","lastName":"Goodrider","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"pt_BR","Address":{"street":"123 Main St","city":"Wheaton","state":"IL","zip":"60107","type":"Home"}}
+	 * {"pickupDateTime":"2013-03-15 06:30",
+	 * "pickUpAddress":{"street":"111 Main St","city":"Wheaton","state":"IL","zip":"60107","addressType":"HOME"},
+	 * "dropOffAddress":{"street":"999 Main St","city":"Naperville","state":"IL","zip":"60107","addressType":"HOME"}
+	 * }
 	 * 
-	 * 
-	 *  http://localhost:8080/moovt/login/authenticateUser
-	 * 
-	 * {"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
-	 * 
-	 *  localhost:8080/moovt/ride/createRide
-	 *  
-	 *  
-	 * 
-	 *  {"id":"6","version":"1","pickupTime":"12:30 PM","passenger":"3",
-	 *  "pickUpAddress":{"street":"111 Main St","city":"Wheaton","state":"IL","zip":"60107","type":"Home"},
-	 *  "dropOffAddress":{"street":"999 Main St","city":"Naperville","state":"IL","zip":"60107","type":"Home"}
-	 *  }
 	 */
 
 	@Secured(['ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'	])
@@ -172,9 +165,12 @@ class RideController {
 	}
 
 	/*
-	 * 	 localhost:8080/moovt/ride/retrievePassengerRides
-	 *  
-	 *   {}
+	 * This API retrieves all Rides created by the <code>Passenger</code> currently logged in.  Please note that a <code>User</code> 
+	 * registered as a <code>Passenger</code> must be logged in. Otherwise a Not Authorized exception will be returned.
+	 * 
+	 * Example: <server-name>/ride/retrievePassengerRides 
+	 * 
+	 * {}
 	 */
 	@Secured(['ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'	])
 	def retrievePassengerRides() {
@@ -199,6 +195,49 @@ class RideController {
 		def rides = c.list {
 			and {
 				eq("passenger", passenger)
+			}
+			maxResults(10)
+			order("lastUpdated", "asc")
+		}
+
+
+
+		if(!rides) {
+			def error = ['error':'No Rides Found']
+			render "${error as JSON}"
+		} else {
+			render "{\"rides\":" + rides.encodeAsJSON() + "}"
+		}
+	}
+
+
+
+	@Secured(['ROLE_DRIVER','IS_AUTHENTICATED_FULLY'])
+	def retrieveUnassignedRideInDriverMetro() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render([code: "ERROR", msg: e.message ] as JSON);
+			return;
+		}
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		CustomGrailsUser principal = auth.getPrincipal();
+		Driver driver = Driver.get(principal.id);
+		assert driver != null, "Because this method is secured, a principal/driver always exist at this point of the code"
+
+		//TODO: Implement the search by metro area
+		log.info("Served Metro: " + driver.servedMetro);
+
+		def c = Ride.createCriteria();
+
+		def rides = c.list {
+			and {
+				eq("rideStatus", RideStatus.UNASSIGNED)
 			}
 			maxResults(10)
 			order("lastUpdated", "asc")
@@ -256,6 +295,11 @@ class RideController {
 					return;
 				}
 
+				if (ride.rideStatus == RideStatus.ASSIGNED) {
+					render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.ride.already.assigned')) as JSON);
+					return;
+				}
+
 				log.info("HERE");
 				ride.driver = driver;
 				ride.rideStatus = RideStatus.ASSIGNED;
@@ -283,51 +327,10 @@ class RideController {
 		}
 
 	}
-	
-	@Secured(['ROLE_DRIVER','IS_AUTHENTICATED_FULLY'])
-	def retrieveUnassignedRideInDriverMetro() {
-		
-				String model = request.reader.getText();
-				log.info(this.actionName + " params are: " + params + " and model is : " + model);
-				JSONObject jsonObject = null;
-				try {
-					jsonObject = new JSONObject(model);
-				} catch (Exception e) {
-					render([code: "ERROR", msg: e.message ] as JSON);
-					return;
-				}
-		
-				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-				CustomGrailsUser principal = auth.getPrincipal();
-				Driver driver = Driver.get(principal.id);
-				assert driver != null, "Because this method is secured, a principal/driver always exist at this point of the code"
-		
-				//TODO: Implement the search by metro area
-				log.info("Served Metro: " + driver.servedMetro);
-		
-				def c = Ride.createCriteria();
-		
-				def rides = c.list {
-					and {
-						eq("rideStatus", RideStatus.UNASSIGNED)
-					}
-					maxResults(10)
-					order("lastUpdated", "asc")
-				}
-		
-		
-		
-				if(!rides) {
-					def error = ['error':'No Rides Found']
-					render "${error as JSON}"
-				} else {
-					render "{\"rides\":" + rides.encodeAsJSON() + "}"
-				}
-			}
 
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def retrieveAllRides() {
-		
+
 		String model = request.reader.getText();
 		log.info(this.actionName + " params are: " + params + " and model is : " + model);
 		JSONObject jsonObject = null;
@@ -341,7 +344,7 @@ class RideController {
 		def c = Ride.createCriteria();
 
 		def rides = Ride.list();
-		
+
 		if(!rides) {
 			def error = ['error':'No Rides Found']
 			render "${error as JSON}"
@@ -350,6 +353,6 @@ class RideController {
 		}
 	}
 
-		
+
 }
 

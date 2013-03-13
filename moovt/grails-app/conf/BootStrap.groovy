@@ -30,6 +30,7 @@ class BootStrap {
 			JSON.registerObjectMarshaller(Ride) {
 				def returnArray = [:]
 				returnArray['id'] = it.id
+				returnArray['version'] = it.version
 				returnArray['rideStatus'] = it.rideStatus.toString()
 				returnArray['driver'] = it.driver
 				returnArray['passenger'] = it.passenger
@@ -49,32 +50,35 @@ class BootStrap {
 				returnArray['addressType'] = it.addressType.toString()
 				return returnArray
 		}
-			JSON.registerObjectMarshaller(Passenger) {
+			JSON.registerObjectMarshaller(User) {
 				def returnArray = [:]
-				String firstName
-				String lastName
-				String phone
-				String email
+				returnArray['id'] = it.id
+				returnArray['version'] = it.version
 				returnArray['firstName'] = it.firstName
 				returnArray['lastName'] = it.lastName
 				returnArray['phone'] = it.phone
 				returnArray['email'] = it.email
-				returnArray['address'] = it.address
+				if (it.driver) {
+					returnArray['driver'] = it.driver
+				}
+				
+				if (it.passenger) {
+					returnArray['passenger'] = it.passenger
+				}
 				return returnArray
 		}
 
 			JSON.registerObjectMarshaller(Driver) {
 				def returnArray = [:]
-				String firstName
-				String lastName
-				String phone
-				String email
-				returnArray['firstName'] = it.firstName
-				returnArray['lastName'] = it.lastName
-				returnArray['phone'] = it.email
-				returnArray['zip'] = it.email
+				returnArray['id'] = it.id
 				returnArray['servedMetro'] = it.servedMetro
 				returnArray['carType'] = it.carType.toString()
+				return returnArray
+		}
+			
+		JSON.registerObjectMarshaller(Passenger) {
+				def returnArray = [:]
+				returnArray['id'] = it.id
 				return returnArray
 		}
 			
@@ -205,15 +209,11 @@ class BootStrap {
 			email: 'jgoodrider@worldtaxi.com',
 			firstName: 'John',
 			lastName: 'Goodrider',
-			phone: '800-800-8080').save(failOnError: true);
-
-						
-		def worldTaxiPassenger = new Passenger(
-			tenantId: worldTaxiTenant.id,
-			createdBy: worldTaxiAdminUser.id,
-			lastUpdatedBy: worldTaxiAdminUser.id)
-		worldTaxiPassenger.id = worldTaxiPassengerUser.id;
-		worldTaxiPassenger.save(failOnError: true);
+			phone: '800-800-8080',
+			passenger: new Passenger(tenantId: worldTaxiTenant.id,
+								     createdBy: worldTaxiAdminUser.id,
+									 lastUpdatedBy: worldTaxiAdminUser.id)
+			).save(failOnError: true);
 
 			if (!worldTaxiPassengerUser.authorities.contains(worldTaxiPassengerRole)) {
 				UserRole.create ( worldTaxiTenant.id, worldTaxiPassengerUser, worldTaxiPassengerRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
@@ -232,18 +232,14 @@ class BootStrap {
 				email: 'jgoodarm@worldtaxi.com',
 				firstName: 'John',
 				lastName: 'Goodarm',
-				phone: '800-800-2020').save(failOnError: true);
-	
-						
-			def worldTaxiDriver = new Driver(
-				id: worldTaxiDriverUser.id,
-				tenantId: worldTaxiTenant.id,
-				createdBy: worldTaxiAdminUser.id,
-				lastUpdatedBy: worldTaxiAdminUser.id,
-				carType: CarType.VAN,
-				servedMetro:"Chicago-Naperville-Joliet, IL");
-			worldTaxiDriver.id = worldTaxiDriverUser.id;
-			worldTaxiDriver.save(failOnError: true);
+				phone: '800-800-2020',
+				driver: new Driver(tenantId: worldTaxiTenant.id,
+								   createdBy: worldTaxiAdminUser.id,
+								   lastUpdatedBy: worldTaxiAdminUser.id,
+								   carType: CarType.VAN,
+								   servedMetro:"Chicago-Naperville-Joliet, IL")
+			).save(failOnError: true);
+			
 	
 				if (!worldTaxiDriverUser.authorities.contains(worldTaxiDriverRole)) {
 					UserRole.create ( worldTaxiTenant.id, worldTaxiDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
@@ -255,16 +251,18 @@ class BootStrap {
 			
 		Address pickUpAddress = new Address (street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME);
 		Address dropOffAddress = new Address (street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME);
-				
+
 		def ride = new Ride(
 			tenantId: worldTaxiTenant.id,
 			createdBy: worldTaxiAdminUser.id,
 			lastUpdatedBy: worldTaxiAdminUser.id,
-			passenger: worldTaxiPassenger,
+			passenger: worldTaxiPassengerUser.passenger,
 			pickupDateTime: new Date(),
 			pickUpAddress: pickUpAddress,
 			dropOffAddress: dropOffAddress,
 			rideStatus: RideStatus.UNASSIGNED).save(failOnError: true);
+
+
 			
 //		if (Item.count()==0) {
 //			Item item = new Item (
