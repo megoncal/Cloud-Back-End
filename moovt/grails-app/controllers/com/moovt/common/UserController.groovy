@@ -3,21 +3,32 @@ package com.moovt.common
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.codehaus.groovy.grails.web.json.JSONArray
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.security.core.Authentication
 import org.springframework.validation.FieldError
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import grails.converters.*
 
 import com.moovt.CallResult;
+import com.moovt.CustomGrailsUser
 import com.moovt.QueryUtils
 import com.moovt.UUIDWrapper;
 import com.moovt.common.Role;
 import com.moovt.common.Tenant;
 import com.moovt.common.User;
 import com.moovt.common.UserRole;
+import com.moovt.taxi.Driver
+import com.moovt.taxi.Passenger
 
 import grails.validation.ValidationException
 import java.util.UUID
 import grails.plugins.springsecurity.Secured
+
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import org.codehaus.groovy.grails.web.json.JSONObject;
+import org.springframework.dao.OptimisticLockingFailureException;
+
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 class UserController {
 
@@ -29,87 +40,6 @@ class UserController {
 	def main() {
 	}
 
-	/*
-	 * createUserInExistingTenant
-	 * Input
-	 *		tenantname (naSavassi)
-	 *		username
-	 * 		password
-	 *      locale
-	 *
-	 *
-	 * Output
-	 *		code (SUCCESS or ERROR)
-	 *		msg
-	 *
-	 * http://localhost:8080/moovt/user/createUserInExistingTenant
-	 * 
-	 * {"tenantname":"naSavassi","username":"movieGoer","password":"movieGoer","locale":"pt_BR"}
-	 */
-	def createUserInExistingTenant() {
-		String model = request.reader.getText();
-		log.info(this.actionName + " params are: " + params + " and model is : " + model);
-		JSONObject jsonObject = null;
-		try {
-			jsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			return;
-		}
-
-		User guestUser = new User(jsonObject);
-
-
-		//Verify if the tenant exists
-		Tenant aTenant = Tenant.findByName(guestUser.tenantname);
-		if (!aTenant) {
-			String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ guestUser.tenantname ])
-			log.warn (msgTenantDoesNotExist)
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist) as JSON);
-			return;
-		} 
-
-		User.withTransaction { status ->
-			try {
-				guestUser.enabled = true;
-				guestUser.tenantId = aTenant.id;
-				guestUser.createdBy = 1
-				guestUser.lastUpdatedBy = 1
-				guestUser.save(flush:true, failOnError:true)
-
-
-				//Update the createdBy and lastUpdatedBy to self
-				guestUser.createdBy = guestUser.id;
-				guestUser.lastUpdatedBy = guestUser.id;
-				guestUser.save(flush:true, failOnError:true)
-
-
-				// Assign the guest role
-				def guestRole = Role.findByTenantIdAndAuthority(aTenant.id, 'ROLE_GUEST')
-				UserRole.create (guestUser.tenantId, guestUser, guestRole, guestUser.createdBy, guestUser.lastUpdatedBy);
-
-				def itemVwrRole = Role.findByTenantIdAndAuthority(aTenant.id, 'ROLE_ITEM_VWR')
-				UserRole.create (guestUser.tenantId, guestUser, itemVwrRole, guestUser.createdBy, guestUser.lastUpdatedBy);
-
-				
-				String msg = message(code: 'default.created.message',
-						args: [message(code: 'User.label', default: 'User', locale:guestUser.locale), guestUser.username],
-						locale: guestUser.locale)
-				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
-				return;
-
-			} catch (ValidationException  e) {
-				render(CallResult.getCallResultFromErrors (e.getErrors(), guestUser.locale) as JSON);
-				return
-			} catch (Throwable e) {
-				status.setRollbackOnly()
-				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-				throw e;
-			}
-			
-		}
-	}
-
 
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def search() {
@@ -118,19 +48,26 @@ class UserController {
 
 		params.max = Math.min(params.max ? params.int('max') : 5, 100)
 
-		def c = User.createCriteria();
 
-		def users = c.list (QueryUtils.c_c(params));
+		try {
+			def c = User.createCriteria();
 
-		if(!users) {
-			def error = ['error':"No Users Found"]
-			render "${params.callback}(${error as JSON})"
-		} else {
-			log.warn(params)
-			render "${params.callback}(${users as JSON})"
+			def users = c.list (QueryUtils.c_c(params));
+
+			if(!users) {
+				render(new CallResult(CallResult.USER,CallResult.ERROR,"No users found") as JSON);		
+			} else {
+				render "{\"users\":" + users.encodeAsJSON() + "}"
+			}
+		} catch (Throwable e) {
+			status.setRollbackOnly();
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
 		}
+
+
 	}
- 
+
 	//This method updates or insert an array of JSON objects
 	@Secured([
 		'ROLE_ADMIN',
@@ -277,6 +214,354 @@ class UserController {
 			render "${uuidWrapper as JSON}"
 		}
 	}
+
+	/*
+	 * createUser
+	 * 
+	 * Creates a user and the related type of user object such as a driver and or a passenger
+	 * 
+	 * To create a Drive use this JSON as and example
+	 * 
+	 * {"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"Sedan","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+	 * 
+	 * To create a Passenger, use this JSON as an example
+	 * 
+	 * {"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
+	 *
+	 * To update include the id and version in the JSON e.g. "id":"456","version":"7"
+	 * 
+	 */
+	def createUser() {
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject userJsonObject = null;
+		try {
+			userJsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
+			throw e;
+		}
+
+
+
+		//For methods without the need of authentication, verify if the tenant exists
+		String tenantname = userJsonObject.optString("tenantname","");
+
+		Tenant tenant = Tenant.findByName(tenantname);
+		if (!tenant) {
+			String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
+			log.warn (msgTenantDoesNotExist)
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist) as JSON);
+			return;
+		}
+
+		//Start a transaction to insert or update based on the existence of an id
+		User.withTransaction { status ->
+			try {
+				log.info("Creating a new user and/or driver and/or passenger");
+				User user = new User(userJsonObject);
+				user.tenantId = tenant.id;
+				user.createdBy = 1;
+				user.lastUpdatedBy = 1;
+				user.save(flush:true, failOnError:true);
+
+				//Update the createdBy and lastUpdatedBy to self
+				user.createdBy = user.id;
+				user.lastUpdatedBy = user.id;
+				user.save(flush:true, failOnError:true)
+
+				//Handle Driver type
+				JSONObject driverJSON = userJsonObject.opt("driver");
+				if (driverJSON) {
+					log.info("000");
+					Driver driver = new Driver (driverJSON);
+					log.info("222 " + driver.dump());
+					driver.id = user.id;
+					driver.tenantId = tenant.id;
+					driver.createdBy = user.id;
+					driver.lastUpdatedBy = user.id;
+					driver.save(flush:true, failOnError:true)
+					log.info("45454");
+					// Assign the driver role
+					def driverRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_DRIVER')
+					UserRole.create (tenant.id, user, driverRole, driver.createdBy, driver.lastUpdatedBy);
+					log.info("333");
+				}
+
+				//Handle Passenger type
+				JSONObject passengerJSON = userJsonObject.opt("passenger");
+				if (passengerJSON) {
+					Passenger passenger = new Passenger (passengerJSON);
+					passenger.id = user.id;
+					passenger.tenantId = tenant.id;
+					passenger.createdBy = user.id;
+					passenger.lastUpdatedBy = user.id;
+					passenger.save(flush:true, failOnError:true)
+
+					// Assign the passenger role
+					def passengerRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_PASSENGER')
+					UserRole.create (tenant.id, user, passengerRole, driver.createdBy, driver.lastUpdatedBy);
+				}
+				String msg = message(code: 'default.created.message',
+				args: [message(code: 'User.label', default: 'User'), user.username ])
+				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+				return;
+			} catch (OptimisticLockingFailureException e) {
+				status.setRollbackOnly();
+				//TODO: Refine locking messages
+				render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
+				return;
+			} catch (ValidationException  e)  {
+				status.setRollbackOnly();
+				log.info("4444");
+				render(CallResult.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+				return;
+			} catch (Throwable e) {log.info("3333");
+				status.setRollbackOnly();
+				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+				throw e;
+			}
+
+		}
+	}
+
+	/*
+	 * user/updateLoggedUser
+	 *
+	 * Creates or updates a user and the related type of user object such as a driver and or a passenger
+	 *
+	 * To update a Drive use this JSON as and example
+	 *
+	 * {"version":"2","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"VAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+	 *
+	 * To update a Passenger, use this JSON as an example
+	 *
+	 * {"version":"2","firstName":"UpdatedJohn","lastName":"Goodrider","username":"jgodrider","password":"Welcome!1","locale":"en-US","passenger":{}}}
+	 *
+	 *
+	 */
+	@Secured(['ROLE_DRIVER', 'ROLE_PASSENGER', 'IS_AUTHENTICATED_FULLY'])
+	def updateLoggedUser() {
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject userJsonObject = null;
+		try {
+			userJsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
+			throw e;
+		}
+
+		//Obtain version from the json object
+		Long version = userJsonObject.optLong("version",0);
+
+		//The Driver
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		CustomGrailsUser principal = auth.getPrincipal();
+		Tenant tenant = Tenant.get(principal.tenantId);
+
+		log.info(">>>>" + principal.dump());
+
+
+		//Start a transaction to update based on the existence of an id
+		User.withTransaction { status ->
+			try {
+				User user = User.get(principal.id);
+				assert user != null, "Because this method is secured, a principal/user always exist at this point of the code"
+
+				//Before updating - check for concurrency
+				if (user.version > version) {
+					render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
+					return;
+				}
+				user.properties = userJsonObject;
+				user.lastUpdatedBy = user.id; //In the taxi app, the user updates itself
+				user.save(flush:true, failOnError:true);
+
+
+				//Handle Driver type
+				JSONObject driverJSON = userJsonObject.opt("driver");
+				if (driverJSON) {
+					Driver driver = Driver.get(principal.id);
+
+					log.info("llllllllllllllllll" + driver.activeStatus);
+
+					if (!driver) {
+						driver = new Driver();
+					}
+					driver.properties = driverJSON
+					driver.id = user.id;
+					log.info("llllllllllllllllll" + driver.dump());
+					driver.save(flush:true, failOnError:true)
+
+					// Assign the driver role
+					def driverRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_DRIVER')
+					if (!user.authorities.contains(driverRole)) {
+						UserRole.create ( tenant.id, user, driverRole)
+					}
+
+				}
+
+				//Handle Passenger type
+				JSONObject passengerJSON = userJsonObject.opt("passenger");
+				if (passengerJSON) {
+					Passenger passenger = Passenger.get(principal.id);
+					if (!passenger) {
+						passenger = new Passenger();
+					}
+					passenger.properties = passengerJSON
+					passenger.id = user.id;
+					passenger.save(flush:true, failOnError:true)
+
+					// Assign the passenger role
+					def passengerRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_PASSENGER')
+					if (!user.authorities.contains(passengerRole)) {
+						UserRole.create ( tenanat.id, user, passengerRole)
+					}
+				}
+
+				String msg = message(code: 'default.updated.message',
+				args: [message(code: 'User.label', default: 'User'), user.username])
+				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+
+
+			} catch (OptimisticLockingFailureException e) {
+				status.setRollbackOnly();
+				//TODO: Refine locking messages
+				render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
+				return;
+			} catch (ValidationException  e)  {
+				status.setRollbackOnly();
+				render(CallResult.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+				return;
+			} catch (Throwable e) {
+				status.setRollbackOnly();
+				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+				throw e;
+			}
+
+		}
+	}
+	
+	/*
+	 * user/retrieveAllUsers
+	 *
+	 * Retrieves all users and associated information about the user type (e.g. driver, passenger, etc
+	 * 
+	 * An example JSON input is {}
+	*/
+	
+	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+	def retrieveAllUsers() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
+			throw e;
+		}
+
+		try {
+			def users = User.list();
+
+			if(!users) {
+				def error = ['error':'No Users Found']
+				render "${error as JSON}"
+			} else {
+				render "{\"users\":" + users.encodeAsJSON() + "}"
+			}
+		} catch (Throwable e) {
+			status.setRollbackOnly();
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
+		}
+	}
+
+	/*
+	 * user/retrieveUserDetailById
+	 *
+	 * Retrieves all users and associated information about the user type (e.g. driver, passenger, etc
+	 * 
+	 * An example JSON input is {"id","1"}
+	*/
+	
+	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+	def retrieveUserDetailById() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
+			throw e;
+		}
+
+		try {
+			Long id = jsonObject.optLong("id",0);
+
+			User user = User.get(id);
+			if(!user) {
+				def error = ['error':'No User Found']
+				render "${error as JSON}"
+			} else {
+				render "{\"user\":" + user.encodeAsJSON() + "}"
+			}
+		} catch (Throwable e) {
+			status.setRollbackOnly();
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
+		}
+
+
+	}
+
+	/*
+	 * user/retrieveLoggedUserDetails
+	 *
+	 * Retrieves all the details about the user currently logged in
+	 * 
+	 * An example JSON input is {}
+	*/
+	
+	@Secured(['ROLE_DRIVER','ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'	])
+	def retrieveLoggedUserDetails() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
+			throw e;
+		}
+
+
+		//The User
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		CustomGrailsUser principal = auth.getPrincipal();
+
+		try {
+			
+			User user = User.get(principal.id);
+			assert user != null, "Because this method is secured, a principal always exist at this point of the code"
+
+			render "{\"user\":" + user.encodeAsJSON() + "}"
+		} catch (Throwable e) {
+			status.setRollbackOnly();
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
+		}
+
+
+	}
+
+
 
 }
 

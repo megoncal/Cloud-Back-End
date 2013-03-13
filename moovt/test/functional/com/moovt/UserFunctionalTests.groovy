@@ -208,6 +208,89 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "Este email (existingEmail@test.com) já existe"
 	}
 
+//Taxi Tests
+	void testCreateUserDriverEnglish() {
+		post('/user/createOrUpdateUser') {
+			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
+			body {
+				"""
+				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"Sedan","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "SUCCESS"
+		assertContentContains "USER"
+		assertContentContains "User dultrafast created"
+	}
+		
+	void testCreateUserPassengerEnglish() {
+		post('/user/createOrUpdateUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "SUCCESS"
+		assertContentContains "USER"
+		assertContentContains "User jairjunkie created"
+	}
+	
+	void testUpdateUserDriverEnglish() {
+		
+		post('/login/authenticateUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1",locale:"pt_BR"}
+				"""
+			}
+		}
+		
+		post('/user/updateLoggedUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"version":"2","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "SUCCESS"
+		assertContentContains "USER"
+		assertContentContains "User jverygoodarm updated"
+	}
+
+	void testUpdateUserPassengerEnglish() {
+		
+		post('/login/authenticateUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				"""
+			}
+		}
+		
+		post('/user/updateLoggedUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"version":"2","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "SUCCESS"
+		assertContentContains "USER"
+		assertContentContains "User jverygoodarm updated"
+	}
+
+	
 	
 }
 

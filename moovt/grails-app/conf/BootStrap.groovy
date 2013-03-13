@@ -195,8 +195,8 @@ class BootStrap {
 		
 		
 		Address address = new Address (street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME);
-				
-		def woldTaxiPassenger = Passenger.findByTenantIdAndUsername(worldTaxiTenant.id, 'jgoodrider') ?: new Passenger(
+
+		User worldTaxiPassengerUser = new User(
 			tenantId: worldTaxiTenant.id,
 			createdBy: worldTaxiAdminUser.id,
 			lastUpdatedBy: worldTaxiAdminUser.id,
@@ -205,18 +205,25 @@ class BootStrap {
 			email: 'jgoodrider@worldtaxi.com',
 			firstName: 'John',
 			lastName: 'Goodrider',
-			phone: '800-800-2020',
-		    address: address).save(failOnError: true)
+			phone: '800-800-8080').save(failOnError: true);
 
-			if (!woldTaxiPassenger.authorities.contains(worldTaxiPassengerRole)) {
-				UserRole.create ( worldTaxiTenant.id, woldTaxiPassenger, worldTaxiPassengerRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
+						
+		def worldTaxiPassenger = new Passenger(
+			tenantId: worldTaxiTenant.id,
+			createdBy: worldTaxiAdminUser.id,
+			lastUpdatedBy: worldTaxiAdminUser.id)
+		worldTaxiPassenger.id = worldTaxiPassengerUser.id;
+		worldTaxiPassenger.save(failOnError: true);
+
+			if (!worldTaxiPassengerUser.authorities.contains(worldTaxiPassengerRole)) {
+				UserRole.create ( worldTaxiTenant.id, worldTaxiPassengerUser, worldTaxiPassengerRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
 			}
 			
-			if (!woldTaxiPassenger.authorities.contains(worldTaxiRideMgrRole)) {
-				UserRole.create ( worldTaxiTenant.id, woldTaxiPassenger, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
+			if (!worldTaxiPassengerUser.authorities.contains(worldTaxiRideMgrRole)) {
+				UserRole.create ( worldTaxiTenant.id, worldTaxiPassengerUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
 			}
-			
-			def woldTaxiDriver = Driver.findByTenantIdAndUsername(worldTaxiTenant.id, 'jgoodarm') ?: new Driver(
+
+			User worldTaxiDriverUser = new User(
 				tenantId: worldTaxiTenant.id,
 				createdBy: worldTaxiAdminUser.id,
 				lastUpdatedBy: worldTaxiAdminUser.id,
@@ -225,16 +232,25 @@ class BootStrap {
 				email: 'jgoodarm@worldtaxi.com',
 				firstName: 'John',
 				lastName: 'Goodarm',
-				phone: '800-800-2020',
-				carType: CarType.VAN,
-				servedMetro:"Chicago-Naperville-Joliet, IL").save(failOnError: true)
+				phone: '800-800-2020').save(failOnError: true);
 	
-				if (!woldTaxiDriver.authorities.contains(worldTaxiDriverRole)) {
-					UserRole.create ( worldTaxiTenant.id, woldTaxiDriver, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
+						
+			def worldTaxiDriver = new Driver(
+				id: worldTaxiDriverUser.id,
+				tenantId: worldTaxiTenant.id,
+				createdBy: worldTaxiAdminUser.id,
+				lastUpdatedBy: worldTaxiAdminUser.id,
+				carType: CarType.VAN,
+				servedMetro:"Chicago-Naperville-Joliet, IL");
+			worldTaxiDriver.id = worldTaxiDriverUser.id;
+			worldTaxiDriver.save(failOnError: true);
+	
+				if (!worldTaxiDriverUser.authorities.contains(worldTaxiDriverRole)) {
+					UserRole.create ( worldTaxiTenant.id, worldTaxiDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
 				}
 				
-				if (!woldTaxiDriver.authorities.contains(worldTaxiRideMgrRole)) {
-					UserRole.create ( worldTaxiTenant.id, woldTaxiDriver, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
+				if (!worldTaxiDriverUser.authorities.contains(worldTaxiRideMgrRole)) {
+					UserRole.create ( worldTaxiTenant.id, worldTaxiDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
 				}
 			
 		Address pickUpAddress = new Address (street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME);
@@ -244,7 +260,7 @@ class BootStrap {
 			tenantId: worldTaxiTenant.id,
 			createdBy: worldTaxiAdminUser.id,
 			lastUpdatedBy: worldTaxiAdminUser.id,
-			passenger: woldTaxiPassenger,
+			passenger: worldTaxiPassenger,
 			pickupDateTime: new Date(),
 			pickUpAddress: pickUpAddress,
 			dropOffAddress: dropOffAddress,

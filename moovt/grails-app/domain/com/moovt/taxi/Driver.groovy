@@ -7,17 +7,28 @@ enum CarType {
 	SEDAN, VAN, LIMO
 }
 
-enum MetroArea {
-	
+enum ActiveStatus {
+	ENABLED, DISABLED
 }
-class Driver extends User {
+enum MetroArea {
+}
 
+@MultiTenantAudit
+class Driver {
 
+	def domainService
+	
+	Long id
+	ActiveStatus activeStatus = ActiveStatus.ENABLED
 	CarType carType
-
 	String servedMetro
 
 	static constraints = {
 	}
-	
+	static mapping = {
+		id generator: 'assigned'
+	}	
+	def beforeValidate () {
+		domainService.setAuditAttributes(this);
+	}
 }

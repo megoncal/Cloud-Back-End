@@ -25,6 +25,8 @@ class User  {
 	boolean accountLocked = false
 	boolean passwordExpired = false
 	String locale = "en_US"
+	
+	
 	 
 	//Transient properties 
 	String tenantname

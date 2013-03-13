@@ -4,11 +4,18 @@ import com.moovt.MultiTenantAudit;
 import com.moovt.common.Address;
 import com.moovt.common.User
 
-class Passenger extends User {
+@MultiTenantAudit
+class Passenger {
 
-
-	Address address
+	def domainService
+	
+	Long id
+	
 	static mapping = {
-		address cascade: 'all'
+		id generator: 'assigned'
 	}
+	
+	def beforeValidate () {
+		domainService.setAuditAttributes(this);
 	}
+}
