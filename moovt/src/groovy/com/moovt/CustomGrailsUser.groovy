@@ -4,6 +4,12 @@ import org.codehaus.groovy.grails.plugins.springsecurity.GrailsUser
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.User
 
+
+/**
+ * This is the extention of a <code>GrailsUser</code> required to add the tenantId and locale of the user.
+ * 
+ *  @author egoncalves
+ */
 class CustomGrailsUser extends GrailsUser {
 
    final Long tenantId

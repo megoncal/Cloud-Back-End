@@ -3,7 +3,7 @@
 		<form>
 			<div class="clSigninRow">
 					<input class="k-textbox clInputMedium" id="tenantname" name="tenantname"
-						type="text" tabindex="1" placeholder="Company Name" value="Moovt"/> 
+						type="text" tabindex="1" placeholder="Company Name" value="WorldTaxi"/> 
 					<input
 						class="k-textbox clInputMedium" id="username" name="username"
 						type="text" tabindex="2" placeholder="User Name" value="admin"/> 

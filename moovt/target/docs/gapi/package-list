@@ -1,6 +1,5 @@
 DefaultPackage
 com.moovt
 com.moovt.common
-com.moovt.marshalling
 com.moovt.taxi
 spring

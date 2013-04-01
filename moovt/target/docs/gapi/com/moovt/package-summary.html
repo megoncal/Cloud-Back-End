@@ -93,32 +93,22 @@ Package com.moovt
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="Asset.html" title="class in com/moovt">Asset</A></B></TD>
-        <TD>Represents an Asset model</TD>
+        <TD>This class represents an <code>Asset</code>. </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="Banana.html" title="class in com/moovt">Banana</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="BananaController.html" title="class in com/moovt">BananaController</A></B></TD>
-        <TD></TD>
+        <TD WIDTH="15%"><B><A HREF="AssetController.html" title="class in com/moovt">AssetController</A></B></TD>
+        <TD>This class contains the APIs to maintain <code>Asset</code> in the AssetManager app.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CallResult.html" title="class in com/moovt">CallResult</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="CustomAccessDeniedHandler.html" title="class in com/moovt">CustomAccessDeniedHandler</A></B></TD>
-        <TD>Base implementation of org.springframework.security.web.access.AccessDeniedHandler.</TD>
+        <TD>Encapsulates the results of a JSON call. </TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CustomDomainMarshaller.html" title="class in com/moovt">CustomDomainMarshaller</A></B></TD>
-        <TD>@author Siegfried Puchbauer, Eduardo Goncalves</TD>
+        <TD>This class is not currently used because we are using specific marshallers located in Bootstrap</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -135,22 +125,7 @@ Package com.moovt
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="CustomGrailsUser.html" title="class in com/moovt">CustomGrailsUser</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="CustomLogoutSuccessHandler.html" title="class in com/moovt">CustomLogoutSuccessHandler</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="CustomRetryWithHttpEntryPoint.html" title="class in com/moovt">CustomRetryWithHttpEntryPoint</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="DomainHelper.html" title="class in com/moovt">DomainHelper</A></B></TD>
-        <TD></TD>
+        <TD>This is the extention of a <code>GrailsUser</code> required to add the tenantId and locale of the user.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -159,34 +134,44 @@ Package com.moovt
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="FilterContainer.html" title="class in com/moovt">FilterContainer</A></B></TD>
+        <TD WIDTH="15%"><B><A HREF="DynEnumService.html" title="class in com/moovt">DynEnumService</A></B></TD>
         <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="DynamicEnum.html" title="class in com/moovt">DynamicEnum</A></B></TD>
+        <TD></TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="FilterContainer.html" title="class in com/moovt">FilterContainer</A></B></TD>
+        <TD>This is reserved for future use with complex JSON searches</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="FilterDescription.html" title="class in com/moovt">FilterDescription</A></B></TD>
-        <TD></TD>
+        <TD>This is reserved for future use with complex JSON searches</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="Item.html" title="class in com/moovt">Item</A></B></TD>
-        <TD></TD>
+        <TD>This class represents an <code>Item</code>. </TD>
+        </TR>
+
+        <TR BGCOLOR="white" CLASS="TableRowColor">
+        <TD WIDTH="15%"><B><A HREF="ItemController.html" title="class in com/moovt">ItemController</A></B></TD>
+        <TD>This class contains the APIs to maintain an <code>Item</code> in the naSavassi app.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="LocaleUtils.html" title="class in com/moovt">LocaleUtils</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="MultiTenantApp.html" title="class in com/moovt">MultiTenantApp</A></B></TD>
-        <TD></TD>
+        <TD>This class contains static methods to help with Locale operations</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="MultiTenantAuditASTTransformation.html" title="class in com/moovt">MultiTenantAuditASTTransformation</A></B></TD>
-        <TD>Performs an ast transformation on a class - adds createdBy/createdDate
- editedBy/EditedDate id and table properties to the subject class.</TD>
+        <TD>This class performs the AST Transformation that adds a tenantId, createdBy, lastUpdatedBy, lastUpdated, dateCreated and CRUD Message to
+ all domain classes.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -196,22 +181,18 @@ Package com.moovt
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="SortDescription.html" title="class in com/moovt">SortDescription</A></B></TD>
-        <TD></TD>
+        <TD>This is reserved for future use with complex JSON searches</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="TenantAuthenticationProvider.html" title="class in com/moovt">TenantAuthenticationProvider</A></B></TD>
-        <TD></TD>
+        <TD>This class encapsulates the custom <code>AuthenticationProvider</code> that provides the <code>authenticate</code> method.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="TenantAuthenticationToken.html" title="class in com/moovt">TenantAuthenticationToken</A></B></TD>
-        <TD></TD>
-        </TR>
-
-        <TR BGCOLOR="white" CLASS="TableRowColor">
-        <TD WIDTH="15%"><B><A HREF="TenantFilter.html" title="class in com/moovt">TenantFilter</A></B></TD>
-        <TD></TD>
+        <TD>This is an extension to the <code>UsernamePasswordAuthenticationToken</code> to add the tenantName and locale required by the
+ authentication process.</TD>
         </TR>
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
@@ -263,7 +244,7 @@ Package com.moovt
 
         <TR BGCOLOR="white" CLASS="TableRowColor">
         <TD WIDTH="15%"><B><A HREF="MultiTenantAudit.html" title="class in com/moovt">MultiTenantAudit</A></B></TD>
-        <TD></TD>
+        <TD>This is the interface that register the <code>MultiTenantAudit</code>AST Transformation used in all domain classes</TD>
         </TR>
 
 </TABLE>

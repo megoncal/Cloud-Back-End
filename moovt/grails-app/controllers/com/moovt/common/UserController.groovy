@@ -11,6 +11,7 @@ import grails.converters.*
 import com.moovt.CallResult;
 import com.moovt.CustomGrailsUser
 import com.moovt.QueryUtils
+import com.moovt.TenantAuthenticationToken
 import com.moovt.UUIDWrapper;
 import com.moovt.common.Role;
 import com.moovt.common.Tenant;
@@ -30,9 +31,12 @@ import org.springframework.dao.OptimisticLockingFailureException;
 
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import org.springframework.security.core.AuthenticationException
+
 class UserController {
 
 	def messageSource; //inject the messageSource bean
+	def authenticationManager; //injection of the authenticationManager required to log in the recently created user
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -40,34 +44,12 @@ class UserController {
 	def main() {
 	}
 
-
-	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
-	def search() {
-
-		log.info("Searching with params:" + params + "and request: " + request.reader.getText());
-
-		params.max = Math.min(params.max ? params.int('max') : 5, 100)
-
-
-		try {
-			def c = User.createCriteria();
-
-			def users = c.list (QueryUtils.c_c(params));
-
-			if(!users) {
-				render(new CallResult(CallResult.USER,CallResult.ERROR,"No users found") as JSON);
-			} else {
-				render "{\"users\":" + users.encodeAsJSON() + "}"
-			}
-		} catch (Throwable e) {
-			status.setRollbackOnly();
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
-		}
-
-
-	}
-
+	/**
+	 * This API is not currently supported.
+	 *
+	 * Example: <server-name>/user/upsert
+	 *
+	 */
 	//This method updates or insert an array of JSON objects
 	@Secured([
 		'ROLE_ADMIN',
@@ -137,6 +119,12 @@ class UserController {
 
 	}
 
+	/**
+	 * This API is not currently supported.
+	 *
+	 * Example: <server-name>/user/delete
+	 *
+	 */
 
 	@Secured(['ROLE_ADMIN',	'IS_AUTHENTICATED_FULLY'])
 	def delete() {
@@ -196,6 +184,12 @@ class UserController {
 
 	}
 
+	/**
+	 * This API is not currently supported.
+	 *
+	 * Example: <server-name>/user/saveImage
+	 *
+	 */
 	@Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
 	def saveImage={
 
@@ -215,21 +209,16 @@ class UserController {
 		}
 	}
 
-	/*
-	 * createUser
+	/**
+	 * This API creates a <code>User</code>, signin the user and returns JSESSIONID.
+	 * The User can be either a <code>Passenger</code> or a <code>Driver</code>. It does not require the user to be
+	 * signed in.
 	 * 
-	 * Creates a user and the related type of user object such as a driver and or a passenger
-	 * 
-	 * To create a Drive use this JSON as and example
-	 * 
-	 * {"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"Sedan","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
-	 * 
-	 * To create a Passenger, use this JSON as an example
-	 * 
-	 * {"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
+	 * @param  url   <server-name>/user/createUser
+	 * @param  input-sample-1 {"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+	 * @param  input-sample-2 {"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
+	 * @return output-sample {"type":"USER","code":"SUCCESS","message":"User dultrxafast created","JSESSIONID":"6317F9E37E0F499399A3F89DDA6D5723"}
 	 *
-	 * To update include the id and version in the JSON e.g. "id":"456","version":"7"
-	 * 
 	 */
 	def createUser() {
 		String model = request.reader.getText();
@@ -246,7 +235,7 @@ class UserController {
 
 		//For methods without the need of authentication, verify if the tenant exists
 		String tenantname = userJsonObject.optString("tenantname","");
-
+		
 		Tenant tenant = Tenant.findByName(tenantname);
 		if (!tenant) {
 			String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
@@ -254,6 +243,9 @@ class UserController {
 			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist) as JSON);
 			return;
 		}
+		
+		//Before any further operation, capture the password in its raw format
+		String password = userJsonObject.optString("password","");
 
 		//Start a transaction to insert or update based on the existence of an id
 		User.withTransaction { status ->
@@ -297,21 +289,36 @@ class UserController {
 
 				user.save(flush:true, failOnError:true);
 
+				//Authenticate this user, please note the use of password in its non-encoded format
+				TenantAuthenticationToken token = new TenantAuthenticationToken(user.username, password,user.tenantname, user.locale);
+				Authentication auth = authenticationManager.authenticate(token);
+				SecurityContextHolder.getContext().setAuthentication(auth);
+				String sessionId = session.getId();
+
 				String msg = message(code: 'default.created.message',
 				args: [message(code: 'User.label', default: 'User'), user.username ])
-				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+
+				render([type: CallResult.USER, code: CallResult.SUCCESS, message: msg, JSESSIONID: sessionId] as JSON);
 				return;
+				
 			} catch (OptimisticLockingFailureException e) {
 				status.setRollbackOnly();
 				//TODO: Refine locking messages
 				render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
+				throw e;
 				return;
 			} catch (ValidationException  e)  {
 				status.setRollbackOnly();
-				log.info("4444");
 				render(CallResult.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+				throw e;
 				return;
-			} catch (Throwable e) {log.info("3333");
+			}  catch (AuthenticationException e) {
+				status.setRollbackOnly();
+				render(new CallResult(CallResult.USER, CallResult.ERROR, e.message) as JSON);
+				throw e;
+				return;
+			}
+			catch (Throwable e) {
 				status.setRollbackOnly();
 				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
 				throw e;
@@ -320,22 +327,14 @@ class UserController {
 		}
 	}
 
-	/*
-	 * user/updateLoggedUser
-	 *
-	 * Creates or updates a user and the related type of user object such as a driver and or a passenger
-	 *
-	 * To update a Drive use this JSON as and example
-	 *
-	 * {"version":"2","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"VAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
-	 *
-	 * To update a Passenger, use this JSON as an example
-	 *
-	 * {"version":"2","firstName":"UpdatedJohn","lastName":"Goodrider","username":"jgodrider","password":"Welcome!1","locale":"en-US","passenger":{}}}
-	 *
-	 *
-	 */
-	@Secured(['ROLE_DRIVER', 'ROLE_PASSENGER', 'IS_AUTHENTICATED_FULLY'])
+	/**
+	 * This API updates the <code>User</code> that is currently logged in and returns the details of the just updated User
+	 * @param  url   <server-name>/user/updateLoggedUser
+	 * @param  input-sample-1 {"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygooxdarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+	 * @param  {"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+	 * @return output-sample 
+	 * 
+	 */	@Secured(['ROLE_DRIVER', 'ROLE_PASSENGER', 'IS_AUTHENTICATED_FULLY'])
 	def updateLoggedUser() {
 		String model = request.reader.getText();
 		log.info(this.actionName + " params are: " + params + " and model is : " + model);
@@ -372,14 +371,21 @@ class UserController {
 
 				//Handle Driver type
 				JSONObject driverJSON = userJsonObject.opt("driver");
+
 				if (driverJSON) {
-					if (!user.driver) {
-						user.driver = new Driver();
+					Driver driver = user.driver;
+					if (!driver) {
+						driver = new Driver(driverJSON);
+						driver.user = user
+					} else {
+						driver.properties = driverJSON
 					}
-					user.driver.properties = driverJSON
 
+					driver.save(flush:true, failOnError:true);
 
-					Assign the driver role
+					user.driver = driver;
+
+					//Assign the driver role
 					def driverRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_DRIVER')
 					if (!user.authorities.contains(driverRole)) {
 						UserRole.create ( tenant.id, user, driverRole)
@@ -390,10 +396,17 @@ class UserController {
 				//Handle Passenger type
 				JSONObject passengerJSON = userJsonObject.opt("passenger");
 				if (passengerJSON) {
-					if (!user.passenger) {
-						user.passenger = new Passenger();
+					Passenger passenger = user.passenger;
+					if (!passenger) {
+						passenger = new Passenger(passengerJSON);
+						passenger.user = user
+					} else {
+						passenger.properties = passengerJSON
 					}
-					passenger.properties = passengerJSON
+
+					passenger.save(flush:true, failOnError:true);
+
+					user.passenger = passenger;
 
 
 					// Assign the passenger role
@@ -429,14 +442,13 @@ class UserController {
 		}
 	}
 
-	/*
-	 * user/retrieveAllUsers
-	 *
-	 * Retrieves all users and associated information about the user type (e.g. driver, passenger, etc
+	/**
+	 * This API retrieves all Users. This API is only available to users with the Administrator privilege.
 	 * 
-	 * An example JSON input is {}
+	 * @param  url   <server-name>/user/retrieveAllUsers
+	 * @param  input-sample {}
+	 * @return output-sample {"users":[{"id":4,"version":1,"firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"},{"id":5,"version":1,"firstName":"John","lastName":"Goodrider","phone":"800-800-8080","email":"jgoodrider@worldtaxi.com","passenger":{"id":5}},{"id":6,"version":1,"firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedMetro":"Chicago-Naperville-Joliet, IL","carType":"VAN"}}]}
 	 */
-
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def retrieveAllUsers() {
 
@@ -463,7 +475,7 @@ class UserController {
 				}
 				order("lastUpdated", "desc")
 			}
- 
+
 			if(!users) {
 				def error = ['error':'No Users Found']
 				render "${error as JSON}"
@@ -471,18 +483,56 @@ class UserController {
 				render "{\"users\":" + users.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			status.setRollbackOnly();
 			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
 			throw e;
 		}
 	}
 
-	/*
-	 * user/retrieveUserDetailById
+	/**
+	 * This API retrieves all Users. This API is only available to users with the Administrator privilege.
 	 *
-	 * Retrieves all users and associated information about the user type (e.g. driver, passenger, etc
-	 * 
-	 * An example JSON input is {"id","1"}
+	 * The return users using the JSONP convention. Please use retrieveAllUsers instead.
+	 *
+	 */
+	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+	def retrieveAllUsersAsJSONP() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		CustomGrailsUser principal = auth.getPrincipal();
+		Tenant tenant = Tenant.get(principal.tenantId);
+
+		try {
+			def c = User.createCriteria();
+
+			def users = c.list {
+				and {
+					eq("tenantId",tenant.id)
+				}
+				order("lastUpdated", "desc")
+			}
+
+			if(!users) {
+				def error = ['error':'No Users Found']
+				render "${error as JSON}"
+			} else {
+				render "${params.callback}(${users as JSON})"
+			}
+		} catch (Throwable e) {
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
+		}
+	}
+
+	/**
+	 * This API is retrieves a User by id. This API is only available to users with the Administrator privilege.
+	 *  
+	 * @param  url   <server-name>/user/retrieveUserDetailById
+	 * @param  input-sample {"id":"6"}
+	 * @return output-sample {"user":{"id":6,"version":1,"firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedMetro":"Chicago-Naperville-Joliet, IL","carType":"VAN"}}}
 	 */
 
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
@@ -503,9 +553,9 @@ class UserController {
 		Tenant tenant = Tenant.get(principal.tenantId);
 
 		try {
-			
+
 			Long id = jsonObject.optLong("id",0);
-			
+
 			def c = User.createCriteria();
 
 			def user = c.get {
@@ -515,8 +565,8 @@ class UserController {
 				}
 				order("lastUpdated", "desc")
 			}
-			
-		
+
+
 			if(!user) {
 				def error = ['error':'No User Found']
 				render "${error as JSON}"
@@ -524,7 +574,6 @@ class UserController {
 				render "{\"user\":" + user.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			status.setRollbackOnly();
 			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
 			throw e;
 		}
@@ -532,12 +581,13 @@ class UserController {
 
 	}
 
-	/*
-	 * user/retrieveLoggedUserDetails
-	 *
-	 * Retrieves all the details about the user currently logged in
+	/**
+	 * This API retrieves the details of the user currently logged in. It is useful to obtain the id of the user for use in subsequent calls.
 	 * 
-	 * An example JSON input is {}
+	 * @param  url   <server-name>/user/retrieveLoggedUserDetails
+	 * @param  input-sample {}
+	 * @return output-sample {"user":{"id":5,"version":1,"firstName":"John","lastName":"Goodrider","phone":"800-800-8080","email":"jgoodrider@worldtaxi.com","passenger":{"id":5}}}
+	 *
 	 */
 
 	@Secured(['ROLE_DRIVER','ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'	])
@@ -565,7 +615,6 @@ class UserController {
 
 			render "{\"user\":" + user.encodeAsJSON() + "}"
 		} catch (Throwable e) {
-			status.setRollbackOnly();
 			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
 			throw e;
 		}

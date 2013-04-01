@@ -8,6 +8,17 @@ import com.moovt.MultiTenantAudit;
 import com.moovt.taxi.Passenger;
 import com.moovt.taxi.Driver;
 
+enum UserType  {
+	DRIVER, PASSENGER, DRIVER_PASSENGER, NO_TYPE
+}
+
+
+/**
+ * This class represents a <code>User</code> in the application. A <code>User</code> is extended through additional classes like <code>Passenger</code> and <code>Driver</code>.
+ * 
+ * @author egoncalves
+ *
+ */
 @MultiTenantAudit
 class User  {     
 	          
@@ -43,12 +54,13 @@ class User  {
 		password nullable:false, blank: false
 		email nullable:false, blank: false, unique: true
 		tenantname bindable: true
-		passenger nullable:true,blank: true
-		driver nullable:true,blank: true
+		passenger nullable:true
+		driver nullable:true
 		//TODO: Other user types
 	}
 
 	static mapping = {
+		table: 'usr'
 		password column: '`password`'
 		
 	}

@@ -3,8 +3,8 @@ package com.moovt
 import com.grailsrocks.functionaltest.*
 
 class UserFunctionalTests extends BrowserTestCase {
-	void testCreateUserInExistingTenantBadMessage() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserBadMessage() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
 			body {
 			}
@@ -15,12 +15,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "A JSONObject text must begin with '{' at character 0 of"
 	}
 
-	void testCreateUserInExistingTenantBadTenantEnglish() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserBadTenantEnglish() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "locale": "en_US"}
+				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080"}
 				"""
 			}
 		}
@@ -30,12 +31,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user."
 	}
 
-	void testCreateUserInExistingTenantSuccessEnglish() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserSuccessEnglish() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
@@ -45,12 +47,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "User moovieGoer created"
 	}
 	
-	void testCreateUserInExistingTenantSuccessPortuquese() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserSuccessPortuquese() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "locale": "pt_BR"}
+				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
@@ -60,12 +63,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "Usuário moovieLover criado"
 	}
 
-	void testCreateUserInExistingTenantNoUserNameEnglish() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserNoUserNameEnglish() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
@@ -75,12 +79,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "The user name must be provided"
 	}
 
-	void testCreateUserInExistingTenantNoUserNamePortuguese() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserNoUserNamePortuguese() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "locale": "pt_BR"}
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
@@ -90,12 +95,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "O nome do usuário deve ser preenchido"
 	}
 	
-	void testCreateUserInExistingTenantNoPasswordEnglish() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserNoPasswordEnglish() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
@@ -105,12 +111,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "The password must be provided"
 	}
 	
-	void testCreateUserInExistingTenantNoPasswordPortuguese() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserNoPasswordPortuguese() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "locale": "pt_BR"}
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
@@ -120,12 +127,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "A senha deve ser preenchida."
 	}
 	
-	void testCreateUserInExistingTenantNoEmailEnglish() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserNoEmailEnglish() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"", "locale": "en_US"}
+				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
@@ -135,12 +143,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "The email must be provided"
 	}
 	
-	void testCreateUserInExistingTenantNoEmailPortuguese() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserNoEmailPortuguese() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"", "locale": "pt_BR"}
+				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", "lastName": "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
@@ -150,12 +159,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "O email deve ser preenchido"
 	}
 
-	void testCreateUserInExistingTenantDuplicateUsernameEnglish() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserDuplicateUsernameEnglish() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"duplicateUsernameTestEnglish@test.com", "username": "duplicateUser", "password":"moovieGoer", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestEnglish@test.com", "username": "duplicateUser", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
@@ -165,12 +175,14 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "This user (duplicateUser) already exist"
 	}
 
-	void testCreateUserInExistingTenantDuplicateUsernamePortuguese() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserDuplicateUsernamePortuguese() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"duplicateUsernameTestPortuguese@test.com", "username": "duplicateUser", "password":"moovieLover", "locale": "pt_BR"}				"""
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestPortuguese@test.com", "username": "duplicateUser", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}				
+				"""
 			}
 		}
 		assertStatus 200
@@ -179,12 +191,13 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "Este usuário (duplicateUser) já existe"
 	}
 
-	void testCreateUserInExistingTenantDuplicateEmailEnglish() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserDuplicateEmailEnglish() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "locale": "en_US"}
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
@@ -194,12 +207,14 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "This email (existingEmail@test.com) already exists"
 	}
 
-	void testCreateUserInExistingTenantDuplicateEmailPortuguese() {
-		post('/user/createUserInExistingTenant') {
+	void testCreateUserDuplicateEmailPortuguese() {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieLover", "locale": "pt_BR"}				"""
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				"""
 			}
 		}
 		assertStatus 200
@@ -210,12 +225,12 @@ class UserFunctionalTests extends BrowserTestCase {
 
 //Taxi Tests
 	void testCreateUserDriverEnglish() {
-		post('/user/createOrUpdateUser') {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 				"""
 			}
 		}
@@ -226,7 +241,7 @@ class UserFunctionalTests extends BrowserTestCase {
 	}
 		
 	void testCreateUserPassengerEnglish() {
-		post('/user/createOrUpdateUser') {
+		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
@@ -255,7 +270,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygooxdarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 				"""
 			}
 		}
@@ -280,14 +295,14 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedMetro":"Chicago-Naperville-Joliet, IL","activeStatus":"ENABLED"}}
+				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
-		assertContentContains "User jverygoodarm updated"
+		assertContentContains "User jgoodrider updated"
 	}
 
 	void testRetrieveAllUsersrEnglish() {
@@ -301,7 +316,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			}
 		}
 		
-		post('user/retrieveAllUsers') {
+		post('/user/retrieveAllUsers') {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
@@ -311,9 +326,8 @@ class UserFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "users"
-		assertContentContains "lastName\":\"Goodrider"
-		assertContentContains "users"
-		assertContentContains "lastName\":\"Goodarm"
+		assertContentContains "firstName\":\"Admin"
+		assertContentContains "firstName\":\"John"
 	}
 
 	void testRetrieveUserDetailByIdEnglish() {
@@ -327,7 +341,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			}
 		}
 		
-		post('user/retrieveUserDetailById') {
+		post('/user/retrieveUserDetailById') {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
@@ -337,7 +351,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "user"
-		assertContentContains "lastName\":\"Goodarm"
+		assertContentContains "firstName\":\"John"
 	}
 	
 	
@@ -352,7 +366,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			}
 		}
 		
-		post('user/retrieveLoggedUserDetails') {
+		post('/user/retrieveLoggedUserDetails') {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
@@ -361,8 +375,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "user"
-		assertContentContains "lastName\":\"Goodrider"
+		assertContentContains "username\":\"jgoodrider"
 	}
 		
 }

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="MNEGONCALVES" name="com.moovt.RideFunctionalTests" tests="5" time="1.413" timestamp="2013-03-19T05:04:14">
+  <properties />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testAssignRideToDriverEnglish" time="0.282" />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrievePassengerRidesEnglish" time="0.631" />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrieveAllRidesEnglish" time="0.144" />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testCreateRideENglish" time="0.177" />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrieveUnassignedRideInDriverMetroEnglish" time="0.16" />
+  <system-out><![CDATA[--Output from testAssignRideToDriverEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1",locale:"pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"ACC952002523597300F95A916F4AA252"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/assignRideToDriver parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"1","version":"1"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"SUCCESS","message":"Ride 1 updated","type":"USER"}
+================================================================================
+#
+--Output from testRetrievePassengerRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"28357F9E54A386DD7D171558608F0DE3"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrievePassengerRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null},{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":"Naperville, IL, USA","carType":"VAN","radiusServed":"RADIUS_100","activeStatus":"ENABLED"},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null}]}
+================================================================================
+#
+--Output from testRetrieveAllRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"admin","password":"admin",locale:"pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"F8B41F178669E8C8BDC697364986DC97"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveAllRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":"Naperville, IL, USA","carType":"VAN","radiusServed":"RADIUS_100","activeStatus":"ENABLED"},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null},{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null}]}
+================================================================================
+#
+--Output from testCreateRideENglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"B6BF18E2C7EBDF4CD17E96FD391B5430"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/createRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"pickupDateTime":"2013-03-15 06:30",
+ "pickUpAddress":{"street":"111 Main St","city":"Wheaton","state":"IL","zip":"60107","addressType":"HOME"},
+ "dropOffAddress":{"street":"999 Main St","city":"Naperville","state":"IL","zip":"60107","addressType":"HOME"}
+}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"SUCCESS","message":"Ride 3 created","type":"USER"}
+================================================================================
+#
+--Output from testRetrieveUnassignedRideInDriverMetroEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1",locale:"pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"60BF8280AD97743EE0DADD129EAA8FE4"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null},{"id":3,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-15 06:30","pickUpAddress":{"street":"111 Main St","city":"Wheaton","state":"IL","zip":"60107","addressType":"HOME"},"dropOffAddress":{"street":"999 Main St","city":"Naperville","state":"IL","zip":"60107","addressType":"HOME"},"rating":null,"comments":null}]}
+================================================================================
+#
+]]></system-out>
+  <system-err><![CDATA[--Output from testAssignRideToDriverEnglish--
+--Output from testRetrievePassengerRidesEnglish--
+--Output from testRetrieveAllRidesEnglish--
+--Output from testCreateRideENglish--
+--Output from testRetrieveUnassignedRideInDriverMetroEnglish--
+]]></system-err>
+</testsuite>

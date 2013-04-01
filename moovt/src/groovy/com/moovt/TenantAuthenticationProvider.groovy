@@ -19,6 +19,12 @@ import org.codehaus.groovy.grails.commons.ApplicationHolder
 import com.moovt.common.Tenant;
 import com.moovt.common.User;
 
+/**
+ * This class encapsulates the custom <code>AuthenticationProvider</code> that provides the <code>authenticate</code> method.
+ *
+ * @author egoncalves
+ *
+ */
 class TenantAuthenticationProvider implements AuthenticationProvider {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());

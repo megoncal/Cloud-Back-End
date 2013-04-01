@@ -25,9 +25,13 @@ class RideController {
 
 	def springSecurityService;
 
-	def index() { }
 
-	/*
+
+	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+	def main() {
+	}
+
+	/**
 	 * This API creates a <code>Ride</code> for the <code>Passenger</code> currently logged in. Please note that a <code>User</code> 
 	 * registered as a <code>Passenger</code> must be logged in. Otherwise a Not Authorized exception will be returned.
 	 * 
@@ -103,15 +107,13 @@ class RideController {
 
 					JSONObject pickUpAddressJsonObject = rideJsonObject.opt("pickUpAddress");
 					log.info(pickUpAddressJsonObject);
-					Address pickUpAddress = new Address(pickUpAddressJsonObject);
+					Address pickUpAddress = new Address(pickUpAddressJsonObject).save(flush:true, failOnError:true);
 					ride.pickUpAddress = pickUpAddress;
 
 					JSONObject dropOffAddressJsonObject = rideJsonObject.opt("dropOffAddress");
 					log.info(dropOffAddressJsonObject);
-					Address dropOffAddress = new Address(dropOffAddressJsonObject);
+					Address dropOffAddress = new Address(dropOffAddressJsonObject).save(flush:true, failOnError:true);
 					ride.dropOffAddress = dropOffAddress;
-
-					log.info("READY " + ride.dump());
 
 					ride.save(flush:true, failOnError:true);
 
@@ -164,13 +166,12 @@ class RideController {
 		}
 	}
 
-	/*
+	/**
 	 * This API retrieves all Rides created by the <code>Passenger</code> currently logged in.  Please note that a <code>User</code> 
 	 * registered as a <code>Passenger</code> must be logged in. Otherwise a Not Authorized exception will be returned.
-	 * 
-	 * Example: <server-name>/ride/retrievePassengerRides 
-	 * 
-	 * {}
+	 * @param  url  <server-name>/ride/retrievePassengerRides
+	 * @param  input-sample {}
+	 * @return output-sample {"rides":[{"id":1,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null},{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null}]}
 	 */
 	@Secured(['ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'	])
 	def retrievePassengerRides() {
@@ -190,30 +191,43 @@ class RideController {
 		Passenger passenger = Passenger.get(principal.id);
 		assert passenger != null, "Because this method is secured, a principal/passenger always exist at this point of the code"
 
-		def c = Ride.createCriteria();
+		try {
+			def c = Ride.createCriteria();
 
-		def rides = c.list {
-			and {
-				eq("passenger", passenger)
+			def rides = c.list {
+				and {
+					eq("passenger", passenger)
+				}
+				maxResults(10)
+				order("lastUpdated", "asc")
 			}
-			maxResults(10)
-			order("lastUpdated", "asc")
-		}
 
 
 
-		if(!rides) {
-			def error = ['error':'No Rides Found']
-			render "${error as JSON}"
-		} else {
-			render "{\"rides\":" + rides.encodeAsJSON() + "}"
+			if(!rides) {
+				def error = ['error':'No Rides Found']
+				render "${error as JSON}"
+			} else {
+				render "{\"rides\":" + rides.encodeAsJSON() + "}"
+			}
+		} catch (Throwable e) {
+			status.setRollbackOnly();
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
 		}
 	}
 
 
-
+	/**
+	 * This API retrieves all unassigned in the Metro Area of the <code>Driver</code> currently logged in.  Please note that a <code>User</code>
+	 * registered as a <code>Driver</code> must be logged in. Otherwise a Not Authorized exception will be returned.
+	 *
+	 * Example: <server-name>/ride/retrieveUnassignedRideInDriverMetro
+	 *
+	 * {}
+	 */
 	@Secured(['ROLE_DRIVER','IS_AUTHENTICATED_FULLY'])
-	def retrieveUnassignedRideInDriverMetro() {
+	def retrieveUnassignedRideInServedArea() {
 
 		String model = request.reader.getText();
 		log.info(this.actionName + " params are: " + params + " and model is : " + model);
@@ -231,32 +245,40 @@ class RideController {
 		assert driver != null, "Because this method is secured, a principal/driver always exist at this point of the code"
 
 		//TODO: Implement the search by metro area
-		log.info("Served Metro: " + driver.servedMetro);
+		log.info("Served Location: " + driver.servedLocation);
+		try {
+			def c = Ride.createCriteria();
 
-		def c = Ride.createCriteria();
-
-		def rides = c.list {
-			and {
-				eq("rideStatus", RideStatus.UNASSIGNED)
+			def rides = c.list {
+				and {
+					eq("rideStatus", RideStatus.UNASSIGNED)
+				}
+				maxResults(10)
+				order("lastUpdated", "asc")
 			}
-			maxResults(10)
-			order("lastUpdated", "asc")
-		}
 
 
 
-		if(!rides) {
-			def error = ['error':'No Rides Found']
-			render "${error as JSON}"
-		} else {
-			render "{\"rides\":" + rides.encodeAsJSON() + "}"
+			if(!rides) {
+				def error = ['error':'No Rides Found']
+				render "${error as JSON}"
+			} else {
+				render "{\"rides\":" + rides.encodeAsJSON() + "}"
+			}
+		} catch (Throwable e) {
+			status.setRollbackOnly();
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
 		}
 	}
 
-	/*
-	 * 	 http://localhost:8080/moovt/ride/assignRideToDriver
+	/**
+	 * This API retrieves assigns a <code>Ride</code> to the <code>Driver</code> currently logged in.  Please note that a <code>User</code>
+	 * registered as a <code>Driver</code> must be logged in. Otherwise a Not Authorized exception will be returned.
 	 *
-	 *   {"id":"1","version":"1"}
+	 * Example: <server-name>/ride/retrieveUnassignedRideInDriverMetro
+	 *
+	 * {}
 	 */
 	@Secured(['ROLE_DRIVER','IS_AUTHENTICATED_FULLY'])
 	def assignRideToDriver() {
@@ -328,6 +350,14 @@ class RideController {
 
 	}
 
+	/**
+	 * This API retrieves all Rides. Only administrators can perform this call.
+	 * 
+	 * Example: <server-name>/ride/retrieveAllRides
+	 * 
+	 * {}
+	 */
+
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def retrieveAllRides() {
 
@@ -340,19 +370,55 @@ class RideController {
 			render([code: "ERROR", msg: e.message ] as JSON);
 			return;
 		}
+		try {
+			def c = Ride.createCriteria();
 
-		def c = Ride.createCriteria();
+			def rides = Ride.list();
 
-		def rides = Ride.list();
-
-		if(!rides) {
-			def error = ['error':'No Rides Found']
-			render "${error as JSON}"
-		} else {
-			render "{\"rides\":" + rides.encodeAsJSON() + "}"
+			if(!rides) {
+				def error = ['error':'No Rides Found']
+				render "${error as JSON}"
+			} else {
+				render "{\"rides\":" + rides.encodeAsJSON() + "}"
+			}
+		} catch (Throwable e) {
+			status.setRollbackOnly();
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
 		}
+
 	}
 
+	/**
+	 * This API retrieves all Rides using the JSONP format. Only administrators can perform this call.
+	 *
+	 * Example: <server-name>/ride/retrieveAllRidesAsJSONP
+	 *
+	 * {}
+	 */
 
+	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+	def retrieveAllRidesAsJSONP() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+
+		try {
+			def c = Ride.createCriteria();
+
+			def rides = Ride.list();
+
+			if(!rides) {
+				def error = ['error':'No Rides Found']
+				render "${error as JSON}"
+			} else {
+				render "${params.callback}(${rides as JSON})"
+			}
+		} catch (Throwable e) {
+			status.setRollbackOnly();
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
+		}
+
+	}
 }
-

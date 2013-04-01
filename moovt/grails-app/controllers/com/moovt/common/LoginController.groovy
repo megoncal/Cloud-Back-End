@@ -3,6 +3,7 @@ package com.moovt.common
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils;
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONObject
+import java.security.Principal
 import javax.servlet.http.HttpServletResponse
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import org.springframework.security.authentication.AccountExpiredException
@@ -17,10 +18,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.core.AuthenticationException
 
 import com.moovt.CallResult;
+import com.moovt.CustomGrailsUser
 import com.moovt.TenantAuthenticationToken;
 import com.moovt.common.User;
 import com.moovt.LocaleUtils;
+import com.moovt.common.UserType;
 
+
+/**
+ * This class contains the APIs to manage the login operations in the application. The method <code>authenticateUser</code> should be used to
+ * authenticate a user and obtain a JSESSIONID cookie for the subsequent calls.
+ *
+ * @author egoncalves
+ *
+ */
 class LoginController {
 
 	def authenticationManager
@@ -178,12 +189,24 @@ class LoginController {
 		render([error: 'access denied'] as JSON)
 	}
 
-	/*
+	
+	/**
+	 * This API authenticate a User using an authentication Service like Facebook or Self. Only Self is implemented at this time
+	 *
+	 * @param  url   <server-name>/login/authenticateUser
+	 * @param  input-sample {"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+	 * @return output-sample {"type":"USER","code":"SUCCESS","message":"Login bem sucedido.","JSESSIONID":"6E7CE31F2EE0768A3AF7AF4310810FC1","userType":"PASSENGER"}
+	 *
+	 * userType can be DRIVER, PASSENGER, BOTH, or NO_TYPE
+	 */
+	
+	/**
 	 * This method authenticate a User using an authentication Service like Facebook or Self
 	 * 
-	 * http://localhost:8080/moovt/login/authenticateUser
+	 * Example: /login/authenticateUser
 	 * 
-	 * {"type":"Self","tenantname":"naSavassi","username":"admin","password":"admin",locale:"pt_BR"}	
+	 * {"type":"Self","tenantname":"naSavassi","username":"admin","password":"admin",locale:"pt_BR"}
+	 * 	
 	 */
 	def authenticateUser = { 
 		//Make sure we have a session
@@ -204,9 +227,9 @@ class LoginController {
 		
 		TenantAuthenticationToken token = new TenantAuthenticationToken(userInstance.username, userInstance.password,userInstance.tenantname, userInstance.locale);
 
-		Authentication signinTab = null;
+		Authentication auth = null;
 		try {
-			signinTab = authenticationManager.authenticate(token);
+			auth = authenticationManager.authenticate(token);
 		} catch (AuthenticationException e) {
 			render(new CallResult(CallResult.USER, CallResult.ERROR, e.message) as JSON);
 			throw e;
@@ -217,14 +240,34 @@ class LoginController {
 			return;
 		}
 		
-		SecurityContextHolder.getContext().setAuthentication(signinTab);
-		Authentication tes = SecurityContextHolder.getContext().getAuthentication();
+		CustomGrailsUser principal = auth.getPrincipal();
 		
-		log.info("User has been successfully authenticated")
+		log.info("User has been successfully authenticated " + principal.getAuthorities());
+		String userType = UserType.NO_TYPE;
+		for (grantedAuthority in principal.getAuthorities()) {
+			println grantedAuthority;
+			if (grantedAuthority.equals('ROLE_PASSENGER')) {
+				if (userType == UserType.DRIVER) {
+					userType = UserType.DRIVER_PASSENGER
+				} else {
+					userType = UserType.PASSENGER;
+				}
+			}
+			if (grantedAuthority.equals('ROLE_DRIVER')) {
+				if (userType == UserType.PASSENGER) {
+					userType = UserType.DRIVER_PASSENGER
+				} else {
+					userType = UserType.DRIVER;
+				}
+			}
+		}
+		
+		
+		//CustomGrailsUser principal = auth.getPrincipal();
 		
 		
 		//Change the default language to the user's language
-		render([type: CallResult.USER, code: CallResult.SUCCESS, message: message(code: 'com.moovt.Login.success'), JSESSIONID: sessionId ] as JSON);
+		render([type: CallResult.USER, code: CallResult.SUCCESS, message: message(code: 'com.moovt.Login.success'), JSESSIONID: sessionId, userType: userType  ] as JSON);
 		return
 		
 	}

@@ -16,9 +16,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginSuccessEnglish() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -26,15 +27,17 @@ class LoginFunctionalTests extends BrowserTestCase {
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "JSESSIONID"
+		assertContentContains "customerType"
 		assertContentContains "Login successful"
 	}
 
 	void testLoginSuccessPortuguese() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin"}
 				"""
 			}
 		}
@@ -42,15 +45,17 @@ class LoginFunctionalTests extends BrowserTestCase {
 		assertContentContains "USER"
 		assertContentContains "SUCCESS"
 		assertContentContains "JSESSIONID"
+		assertContentContains "customerType"
 		assertContentContains "Login bem sucedido."
 	}
 
 	void testLoginNoTenantEnglish() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
 				"""
 			}
 		}
@@ -63,9 +68,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginNoTenantPortuguese() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
 				"""
 			}
 		}
@@ -78,9 +84,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginTenantNotFoundEnglish() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
 				"""
 			}
 		}
@@ -93,9 +100,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginTenantNotFoundPortuguese() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
 				"""
 			}
 		}
@@ -108,9 +116,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginNoPasswordEnglish() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"","locale":"en_US"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
 				"""
 			}
 		}
@@ -123,9 +132,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginNoUsernamedEnglish() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
 				"""
 			}
 		}
@@ -138,9 +148,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginFailedEnglish() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw","locale":"en_US"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
 				"""
 			}
 		}
@@ -153,9 +164,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginNoPasswordPortuguese() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
 				"""
 			}
 		}
@@ -168,9 +180,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginNoUsernamedPortuguese() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
 				"""
 			}
 		}
@@ -183,9 +196,10 @@ class LoginFunctionalTests extends BrowserTestCase {
 	void testLoginFailedPortuguese() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
 				"""
 			}
 		}

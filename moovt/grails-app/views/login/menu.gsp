@@ -8,14 +8,11 @@
 			class="k-link" href="" id="aUserMenu"
 			onClick="handleUserMenu();return false;">User</a></li>
 		</sec:ifAnyGranted>
-		<sec:ifAnyGranted roles="ROLE_ITEM_MGR">
+		<sec:ifAnyGranted roles="ROLE_ADMIN">	
 		<li id="menuItemId" class="k-item k-state-default"><a
-			class="k-link" href="" id="aItemMenu"
-			onClick="handleItemMenu();return false;">Item</a></li>
+			class="k-link" href="" id="aRideMenu"
+			onClick="handleRideMenu();return false;">Ride</a></li>
 		</sec:ifAnyGranted>
-		<li id="menuItemId" class="k-item k-state-default"><a
-			class="k-link" href="" id="aTestMenu"
-			onClick="handleTestMenu();return false;">Test</a></li> 
 	</ul>
 	<script>
 	   /**
@@ -40,15 +37,20 @@
 
 		}
 
-		/*public class Address {
-			String street;
-		}
-		public class Person {
-			String text;
-			Address address;
+	    /**
+	    *
+	    */
+	    function handleRideMenu() {
+				log.info("Ride menu clicked");
+				if (!(doesTabExists("rideMain"))) {
+					addTab("Rides &nbsp;<a class=\"clCloseTab\" onclick='removeTab($(this).closest(\"li\").attr(\"id\"))'>&nbsp;&nbsp;&nbsp;&nbsp;</a>","rideMain","${g.createLink(controller:'ride',action:'main')}");
 			}
-		*/
-		function handleTestMenu() {
+
+		}
+
+
+
+	    function handleTestMenu() {
 			log.info ("Test menu clicked")
 			//var obj = new Address("Test");
 

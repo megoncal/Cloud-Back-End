@@ -4,7 +4,12 @@ import org.apache.commons.lang.builder.HashCodeBuilder
 
 import com.moovt.MultiTenantAudit;
 
-
+/**
+ * This class represents the many-to-many association between <code>User</code> and its authorities (i.e. Roles).
+ * 
+ * @author egoncalves
+ *
+ */
 @MultiTenantAudit
 class UserRole implements Serializable {
 

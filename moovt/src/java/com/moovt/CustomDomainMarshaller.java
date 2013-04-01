@@ -31,8 +31,10 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
 /**
- * @author Siegfried Puchbauer, Eduardo Goncalves
- * @since 1.1
+ * This class is not currently used because we are using specific marshallers located in Bootstrap
+ *
+ * @author egoncalves
+ *
  */
 public class CustomDomainMarshaller implements ObjectMarshaller<JSON> {
 

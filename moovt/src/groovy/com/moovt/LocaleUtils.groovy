@@ -1,5 +1,10 @@
 package com.moovt
 
+/**
+ * This class contains static methods to help with Locale operations
+ * @author egoncalves
+ *
+ */
 class LocaleUtils {
 
 	public LocaleUtils() {

@@ -1,5 +1,11 @@
 package com.moovt
 
+/**
+ * This class represents an <code>Item</code>. This is currently used by the naSavassi App.
+ *
+ * @author egoncalves
+ *
+ */
 @MultiTenantAudit
 class Item {
 	

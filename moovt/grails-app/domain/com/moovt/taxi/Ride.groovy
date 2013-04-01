@@ -7,6 +7,12 @@ enum RideStatus {
 	UNASSIGNED, ASSIGNED, CANCELED, COMPLETED, COMMENTED
  }
 
+/**
+ * This class represents a <code>Ride</code>. 
+ *
+ * @author egoncalves
+ *
+ */
 @MultiTenantAudit
 class Ride {
 
@@ -30,10 +36,8 @@ class Ride {
 	//TODO: Check Custom Hibernate Types
 	
 	static mapping = {
-		//pickUpAddress cascade: 'all'
-		//dropOffAddress cascade: 'all'
-		pickUpAddress fetch: 'join', cascade: 'all'
-		dropOffAddress fetch: 'join', cascade: 'all'
+		pickUpAddress fetch: 'join'
+		dropOffAddress fetch: 'join'
 		driver fetch: 'join'
 		passenger fetch: 'join'
 	}

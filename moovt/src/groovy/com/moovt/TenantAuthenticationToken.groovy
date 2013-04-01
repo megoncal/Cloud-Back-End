@@ -2,6 +2,13 @@ package com.moovt
 
 import java.util.Locale;
 
+/**
+ * 
+ * This is an extension to the <code>UsernamePasswordAuthenticationToken</code> to add the tenantName and locale required by the
+ * authentication process. 
+ * 
+ */
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 
 class TenantAuthenticationToken extends UsernamePasswordAuthenticationToken {

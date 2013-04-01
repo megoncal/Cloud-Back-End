@@ -2,8 +2,14 @@ package com.moovt
 
 //TODO: Handle the authentication failure other than 302
 
+enum CustomerType  {
+	DRIVER, PASSENGER
+}
+
 /**
- * Represents an Asset model
+ * This class represents an <code>Asset</code>. This is currently used by the AssetManager App.
+ *
+ * @author egoncalves
  *
  */
 class Asset {

@@ -1,6 +1,11 @@
 package com.moovt.common
 
-
+/**
+ * This class represents a <code>Tenant</code> in this multi-tenant application.
+ * 
+ * @author egoncalves
+ *
+ */
 class Tenant{
 
 	def domainService;

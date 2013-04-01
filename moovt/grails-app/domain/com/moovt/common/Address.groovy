@@ -6,9 +6,18 @@ enum AddressType {
 	HOME, OFFICE
 }
 
+/**
+ * This class represents an <code>Address</code> that is used in Rides and Users.
+ *
+ * @author egoncalves
+ *
+ */
 @MultiTenantAudit
 class Address {
 
+	
+	def domainService
+	
     static constraints = {
     }
 	
@@ -28,7 +37,11 @@ class Address {
 	String zip
 	AddressType addressType
 	//String type
-	
+
+	def beforeValidate () {
+		domainService.setAuditAttributes(this);
+	}
+		
 	String toString(){
 		dump();
 	}

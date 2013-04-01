@@ -15,9 +15,13 @@ import java.lang.reflect.Modifier;
 import java.io.*;
 
 /**
- * Performs an ast transformation on a class - adds createdBy/createdDate
- * editedBy/EditedDate id and table properties to the subject class.
+ * This class performs the AST Transformation that adds a tenantId, createdBy, lastUpdatedBy, lastUpdated, dateCreated and CRUD Message to
+ * all domain classes.
+ * 
+ * @author egoncalves
+ *
  */
+
 @GroovyASTTransformation(phase = CompilePhase.CANONICALIZATION)
 public class MultiTenantAuditASTTransformation implements ASTTransformation {
 
