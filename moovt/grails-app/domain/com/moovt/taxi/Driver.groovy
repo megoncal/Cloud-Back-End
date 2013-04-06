@@ -1,7 +1,7 @@
 package com.moovt.taxi
 
 import com.moovt.MultiTenantAudit;
-import com.moovt.common.GeoName;
+import com.moovt.common.Location;
 import com.moovt.common.User;
 
 enum CarType {
@@ -29,7 +29,7 @@ class Driver {
 	
 	ActiveStatus activeStatus = ActiveStatus.ENABLED
 	CarType carType
-	String servedLocation
+	Location servedLocation
 	RadiusServed radiusServed
 	static belongsTo = [ user: User ]
 	

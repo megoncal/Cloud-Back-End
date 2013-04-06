@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat
 import com.moovt.DynamicEnum
 import com.moovt.common.Address
 import com.moovt.common.AddressType
-import com.moovt.common.GeoName
+import com.moovt.common.Location
+import com.moovt.common.LocationType;
 import com.moovt.common.Role
 import com.moovt.common.Tenant
 import com.moovt.common.User
@@ -69,9 +70,9 @@ class BootStrap {
 			def returnArray = [:]
 			returnArray['id'] = it.id
 			returnArray['servedLocation'] = it.servedLocation
-			returnArray['carType'] = it.carType.toString()
-			returnArray['radiusServed'] = it.radiusServed.toString()
-			returnArray['activeStatus'] = it.activeStatus.toString()
+			returnArray['carType'] = it.carType
+			returnArray['radiusServed'] = it.radiusServed
+			returnArray['activeStatus'] = it.activeStatus
 			return returnArray
 		}
 
@@ -81,6 +82,16 @@ class BootStrap {
 			return returnArray
 		}
 
+		JSON.registerObjectMarshaller(Location) {
+			def returnArray = [:]
+			returnArray['locationName'] = it.locationName
+			returnArray['politicalName'] = it.politicalName
+			returnArray['latitude'] = it.latitude
+			returnArray['longitude'] = it.longitude
+			returnArray['locationType'] = it.locationType.toString()
+			return returnArray
+		}
+		
 		JSON.registerObjectMarshaller(DynamicEnum) {
 			def returnArray = [:]
 			returnArray['code'] = it.code
@@ -229,7 +240,11 @@ class BootStrap {
 		}
 
 		//
-		GeoName napervilleCity = new GeoName(name:'Naperville').save(failOnError: true);
+		Location napervilleCity = new Location(locationName:'Naperville',
+			                                         politicalName:'IL, United States',
+													 latitude: 41.78586290,
+													 longitude: -88.14728930,
+													 locationType: LocationType.APPROXIMATE).save(failOnError: true);
 		
 		User worldTaxiDriverUser = new User(
 				tenantId: worldTaxiTenant.id,
@@ -245,7 +260,7 @@ class BootStrap {
 				createdBy: worldTaxiAdminUser.id,
 				lastUpdatedBy: worldTaxiAdminUser.id,
 				carType: CarType.VAN,
-				servedLocation:'Naperville, IL, USA',
+				servedLocation: napervilleCity,
 				radiusServed:RadiusServed.RADIUS_100)
 				).save(failOnError: true);
 
@@ -258,9 +273,6 @@ class BootStrap {
 			UserRole.create ( worldTaxiTenant.id, worldTaxiDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)
 		}
 
-		Address pickUpAddress = new Address (tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id, lastUpdatedBy: worldTaxiAdminUser.id,street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME).save(failOnError:true);
-		Address dropOffAddress = new Address (tenantId: worldTaxiTenant.id,	createdBy: worldTaxiAdminUser.id, lastUpdatedBy: worldTaxiAdminUser.id,street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME).save(failOnError:true);
-
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date pickupDateTime = simpleDateFormat.parse("2013-03-13 20:10");
 		
@@ -270,8 +282,8 @@ class BootStrap {
 				lastUpdatedBy: worldTaxiAdminUser.id,
 				passenger: worldTaxiPassengerUser.passenger,
 				pickupDateTime: pickupDateTime,
-				pickUpAddress: pickUpAddress,
-				dropOffAddress: dropOffAddress,
+				pickUpLocation: napervilleCity,
+				dropOffLocation: napervilleCity,
 				rideStatus: RideStatus.UNASSIGNED).save(failOnError: true);
 
 			def rideTwo = new Ride(
@@ -280,8 +292,8 @@ class BootStrap {
 				lastUpdatedBy: worldTaxiAdminUser.id,
 				passenger: worldTaxiPassengerUser.passenger,
 				pickupDateTime: pickupDateTime,
-				pickUpAddress: pickUpAddress,
-				dropOffAddress: dropOffAddress,
+				pickUpLocation: napervilleCity,
+				dropOffLocation: napervilleCity,
 				rideStatus: RideStatus.UNASSIGNED).save(failOnError: true);
 
 

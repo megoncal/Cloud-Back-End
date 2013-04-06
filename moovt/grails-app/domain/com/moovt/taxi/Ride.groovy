@@ -2,6 +2,7 @@ package com.moovt.taxi
 
 import com.moovt.MultiTenantAudit;
 import com.moovt.common.Address;
+import com.moovt.common.Location
 
 enum RideStatus {
 	UNASSIGNED, ASSIGNED, CANCELED, COMPLETED, COMMENTED
@@ -22,8 +23,8 @@ class Ride {
 	Driver driver
 	Passenger passenger
 	Date pickupDateTime
-	Address pickUpAddress
-	Address dropOffAddress
+	Location pickUpLocation
+	Location dropOffLocation
 	Double rating
 	String comments
 	

@@ -131,9 +131,9 @@ grails.stamp.audit.lastUpdated = lastUpdated
 grails.stamp.audit.createdDate = createdDate
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.moovt.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.moovt.UserRole'
-grails.plugins.springsecurity.authority.className = 'com.moovt.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.moovt.common.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.moovt.common.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.moovt.common.Role'
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugins.springsecurity.password.encodeHashAsBase64 = true
 grails.plugins.springsecurity.filterChain.filterNames = [

@@ -31,12 +31,13 @@ class Address {
 		this.addressType = addressType;
 	}
 
-	String street
-	String city
-	String state
-	String zip
+	
+	String address
+	String formattedAddress
+	Long latitude
+	Long longitude
+	String locationType
 	AddressType addressType
-	//String type
 
 	def beforeValidate () {
 		domainService.setAuditAttributes(this);

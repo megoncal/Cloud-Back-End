@@ -40,6 +40,7 @@ class UserController {
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def main() {
 	}

@@ -199,15 +199,7 @@ class LoginController {
 	 *
 	 * userType can be DRIVER, PASSENGER, BOTH, or NO_TYPE
 	 */
-	
-	/**
-	 * This method authenticate a User using an authentication Service like Facebook or Self
-	 * 
-	 * Example: /login/authenticateUser
-	 * 
-	 * {"type":"Self","tenantname":"naSavassi","username":"admin","password":"admin",locale:"pt_BR"}
-	 * 	
-	 */
+
 	def authenticateUser = { 
 		//Make sure we have a session
 		String sessionId = session.getId();
