@@ -20,6 +20,7 @@ def conf = SpringSecurityUtils.securityConfig
 		saltSource = ref('saltSource')
 		preAuthenticationChecks = ref('preAuthenticationChecks')
 		postAuthenticationChecks = ref('postAuthenticationChecks')
+		grailsApplication = ref('grailsApplication')
 	}
 	
 	

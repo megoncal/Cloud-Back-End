@@ -40,9 +40,6 @@ public class MultiTenantAuditASTTransformation implements ASTTransformation {
 		for (ASTNode astNode : astNodes) {
 			if (astNode instanceof ClassNode) {
 				ClassNode classNode = (ClassNode) astNode;
-				Expression now = new ConstructorCallExpression(new ClassNode(
-						java.util.Date.class),
-						MethodCallExpression.NO_ARGUMENTS);
 				classNode.addProperty(tenantIdField, Modifier.PUBLIC,
 						new ClassNode(Long.class), null,
 						null, null);

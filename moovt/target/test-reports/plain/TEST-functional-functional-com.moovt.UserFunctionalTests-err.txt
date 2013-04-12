@@ -13,9 +13,9 @@
 --Output from testUpdateUserPassengerEnglish--
 --Output from testRetrieveUserDetailByIdEnglish--
 --Output from testRetrieveLoggedUserDetailsIdEnglish--
+--Output from testUpdateUserDriverEnglish--
+--Output from testCreateUserDriverEnglish--
+--Output from testCreateUserNoEmailEnglish--
 --Output from testCreateUserSuccessEnglish--
 --Output from testCreateUserBadMessage--
---Output from testUpdateUserDriverEnglish--
---Output from testCreateUserNoEmailEnglish--
---Output from testCreateUserDriverEnglish--
 --Output from testRetrieveAllUsersrEnglish--

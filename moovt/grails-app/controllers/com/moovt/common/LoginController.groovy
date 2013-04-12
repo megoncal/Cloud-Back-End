@@ -97,6 +97,16 @@ class LoginController {
 		}
 	}
 
+	
+	def test = {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//CustomGrailsUser principal = auth.getPrincipal();
+		
+		render ("OK" + auth);
+		
+	}
+	
 	/**
 	 * Show the login page.
 	 */
@@ -233,6 +243,8 @@ class LoginController {
 		}
 		
 		CustomGrailsUser principal = auth.getPrincipal();
+		SecurityContextHolder.getContext().setAuthentication(auth);
+		
 		
 		log.info("User has been successfully authenticated " + principal.getAuthorities());
 		String userType = UserType.NO_TYPE;
@@ -254,8 +266,9 @@ class LoginController {
 			}
 		}
 		
+		Authentication test = SecurityContextHolder.getContext().getAuthentication();
 		
-		//CustomGrailsUser principal = auth.getPrincipal();
+		log.info("TESTING .... " + test);
 		
 		
 		//Change the default language to the user's language

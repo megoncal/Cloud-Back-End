@@ -10,7 +10,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -33,7 +33,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -56,7 +56,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -79,7 +79,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -90,7 +90,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"class":"com.moovt.CallResult","code":"ERROR","message":"O nome do usuário deve ser preenchido.","type":"USER"}
 ================================================================================
 #
---Output from testLoginNoTenantEnglish--
+--Output from testLoginSuccessEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
@@ -102,15 +102,17 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
+ROLE_PASSENGER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company.","type":"USER"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"1E7F9BBFD8EC7060429164C06A8FFDD9","userType":"PASSENGER"}
 ================================================================================
 #
 --Output from testLoginBadMessage--
@@ -133,6 +135,52 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
 ================================================================================
 #
+--Output from testLoginFailedPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Usuário e senha inválidos.","type":"USER"}
+================================================================================
+#
+--Output from testLoginNoTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company.","type":"USER"}
+================================================================================
+#
 --Output from testLoginNoTenantPortuguese--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -145,7 +193,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -154,29 +202,6 @@ Content of web window [TopLevelWindow[name=""]] changed
 ================================================================================
 == Content =====================================================================
 {"class":"com.moovt.CallResult","code":"ERROR","message":"A companhia deve ser preenchida.","type":"USER"}
-================================================================================
-#
---Output from testLoginNoPasswordEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"","locale":"en_US"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password.","type":"USER"}
 ================================================================================
 #
 --Output from testLoginNoUsernamedEnglish--
@@ -191,7 +216,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -200,6 +225,29 @@ Content of web window [TopLevelWindow[name=""]] changed
 ================================================================================
 == Content =====================================================================
 {"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no username was provided. Please enter a username.","type":"USER"}
+================================================================================
+#
+--Output from testLoginNoPasswordEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password.","type":"USER"}
 ================================================================================
 #
 --Output from testLoginSuccessPortuguese--
@@ -214,38 +262,17 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin"}
 				
 ================================================================================
+ROLE_ADMIN
+ROLE_ITEM_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login bem sucedido.","JSESSIONID":"0696C31B499F07B5F421CD3730A3394A"}
-================================================================================
-#
---Output from testLoginSuccessEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin","locale":"en_US"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"170D1AAF1208457F7E0C083A804457FD"}
+{"type":"USER","code":"SUCCESS","message":"Login bem sucedido.","JSESSIONID":"80F080EAC8011ED015730A99297B4504","userType":"NO_TYPE"}
 ================================================================================
 #
 --Output from testLoginFailedEnglish--
@@ -260,7 +287,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw","locale":"en_US"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -269,28 +296,5 @@ Content of web window [TopLevelWindow[name=""]] changed
 ================================================================================
 == Content =====================================================================
 {"class":"com.moovt.CallResult","code":"ERROR","message":"User name and or password is invalid. Please try again.","type":"USER"}
-================================================================================
-#
---Output from testLoginFailedPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw","locale":"pt_BR"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Usuário e senha inválidos.","type":"USER"}
 ================================================================================
 #

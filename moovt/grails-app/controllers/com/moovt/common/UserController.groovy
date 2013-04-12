@@ -216,7 +216,7 @@ class UserController {
 	 * signed in.
 	 * 
 	 * @param  url   <server-name>/user/createUser
-	 * @param  input-sample-1 {"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+	 * @param  input-sample-1 {"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 	 * @param  input-sample-2 {"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
 	 * @return output-sample {"type":"USER","code":"SUCCESS","message":"User dultrxafast created","JSESSIONID":"6317F9E37E0F499399A3F89DDA6D5723"}
 	 *
@@ -266,11 +266,22 @@ class UserController {
 				//Handle Driver type
 				JSONObject driverJSON = userJsonObject.opt("driver");
 				if (driverJSON) {
+					//Handle the driver's served location inside the driver JSON
+					JSONObject servedLocationJSON = driverJSON.opt("servedLocation");
+					if (!servedLocationJSON) {
+						status.setRollbackOnly();
+						render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON') as JSON);
+						return;
+					} 
+					Location servedLocation = new Location (servedLocationJSON);
+					servedLocation.save(flush:true, failOnError:true);
+					
 					user.driver = new Driver (driverJSON);
+					user.driver.servedLocation = servedLocation;
 					user.driver.tenantId = tenant.id;
 					user.driver.createdBy = user.id;
 					user.driver.lastUpdatedBy = user.id;
-
+					
 					def driverRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_DRIVER')
 					UserRole.create (tenant.id, user, driverRole, user.createdBy, user.lastUpdatedBy);
 				}
@@ -331,7 +342,7 @@ class UserController {
 	/**
 	 * This API updates the <code>User</code> that is currently logged in and returns the details of the just updated User
 	 * @param  url   <server-name>/user/updateLoggedUser
-	 * @param  input-sample-1 {"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygooxdarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+	 * @param  input-sample-1 {"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygooxdarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 	 * @param  {"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 	 * @return output-sample 
 	 * 
@@ -374,14 +385,28 @@ class UserController {
 				JSONObject driverJSON = userJsonObject.opt("driver");
 
 				if (driverJSON) {
+					//Handle the driver's served location inside the driver JSON
+					JSONObject servedLocationJSON = driverJSON.opt("servedLocation");
+					if (!servedLocationJSON) {
+							status.setRollbackOnly();
+								render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON') as JSON);
+								return;
+							}
+					
 					Driver driver = user.driver;
 					if (!driver) {
 						driver = new Driver(driverJSON);
+						Location servedLocation = new Location(servedLocationJSON);
+						servedLocation.save(flush:true, failOnError:true);
+						driver.servedLocation = servedLocation;
 						driver.user = user
 					} else {
-						driver.properties = driverJSON
+					    driver.servedLocation.properties = servedLocationJSON;
+						driver.properties = driverJSON;
 					}
 
+					log.info("Driver being saved " + driver.dump());			
+					
 					driver.save(flush:true, failOnError:true);
 
 					user.driver = driver;
@@ -405,6 +430,8 @@ class UserController {
 						passenger.properties = passengerJSON
 					}
 
+					log.info("Passenger being saved " + driver.dump());
+					
 					passenger.save(flush:true, failOnError:true);
 
 					user.passenger = passenger;
@@ -417,7 +444,7 @@ class UserController {
 					}
 				}
 
-				log.info("Prior to Saving")
+				log.info("User being saved " + user.dump());
 				user.save(flush:true, failOnError:true)
 
 				String msg = message(code: 'default.updated.message',
@@ -536,7 +563,7 @@ class UserController {
 	 * @return output-sample {"user":{"id":6,"version":1,"firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedMetro":"Chicago-Naperville-Joliet, IL","carType":"VAN"}}}
 	 */
 
-	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+//	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def retrieveUserDetailById() {
 
 		String model = request.reader.getText();
@@ -549,9 +576,9 @@ class UserController {
 			throw e;
 		}
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomGrailsUser principal = auth.getPrincipal();
-		Tenant tenant = Tenant.get(principal.tenantId);
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//CustomGrailsUser principal = auth.getPrincipal();
+		//Tenant tenant = Tenant.get(principal.tenantId);
 
 		try {
 
@@ -561,7 +588,7 @@ class UserController {
 
 			def user = c.get {
 				and {
-					eq("tenantId",tenant.id)
+					//eq("tenantId",tenant.id)
 					eq("id",id)
 				}
 				order("lastUpdated", "desc")

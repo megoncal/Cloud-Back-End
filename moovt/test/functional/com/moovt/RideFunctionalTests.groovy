@@ -115,9 +115,9 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-				{"pickupDateTime":"2013-03-15 06:30",
- "pickUpAddress":{"street":"111 Main St","city":"Wheaton","state":"IL","zip":"60107","addressType":"HOME"},
- "dropOffAddress":{"street":"999 Main St","city":"Naperville","state":"IL","zip":"60107","addressType":"HOME"}
+{"pickupDateTime":"2013-03-15 06:30",
+ "pickUpLocation":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
+ "dropOffLocation":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"}
 }
 				"""
 					}

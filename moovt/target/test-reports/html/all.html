@@ -15,7 +15,7 @@
      - All tests </h1>
 <p class="intro">
                         Executed
-                        39
+                        44
                         tests
                     
                         without a single error or failure!
@@ -43,6 +43,220 @@
 <div class="clear"></div>
 <div class="testsuite success">
 <div class="header">
+<h2>LocationFunctionalTests</h2>
+<h3>
+                        Executed
+                        5
+                        tests
+                    
+                        without a single error or failure!
+                    </h3>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testState">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testState</b>
+</p>
+<p class="summary">Executed in 1.987 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testSearchBadJSON">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testSearchBadJSON</b>
+</p>
+<p class="summary">Executed in 0.052 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testSearchNoLocation">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testSearchNoLocation</b>
+</p>
+<p class="summary">Executed in 0.05 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testSearchStreet">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testSearchStreet</b>
+</p>
+<p class="summary">Executed in 0.164 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testSearchCity">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testSearchCity</b>
+</p>
+<p class="summary">Executed in 0.162 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="clearfix output footer">
+<div class="sysout">
+<h2>Standard output</h2>
+<pre class="stdout">--Output from testState--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"location":"MG"}	
+				
+================================================================================
+HTTP/1.1 200 OK
+[[address_components:[[long_name:Minas Gerais, short_name:MG, types:[administrative_area_level_1, political]], [long_name:Brazil, short_name:BR, types:[country, political]]], formatted_address:Minas Gerais, Brazil, geometry:[bounds:[northeast:[lat:-14.2330917, lng:-39.85684850000001], southwest:[lat:-22.9228324, lng:-51.0466651]], location:[lat:-17.930178, lng:-43.7908453], location_type:APPROXIMATE, viewport:[northeast:[lat:-14.2330917, lng:-39.85684850000001], southwest:[lat:-22.9228324, lng:-51.0466651]]], types:[administrative_area_level_1, political]]]
+administrative_area_level_1
+political
+country
+political
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"locations":[]}
+================================================================================
+#
+--Output from testSearchBadJSON--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"code":"ERROR","msg":"A JSONObject text must begin with '{' at character 0 of "}
+================================================================================
+#
+--Output from testSearchNoLocation--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"thisMustBeLocation":"Rua Major Lopes 55, Belo Horizonte, MG"}				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Input JSON must contain a location element","type":"SYSTEM"}
+================================================================================
+#
+--Output from testSearchStreet--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"location":"Rua Major Lopes 55, Belo Horizonte, MG"}	
+				
+================================================================================
+HTTP/1.1 200 OK
+[]
+HTTP/1.1 200 OK
+[[address_components:[[long_name:55, short_name:55, types:[street_number]], [long_name:Rua Major Lopes, short_name:R. Maj. Lopes, types:[route]], [long_name:S&atilde;o Pedro, short_name:S&atilde;o Pedro, types:[sublocality, political]], [long_name:Belo Horizonte, short_name:Belo Horizonte, types:[locality, political]], [long_name:Minas Gerais, short_name:MG, types:[administrative_area_level_1, political]], [long_name:Brazil, short_name:BR, types:[country, political]], [long_name:30330-050, short_name:30330-050, types:[postal_code]]], formatted_address:Rua Major Lopes, 55 - S&atilde;o Pedro, Belo Horizonte - Minas Gerais, 30330-050, Brazil, geometry:[bounds:[northeast:[lat:-19.9413628, lng:-43.9373064], southwest:[lat:-19.941379, lng:-43.93731289999999]], location:[lat:-19.9413628, lng:-43.9373064], location_type:RANGE_INTERPOLATED, viewport:[northeast:[lat:-19.9400219197085, lng:-43.9359606697085], southwest:[lat:-19.9427198802915, lng:-43.93865863029149]]], types:[street_address]]]
+street_number
+route
+sublocality
+political
+locality
+political
+administrative_area_level_1
+political
+country
+political
+postal_code
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"locations":[{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"}]}
+================================================================================
+#
+--Output from testSearchCity--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"location":"Belo Horizonte, MG"}	
+				
+================================================================================
+HTTP/1.1 200 OK
+[[address_components:[[long_name:Belo Horizonte, short_name:Belo Horizonte, types:[locality, political]], [long_name:Minas Gerais, short_name:MG, types:[administrative_area_level_1, political]], [long_name:Brazil, short_name:BR, types:[country, political]]], formatted_address:Belo Horizonte - Minas Gerais, Brazil, geometry:[bounds:[northeast:[lat:-19.7775663, lng:-43.856856], southwest:[lat:-20.0598165, lng:-44.0628097]], location:[lat:-19.9190677, lng:-43.9385747], location_type:APPROXIMATE, viewport:[northeast:[lat:-19.7775663, lng:-43.856856], southwest:[lat:-20.0598165, lng:-44.0628097]]], types:[locality, political]]]
+locality
+political
+administrative_area_level_1
+political
+country
+political
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"locations":[{"locationName":"Belo Horizonte","politicalName":"Minas Gerais, Brazil","latitude":-19.9190677,"longitude":-43.9385747,"locationType":"APPROXIMATE"}]}
+================================================================================
+#
+</pre>
+</div>
+<div class="syserr">
+<h2>System error</h2>
+<pre class="syserr">--Output from testState--
+--Output from testSearchBadJSON--
+--Output from testSearchNoLocation--
+--Output from testSearchStreet--
+--Output from testSearchCity--
+</pre>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="testsuite success">
+<div class="header">
 <h2>LoginFunctionalTests</h2>
 <h3>
                         Executed
@@ -57,7 +271,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testLoginTenantNotFoundEnglish</b>
 </p>
-<p class="summary">Executed in 2.632 seconds.</p>
+<p class="summary">Executed in 0.193 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -67,7 +281,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testLoginTenantNotFoundPortuguese</b>
 </p>
-<p class="summary">Executed in 0.122 seconds.</p>
+<p class="summary">Executed in 0.114 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -77,7 +291,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testLoginNoPasswordPortuguese</b>
 </p>
-<p class="summary">Executed in 0.152 seconds.</p>
+<p class="summary">Executed in 0.129 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -87,67 +301,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testLoginNoUsernamedPortuguese</b>
 </p>
-<p class="summary">Executed in 0.177 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginNoTenantEnglish">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testLoginNoTenantEnglish</b>
-</p>
-<p class="summary">Executed in 0.15 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginBadMessage">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testLoginBadMessage</b>
-</p>
-<p class="summary">Executed in 0.171 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginNoTenantPortuguese">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testLoginNoTenantPortuguese</b>
-</p>
-<p class="summary">Executed in 0.104 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginNoPasswordEnglish">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testLoginNoPasswordEnglish</b>
-</p>
-<p class="summary">Executed in 0.251 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginNoUsernamedEnglish">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testLoginNoUsernamedEnglish</b>
-</p>
-<p class="summary">Executed in 0.147 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginSuccessPortuguese">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testLoginSuccessPortuguese</b>
-</p>
-<p class="summary">Executed in 0.891 seconds.</p>
+<p class="summary">Executed in 0.077 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -157,17 +311,17 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testLoginSuccessEnglish</b>
 </p>
-<p class="summary">Executed in 0.197 seconds.</p>
+<p class="summary">Executed in 1.144 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginFailedEnglish">
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginBadMessage">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testLoginFailedEnglish</b>
+<span class="icon success"></span><b class="testname message success">testLoginBadMessage</b>
 </p>
-<p class="summary">Executed in 0.172 seconds.</p>
+<p class="summary">Executed in 0.045 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -177,7 +331,67 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testLoginFailedPortuguese</b>
 </p>
+<p class="summary">Executed in 0.105 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginNoTenantEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testLoginNoTenantEnglish</b>
+</p>
+<p class="summary">Executed in 0.099 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginNoTenantPortuguese">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testLoginNoTenantPortuguese</b>
+</p>
+<p class="summary">Executed in 0.063 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginNoUsernamedEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testLoginNoUsernamedEnglish</b>
+</p>
+<p class="summary">Executed in 0.101 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginNoPasswordEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testLoginNoPasswordEnglish</b>
+</p>
+<p class="summary">Executed in 0.235 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginSuccessPortuguese">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testLoginSuccessPortuguese</b>
+</p>
 <p class="summary">Executed in 0.127 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testLoginFailedEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testLoginFailedEnglish</b>
+</p>
+<p class="summary">Executed in 0.122 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -197,7 +411,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -220,7 +434,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -243,7 +457,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -266,7 +480,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -277,7 +491,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"class":"com.moovt.CallResult","code":"ERROR","message":"O nome do usu&aacute;rio deve ser preenchido.","type":"USER"}
 ================================================================================
 #
---Output from testLoginNoTenantEnglish--
+--Output from testLoginSuccessEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
@@ -289,15 +503,17 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
+ROLE_PASSENGER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company.","type":"USER"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"1E7F9BBFD8EC7060429164C06A8FFDD9","userType":"PASSENGER"}
 ================================================================================
 #
 --Output from testLoginBadMessage--
@@ -320,144 +536,6 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
 ================================================================================
 #
---Output from testLoginNoTenantPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin","locale":"pt_BR"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"A companhia deve ser preenchida.","type":"USER"}
-================================================================================
-#
---Output from testLoginNoPasswordEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"","locale":"en_US"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password.","type":"USER"}
-================================================================================
-#
---Output from testLoginNoUsernamedEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin","locale":"en_US"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no username was provided. Please enter a username.","type":"USER"}
-================================================================================
-#
---Output from testLoginSuccessPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin","locale":"pt_BR"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login bem sucedido.","JSESSIONID":"0696C31B499F07B5F421CD3730A3394A"}
-================================================================================
-#
---Output from testLoginSuccessEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin","locale":"en_US"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"170D1AAF1208457F7E0C083A804457FD"}
-================================================================================
-#
---Output from testLoginFailedEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw","locale":"en_US"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"User name and or password is invalid. Please try again.","type":"USER"}
-================================================================================
-#
 --Output from testLoginFailedPortuguese--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -470,7 +548,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw","locale":"pt_BR"}
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -481,6 +559,146 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"class":"com.moovt.CallResult","code":"ERROR","message":"Usu&aacute;rio e senha inv&aacute;lidos.","type":"USER"}
 ================================================================================
 #
+--Output from testLoginNoTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company.","type":"USER"}
+================================================================================
+#
+--Output from testLoginNoTenantPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"A companhia deve ser preenchida.","type":"USER"}
+================================================================================
+#
+--Output from testLoginNoUsernamedEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no username was provided. Please enter a username.","type":"USER"}
+================================================================================
+#
+--Output from testLoginNoPasswordEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password.","type":"USER"}
+================================================================================
+#
+--Output from testLoginSuccessPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin"}
+				
+================================================================================
+ROLE_ADMIN
+ROLE_ITEM_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login bem sucedido.","JSESSIONID":"80F080EAC8011ED015730A99297B4504","userType":"NO_TYPE"}
+================================================================================
+#
+--Output from testLoginFailedEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"User name and or password is invalid. Please try again.","type":"USER"}
+================================================================================
+#
 </pre>
 </div>
 <div class="syserr">
@@ -489,15 +707,15 @@ Content of web window [TopLevelWindow[name=""]] changed
 --Output from testLoginTenantNotFoundPortuguese--
 --Output from testLoginNoPasswordPortuguese--
 --Output from testLoginNoUsernamedPortuguese--
---Output from testLoginNoTenantEnglish--
---Output from testLoginBadMessage--
---Output from testLoginNoTenantPortuguese--
---Output from testLoginNoPasswordEnglish--
---Output from testLoginNoUsernamedEnglish--
---Output from testLoginSuccessPortuguese--
 --Output from testLoginSuccessEnglish--
---Output from testLoginFailedEnglish--
+--Output from testLoginBadMessage--
 --Output from testLoginFailedPortuguese--
+--Output from testLoginNoTenantEnglish--
+--Output from testLoginNoTenantPortuguese--
+--Output from testLoginNoUsernamedEnglish--
+--Output from testLoginNoPasswordEnglish--
+--Output from testLoginSuccessPortuguese--
+--Output from testLoginFailedEnglish--
 </pre>
 </div>
 </div>
@@ -519,7 +737,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testAssignRideToDriverEnglish</b>
 </p>
-<p class="summary">Executed in 0.282 seconds.</p>
+<p class="summary">Executed in 0.158 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -529,27 +747,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testRetrievePassengerRidesEnglish</b>
 </p>
-<p class="summary">Executed in 0.631 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testRetrieveAllRidesEnglish">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testRetrieveAllRidesEnglish</b>
-</p>
-<p class="summary">Executed in 0.144 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateRideENglish">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testCreateRideENglish</b>
-</p>
-<p class="summary">Executed in 0.177 seconds.</p>
+<p class="summary">Executed in 0.284 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -559,7 +757,27 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testRetrieveUnassignedRideInDriverMetroEnglish</b>
 </p>
-<p class="summary">Executed in 0.16 seconds.</p>
+<p class="summary">Executed in 0.111 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateRideENglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCreateRideENglish</b>
+</p>
+<p class="summary">Executed in 0.106 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testRetrieveAllRidesEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testRetrieveAllRidesEnglish</b>
+</p>
+<p class="summary">Executed in 0.12 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -578,15 +796,17 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1",locale:"pt_BR"}
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
 				
 ================================================================================
+ROLE_DRIVER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"ACC952002523597300F95A916F4AA252"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"AC27EB2BB72A9771A13F31C30969D42E","userType":"DRIVER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/assignRideToDriver parameters: ==
@@ -618,15 +838,17 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
+ROLE_PASSENGER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"28357F9E54A386DD7D171558608F0DE3"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"731CA361E626657FA46DA64405190793","userType":"PASSENGER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/retrievePassengerRides parameters: ==
@@ -644,90 +866,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"rides":[{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null},{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":"Naperville, IL, USA","carType":"VAN","radiusServed":"RADIUS_100","activeStatus":"ENABLED"},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null}]}
-================================================================================
-#
---Output from testRetrieveAllRidesEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"WorldTaxi","username":"admin","password":"admin",locale:"pt_BR"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"F8B41F178669E8C8BDC697364986DC97"}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/ride/retrieveAllRides parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"rides":[{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":"Naperville, IL, USA","carType":"VAN","radiusServed":"RADIUS_100","activeStatus":"ENABLED"},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null},{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null}]}
-================================================================================
-#
---Output from testCreateRideENglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"B6BF18E2C7EBDF4CD17E96FD391B5430"}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/ride/createRide parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"pickupDateTime":"2013-03-15 06:30",
- "pickUpAddress":{"street":"111 Main St","city":"Wheaton","state":"IL","zip":"60107","addressType":"HOME"},
- "dropOffAddress":{"street":"999 Main St","city":"Naperville","state":"IL","zip":"60107","addressType":"HOME"}
-}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"SUCCESS","message":"Ride 3 created","type":"USER"}
+{"rides":[{"id":2,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"radiusServed":{"code":"RADIUS_100","description":"100 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
 ================================================================================
 #
 --Output from testRetrieveUnassignedRideInDriverMetroEnglish--
@@ -741,15 +880,17 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1",locale:"pt_BR"}
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
 				
 ================================================================================
+ROLE_DRIVER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"60BF8280AD97743EE0DADD129EAA8FE4"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"72B68C5F16356C9A0E523BA67F37B12A","userType":"DRIVER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
@@ -767,7 +908,93 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"rides":[{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"dropOffAddress":{"street":"123 Main St","city":"Wheanton","state":"IL","zip":"00001","addressType":"HOME"},"rating":null,"comments":null},{"id":3,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-15 06:30","pickUpAddress":{"street":"111 Main St","city":"Wheaton","state":"IL","zip":"60107","addressType":"HOME"},"dropOffAddress":{"street":"999 Main St","city":"Naperville","state":"IL","zip":"60107","addressType":"HOME"},"rating":null,"comments":null}]}
+{"rides":[{"id":2,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
+================================================================================
+#
+--Output from testCreateRideENglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"31F60D9A23FE3234199379BC117C6A38","userType":"PASSENGER"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/createRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"pickupDateTime":"2013-03-15 06:30",
+ "pickUpLocation":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
+ "dropOffLocation":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"}
+}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"SUCCESS","message":"Ride 3 created","type":"USER"}
+================================================================================
+#
+--Output from testRetrieveAllRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"admin","password":"admin"}
+				
+================================================================================
+ROLE_ADMIN
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"B85EFD6AD5966E8271DA5E9C10852237","userType":"NO_TYPE"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveAllRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"radiusServed":{"code":"RADIUS_100","description":"100 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":2,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":3,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-15 06:30","pickUpAddress":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffAddress":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"rating":null,"comments":null}]}
 ================================================================================
 #
 </pre>
@@ -776,9 +1003,9 @@ Content of web window [TopLevelWindow[name=""]] changed
 <h2>System error</h2>
 <pre class="syserr">--Output from testAssignRideToDriverEnglish--
 --Output from testRetrievePassengerRidesEnglish--
---Output from testRetrieveAllRidesEnglish--
---Output from testCreateRideENglish--
 --Output from testRetrieveUnassignedRideInDriverMetroEnglish--
+--Output from testCreateRideENglish--
+--Output from testRetrieveAllRidesEnglish--
 </pre>
 </div>
 </div>
@@ -800,7 +1027,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserNoUserNameEnglish</b>
 </p>
-<p class="summary">Executed in 0.297 seconds.</p>
+<p class="summary">Executed in 0.175 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -810,7 +1037,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserSuccessPortuquese</b>
 </p>
-<p class="summary">Executed in 0.163 seconds.</p>
+<p class="summary">Executed in 0.11 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -820,7 +1047,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserNoUserNamePortuguese</b>
 </p>
-<p class="summary">Executed in 0.098 seconds.</p>
+<p class="summary">Executed in 0.069 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -830,7 +1057,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserBadTenantEnglish</b>
 </p>
-<p class="summary">Executed in 0.058 seconds.</p>
+<p class="summary">Executed in 0.045 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -840,7 +1067,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserNoPasswordEnglish</b>
 </p>
-<p class="summary">Executed in 0.115 seconds.</p>
+<p class="summary">Executed in 0.06 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -850,7 +1077,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserNoPasswordPortuguese</b>
 </p>
-<p class="summary">Executed in 0.124 seconds.</p>
+<p class="summary">Executed in 0.06 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -860,7 +1087,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserNoEmailPortuguese</b>
 </p>
-<p class="summary">Executed in 0.216 seconds.</p>
+<p class="summary">Executed in 0.058 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -870,7 +1097,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserDuplicateUsernameEnglish</b>
 </p>
-<p class="summary">Executed in 0.098 seconds.</p>
+<p class="summary">Executed in 0.079 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -880,7 +1107,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserDuplicateUsernamePortuguese</b>
 </p>
-<p class="summary">Executed in 0.106 seconds.</p>
+<p class="summary">Executed in 0.079 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -890,7 +1117,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserDuplicateEmailEnglish</b>
 </p>
-<p class="summary">Executed in 0.096 seconds.</p>
+<p class="summary">Executed in 0.068 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -900,7 +1127,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserDuplicateEmailPortuguese</b>
 </p>
-<p class="summary">Executed in 0.159 seconds.</p>
+<p class="summary">Executed in 0.058 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -910,7 +1137,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserPassengerEnglish</b>
 </p>
-<p class="summary">Executed in 0.158 seconds.</p>
+<p class="summary">Executed in 0.096 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -920,7 +1147,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testUpdateUserPassengerEnglish</b>
 </p>
-<p class="summary">Executed in 0.213 seconds.</p>
+<p class="summary">Executed in 0.158 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -930,7 +1157,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testRetrieveUserDetailByIdEnglish</b>
 </p>
-<p class="summary">Executed in 0.136 seconds.</p>
+<p class="summary">Executed in 0.098 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -940,27 +1167,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testRetrieveLoggedUserDetailsIdEnglish</b>
 </p>
-<p class="summary">Executed in 0.111 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserSuccessEnglish">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testCreateUserSuccessEnglish</b>
-</p>
-<p class="summary">Executed in 0.126 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserBadMessage">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testCreateUserBadMessage</b>
-</p>
-<p class="summary">Executed in 0.044 seconds.</p>
+<p class="summary">Executed in 0.108 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -970,17 +1177,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testUpdateUserDriverEnglish</b>
 </p>
-<p class="summary">Executed in 0.194 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserNoEmailEnglish">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testCreateUserNoEmailEnglish</b>
-</p>
-<p class="summary">Executed in 0.086 seconds.</p>
+<p class="summary">Executed in 0.114 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -990,7 +1187,37 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserDriverEnglish</b>
 </p>
-<p class="summary">Executed in 0.154 seconds.</p>
+<p class="summary">Executed in 0.088 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserNoEmailEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCreateUserNoEmailEnglish</b>
+</p>
+<p class="summary">Executed in 0.045 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserSuccessEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCreateUserSuccessEnglish</b>
+</p>
+<p class="summary">Executed in 0.116 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserBadMessage">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCreateUserBadMessage</b>
+</p>
+<p class="summary">Executed in 0.03 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -1000,7 +1227,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 <p>
 <span class="icon success"></span><b class="testname message success">testRetrieveAllUsersrEnglish</b>
 </p>
-<p class="summary">Executed in 0.156 seconds.</p>
+<p class="summary">Executed in 0.142 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -1052,7 +1279,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Usu&aacute;rio moovieLover criado","JSESSIONID":"454D790BF76A6D41E22FA6376B856D0D"}
+{"type":"USER","code":"SUCCESS","message":"Usu&aacute;rio moovieLover criado","JSESSIONID":"6BC65F1F69DBFC3F0FA73FDACBFE2AF3"}
 ================================================================================
 #
 --Output from testCreateUserNoUserNamePortuguese--
@@ -1091,7 +1318,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080","locale": "en_US"}
+				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -1289,7 +1516,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User jairjunkie created","JSESSIONID":"68F26143C41515460C270BA2770F82DF"}
+{"type":"USER","code":"SUCCESS","message":"User jairjunkie created","JSESSIONID":"73A4AC9C22C5A6A4F4ABAEE46104AA52"}
 ================================================================================
 #
 --Output from testUpdateUserPassengerEnglish--
@@ -1306,12 +1533,14 @@ Accept: */*
 				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
 				
 ================================================================================
+ROLE_PASSENGER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"53AE810339E76D8CA470EA6E844B889D"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"D2FC95E7EA9D184303977FC32F646DED","userType":"PASSENGER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/updateLoggedUser parameters: ==
@@ -1321,7 +1550,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -1346,12 +1575,13 @@ Accept: */*
 				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
 				
 ================================================================================
+ROLE_ADMIN
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"A9F23C26E789EA65D36CCA99D1F2B582"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"90D2F7B94FED01951368D4CA5C3252F2","userType":"NO_TYPE"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/retrieveUserDetailById parameters: ==
@@ -1369,7 +1599,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"user":{"id":6,"version":1,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedLocation":"Naperville, IL, USA","carType":"VAN","radiusServed":"RADIUS_100","activeStatus":"ENABLED"}}}
+{"user":{"id":6,"version":1,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedLocation":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"radiusServed":{"code":"RADIUS_100","description":"100 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}}
 ================================================================================
 #
 --Output from testRetrieveLoggedUserDetailsIdEnglish--
@@ -1386,12 +1616,15 @@ Accept: */*
 				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
 				
 ================================================================================
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"A89FF5CFE7AC36E18B51A2E086C26237"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"F195313B8680797D4ADA1304CCD443C2","userType":"PASSENGER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/retrieveLoggedUserDetails parameters: ==
@@ -1409,50 +1642,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"user":{"id":5,"version":4,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":"Chicago, IL, USA","carType":"SEDAN","radiusServed":"RADIUS_50","activeStatus":"ENABLED"},"passenger":{"id":5}}}
-================================================================================
-#
---Output from testCreateUserSuccessEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User moovieGoer created","JSESSIONID":"F3BEE53A0CA592BB1C229628A8A4D4D0"}
-================================================================================
-#
---Output from testCreateUserBadMessage--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
+{"user":{"id":5,"version":2,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5}}}
 ================================================================================
 #
 --Output from testUpdateUserDriverEnglish--
@@ -1469,12 +1659,14 @@ Accept: */*
 				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1",locale:"pt_BR"}
 				
 ================================================================================
+ROLE_DRIVER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"E43295D64EFECB58DD8CDCF48326FFF7"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"BF47AEB4726AF0FDCF8875FF0EF6D5AE","userType":"DRIVER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/updateLoggedUser parameters: ==
@@ -1484,7 +1676,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -1493,6 +1685,29 @@ Content of web window [TopLevelWindow[name=""]] changed
 ================================================================================
 == Content =====================================================================
 {"class":"com.moovt.CallResult","code":"SUCCESS","message":"User jverygoodarm updated","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserDriverEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"User dultrafast created","JSESSIONID":"01E5A9089CA95100997C9432CCE4205F"}
 ================================================================================
 #
 --Output from testCreateUserNoEmailEnglish--
@@ -1519,7 +1734,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"class":"com.moovt.CallResult","code":"ERROR","message":"The email must be provided.","type":"USER"}
 ================================================================================
 #
---Output from testCreateUserDriverEnglish--
+--Output from testCreateUserSuccessEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
@@ -1531,7 +1746,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -1539,7 +1754,27 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User dultrafast created","JSESSIONID":"E94CDAE7A0362F3ABE300AE74BBF8D8C"}
+{"type":"USER","code":"SUCCESS","message":"User moovieGoer created","JSESSIONID":"F966F2873095ED940E5DBEF5F09C8831"}
+================================================================================
+#
+--Output from testCreateUserBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
 ================================================================================
 #
 --Output from testRetrieveAllUsersrEnglish--
@@ -1556,12 +1791,13 @@ Accept: */*
 				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
 				
 ================================================================================
+ROLE_ADMIN
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"793A9B6D67E5FC54F2770550B06C690A"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"F5A0BC30FD1CEA7797A9427481602AB6","userType":"NO_TYPE"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/retrieveAllUsers parameters: ==
@@ -1579,7 +1815,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"users":[{"id":6,"version":5,"username":"jverygoodarm","firstName":"John","lastName":"VeryGoodarm","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","driver":{"id":6,"servedLocation":"Chicago, IL, USA","carType":"SEDAN","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}},{"id":10,"version":2,"username":"dultrafast","firstName":"David","lastName":"Ultrafast","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","driver":{"id":10,"servedLocation":"Chicago, IL, USA","carType":"SEDAN","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}},{"id":5,"version":4,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":"Chicago, IL, USA","carType":"SEDAN","radiusServed":"RADIUS_50","activeStatus":"ENABLED"},"passenger":{"id":5}},{"id":8,"version":3,"username":"jairjunkie","firstName":"John","lastName":"Airjunkie","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","passenger":{"id":8}},{"id":4,"version":1,"username":"admin","firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"}]}
+{"users":[{"id":5,"version":2,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5}},{"id":6,"version":3,"username":"jverygoodarm","firstName":"John","lastName":"VeryGoodarm","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","driver":{"id":6,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":8,"version":2,"username":"jairjunkie","firstName":"John","lastName":"Airjunkie","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","passenger":{"id":8}},{"id":9,"version":2,"username":"dultrafast","firstName":"David","lastName":"Ultrafast","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","driver":{"id":9,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":4,"version":1,"username":"admin","firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"}]}
 ================================================================================
 #
 </pre>
@@ -1601,11 +1837,11 @@ Content of web window [TopLevelWindow[name=""]] changed
 --Output from testUpdateUserPassengerEnglish--
 --Output from testRetrieveUserDetailByIdEnglish--
 --Output from testRetrieveLoggedUserDetailsIdEnglish--
+--Output from testUpdateUserDriverEnglish--
+--Output from testCreateUserDriverEnglish--
+--Output from testCreateUserNoEmailEnglish--
 --Output from testCreateUserSuccessEnglish--
 --Output from testCreateUserBadMessage--
---Output from testUpdateUserDriverEnglish--
---Output from testCreateUserNoEmailEnglish--
---Output from testCreateUserDriverEnglish--
 --Output from testRetrieveAllUsersrEnglish--
 </pre>
 </div>

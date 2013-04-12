@@ -21,6 +21,7 @@ import com.moovt.taxi.RideStatus
 class BootStrap {
 
 	def grailsApplication
+	def dynEnumService
 
 	def init = { //A couple of Marshallers
 		servletContext ->
@@ -32,8 +33,8 @@ class BootStrap {
 			returnArray['driver'] = it.driver
 			returnArray['passenger'] = it.passenger
 			returnArray['pickupDateTime'] = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(it.pickupDateTime)
-			returnArray['pickUpAddress'] = it.pickUpAddress
-			returnArray['dropOffAddress'] = it.dropOffAddress
+			returnArray['pickUpAddress'] = it.pickUpLocation
+			returnArray['dropOffAddress'] = it.dropOffLocation
 			returnArray['rating'] = it.rating
 			returnArray['comments'] = it.comments
 			return returnArray
@@ -70,9 +71,9 @@ class BootStrap {
 			def returnArray = [:]
 			returnArray['id'] = it.id
 			returnArray['servedLocation'] = it.servedLocation
-			returnArray['carType'] = it.carType
-			returnArray['radiusServed'] = it.radiusServed
-			returnArray['activeStatus'] = it.activeStatus
+			returnArray['carType'] = dynEnumService.getDynEnum (it.carType)
+			returnArray['radiusServed'] = dynEnumService.getDynEnum (it.radiusServed)
+			returnArray['activeStatus'] = dynEnumService.getDynEnum (it.activeStatus)
 			return returnArray
 		}
 

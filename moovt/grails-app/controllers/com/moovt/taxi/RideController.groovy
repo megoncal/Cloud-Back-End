@@ -3,6 +3,7 @@ package com.moovt.taxi
 import com.moovt.CallResult;
 import com.moovt.CustomGrailsUser
 import com.moovt.common.Address
+import com.moovt.common.Location
 import com.moovt.common.Tenant;
 import com.moovt.common.Role;
 import com.moovt.common.User;
@@ -105,15 +106,15 @@ class RideController {
 
 					//Addresses
 
-					JSONObject pickUpAddressJsonObject = rideJsonObject.opt("pickUpAddress");
-					log.info(pickUpAddressJsonObject);
-					Address pickUpAddress = new Address(pickUpAddressJsonObject).save(flush:true, failOnError:true);
-					ride.pickUpAddress = pickUpAddress;
+					JSONObject pickUpLocationJsonObject = rideJsonObject.opt("pickUpLocation");
+					log.info(pickUpLocationJsonObject);
+					Location pickUpLocation = new Location(pickUpLocationJsonObject).save(flush:true, failOnError:true);
+					ride.pickUpLocation = pickUpLocation;
 
-					JSONObject dropOffAddressJsonObject = rideJsonObject.opt("dropOffAddress");
-					log.info(dropOffAddressJsonObject);
-					Address dropOffAddress = new Address(dropOffAddressJsonObject).save(flush:true, failOnError:true);
-					ride.dropOffAddress = dropOffAddress;
+					JSONObject dropOffLocationJsonObject = rideJsonObject.opt("dropOffLocation");
+					log.info(dropOffLocationJsonObject);
+					Location dropOffLocation = new Location(dropOffLocationJsonObject).save(flush:true, failOnError:true);
+					ride.dropOffLocation = dropOffLocation;
 
 					ride.save(flush:true, failOnError:true);
 
@@ -211,7 +212,6 @@ class RideController {
 				render "{\"rides\":" + rides.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			status.setRollbackOnly();
 			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
 			throw e;
 		}

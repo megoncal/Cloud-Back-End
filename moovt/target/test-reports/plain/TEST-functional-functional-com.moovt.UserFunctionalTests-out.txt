@@ -42,7 +42,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Usuário moovieLover criado","JSESSIONID":"454D790BF76A6D41E22FA6376B856D0D"}
+{"type":"USER","code":"SUCCESS","message":"Usuário moovieLover criado","JSESSIONID":"6BC65F1F69DBFC3F0FA73FDACBFE2AF3"}
 ================================================================================
 #
 --Output from testCreateUserNoUserNamePortuguese--
@@ -81,7 +81,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080","locale": "en_US"}
+				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -279,7 +279,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User jairjunkie created","JSESSIONID":"68F26143C41515460C270BA2770F82DF"}
+{"type":"USER","code":"SUCCESS","message":"User jairjunkie created","JSESSIONID":"73A4AC9C22C5A6A4F4ABAEE46104AA52"}
 ================================================================================
 #
 --Output from testUpdateUserPassengerEnglish--
@@ -296,12 +296,14 @@ Accept: */*
 				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
 				
 ================================================================================
+ROLE_PASSENGER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"53AE810339E76D8CA470EA6E844B889D"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"D2FC95E7EA9D184303977FC32F646DED","userType":"PASSENGER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/updateLoggedUser parameters: ==
@@ -311,7 +313,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -336,12 +338,13 @@ Accept: */*
 				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
 				
 ================================================================================
+ROLE_ADMIN
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"A9F23C26E789EA65D36CCA99D1F2B582"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"90D2F7B94FED01951368D4CA5C3252F2","userType":"NO_TYPE"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/retrieveUserDetailById parameters: ==
@@ -359,7 +362,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"user":{"id":6,"version":1,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedLocation":"Naperville, IL, USA","carType":"VAN","radiusServed":"RADIUS_100","activeStatus":"ENABLED"}}}
+{"user":{"id":6,"version":1,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedLocation":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"radiusServed":{"code":"RADIUS_100","description":"100 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}}
 ================================================================================
 #
 --Output from testRetrieveLoggedUserDetailsIdEnglish--
@@ -376,12 +379,15 @@ Accept: */*
 				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
 				
 ================================================================================
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"A89FF5CFE7AC36E18B51A2E086C26237"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"F195313B8680797D4ADA1304CCD443C2","userType":"PASSENGER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/retrieveLoggedUserDetails parameters: ==
@@ -399,50 +405,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"user":{"id":5,"version":4,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":"Chicago, IL, USA","carType":"SEDAN","radiusServed":"RADIUS_50","activeStatus":"ENABLED"},"passenger":{"id":5}}}
-================================================================================
-#
---Output from testCreateUserSuccessEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User moovieGoer created","JSESSIONID":"F3BEE53A0CA592BB1C229628A8A4D4D0"}
-================================================================================
-#
---Output from testCreateUserBadMessage--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
+{"user":{"id":5,"version":2,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5}}}
 ================================================================================
 #
 --Output from testUpdateUserDriverEnglish--
@@ -459,12 +422,14 @@ Accept: */*
 				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1",locale:"pt_BR"}
 				
 ================================================================================
+ROLE_DRIVER
+ROLE_RIDE_MGR
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"E43295D64EFECB58DD8CDCF48326FFF7"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"BF47AEB4726AF0FDCF8875FF0EF6D5AE","userType":"DRIVER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/updateLoggedUser parameters: ==
@@ -474,7 +439,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -483,6 +448,29 @@ Content of web window [TopLevelWindow[name=""]] changed
 ================================================================================
 == Content =====================================================================
 {"class":"com.moovt.CallResult","code":"SUCCESS","message":"User jverygoodarm updated","type":"USER"}
+================================================================================
+#
+--Output from testCreateUserDriverEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"User dultrafast created","JSESSIONID":"01E5A9089CA95100997C9432CCE4205F"}
 ================================================================================
 #
 --Output from testCreateUserNoEmailEnglish--
@@ -509,7 +497,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"class":"com.moovt.CallResult","code":"ERROR","message":"The email must be provided.","type":"USER"}
 ================================================================================
 #
---Output from testCreateUserDriverEnglish--
+--Output from testCreateUserSuccessEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
@@ -521,7 +509,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":"Chicago, IL, USA","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -529,7 +517,27 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User dultrafast created","JSESSIONID":"E94CDAE7A0362F3ABE300AE74BBF8D8C"}
+{"type":"USER","code":"SUCCESS","message":"User moovieGoer created","JSESSIONID":"F966F2873095ED940E5DBEF5F09C8831"}
+================================================================================
+#
+--Output from testCreateUserBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
 ================================================================================
 #
 --Output from testRetrieveAllUsersrEnglish--
@@ -546,12 +554,13 @@ Accept: */*
 				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
 				
 ================================================================================
+ROLE_ADMIN
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"793A9B6D67E5FC54F2770550B06C690A"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"F5A0BC30FD1CEA7797A9427481602AB6","userType":"NO_TYPE"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/retrieveAllUsers parameters: ==
@@ -569,6 +578,6 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"users":[{"id":6,"version":5,"username":"jverygoodarm","firstName":"John","lastName":"VeryGoodarm","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","driver":{"id":6,"servedLocation":"Chicago, IL, USA","carType":"SEDAN","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}},{"id":10,"version":2,"username":"dultrafast","firstName":"David","lastName":"Ultrafast","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","driver":{"id":10,"servedLocation":"Chicago, IL, USA","carType":"SEDAN","radiusServed":"RADIUS_50","activeStatus":"ENABLED"}},{"id":5,"version":4,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":"Chicago, IL, USA","carType":"SEDAN","radiusServed":"RADIUS_50","activeStatus":"ENABLED"},"passenger":{"id":5}},{"id":8,"version":3,"username":"jairjunkie","firstName":"John","lastName":"Airjunkie","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","passenger":{"id":8}},{"id":4,"version":1,"username":"admin","firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"}]}
+{"users":[{"id":5,"version":2,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5}},{"id":6,"version":3,"username":"jverygoodarm","firstName":"John","lastName":"VeryGoodarm","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","driver":{"id":6,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":8,"version":2,"username":"jairjunkie","firstName":"John","lastName":"Airjunkie","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","passenger":{"id":8}},{"id":9,"version":2,"username":"dultrafast","firstName":"David","lastName":"Ultrafast","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","driver":{"id":9,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":4,"version":1,"username":"admin","firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"}]}
 ================================================================================
 #

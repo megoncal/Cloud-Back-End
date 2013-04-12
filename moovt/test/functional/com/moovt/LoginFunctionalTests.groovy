@@ -27,7 +27,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "JSESSIONID"
-		assertContentContains "customerType"
+		assertContentContains "userType"
 		assertContentContains "Login successful"
 	}
 
@@ -45,7 +45,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		assertContentContains "USER"
 		assertContentContains "SUCCESS"
 		assertContentContains "JSESSIONID"
-		assertContentContains "customerType"
+		assertContentContains "userType"
 		assertContentContains "Login bem sucedido."
 	}
 

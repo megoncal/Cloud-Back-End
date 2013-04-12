@@ -14,20 +14,20 @@ class DriverController {
 	def dynEnumService;
 	
 	def getCarTypeEnum() {
-		def carTypes = dynEnumService.getDynamicEnum(CarType, RequestContextUtils.getLocale(request));
+		def carTypes = dynEnumService.getDynamicEnums(CarType);
 		render (carTypes as JSON);
 		
 	}
 	
 	def getActiveStatusEnum() {
-		def carTypes = dynEnumService.getDynamicEnum(ActiveStatus, RequestContextUtils.getLocale(request));
-		render (carTypes as JSON);
+		def activeStatus = dynEnumService.getDynamicEnums(ActiveStatus);
+		render (activeStatus as JSON);
 		
 	}
 	
 	def getRadiusServedEnum() {
-		def carTypes = dynEnumService.getDynamicEnum(RadiusServed, RequestContextUtils.getLocale(request));
-		render (carTypes as JSON);
+		def radius = dynEnumService.getDynamicEnums(RadiusServed);
+		render (radius as JSON);
 		
 	}
 }

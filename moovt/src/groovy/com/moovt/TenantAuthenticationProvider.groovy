@@ -14,7 +14,11 @@ import org.springframework.security.core.AuthenticationException
 import org.springframework.security.core.authority.GrantedAuthorityImpl
 import org.springframework.security.core.userdetails.UserDetailsChecker
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import org.codehaus.groovy.grails.commons.ApplicationHolder
+import org.codehaus.groovy.grails.commons.GrailsApplication
+
+import org.codehaus.groovy.grails.web.util.WebUtils
+import org.springframework.web.context.request.ServletWebRequest
+import org.springframework.web.servlet.support.RequestContextUtils
 
 import com.moovt.common.Tenant;
 import com.moovt.common.User;
@@ -29,6 +33,7 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
+	GrailsApplication grailsApplication
 	PasswordEncoder passwordEncoder
 	SaltSource saltSource
 	UserDetailsChecker preAuthenticationChecks
@@ -42,9 +47,10 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 		String username = authentication.name
 		String tenantName = authentication.tenantName
 		//The local variable locale will be used to get messages from Message Source
-		Locale locale = LocaleUtils.stringToLocale(authentication.locale);
+		def webUtils = WebUtils.retrieveGrailsWebRequest();
+		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
 		
-		MessageSource messageSource = ApplicationHolder.application.mainContext.getBean('messageSource')
+		MessageSource messageSource = grailsApplication.getMainContext().getBean('messageSource')
 		
 		log.info("Authenticating user: " + username + " tenant: " + tenantName + " password: " + password);
 
@@ -97,17 +103,17 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 		def result = new TenantAuthenticationToken(userDetails,
            	     authentication.credentials, tenantName, authorities)
 		result.details = authentication.details
-		result
+		return result;
 	}
 
 	protected void additionalAuthenticationChecks(GrailsUser userDetails,
 			  TenantAuthenticationToken authentication) throws AuthenticationException {
 			  
-			  
-	    MessageSource messageSource = ApplicationHolder.application.mainContext.getBean('messageSource');
-		//The local variable locale will be used to get messages from Message Source
-		Locale locale = LocaleUtils.stringToLocale(authentication.locale);
 
+		MessageSource messageSource = grailsApplication.getMainContext().getBean('messageSource')
+		def webUtils = WebUtils.retrieveGrailsWebRequest();
+		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
+		
 		def salt = saltSource.getSalt(userDetails)
 
 		if (authentication.credentials == null) {
