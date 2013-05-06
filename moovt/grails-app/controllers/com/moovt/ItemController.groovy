@@ -66,14 +66,14 @@ class ItemController {
 	   try {
 		   jsonObject = new JSONObject(model);
 	   } catch (Exception e) {
-		   render([code: "ERROR", msg: e.message ] as JSON);
+		   render(new CallResult(CallResult.SYSTEM, CallResult.SYSTEM, e.message) as JSON);
 		   return;
 	   }
 	   
 	   //type is expected in the jsonObject
 	   String type = jsonObject.type;
 	   if (!type) {
-		   render([code: "ERROR", msg: message(code:'com.moovt.Item.retrieveItemsByTypeAndRecency.parameter.invalid') ] as JSON);
+		   render(new CallResult(CallResult.SYSTEM, CallResult.SYSTEM, message(code:'com.moovt.Item.retrieveItemsByTypeAndRecency.parameter.invalid')) as JSON);
 	   }
 
 	   def c = Item.createCriteria();

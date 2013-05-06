@@ -5,7 +5,7 @@ import com.moovt.common.Address;
 import com.moovt.common.Location
 
 enum RideStatus {
-	UNASSIGNED, ASSIGNED, CANCELED, COMPLETED, COMMENTED
+	UNASSIGNED, ASSIGNED, COMPLETED
  }
 
 /**

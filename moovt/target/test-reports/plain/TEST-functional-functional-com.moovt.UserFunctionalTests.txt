@@ -1,416 +1,6 @@
 Testsuite: com.moovt.UserFunctionalTests
-Tests run: 21, Failures: 0, Errors: 0, Time elapsed: 1.881 sec
+Tests run: 21, Failures: 0, Errors: 0, Time elapsed: 2.702 sec
 ------------- Standard Output ---------------
---Output from testCreateUserNoUserNameEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'username': rejected value []; codes [com.moovt.common.User.username.blank.error.com.moovt.common.User.username,com.moovt.common.User.username.blank.error.username,com.moovt.common.User.username.blank.error.java.lang.String,com.moovt.common.User.username.blank.error,user.username.blank.error.com.moovt.common.User.username,user.username.blank.error.username,user.username.blank.error.java.lang.String,user.username.blank.error,com.moovt.common.User.username.blank.com.moovt.common.User.username,com.moovt.common.User.username.blank.username,com.moovt.common.User.username.blank.java.lang.String,com.moovt.common.User.username.blank,user.username.blank.com.moovt.common.User.username,user.username.blank.username,user.username.blank.java.lang.String,user.username.blank,blank.com.moovt.common.User.username,blank.username,blank.java.lang.String,blank]; arguments [username,class com.moovt.common.User]; default message [Property [{0}] of class [{1}] cannot be blank]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"The user name must be provided.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserSuccessPortuquese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Usuário moovieLover criado","JSESSIONID":"6BC65F1F69DBFC3F0FA73FDACBFE2AF3"}
-================================================================================
-#
---Output from testCreateUserNoUserNamePortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'username': rejected value []; codes [com.moovt.common.User.username.blank.error.com.moovt.common.User.username,com.moovt.common.User.username.blank.error.username,com.moovt.common.User.username.blank.error.java.lang.String,com.moovt.common.User.username.blank.error,user.username.blank.error.com.moovt.common.User.username,user.username.blank.error.username,user.username.blank.error.java.lang.String,user.username.blank.error,com.moovt.common.User.username.blank.com.moovt.common.User.username,com.moovt.common.User.username.blank.username,com.moovt.common.User.username.blank.java.lang.String,com.moovt.common.User.username.blank,user.username.blank.com.moovt.common.User.username,user.username.blank.username,user.username.blank.java.lang.String,user.username.blank,blank.com.moovt.common.User.username,blank.username,blank.java.lang.String,blank]; arguments [username,class com.moovt.common.User]; default message [O campo [{0}] da classe [{1}] não pode ficar em branco]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"O nome do usuário deve ser preenchido.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserBadTenantEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user.","type":"SYSTEM"}
-================================================================================
-#
---Output from testCreateUserNoPasswordEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'password': rejected value []; codes [com.moovt.common.User.password.blank.error.com.moovt.common.User.password,com.moovt.common.User.password.blank.error.password,com.moovt.common.User.password.blank.error.java.lang.String,com.moovt.common.User.password.blank.error,user.password.blank.error.com.moovt.common.User.password,user.password.blank.error.password,user.password.blank.error.java.lang.String,user.password.blank.error,com.moovt.common.User.password.blank.com.moovt.common.User.password,com.moovt.common.User.password.blank.password,com.moovt.common.User.password.blank.java.lang.String,com.moovt.common.User.password.blank,user.password.blank.com.moovt.common.User.password,user.password.blank.password,user.password.blank.java.lang.String,user.password.blank,blank.com.moovt.common.User.password,blank.password,blank.java.lang.String,blank]; arguments [password,class com.moovt.common.User]; default message [Property [{0}] of class [{1}] cannot be blank]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"The password must be provided.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserNoPasswordPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'password': rejected value []; codes [com.moovt.common.User.password.blank.error.com.moovt.common.User.password,com.moovt.common.User.password.blank.error.password,com.moovt.common.User.password.blank.error.java.lang.String,com.moovt.common.User.password.blank.error,user.password.blank.error.com.moovt.common.User.password,user.password.blank.error.password,user.password.blank.error.java.lang.String,user.password.blank.error,com.moovt.common.User.password.blank.com.moovt.common.User.password,com.moovt.common.User.password.blank.password,com.moovt.common.User.password.blank.java.lang.String,com.moovt.common.User.password.blank,user.password.blank.com.moovt.common.User.password,user.password.blank.password,user.password.blank.java.lang.String,user.password.blank,blank.com.moovt.common.User.password,blank.password,blank.java.lang.String,blank]; arguments [password,class com.moovt.common.User]; default message [O campo [{0}] da classe [{1}] não pode ficar em branco]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"A senha deve ser preenchida.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserNoEmailPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", "lastName": "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'email': rejected value []; codes [com.moovt.common.User.email.blank.error.com.moovt.common.User.email,com.moovt.common.User.email.blank.error.email,com.moovt.common.User.email.blank.error.java.lang.String,com.moovt.common.User.email.blank.error,user.email.blank.error.com.moovt.common.User.email,user.email.blank.error.email,user.email.blank.error.java.lang.String,user.email.blank.error,com.moovt.common.User.email.blank.com.moovt.common.User.email,com.moovt.common.User.email.blank.email,com.moovt.common.User.email.blank.java.lang.String,com.moovt.common.User.email.blank,user.email.blank.com.moovt.common.User.email,user.email.blank.email,user.email.blank.java.lang.String,user.email.blank,blank.com.moovt.common.User.email,blank.email,blank.java.lang.String,blank]; arguments [email,class com.moovt.common.User]; default message [O campo [{0}] da classe [{1}] não pode ficar em branco]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"O email deve ser preenchido.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserDuplicateUsernameEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"duplicateUsernameTestEnglish@test.com", "username": "duplicateUser", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'username': rejected value [duplicateUser]; codes [com.moovt.common.User.username.unique.error.com.moovt.common.User.username,com.moovt.common.User.username.unique.error.username,com.moovt.common.User.username.unique.error.java.lang.String,com.moovt.common.User.username.unique.error,user.username.unique.error.com.moovt.common.User.username,user.username.unique.error.username,user.username.unique.error.java.lang.String,user.username.unique.error,com.moovt.common.User.username.unique.com.moovt.common.User.username,com.moovt.common.User.username.unique.username,com.moovt.common.User.username.unique.java.lang.String,com.moovt.common.User.username.unique,user.username.unique.com.moovt.common.User.username,user.username.unique.username,user.username.unique.java.lang.String,user.username.unique,unique.com.moovt.common.User.username,unique.username,unique.java.lang.String,unique]; arguments [username,class com.moovt.common.User,duplicateUser]; default message [Property [{0}] of class [{1}] with value [{2}] must be unique]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"This user (duplicateUser) already exists.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserDuplicateUsernamePortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"duplicateUsernameTestPortuguese@test.com", "username": "duplicateUser", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}				
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'username': rejected value [duplicateUser]; codes [com.moovt.common.User.username.unique.error.com.moovt.common.User.username,com.moovt.common.User.username.unique.error.username,com.moovt.common.User.username.unique.error.java.lang.String,com.moovt.common.User.username.unique.error,user.username.unique.error.com.moovt.common.User.username,user.username.unique.error.username,user.username.unique.error.java.lang.String,user.username.unique.error,com.moovt.common.User.username.unique.com.moovt.common.User.username,com.moovt.common.User.username.unique.username,com.moovt.common.User.username.unique.java.lang.String,com.moovt.common.User.username.unique,user.username.unique.com.moovt.common.User.username,user.username.unique.username,user.username.unique.java.lang.String,user.username.unique,unique.com.moovt.common.User.username,unique.username,unique.java.lang.String,unique]; arguments [username,class com.moovt.common.User,duplicateUser]; default message [O campo [{0}] da classe [{1}] com o valor [{2}] deve ser único]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Este usuário (duplicateUser) já existe.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserDuplicateEmailEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'email': rejected value [existingEmail@test.com]; codes [com.moovt.common.User.email.unique.error.com.moovt.common.User.email,com.moovt.common.User.email.unique.error.email,com.moovt.common.User.email.unique.error.java.lang.String,com.moovt.common.User.email.unique.error,user.email.unique.error.com.moovt.common.User.email,user.email.unique.error.email,user.email.unique.error.java.lang.String,user.email.unique.error,com.moovt.common.User.email.unique.com.moovt.common.User.email,com.moovt.common.User.email.unique.email,com.moovt.common.User.email.unique.java.lang.String,com.moovt.common.User.email.unique,user.email.unique.com.moovt.common.User.email,user.email.unique.email,user.email.unique.java.lang.String,user.email.unique,unique.com.moovt.common.User.email,unique.email,unique.java.lang.String,unique]; arguments [email,class com.moovt.common.User,existingEmail@test.com]; default message [Property [{0}] of class [{1}] with value [{2}] must be unique]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"This email (existingEmail@test.com) already exists.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserDuplicateEmailPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
-				
-================================================================================
-Errors are Field error in object 'com.moovt.common.User' on field 'email': rejected value [existingEmail@test.com]; codes [com.moovt.common.User.email.unique.error.com.moovt.common.User.email,com.moovt.common.User.email.unique.error.email,com.moovt.common.User.email.unique.error.java.lang.String,com.moovt.common.User.email.unique.error,user.email.unique.error.com.moovt.common.User.email,user.email.unique.error.email,user.email.unique.error.java.lang.String,user.email.unique.error,com.moovt.common.User.email.unique.com.moovt.common.User.email,com.moovt.common.User.email.unique.email,com.moovt.common.User.email.unique.java.lang.String,com.moovt.common.User.email.unique,user.email.unique.com.moovt.common.User.email,user.email.unique.email,user.email.unique.java.lang.String,user.email.unique,unique.com.moovt.common.User.email,unique.email,unique.java.lang.String,unique]; arguments [email,class com.moovt.common.User,existingEmail@test.com]; default message [O campo [{0}] da classe [{1}] com o valor [{2}] deve ser único]
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Este email (existingEmail@test.com) já existe.","type":"USER"}
-================================================================================
-#
---Output from testCreateUserPassengerEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User jairjunkie created","JSESSIONID":"73A4AC9C22C5A6A4F4ABAEE46104AA52"}
-================================================================================
-#
---Output from testUpdateUserPassengerEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
-				
-================================================================================
-ROLE_PASSENGER
-ROLE_RIDE_MGR
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"D2FC95E7EA9D184303977FC32F646DED","userType":"PASSENGER"}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/user/updateLoggedUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"SUCCESS","message":"User jgoodrider updated","type":"USER"}
-================================================================================
-#
---Output from testRetrieveUserDetailByIdEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
-				
-================================================================================
-ROLE_ADMIN
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"90D2F7B94FED01951368D4CA5C3252F2","userType":"NO_TYPE"}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/user/retrieveUserDetailById parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"id":"6"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"user":{"id":6,"version":1,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedLocation":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"radiusServed":{"code":"RADIUS_100","description":"100 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}}
-================================================================================
-#
---Output from testRetrieveLoggedUserDetailsIdEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
-				
-================================================================================
-ROLE_DRIVER
-ROLE_PASSENGER
-ROLE_RIDE_MGR
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"F195313B8680797D4ADA1304CCD443C2","userType":"PASSENGER"}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/user/retrieveLoggedUserDetails parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"user":{"id":5,"version":2,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5}}}
-================================================================================
-#
 --Output from testUpdateUserDriverEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -432,7 +22,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"BF47AEB4726AF0FDCF8875FF0EF6D5AE","userType":"DRIVER"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"2618D013E7A54BF340F7B6C524E1ABD6","userType":"DRIVER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/updateLoggedUser parameters: ==
@@ -442,7 +32,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -450,7 +40,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"SUCCESS","message":"User jverygoodarm updated","type":"USER"}
+{"type":"USER","code":"SUCCESS","message":"User jverygoodarm updated"}
 ================================================================================
 #
 --Output from testCreateUserDriverEnglish--
@@ -465,7 +55,7 @@ Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"radiusServed":"RADIUS_50","activeStatus":"ENABLED"}}
+				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
 				
 ================================================================================
 Interceptor createPage: TopLevelWindow[name=""]
@@ -473,7 +63,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User dultrafast created","JSESSIONID":"01E5A9089CA95100997C9432CCE4205F"}
+{"type":"USER","code":"SUCCESS","message":"User dultrafast created","JSESSIONID":"9A85756C12849A86EE73338A8777A765"}
 ================================================================================
 #
 --Output from testCreateUserNoEmailEnglish--
@@ -497,7 +87,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"The email must be provided.","type":"USER"}
+{"type":"USER","code":"ERROR","message":"The email must be provided."}
 ================================================================================
 #
 --Output from testCreateUserSuccessEnglish--
@@ -520,7 +110,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"User moovieGoer created","JSESSIONID":"F966F2873095ED940E5DBEF5F09C8831"}
+{"type":"USER","code":"SUCCESS","message":"User moovieGoer created","JSESSIONID":"17E0244959343D308ECDE45051C7CCE4"}
 ================================================================================
 #
 --Output from testCreateUserBadMessage--
@@ -540,7 +130,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
+{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}
 ================================================================================
 #
 --Output from testRetrieveAllUsersrEnglish--
@@ -563,7 +153,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"F5A0BC30FD1CEA7797A9427481602AB6","userType":"NO_TYPE"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"56644EBF5AB04E85D1ECB68DA0FC6790","userType":"NO_TYPE"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/user/retrieveAllUsers parameters: ==
@@ -581,11 +171,427 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"users":[{"id":5,"version":2,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5}},{"id":6,"version":3,"username":"jverygoodarm","firstName":"John","lastName":"VeryGoodarm","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","driver":{"id":6,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":8,"version":2,"username":"jairjunkie","firstName":"John","lastName":"Airjunkie","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","passenger":{"id":8}},{"id":9,"version":2,"username":"dultrafast","firstName":"David","lastName":"Ultrafast","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","driver":{"id":9,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"radiusServed":{"code":"RADIUS_50","description":"50 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":4,"version":1,"username":"admin","firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"}]}
+{"users":[{"id":6,"version":2,"username":"jverygoodarm","firstName":"John","lastName":"VeryGoodarm","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","driver":{"id":6,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":15,"version":3,"username":"dultrafast","firstName":"David","lastName":"Ultrafast","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","driver":{"id":15,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":4,"version":1,"username":"admin","firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"},{"id":5,"version":1,"username":"jgoodrider","firstName":"John","lastName":"Goodrider","phone":"800-800-8080","email":"jgoodrider@worldtaxi.com","passenger":{"id":5}},{"id":7,"version":1,"username":"napervilleCityDriverUser","firstName":"napervilleCityDriverUser","lastName":"Goodarm","phone":"800-800-2020","email":"napervilleCityDriverUser@worldtaxi.com","driver":{"id":7,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":8,"version":1,"username":"wheatonCityDriverUser","firstName":"wheatonCityDriverUser","lastName":"Goodarm","phone":"800-800-2020","email":"wheatonCityDriverUser@worldtaxi.com","driver":{"id":8,"servedLocation":{"locationName":"Wheaton","politicalName":"Illinois, United States","latitude":41.8661403,"longitude":-88.1070127,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":9,"version":1,"username":"auroraCityDriverUser","firstName":"auroraCityDriverUser","lastName":"Goodarm","phone":"800-800-2020","email":"auroraCityDriverUser@worldtaxi.com","driver":{"id":9,"servedLocation":{"locationName":"Aurora","politicalName":"Illinois, United States","latitude":41.7605849,"longitude":-88.32007150000001,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":10,"version":0,"username":"plainfieldCityDriverUser","firstName":"plainfieldCityDriverUser","lastName":"Goodarm","phone":"800-800-2020","email":"plainfieldCityDriverUser@worldtaxi.com","driver":{"id":10,"servedLocation":{"locationName":"Plainfield","politicalName":"Illinois, United States","latitude":41.632223,"longitude":-88.2120315,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":11,"version":1,"username":"detroitCityDriverUser","firstName":"detroitCityDriverUser","lastName":"Goodarm","phone":"800-800-2020","email":"detroitCityDriverUser@worldtaxi.com","driver":{"id":11,"servedLocation":{"locationName":"Detroit","politicalName":"Michigan, United States","latitude":42.331427,"longitude":-83.0457538,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":12,"version":1,"username":"contagemCityDriverUser","firstName":"contagemCityDriverUser","lastName":"Goodarm","phone":"800-800-2020","email":"contagemCityDriverUser@worldtaxi.com","driver":{"id":12,"servedLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":13,"version":0,"username":"vespasianoCityDriverUser","firstName":"vespasianoCityDriverUser","lastName":"Goodarm","phone":"800-800-2020","email":"vespasianoCityDriverUser@worldtaxi.com","driver":{"id":13,"servedLocation":{"locationName":"Vespasiano","politicalName":"Minas Gerais, Brazil","latitude":-19.6933911,"longitude":-43.913722,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},{"id":14,"version":1,"username":"carmoDoCajuruCityDriverUser","firstName":"carmoDoCajuruCityDriverUser","lastName":"Goodarm","phone":"800-800-2020","email":"carmoDoCajuruCityDriverUser@worldtaxi.com","driver":{"id":14,"servedLocation":{"locationName":"Carmo do Cajuru","politicalName":"Minas Gerais, Brazil","latitude":-20.1870332,"longitude":-44.7731276,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}]}
+================================================================================
+#
+--Output from testCreateUserNoUserNameEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'username': rejected value []; codes [com.moovt.common.User.username.blank.error.com.moovt.common.User.username,com.moovt.common.User.username.blank.error.username,com.moovt.common.User.username.blank.error.java.lang.String,com.moovt.common.User.username.blank.error,user.username.blank.error.com.moovt.common.User.username,user.username.blank.error.username,user.username.blank.error.java.lang.String,user.username.blank.error,com.moovt.common.User.username.blank.com.moovt.common.User.username,com.moovt.common.User.username.blank.username,com.moovt.common.User.username.blank.java.lang.String,com.moovt.common.User.username.blank,user.username.blank.com.moovt.common.User.username,user.username.blank.username,user.username.blank.java.lang.String,user.username.blank,blank.com.moovt.common.User.username,blank.username,blank.java.lang.String,blank]; arguments [username,class com.moovt.common.User]; default message [Property [{0}] of class [{1}] cannot be blank]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"The user name must be provided."}
+================================================================================
+#
+--Output from testCreateUserSuccessPortuquese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Usuário moovieLover criado","JSESSIONID":"04E91C3F4C3B0C1F3307AFBD54957208"}
+================================================================================
+#
+--Output from testCreateUserNoUserNamePortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'username': rejected value []; codes [com.moovt.common.User.username.blank.error.com.moovt.common.User.username,com.moovt.common.User.username.blank.error.username,com.moovt.common.User.username.blank.error.java.lang.String,com.moovt.common.User.username.blank.error,user.username.blank.error.com.moovt.common.User.username,user.username.blank.error.username,user.username.blank.error.java.lang.String,user.username.blank.error,com.moovt.common.User.username.blank.com.moovt.common.User.username,com.moovt.common.User.username.blank.username,com.moovt.common.User.username.blank.java.lang.String,com.moovt.common.User.username.blank,user.username.blank.com.moovt.common.User.username,user.username.blank.username,user.username.blank.java.lang.String,user.username.blank,blank.com.moovt.common.User.username,blank.username,blank.java.lang.String,blank]; arguments [username,class com.moovt.common.User]; default message [O campo [{0}] da classe [{1}] não pode ficar em branco]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"O nome do usuário deve ser preenchido."}
+================================================================================
+#
+--Output from testCreateUserBadTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"SYSTEM","code":"ERROR","message":"This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user."}
+================================================================================
+#
+--Output from testCreateUserNoPasswordEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'password': rejected value []; codes [com.moovt.common.User.password.blank.error.com.moovt.common.User.password,com.moovt.common.User.password.blank.error.password,com.moovt.common.User.password.blank.error.java.lang.String,com.moovt.common.User.password.blank.error,user.password.blank.error.com.moovt.common.User.password,user.password.blank.error.password,user.password.blank.error.java.lang.String,user.password.blank.error,com.moovt.common.User.password.blank.com.moovt.common.User.password,com.moovt.common.User.password.blank.password,com.moovt.common.User.password.blank.java.lang.String,com.moovt.common.User.password.blank,user.password.blank.com.moovt.common.User.password,user.password.blank.password,user.password.blank.java.lang.String,user.password.blank,blank.com.moovt.common.User.password,blank.password,blank.java.lang.String,blank]; arguments [password,class com.moovt.common.User]; default message [Property [{0}] of class [{1}] cannot be blank]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"The password must be provided."}
+================================================================================
+#
+--Output from testCreateUserNoPasswordPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'password': rejected value []; codes [com.moovt.common.User.password.blank.error.com.moovt.common.User.password,com.moovt.common.User.password.blank.error.password,com.moovt.common.User.password.blank.error.java.lang.String,com.moovt.common.User.password.blank.error,user.password.blank.error.com.moovt.common.User.password,user.password.blank.error.password,user.password.blank.error.java.lang.String,user.password.blank.error,com.moovt.common.User.password.blank.com.moovt.common.User.password,com.moovt.common.User.password.blank.password,com.moovt.common.User.password.blank.java.lang.String,com.moovt.common.User.password.blank,user.password.blank.com.moovt.common.User.password,user.password.blank.password,user.password.blank.java.lang.String,user.password.blank,blank.com.moovt.common.User.password,blank.password,blank.java.lang.String,blank]; arguments [password,class com.moovt.common.User]; default message [O campo [{0}] da classe [{1}] não pode ficar em branco]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"A senha deve ser preenchida."}
+================================================================================
+#
+--Output from testCreateUserNoEmailPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", "lastName": "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'email': rejected value []; codes [com.moovt.common.User.email.blank.error.com.moovt.common.User.email,com.moovt.common.User.email.blank.error.email,com.moovt.common.User.email.blank.error.java.lang.String,com.moovt.common.User.email.blank.error,user.email.blank.error.com.moovt.common.User.email,user.email.blank.error.email,user.email.blank.error.java.lang.String,user.email.blank.error,com.moovt.common.User.email.blank.com.moovt.common.User.email,com.moovt.common.User.email.blank.email,com.moovt.common.User.email.blank.java.lang.String,com.moovt.common.User.email.blank,user.email.blank.com.moovt.common.User.email,user.email.blank.email,user.email.blank.java.lang.String,user.email.blank,blank.com.moovt.common.User.email,blank.email,blank.java.lang.String,blank]; arguments [email,class com.moovt.common.User]; default message [O campo [{0}] da classe [{1}] não pode ficar em branco]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"O email deve ser preenchido."}
+================================================================================
+#
+--Output from testCreateUserDuplicateUsernameEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestEnglish@test.com", "username": "duplicateUser", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'username': rejected value [duplicateUser]; codes [com.moovt.common.User.username.unique.error.com.moovt.common.User.username,com.moovt.common.User.username.unique.error.username,com.moovt.common.User.username.unique.error.java.lang.String,com.moovt.common.User.username.unique.error,user.username.unique.error.com.moovt.common.User.username,user.username.unique.error.username,user.username.unique.error.java.lang.String,user.username.unique.error,com.moovt.common.User.username.unique.com.moovt.common.User.username,com.moovt.common.User.username.unique.username,com.moovt.common.User.username.unique.java.lang.String,com.moovt.common.User.username.unique,user.username.unique.com.moovt.common.User.username,user.username.unique.username,user.username.unique.java.lang.String,user.username.unique,unique.com.moovt.common.User.username,unique.username,unique.java.lang.String,unique]; arguments [username,class com.moovt.common.User,duplicateUser]; default message [Property [{0}] of class [{1}] with value [{2}] must be unique]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"This user (duplicateUser) already exists."}
+================================================================================
+#
+--Output from testCreateUserDuplicateUsernamePortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestPortuguese@test.com", "username": "duplicateUser", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}				
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'username': rejected value [duplicateUser]; codes [com.moovt.common.User.username.unique.error.com.moovt.common.User.username,com.moovt.common.User.username.unique.error.username,com.moovt.common.User.username.unique.error.java.lang.String,com.moovt.common.User.username.unique.error,user.username.unique.error.com.moovt.common.User.username,user.username.unique.error.username,user.username.unique.error.java.lang.String,user.username.unique.error,com.moovt.common.User.username.unique.com.moovt.common.User.username,com.moovt.common.User.username.unique.username,com.moovt.common.User.username.unique.java.lang.String,com.moovt.common.User.username.unique,user.username.unique.com.moovt.common.User.username,user.username.unique.username,user.username.unique.java.lang.String,user.username.unique,unique.com.moovt.common.User.username,unique.username,unique.java.lang.String,unique]; arguments [username,class com.moovt.common.User,duplicateUser]; default message [O campo [{0}] da classe [{1}] com o valor [{2}] deve ser único]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"Este usuário (duplicateUser) já existe."}
+================================================================================
+#
+--Output from testCreateUserDuplicateEmailEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'email': rejected value [existingEmail@test.com]; codes [com.moovt.common.User.email.unique.error.com.moovt.common.User.email,com.moovt.common.User.email.unique.error.email,com.moovt.common.User.email.unique.error.java.lang.String,com.moovt.common.User.email.unique.error,user.email.unique.error.com.moovt.common.User.email,user.email.unique.error.email,user.email.unique.error.java.lang.String,user.email.unique.error,com.moovt.common.User.email.unique.com.moovt.common.User.email,com.moovt.common.User.email.unique.email,com.moovt.common.User.email.unique.java.lang.String,com.moovt.common.User.email.unique,user.email.unique.com.moovt.common.User.email,user.email.unique.email,user.email.unique.java.lang.String,user.email.unique,unique.com.moovt.common.User.email,unique.email,unique.java.lang.String,unique]; arguments [email,class com.moovt.common.User,existingEmail@test.com]; default message [Property [{0}] of class [{1}] with value [{2}] must be unique]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"This email (existingEmail@test.com) already exists."}
+================================================================================
+#
+--Output from testCreateUserDuplicateEmailPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Errors are Field error in object 'com.moovt.common.User' on field 'email': rejected value [existingEmail@test.com]; codes [com.moovt.common.User.email.unique.error.com.moovt.common.User.email,com.moovt.common.User.email.unique.error.email,com.moovt.common.User.email.unique.error.java.lang.String,com.moovt.common.User.email.unique.error,user.email.unique.error.com.moovt.common.User.email,user.email.unique.error.email,user.email.unique.error.java.lang.String,user.email.unique.error,com.moovt.common.User.email.unique.com.moovt.common.User.email,com.moovt.common.User.email.unique.email,com.moovt.common.User.email.unique.java.lang.String,com.moovt.common.User.email.unique,user.email.unique.com.moovt.common.User.email,user.email.unique.email,user.email.unique.java.lang.String,user.email.unique,unique.com.moovt.common.User.email,unique.email,unique.java.lang.String,unique]; arguments [email,class com.moovt.common.User,existingEmail@test.com]; default message [O campo [{0}] da classe [{1}] com o valor [{2}] deve ser único]
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"Este email (existingEmail@test.com) já existe."}
+================================================================================
+#
+--Output from testCreateUserPassengerEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"User jairjunkie created","JSESSIONID":"D0D94252438A3903F7459AD261DD9CB8"}
+================================================================================
+#
+--Output from testUpdateUserPassengerEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				
+================================================================================
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"A1E4CA7F8F8D0D46DAB75B445ED49FC0","userType":"PASSENGER"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/user/updateLoggedUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"User jgoodrider updated"}
+================================================================================
+#
+--Output from testRetrieveUserDetailByIdEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
+				
+================================================================================
+ROLE_ADMIN
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"9D032BE77731680E7CD9CD8201A1AA0A","userType":"NO_TYPE"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/user/retrieveUserDetailById parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"6"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"user":{"id":6,"version":2,"username":"jverygoodarm","firstName":"John","lastName":"VeryGoodarm","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","driver":{"id":6,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}}
+================================================================================
+#
+--Output from testRetrieveLoggedUserDetailsIdEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				
+================================================================================
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"30DC3D29250DF087E2B39C31384F4D0B","userType":"PASSENGER"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/user/retrieveLoggedUserDetails parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"user":{"id":5,"version":3,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","driver":{"id":5,"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"SEDAN","description":"Sedan"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5}}}
 ================================================================================
 #
 ------------- ---------------- ---------------
 ------------- Standard Error -----------------
+--Output from testUpdateUserDriverEnglish--
+--Output from testCreateUserDriverEnglish--
+--Output from testCreateUserNoEmailEnglish--
+--Output from testCreateUserSuccessEnglish--
+--Output from testCreateUserBadMessage--
+--Output from testRetrieveAllUsersrEnglish--
 --Output from testCreateUserNoUserNameEnglish--
 --Output from testCreateUserSuccessPortuquese--
 --Output from testCreateUserNoUserNamePortuguese--
@@ -601,32 +607,26 @@ Content of web window [TopLevelWindow[name=""]] changed
 --Output from testUpdateUserPassengerEnglish--
 --Output from testRetrieveUserDetailByIdEnglish--
 --Output from testRetrieveLoggedUserDetailsIdEnglish--
---Output from testUpdateUserDriverEnglish--
---Output from testCreateUserDriverEnglish--
---Output from testCreateUserNoEmailEnglish--
---Output from testCreateUserSuccessEnglish--
---Output from testCreateUserBadMessage--
---Output from testRetrieveAllUsersrEnglish--
 ------------- ---------------- ---------------
 
-Testcase: testCreateUserNoUserNameEnglish took 0.175 sec
-Testcase: testCreateUserSuccessPortuquese took 0.11 sec
-Testcase: testCreateUserNoUserNamePortuguese took 0.069 sec
-Testcase: testCreateUserBadTenantEnglish took 0.045 sec
-Testcase: testCreateUserNoPasswordEnglish took 0.06 sec
-Testcase: testCreateUserNoPasswordPortuguese took 0.06 sec
-Testcase: testCreateUserNoEmailPortuguese took 0.058 sec
-Testcase: testCreateUserDuplicateUsernameEnglish took 0.079 sec
-Testcase: testCreateUserDuplicateUsernamePortuguese took 0.079 sec
-Testcase: testCreateUserDuplicateEmailEnglish took 0.068 sec
-Testcase: testCreateUserDuplicateEmailPortuguese took 0.058 sec
-Testcase: testCreateUserPassengerEnglish took 0.096 sec
-Testcase: testUpdateUserPassengerEnglish took 0.159 sec
-Testcase: testRetrieveUserDetailByIdEnglish took 0.098 sec
-Testcase: testRetrieveLoggedUserDetailsIdEnglish took 0.108 sec
-Testcase: testUpdateUserDriverEnglish took 0.114 sec
-Testcase: testCreateUserDriverEnglish took 0.088 sec
-Testcase: testCreateUserNoEmailEnglish took 0.045 sec
-Testcase: testCreateUserSuccessEnglish took 0.116 sec
-Testcase: testCreateUserBadMessage took 0.03 sec
-Testcase: testRetrieveAllUsersrEnglish took 0.142 sec
+Testcase: testUpdateUserDriverEnglish took 0.236 sec
+Testcase: testCreateUserDriverEnglish took 0.171 sec
+Testcase: testCreateUserNoEmailEnglish took 0.111 sec
+Testcase: testCreateUserSuccessEnglish took 0.124 sec
+Testcase: testCreateUserBadMessage took 0.046 sec
+Testcase: testRetrieveAllUsersrEnglish took 0.291 sec
+Testcase: testCreateUserNoUserNameEnglish took 0.139 sec
+Testcase: testCreateUserSuccessPortuquese took 0.126 sec
+Testcase: testCreateUserNoUserNamePortuguese took 0.086 sec
+Testcase: testCreateUserBadTenantEnglish took 0.055 sec
+Testcase: testCreateUserNoPasswordEnglish took 0.071 sec
+Testcase: testCreateUserNoPasswordPortuguese took 0.055 sec
+Testcase: testCreateUserNoEmailPortuguese took 0.118 sec
+Testcase: testCreateUserDuplicateUsernameEnglish took 0.059 sec
+Testcase: testCreateUserDuplicateUsernamePortuguese took 0.087 sec
+Testcase: testCreateUserDuplicateEmailEnglish took 0.092 sec
+Testcase: testCreateUserDuplicateEmailPortuguese took 0.116 sec
+Testcase: testCreateUserPassengerEnglish took 0.24 sec
+Testcase: testUpdateUserPassengerEnglish took 0.187 sec
+Testcase: testRetrieveUserDetailByIdEnglish took 0.145 sec
+Testcase: testRetrieveLoggedUserDetailsIdEnglish took 0.123 sec

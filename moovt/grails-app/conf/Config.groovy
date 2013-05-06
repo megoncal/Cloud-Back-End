@@ -1,16 +1,4 @@
-// locations to search for config files that get merged into the main config;
-// config files can be ConfigSlurper scripts, Java properties files, or classes
-// in the classpath in ConfigSlurper format
-
-// grails.config.locations = [ "classpath:${appName}-config.properties",
-//                             "classpath:${appName}-config.groovy",
-//                             "file:${userHome}/.grails/${appName}-config.properties",
-//                             "file:${userHome}/.grails/${appName}-config.groovy"]
-
-// if (System.properties["${appName}.config.location"]) {
-//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
-// }
-
+//
 grails.war.dependencies = {}
 
 
@@ -149,4 +137,8 @@ grails.plugins.springsecurity.filterChain.filterNames = [
 grails.gorm.save.failOnError = true
 
 
+moovt.driver.search.radius=66
 
+//TODO: Finish RetrieveNearByRides
+//TODO: Enhance AssignRide **********************
+//TODO: Complete Ride and Review (5 stars)

@@ -174,7 +174,7 @@ class LoginController {
 		}
 
 		if (springSecurityService.isAjax(request)) {
-			render([code: "ERROR", msg: msg ] as JSON)
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msg) as JSON)
 		}
 		else {
 			flash.message = msg
@@ -187,7 +187,7 @@ class LoginController {
 	 */
 	def ajaxSuccess = {
 		log.info("ajaxSuccess action called");
-		render(['code': "SUCCESS", 'msg': "User signed in successfully" ] as JSON)
+		render(new CallResult(CallResult.SYSTEM, CallResult.SUCCESS, "User signed in successfully") as JSON)
 		//render([success: true, username: springSecurityService.authentication.name] as JSON)
 	}
 

@@ -25,10 +25,5 @@ class DriverController {
 		
 	}
 	
-	def getRadiusServedEnum() {
-		def radius = dynEnumService.getDynamicEnums(RadiusServed);
-		render (radius as JSON);
-		
-	}
 }
 

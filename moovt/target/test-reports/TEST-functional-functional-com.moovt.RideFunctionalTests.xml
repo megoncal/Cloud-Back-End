@@ -1,54 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="MNEGONCALVES" name="com.moovt.RideFunctionalTests" tests="5" time="0.786" timestamp="2013-04-12T17:58:11">
+<testsuite errors="0" failures="0" hostname="MNEGONCALVES" name="com.moovt.RideFunctionalTests" tests="5" time="1.255" timestamp="2013-05-04T17:04:24">
   <properties />
-  <testcase classname="com.moovt.RideFunctionalTests" name="testAssignRideToDriverEnglish" time="0.158" />
-  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrievePassengerRidesEnglish" time="0.284" />
-  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrieveUnassignedRideInDriverMetroEnglish" time="0.111" />
-  <testcase classname="com.moovt.RideFunctionalTests" name="testCreateRideENglish" time="0.106" />
-  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrieveAllRidesEnglish" time="0.12" />
-  <system-out><![CDATA[--Output from testAssignRideToDriverEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
-				
-================================================================================
-ROLE_DRIVER
-ROLE_RIDE_MGR
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"AC27EB2BB72A9771A13F31C30969D42E","userType":"DRIVER"}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/ride/assignRideToDriver parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"id":"1","version":"1"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"SUCCESS","message":"Ride 1 updated","type":"USER"}
-================================================================================
-#
---Output from testRetrievePassengerRidesEnglish--
+  <testcase classname="com.moovt.RideFunctionalTests" name="testCreateRideENglish" time="0.617" />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrieveAllRidesEnglish" time="0.139" />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testAssignRideToDriverEnglish" time="0.181" />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrievePassengerRidesEnglish" time="0.199" />
+  <testcase classname="com.moovt.RideFunctionalTests" name="testRetrieveUnassignedRideInServedAreaEnglish" time="0.111" />
+  <system-out><![CDATA[--Output from testCreateRideENglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
@@ -69,91 +27,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"731CA361E626657FA46DA64405190793","userType":"PASSENGER"}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/ride/retrievePassengerRides parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"rides":[{"id":2,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"radiusServed":{"code":"RADIUS_100","description":"100 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
-================================================================================
-#
---Output from testRetrieveUnassignedRideInDriverMetroEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
-				
-================================================================================
-ROLE_DRIVER
-ROLE_RIDE_MGR
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"72B68C5F16356C9A0E523BA67F37B12A","userType":"DRIVER"}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"rides":[{"id":2,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
-================================================================================
-#
---Output from testCreateRideENglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
-================================================================================
-ROLE_PASSENGER
-ROLE_RIDE_MGR
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"31F60D9A23FE3234199379BC117C6A38","userType":"PASSENGER"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"539D134EA318AC2E4501836FFE2EF8D7","userType":"PASSENGER"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/createRide parameters: ==
@@ -174,7 +48,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"SUCCESS","message":"Ride 3 created","type":"USER"}
+{"type":"USER","code":"SUCCESS","message":"Ride #4 created and sent to 3 drivers. "}
 ================================================================================
 #
 --Output from testRetrieveAllRidesEnglish--
@@ -197,7 +71,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"B85EFD6AD5966E8271DA5E9C10852237","userType":"NO_TYPE"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"52AAB97EB2FCE0B19EB15639F2F371B1","userType":"NO_TYPE"}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/retrieveAllRides parameters: ==
@@ -215,14 +89,140 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"rides":[{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"radiusServed":{"code":"RADIUS_100","description":"100 Miles"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":2,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"IL, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":3,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-15 06:30","pickUpAddress":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffAddress":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"rating":null,"comments":null}]}
+{"rides":[{"id":1,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Wheaton","politicalName":"Illinois, United States","latitude":41.8661403,"longitude":-88.1070127,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":3,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":4,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-15 06:30","pickUpAddress":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffAddress":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"rating":null,"comments":null}]}
+================================================================================
+#
+--Output from testAssignRideToDriverEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
+				
+================================================================================
+ROLE_DRIVER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"1AFF00747350643E0AFF228EED2B44C4","userType":"DRIVER"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/assignRideToDriver parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"1","version":"1"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Ride 1 updated"}
+================================================================================
+#
+--Output from testRetrievePassengerRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"4E74ACF625AC3EE9B46560149F419BF2","userType":"PASSENGER"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrievePassengerRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Wheaton","politicalName":"Illinois, United States","latitude":41.8661403,"longitude":-88.1070127,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":3,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":4,"version":0,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-15 06:30","pickUpAddress":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffAddress":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"rating":null,"comments":null},{"id":1,"version":2,"rideStatus":"ASSIGNED","driver":{"id":6,"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
+================================================================================
+#
+--Output from testRetrieveUnassignedRideInServedAreaEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
+				
+================================================================================
+ROLE_DRIVER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"6B2D908E112CF8EF08914BD60D1FF737","userType":"DRIVER"}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":2,"version":1,"rideStatus":"UNASSIGNED","driver":null,"passenger":{"id":5},"pickupDateTime":"2013-03-13 20:10","pickUpAddress":{"locationName":"Wheaton","politicalName":"Illinois, United States","latitude":41.8661403,"longitude":-88.1070127,"locationType":"APPROXIMATE"},"dropOffAddress":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
 ================================================================================
 #
 ]]></system-out>
-  <system-err><![CDATA[--Output from testAssignRideToDriverEnglish--
---Output from testRetrievePassengerRidesEnglish--
---Output from testRetrieveUnassignedRideInDriverMetroEnglish--
---Output from testCreateRideENglish--
+  <system-err><![CDATA[--Output from testCreateRideENglish--
 --Output from testRetrieveAllRidesEnglish--
+--Output from testAssignRideToDriverEnglish--
+--Output from testRetrievePassengerRidesEnglish--
+--Output from testRetrieveUnassignedRideInServedAreaEnglish--
 ]]></system-err>
 </testsuite>

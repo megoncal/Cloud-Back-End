@@ -1,7 +1,3 @@
---Output from testLoginTenantNotFoundEnglish--
---Output from testLoginTenantNotFoundPortuguese--
---Output from testLoginNoPasswordPortuguese--
---Output from testLoginNoUsernamedPortuguese--
 --Output from testLoginSuccessEnglish--
 --Output from testLoginBadMessage--
 --Output from testLoginFailedPortuguese--
@@ -11,3 +7,7 @@
 --Output from testLoginNoPasswordEnglish--
 --Output from testLoginSuccessPortuguese--
 --Output from testLoginFailedEnglish--
+--Output from testLoginTenantNotFoundEnglish--
+--Output from testLoginTenantNotFoundPortuguese--
+--Output from testLoginNoPasswordPortuguese--
+--Output from testLoginNoUsernamedPortuguese--

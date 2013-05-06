@@ -46,22 +46,12 @@
                         without a single error or failure!
                     </h3>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testState">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testState</b>
-</p>
-<p class="summary">Executed in 1.987 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
 <div class="testcase clearfix success grid_8 alpha omega" data-name="testSearchBadJSON">
 <div class="grid_3 alpha">
 <p>
 <span class="icon success"></span><b class="testname message success">testSearchBadJSON</b>
 </p>
-<p class="summary">Executed in 0.052 seconds.</p>
+<p class="summary">Executed in 2.962 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -71,7 +61,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testSearchNoLocation</b>
 </p>
-<p class="summary">Executed in 0.05 seconds.</p>
+<p class="summary">Executed in 0.072 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -81,7 +71,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testSearchStreet</b>
 </p>
-<p class="summary">Executed in 0.164 seconds.</p>
+<p class="summary">Executed in 0.985 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -91,7 +81,17 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testSearchCity</b>
 </p>
-<p class="summary">Executed in 0.162 seconds.</p>
+<p class="summary">Executed in 0.22 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testState">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testState</b>
+</p>
+<p class="summary">Executed in 0.197 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -99,35 +99,7 @@
 <div class="clearfix output footer">
 <div class="sysout">
 <h2>Standard output</h2>
-<pre class="stdout">--Output from testState--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/location/search parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-{"location":"MG"}	
-				
-================================================================================
-HTTP/1.1 200 OK
-[[address_components:[[long_name:Minas Gerais, short_name:MG, types:[administrative_area_level_1, political]], [long_name:Brazil, short_name:BR, types:[country, political]]], formatted_address:Minas Gerais, Brazil, geometry:[bounds:[northeast:[lat:-14.2330917, lng:-39.85684850000001], southwest:[lat:-22.9228324, lng:-51.0466651]], location:[lat:-17.930178, lng:-43.7908453], location_type:APPROXIMATE, viewport:[northeast:[lat:-14.2330917, lng:-39.85684850000001], southwest:[lat:-22.9228324, lng:-51.0466651]]], types:[administrative_area_level_1, political]]]
-administrative_area_level_1
-political
-country
-political
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"locations":[]}
-================================================================================
-#
---Output from testSearchBadJSON--
+<pre class="stdout">--Output from testSearchBadJSON--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
@@ -144,7 +116,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"code":"ERROR","msg":"A JSONObject text must begin with '{' at character 0 of "}
+{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}
 ================================================================================
 #
 --Output from testSearchNoLocation--
@@ -165,7 +137,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Input JSON must contain a location element","type":"SYSTEM"}
+{"type":"SYSTEM","code":"ERROR","message":"Input JSON must contain a location element"}
 ================================================================================
 #
 --Output from testSearchStreet--
@@ -182,8 +154,6 @@ Accept: */*
 {"location":"Rua Major Lopes 55, Belo Horizonte, MG"}	
 				
 ================================================================================
-HTTP/1.1 200 OK
-[]
 HTTP/1.1 200 OK
 [[address_components:[[long_name:55, short_name:55, types:[street_number]], [long_name:Rua Major Lopes, short_name:R. Maj. Lopes, types:[route]], [long_name:S&atilde;o Pedro, short_name:S&atilde;o Pedro, types:[sublocality, political]], [long_name:Belo Horizonte, short_name:Belo Horizonte, types:[locality, political]], [long_name:Minas Gerais, short_name:MG, types:[administrative_area_level_1, political]], [long_name:Brazil, short_name:BR, types:[country, political]], [long_name:30330-050, short_name:30330-050, types:[postal_code]]], formatted_address:Rua Major Lopes, 55 - S&atilde;o Pedro, Belo Horizonte - Minas Gerais, 30330-050, Brazil, geometry:[bounds:[northeast:[lat:-19.9413628, lng:-43.9373064], southwest:[lat:-19.941379, lng:-43.93731289999999]], location:[lat:-19.9413628, lng:-43.9373064], location_type:RANGE_INTERPOLATED, viewport:[northeast:[lat:-19.9400219197085, lng:-43.9359606697085], southwest:[lat:-19.9427198802915, lng:-43.93865863029149]]], types:[street_address]]]
 street_number
@@ -235,15 +205,43 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"locations":[{"locationName":"Belo Horizonte","politicalName":"Minas Gerais, Brazil","latitude":-19.9190677,"longitude":-43.9385747,"locationType":"APPROXIMATE"}]}
 ================================================================================
 #
+--Output from testState--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"location":"MG"}	
+				
+================================================================================
+HTTP/1.1 200 OK
+[[address_components:[[long_name:Minas Gerais, short_name:MG, types:[administrative_area_level_1, political]], [long_name:Brazil, short_name:BR, types:[country, political]]], formatted_address:Minas Gerais, Brazil, geometry:[bounds:[northeast:[lat:-14.2330917, lng:-39.85684850000001], southwest:[lat:-22.9228324, lng:-51.0466651]], location:[lat:-17.930178, lng:-43.7908453], location_type:APPROXIMATE, viewport:[northeast:[lat:-14.2330917, lng:-39.85684850000001], southwest:[lat:-22.9228324, lng:-51.0466651]]], types:[administrative_area_level_1, political]]]
+administrative_area_level_1
+political
+country
+political
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"locations":[]}
+================================================================================
+#
 </pre>
 </div>
 <div class="syserr">
 <h2>System error</h2>
-<pre class="syserr">--Output from testState--
---Output from testSearchBadJSON--
+<pre class="syserr">--Output from testSearchBadJSON--
 --Output from testSearchNoLocation--
 --Output from testSearchStreet--
 --Output from testSearchCity--
+--Output from testState--
 </pre>
 </div>
 </div>

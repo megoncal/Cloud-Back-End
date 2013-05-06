@@ -8,9 +8,6 @@ enum CarType {
 	SEDAN, VAN, LIMO
 }
 
-enum RadiusServed {
-	RADIUS_50, RADIUS_100
-}
 
 enum ActiveStatus  {
 	   ENABLED, DISABLED
@@ -30,7 +27,6 @@ class Driver {
 	ActiveStatus activeStatus = ActiveStatus.ENABLED
 	CarType carType
 	Location servedLocation
-	RadiusServed radiusServed
 	static belongsTo = [ user: User ]
 	
 	static constraints = {

@@ -1,98 +1,6 @@
 Testsuite: com.moovt.LoginFunctionalTests
-Tests run: 13, Failures: 0, Errors: 0, Time elapsed: 2.578 sec
+Tests run: 13, Failures: 0, Errors: 0, Time elapsed: 1.498 sec
 ------------- Standard Output ---------------
---Output from testLoginTenantNotFoundEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"This company (BadTenant) was not found. Please enter a valid company name.","type":"USER"}
-================================================================================
-#
---Output from testLoginTenantNotFoundPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Esta companhia (BadTenant) não foi encontrada.","type":"USER"}
-================================================================================
-#
---Output from testLoginNoPasswordPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"A senha deve ser preenchida.","type":"USER"}
-================================================================================
-#
---Output from testLoginNoUsernamedPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
-				
-================================================================================
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"O nome do usuário deve ser preenchido.","type":"USER"}
-================================================================================
-#
 --Output from testLoginSuccessEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -115,7 +23,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"1E7F9BBFD8EC7060429164C06A8FFDD9","userType":"PASSENGER"}
+{"type":"USER","code":"SUCCESS","message":"Login successful.","JSESSIONID":"C5341DAB8D34B336456EFE702C275C5A","userType":"PASSENGER"}
 ================================================================================
 #
 --Output from testLoginBadMessage--
@@ -135,7 +43,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of ","type":"SYSTEM"}
+{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}
 ================================================================================
 #
 --Output from testLoginFailedPortuguese--
@@ -158,7 +66,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Usuário e senha inválidos.","type":"USER"}
+{"type":"USER","code":"ERROR","message":"Usuário e senha inválidos."}
 ================================================================================
 #
 --Output from testLoginNoTenantEnglish--
@@ -181,7 +89,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company.","type":"USER"}
+{"type":"USER","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company."}
 ================================================================================
 #
 --Output from testLoginNoTenantPortuguese--
@@ -204,7 +112,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"A companhia deve ser preenchida.","type":"USER"}
+{"type":"USER","code":"ERROR","message":"A companhia deve ser preenchida."}
 ================================================================================
 #
 --Output from testLoginNoUsernamedEnglish--
@@ -227,7 +135,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no username was provided. Please enter a username.","type":"USER"}
+{"type":"USER","code":"ERROR","message":"Authentication failed because no username was provided. Please enter a username."}
 ================================================================================
 #
 --Output from testLoginNoPasswordEnglish--
@@ -250,7 +158,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password.","type":"USER"}
+{"type":"USER","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password."}
 ================================================================================
 #
 --Output from testLoginSuccessPortuguese--
@@ -275,7 +183,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"type":"USER","code":"SUCCESS","message":"Login bem sucedido.","JSESSIONID":"80F080EAC8011ED015730A99297B4504","userType":"NO_TYPE"}
+{"type":"USER","code":"SUCCESS","message":"Login bem sucedido.","JSESSIONID":"E1061DE1BA6F14DE4EC4A45F5F7587C5","userType":"NO_TYPE"}
 ================================================================================
 #
 --Output from testLoginFailedEnglish--
@@ -298,15 +206,103 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"class":"com.moovt.CallResult","code":"ERROR","message":"User name and or password is invalid. Please try again.","type":"USER"}
+{"type":"USER","code":"ERROR","message":"User name and or password is invalid. Please try again."}
+================================================================================
+#
+--Output from testLoginTenantNotFoundEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"This company (BadTenant) was not found. Please enter a valid company name."}
+================================================================================
+#
+--Output from testLoginTenantNotFoundPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"Esta companhia (BadTenant) não foi encontrada."}
+================================================================================
+#
+--Output from testLoginNoPasswordPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"A senha deve ser preenchida."}
+================================================================================
+#
+--Output from testLoginNoUsernamedPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"type":"USER","code":"ERROR","message":"O nome do usuário deve ser preenchido."}
 ================================================================================
 #
 ------------- ---------------- ---------------
 ------------- Standard Error -----------------
---Output from testLoginTenantNotFoundEnglish--
---Output from testLoginTenantNotFoundPortuguese--
---Output from testLoginNoPasswordPortuguese--
---Output from testLoginNoUsernamedPortuguese--
 --Output from testLoginSuccessEnglish--
 --Output from testLoginBadMessage--
 --Output from testLoginFailedPortuguese--
@@ -316,18 +312,22 @@ Content of web window [TopLevelWindow[name=""]] changed
 --Output from testLoginNoPasswordEnglish--
 --Output from testLoginSuccessPortuguese--
 --Output from testLoginFailedEnglish--
+--Output from testLoginTenantNotFoundEnglish--
+--Output from testLoginTenantNotFoundPortuguese--
+--Output from testLoginNoPasswordPortuguese--
+--Output from testLoginNoUsernamedPortuguese--
 ------------- ---------------- ---------------
 
-Testcase: testLoginTenantNotFoundEnglish took 0.193 sec
-Testcase: testLoginTenantNotFoundPortuguese took 0.114 sec
-Testcase: testLoginNoPasswordPortuguese took 0.129 sec
-Testcase: testLoginNoUsernamedPortuguese took 0.078 sec
-Testcase: testLoginSuccessEnglish took 1.144 sec
-Testcase: testLoginBadMessage took 0.046 sec
-Testcase: testLoginFailedPortuguese took 0.105 sec
-Testcase: testLoginNoTenantEnglish took 0.099 sec
-Testcase: testLoginNoTenantPortuguese took 0.063 sec
-Testcase: testLoginNoUsernamedEnglish took 0.101 sec
-Testcase: testLoginNoPasswordEnglish took 0.235 sec
-Testcase: testLoginSuccessPortuguese took 0.127 sec
-Testcase: testLoginFailedEnglish took 0.122 sec
+Testcase: testLoginSuccessEnglish took 0.339 sec
+Testcase: testLoginBadMessage took 0.058 sec
+Testcase: testLoginFailedPortuguese took 0.197 sec
+Testcase: testLoginNoTenantEnglish took 0.137 sec
+Testcase: testLoginNoTenantPortuguese took 0.097 sec
+Testcase: testLoginNoUsernamedEnglish took 0.124 sec
+Testcase: testLoginNoPasswordEnglish took 0.118 sec
+Testcase: testLoginSuccessPortuguese took 0.066 sec
+Testcase: testLoginFailedEnglish took 0.075 sec
+Testcase: testLoginTenantNotFoundEnglish took 0.06 sec
+Testcase: testLoginTenantNotFoundPortuguese took 0.094 sec
+Testcase: testLoginNoPasswordPortuguese took 0.061 sec
+Testcase: testLoginNoUsernamedPortuguese took 0.055 sec

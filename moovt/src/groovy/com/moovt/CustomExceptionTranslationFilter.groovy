@@ -70,7 +70,7 @@ public class CustomExceptionTranslationFilter extends GenericFilterBean {
 
             if (ase != null) {
               		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-					  def error = ['code':'ERROR','msg':'Not Authorized']
+					  def error = ['type':'SYSTEM','code':'ERROR','message':'Not Authorized']
 					response.outputStream << "${error as JSON}"
 
             } else {

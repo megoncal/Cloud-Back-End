@@ -1,3 +1,9 @@
+--Output from testUpdateUserDriverEnglish--
+--Output from testCreateUserDriverEnglish--
+--Output from testCreateUserNoEmailEnglish--
+--Output from testCreateUserSuccessEnglish--
+--Output from testCreateUserBadMessage--
+--Output from testRetrieveAllUsersrEnglish--
 --Output from testCreateUserNoUserNameEnglish--
 --Output from testCreateUserSuccessPortuquese--
 --Output from testCreateUserNoUserNamePortuguese--
@@ -13,9 +19,3 @@
 --Output from testUpdateUserPassengerEnglish--
 --Output from testRetrieveUserDetailByIdEnglish--
 --Output from testRetrieveLoggedUserDetailsIdEnglish--
---Output from testUpdateUserDriverEnglish--
---Output from testCreateUserDriverEnglish--
---Output from testCreateUserNoEmailEnglish--
---Output from testCreateUserSuccessEnglish--
---Output from testCreateUserBadMessage--
---Output from testRetrieveAllUsersrEnglish--

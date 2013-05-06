@@ -1,8 +1,16 @@
 package com.moovt.common
 
 import com.moovt.CallResult
+import com.moovt.CustomGrailsUser
+import com.moovt.taxi.Passenger
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONObject
+import org.springframework.dao.OptimisticLockingFailureException;
+import grails.validation.ValidationException;
+import org.springframework.security.core.Authentication
+import org.springframework.web.servlet.support.RequestContextUtils;
+import grails.plugins.springsecurity.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 class LocationController {
 
@@ -11,7 +19,7 @@ class LocationController {
     def index() { }
 	
 	/**
-	 * This API retrieves one or more <code>GeoLocation</code> based on a location string provided
+	 * This API retrieves one or more <code>Location</code> based on a location string provided
 	 * @param  url  <server-name>/location/search
 	 * @param  input-sample {"location":"Rua Major Lopes 55, Belo Horizonte, MG"}
 	 * @return output-sample {"locations":[{"locationName":...,"politicalName":...,"latitude":..., "longitude":....,"locationType":....}]}
@@ -24,7 +32,7 @@ class LocationController {
 		try {
 			jsonObject = new JSONObject(model);
 		} catch (Exception e) {
-			render([code: "ERROR", msg: e.message ] as JSON);
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
 			return;
 		}
 		
@@ -50,5 +58,46 @@ class LocationController {
 		
 		
 	}
+	
+	/**
+	 * This API retrieves a list of Location frequently used by this passenger
+	 * @param  url  <server-name>/location/getMostFrequentLocations
+	 * @param  input-sample {}
+	 * @return output-sample {"locations":[{"locationName":...,"politicalName":...,"latitude":..., "longitude":....,"locationType":....}]}
+	 */
+	
+	@Secured(['ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'	])
+	def getMostFrequentLocations() {
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+		} catch (Exception e) {
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, e.message) as JSON);
+			return;
+		}
+
+		//Passenger
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		CustomGrailsUser principal = auth.getPrincipal();
+		assert principal.id != null, "Because this method is secured, a principal always exist at this point of the code"
+		Passenger passenger = Passenger.get(principal.id);
+		
+		//Call Service
+		try {
+			List<Location> locations = locationService.getMostFrequentLocations(passenger);
+			render "{\"locations\":" + locations.encodeAsJSON() + "}"
+		} catch (Throwable e) {
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
+		}
+		
+		
+		
+		
+		
+	}
+	
 	
 }
