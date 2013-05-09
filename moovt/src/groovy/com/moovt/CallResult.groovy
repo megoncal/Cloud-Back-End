@@ -2,7 +2,6 @@ package com.moovt
 
 import grails.validation.ValidationErrors
 import org.apache.commons.logging.Log
-import org.codehaus.groovy.grails.commons.ApplicationHolder
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,17 +42,4 @@ class CallResult {
 
 	}
 	
-	public static getCallResultFromErrors (ValidationErrors errors, Locale locale = Locale.US) {
-		
-				MessageSource messageSource = ApplicationHolder.application.mainContext.getBean('messageSource')
-				
-				String message ="";
-				for (error in errors.getAllErrors()) {
-						System.out.println("Errors are " + error);
-						//message = message + ", " + messageSource.getMessage(error, locale)
-						message = messageSource.getMessage(error, locale);
-				}
-		
-				return new CallResult(CallResult.USER,CallResult.ERROR,message);
-			}
 }

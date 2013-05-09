@@ -2,7 +2,9 @@ package com.moovt.common
 
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.codehaus.groovy.grails.web.json.JSONArray
+import org.springframework.context.MessageSource
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.core.Authentication
 import org.springframework.validation.FieldError
 import org.springframework.web.multipart.commons.CommonsMultipartFile
@@ -13,6 +15,7 @@ import com.moovt.CustomGrailsUser
 import com.moovt.QueryUtils
 import com.moovt.TenantAuthenticationToken
 import com.moovt.UUIDWrapper;
+import com.moovt.UtilService
 import com.moovt.common.Role;
 import com.moovt.common.Tenant;
 import com.moovt.common.User;
@@ -35,8 +38,9 @@ import org.springframework.security.core.AuthenticationException
 
 class UserController {
 
-	def messageSource; //inject the messageSource bean
-	def authenticationManager; //injection of the authenticationManager required to log in the recently created user
+	MessageSource messageSource; //inject the messageSource bean
+	UtilService utilService; //inject the utilService bean
+	AuthenticationManager authenticationManager; //injection of the authenticationManager required to log in the recently created user
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -274,6 +278,9 @@ class UserController {
 						return;
 					} 
 					Location servedLocation = new Location (servedLocationJSON);
+					servedLocation.tenantId = tenant.id;
+					servedLocation.createdBy = user.id;
+					servedLocation.lastUpdatedBy = user.id;
 					servedLocation.save(flush:true, failOnError:true);
 					
 					user.driver = new Driver (driverJSON);
@@ -321,7 +328,7 @@ class UserController {
 				return;
 			} catch (ValidationException  e)  {
 				status.setRollbackOnly();
-				render(CallResult.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+				render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
 				throw e;
 				return;
 			}  catch (AuthenticationException e) {
@@ -459,7 +466,7 @@ class UserController {
 				return;
 			} catch (ValidationException  e)  {
 				status.setRollbackOnly();
-				render(CallResult.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+				render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
 				return;
 			} catch (Throwable e) {
 				status.setRollbackOnly();

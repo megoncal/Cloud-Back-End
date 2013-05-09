@@ -87,7 +87,7 @@ dataSource {
 	
    hibernate {
 	cache.use_second_level_cache = false
-	cache.use_query_cache = falsen
+	cache.use_query_cache = false
 	cache.provider_class = 'net.sf.ehcache.hibernate.EhCacheProvider'
    } // environment specific settings
 	
@@ -105,11 +105,14 @@ dataSource {
     }
     test {
      dataSource {
-      dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+      dbCreate = "create" // one of 'create', 'create-drop','update'
       url = "jdbc:mysql://localhost/MOOVTTEST?useUnicode=yes&characterEncoding=UTF-8"
       username = "test"
       password = "testpw"
      }
+	 hibernate {
+		 show_sql = true
+		}
     }
     production {
      dataSource {

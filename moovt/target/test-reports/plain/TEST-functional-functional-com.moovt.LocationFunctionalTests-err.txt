@@ -1,5 +1,0 @@
---Output from testSearchBadJSON--
---Output from testSearchNoLocation--
---Output from testSearchStreet--
---Output from testSearchCity--
---Output from testState--

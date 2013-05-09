@@ -1,5 +1,7 @@
 package com.moovt
 
+//TODO: Rationalize Queries check test testCreateUserDuplicateUsernameEnglish
+
 import com.grailsrocks.functionaltest.*
 
 class RideFunctionalTests extends BrowserTestCase {
@@ -35,7 +37,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
+				{"type":"Self","tenantname":"WorldTaxi","username":"jspeedy","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -49,8 +51,9 @@ class RideFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "id\":2"
+		assertContentContains "id\":1"
 		assertContentContains "passenger\":{\"id\":5}"
+		assertContentContains "UNASSIGNED"
 	}
 
 	void testAssignRideToDriverEnglish() {
@@ -59,7 +62,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
+				{"type":"Self","tenantname":"WorldTaxi","username":"jspeedy","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -68,7 +71,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"id":"1","version":"1"}
+				{"id":"3","version":"1"}
 				"""
 			}
 		}
@@ -140,21 +143,16 @@ class RideFunctionalTests extends BrowserTestCase {
 					}
 				}
 		
-				post('/ride/createRide') {
+				post('/ride/cloneRide') {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-{"pickupDateTime":"2013-03-15 06:30",
- "pickUpLocation":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
- "dropOffLocation":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"}
-}
-				"""
+{"id":"5"}				"""
 					}
 				}
 				assertStatus 200
-				assertContentContains "SUCCESS"
-				assertContentContains "USER"
-				assertContentContains "created"
+				assertContentContains "\"driver\":null"
+				assertContentContains "\"rideStatus\":\"UNASSIGNED\""
 			}
 	
 	void testCloneRideBadMessage() {
@@ -168,7 +166,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					}
 				}
 		
-				post('/ride/createRide') {
+				post('/ride/cloneRide') {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
@@ -198,13 +196,13 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"id":"1","version":"1","rating":"5","comments":"Great ride!"}
+				{"id":"4","version":"1","rating":"5","comments":"Great ride!"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "SUCCESS"
-		assertContentContains "Ride 1 updated"
+		assertContentContains "Ride 4 updated"
 	}
 
 
@@ -223,6 +221,7 @@ class RideFunctionalTests extends BrowserTestCase {
 
 		post('/ride/closeRide') {
 			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
 				{"id":"2","version":"1","rating":"5","comments":"Bom motorista"}
@@ -288,7 +287,7 @@ class RideFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "This ride has already been completed. Unable to add comment"
 	}
 

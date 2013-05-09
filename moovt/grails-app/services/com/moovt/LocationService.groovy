@@ -13,13 +13,14 @@ import org.hibernate.Session
 import org.hibernate.SessionFactory
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
-import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
+import org.codehaus.groovy.grails.commons.GrailsApplication
 
 
 class LocationService {
 
 	SessionFactory sessionFactory
 	MailService mailService
+	GrailsApplication grailsApplication
 
 	static transactional = false
 
@@ -172,7 +173,7 @@ class LocationService {
 		//TODO: Make the 100 Km (66 miles) a parameter
 		//Drivers within 66 minles or 100 Km of the pickup location will be called
 
-		Double dist = CH.config.moovt.driver.search.radius;
+		Double dist = grailsApplication.config.moovt.driver.search.radius;
 		Double lon1 = pickUpLocation.longitude-dist/Math.abs(Math.cos(Math.toRadians(pickUpLocation.latitude))*69);
 		Double lon2 = pickUpLocation.longitude+dist/Math.abs(Math.cos(Math.toRadians(pickUpLocation.latitude))*69);
 		Double lat1 = pickUpLocation.latitude-(dist/69);
@@ -208,12 +209,14 @@ class LocationService {
 	public List<RideDistance> findNearbyRides(Location servedLocation) {
 		
 				List<RideDistance> l = new ArrayList<RideDistance>();
+				
+				log.info("Finding Nearby Rides for " + servedLocation.dump())
 		
 				//Determine the rectangle of 66 radius
 				//TODO: Make the 100 Km (66 miles) a parameter
 				//Rides within 66 miles or 100 Km of the driver location will be displayed
 		
-				Double dist = CH.config.moovt.driver.search.radius;
+				Double dist = grailsApplication.config.moovt.driver.search.radius;
 				Double lon1 = servedLocation.longitude-dist/Math.abs(Math.cos(Math.toRadians(servedLocation.latitude))*69);
 				Double lon2 = servedLocation.longitude+dist/Math.abs(Math.cos(Math.toRadians(servedLocation.latitude))*69);
 				Double lat1 = servedLocation.latitude-(dist/69);
@@ -230,6 +233,9 @@ class LocationService {
 				query.setDouble('lat1', lat1);
 				query.setDouble('lat2', lat2);
 				query.setDouble('dist', dist);
+				
+				log.info(query.dump());
+				
 				List rows = query.list();
 		
 				Integer numberOfDrivers = 0;

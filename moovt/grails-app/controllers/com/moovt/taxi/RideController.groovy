@@ -6,8 +6,10 @@ import com.moovt.DriverDistance
 import com.moovt.LocationService
 import com.moovt.NotificationService;
 import com.moovt.RideDistance
+import com.moovt.UtilService
 import com.moovt.common.Address
 import com.moovt.common.Location
+import com.moovt.common.LoginController;
 import com.moovt.common.Tenant;
 import com.moovt.common.Role;
 import com.moovt.common.User;
@@ -30,7 +32,9 @@ class RideController {
 
 	def springSecurityService;
 	LocationService locationService;
-	NotificationService notificationService
+	NotificationService notificationService;
+	UtilService utilService;
+	
 
 
 
@@ -129,7 +133,7 @@ class RideController {
 				return;
 			} catch (ValidationException  e) {
 				status.setRollbackOnly();
-				render(CallResult.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+				render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
 				return;
 			} catch (Throwable e) {
 				status.setRollbackOnly();
@@ -155,17 +159,13 @@ class RideController {
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.SYSTEM, e.message) as JSON);
-			return;
-		}
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomGrailsUser principal = auth.getPrincipal();
-		Passenger passenger = Passenger.get(principal.id);
-		assert passenger != null, "Because this method is secured, a principal/passenger always exist at this point of the code"
 
-		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Passenger passenger = Passenger.get(principal.id);
+			assert passenger != null, "Because this method is secured, a principal/passenger always exist at this point of the code"
+
 			def c = Ride.createCriteria();
 
 			def rides = c.list {
@@ -207,17 +207,16 @@ class RideController {
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.SYSTEM, e.message) as JSON);
-			return;
-		}
 
-		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			CustomGrailsUser principal = auth.getPrincipal();
 			Driver driver = Driver.get(principal.id);
 			assert driver != null, "Because this method is secured, a principal/driver always exist at this point of the code"
-
+			
+			log.info("About to compile list of nearby rides for " + driver.dump())
+			log.info("The served location is " + driver.servedLocation.dump())
+			log.info("The served location is " + Location.get(driver.servedLocation.id).dump())
+			
 			List<Ride> rides = new ArrayList<Ride>();
 			List<RideDistance> nearbyRides = locationService.findNearbyRides (driver.servedLocation);
 			for (nearbyRide in nearbyRides) {
@@ -227,7 +226,7 @@ class RideController {
 
 
 			if(!rides) {
-				render (new CallResult(CallReulst.SYSTEM,CallResult.ERROR, 'No Rides Found') as JSON);
+				render (new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'No Rides Found') as JSON);
 			} else {
 				render "{\"rides\":" + rides.encodeAsJSON() + "}"
 			}
@@ -253,69 +252,70 @@ class RideController {
 		JSONObject rideJsonObject = null;
 		try {
 			rideJsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			throw e;
-		}
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomGrailsUser principal = auth.getPrincipal();
-		Driver driver = Driver.get(principal.id);
-		assert driver != null, "Because this method is secured, a principal/driver always exist at this point of the code"
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Driver driver = Driver.get(principal.id);
+			assert driver != null, "Because this method is secured, a principal/driver always exist at this point of the code"
 
-		Long id = rideJsonObject.optLong("id",0);
-		Long version = rideJsonObject.optLong("version",0);
+			Long id = rideJsonObject.getLong("id");
+			Long version = rideJsonObject.getLong("version");
 
-		Ride.withTransaction { status ->
-			Ride ride = null;
-			try {
-				ride = Ride.get(id);
+			Ride.withTransaction { status ->
+				Ride ride = null;
+				try {
+					ride = Ride.get(id);
 
-				//Before proceeding - check that this is a legitimate id
-				if (!ride) {
-					render (new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])) as JSON);
+					//Before proceeding - check that this is a legitimate id
+					if (!ride) {
+						render (new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])) as JSON);
+						return;
+					}
+					//Before updating - check for concurrency
+					if (ride.version > version) {
+						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
+						return;
+					}
+
+					if ((ride.rideStatus == RideStatus.ASSIGNED) || (ride.rideStatus == RideStatus.COMPLETED)) {
+						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.ride.already.assigned')) as JSON);
+						return;
+					}
+
+					log.info("HERE");
+					ride.driver = driver;
+					ride.rideStatus = RideStatus.ASSIGNED;
+
+					ride.save(flush:true, failOnError:true);
+					notificationService.notifyDriverOfRideAssignment(ride);
+					notificationService.notifyPassengerOfRideAssignment(ride);
+
+
+					String msg = message(code: 'default.updated.message',
+					args: [message(code: 'Ride.label', default: 'Ride'), ride.id])
+					render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+
+				} catch (OptimisticLockingFailureException e) {
+					status.setRollbackOnly();
+					//TODO: Refine locking messages
+					render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
 					return;
-				}
-				//Before updating - check for concurrency
-				if (ride.version > version) {
-					render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
+				} catch (ValidationException  e) {
+					status.setRollbackOnly();
+
+					render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
 					return;
+				} catch (Throwable e) {
+					status.setRollbackOnly();
+					render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+					throw e;
 				}
 
-				if ((ride.rideStatus == RideStatus.ASSIGNED) || (ride.rideStatus == RideStatus.COMPLETED)) {
-					render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.ride.already.assigned')) as JSON);
-					return;
-				}
-
-				log.info("HERE");
-				ride.driver = driver;
-				ride.rideStatus = RideStatus.ASSIGNED;
-
-				ride.save(flush:true, failOnError:true);
-				notificationService.notifyDriverOfRideAssignment(ride);
-				notificationService.notifyPassengerOfRideAssignment(ride);
-
-
-				String msg = message(code: 'default.updated.message',
-				args: [message(code: 'Ride.label', default: 'Ride'), ride.id])
-				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
-
-			} catch (OptimisticLockingFailureException e) {
-				status.setRollbackOnly();
-				//TODO: Refine locking messages
-				render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
-				return;
-			} catch (ValidationException  e) {
-				status.setRollbackOnly();
-
-				render(CallResult.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
-				return;
-			} catch (Throwable e) {
-				status.setRollbackOnly();
-				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-				throw e;
 			}
 
+		} catch (Throwable e) {
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
 		}
 
 	}
@@ -342,18 +342,14 @@ class RideController {
 			Passenger passenger = Passenger.get(principal.id);
 			assert passenger != null, "Because this method is secured, a principal/passenger always exist at this point of the code"
 
-			try {
-				Long id = rideJsonObject.getLong("id",0);
-				Long version = rideJsonObject.getLong("version",0);
-				Integer rating = rideJsonObject.getInt("rating");
-				if (!((0 <= rating) && (rating <=5))) {
-					throw new Exception ("Rating must be between 0 and 5")
-				}
-				String comments = rideJsonObject.optString("comments","");
-			} catch (Throwable e) {
-				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-				throw e;
+
+			Long id = rideJsonObject.getLong("id");
+			Long version = rideJsonObject.getLong("version");
+			Integer rating = rideJsonObject.getInt("rating");
+			if (!((0 <= rating) && (rating <=5))) {
+				throw new Exception ("Rating must be between 0 and 5")
 			}
+			String comments = rideJsonObject.optString("comments","");
 
 			Ride.withTransaction { status ->
 				Ride ride = null;
@@ -367,6 +363,7 @@ class RideController {
 					}
 					//Before updating - check for concurrency
 					if (ride.version > version) {
+						log.info("Ride version is " + ride.version + "vs." + version);
 						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
 						return;
 					}
@@ -397,15 +394,17 @@ class RideController {
 					return;
 				} catch (ValidationException  e) {
 					status.setRollbackOnly();
-
-					render(CallResult.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+					render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
 					return;
+				} catch (Throwable e) {
+					status.setRollbackOnly();
+					render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+					throw e;
 				}
 
 			} //Transaction Close
 
 		} catch (Throwable e) {
-			status.setRollbackOnly();
 			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
 			throw e;
 		}
@@ -446,7 +445,7 @@ class RideController {
 
 			Ride clonedRide = new Ride();
 			clonedRide.properties = ride.properties;
-			ride.rideStatus = RideStatus.UNASSIGNED;
+			clonedRide.rideStatus = RideStatus.UNASSIGNED;
 
 			render clonedRide.encodeAsJSON()
 
