@@ -46,8 +46,9 @@ class LocationController {
 		
 		//Call Service
 		try {
-			List<Location> locations = locationService.searchLocation (locationStr);
-			render "{\"locations\":" + locations.encodeAsJSON() + "}"
+			//List<Location> locations = locationService.searchLocation (locationStr);
+			Location locations = new Location(locationName:'Wheaton',  politicalName:'Illinois, United States', latitude: 41.8661403, longitude: -88.1070127, locationType: LocationType.APPROXIMATE);	
+			render "{\"locations\":[" + locations.encodeAsJSON() + "]}"
 		} catch (Throwable e) {
 		    render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
 			throw e;

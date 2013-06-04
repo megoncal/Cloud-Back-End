@@ -110,7 +110,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "USER"
 		assertContentContains "ERROR"
-		assertContentContains "Esta companhia (BadTenant) não foi encontrada"
+		assertContentContains "Esta companhia (BadTenant) n‹o foi encontrada"
 	}
 
 	void testLoginNoPasswordEnglish() {
@@ -190,7 +190,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "O nome do usuário deve ser preenchido."
+		assertContentContains "O nome do usu‡rio deve ser preenchido."
 	}
 	
 	void testLoginFailedPortuguese() {
@@ -206,8 +206,8 @@ class LoginFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Usuário e senha inválidos."
-	}
+		assertContentContains "Usu‡rio e senha inv‡lidos."
+	} 
 	
 }
 

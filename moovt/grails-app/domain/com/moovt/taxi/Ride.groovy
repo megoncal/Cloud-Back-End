@@ -1,11 +1,10 @@
 package com.moovt.taxi
 
 import com.moovt.MultiTenantAudit;
-import com.moovt.common.Address;
 import com.moovt.common.Location
 
 enum RideStatus {
-	UNASSIGNED, ASSIGNED, COMPLETED
+	UNASSIGNED, ASSIGNED, COMPLETED, DELETED
  }
 
 /**
@@ -25,16 +24,16 @@ class Ride {
 	Date pickupDateTime
 	Location pickUpLocation
 	Location dropOffLocation
+	CarType carType
 	Double rating
 	String comments
-	
+
 	static constraints = {
 		driver nullable: true
 		rating nullable: true
 		comments nullable: true
 	}
 	
-	//TODO: Check Custom Hibernate Types
 	
 	static mapping = {
 		pickUpAddress fetch: 'join'

@@ -7,7 +7,6 @@ import com.moovt.LocationService
 import com.moovt.NotificationService;
 import com.moovt.RideDistance
 import com.moovt.UtilService
-import com.moovt.common.Address
 import com.moovt.common.Location
 import com.moovt.common.LoginController;
 import com.moovt.common.Tenant;
@@ -50,7 +49,8 @@ class RideController {
 	 * 
 	 * {"pickupDateTime":"2013-03-15 06:30",
 	 * "pickUpLocation":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
-	 * "dropOffLocation":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"}
+	 * "dropOffLocation":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
+	 * "carType":"SEDAN"
 	 * }
 	 * 
 	 */
@@ -95,14 +95,16 @@ class RideController {
 					throw e;
 				}
 
-
+				//Rides are created unassigned
 				ride.rideStatus = RideStatus.UNASSIGNED;
 
+				//
+				ride.carType = rideJsonObject.optString("carType", "SEDAN");
+				
 				//Passenger
 				assert principal.id != null, "Because this method is secured, a principal always exist at this point of the code"
 				ride.passenger = Passenger.get(principal.id);
-
-
+				
 				//Addresses
 
 				JSONObject pickUpLocationJsonObject = rideJsonObject.opt("pickUpLocation");
@@ -117,7 +119,7 @@ class RideController {
 
 				ride.save(flush:true, failOnError:true);
 
-				List<DriverDistance> nearbyDrivers = locationService.findNearbyDrivers (pickUpLocation);
+				List<DriverDistance> nearbyDrivers = locationService.findNearbyDrivers (pickUpLocation, ride.carType);
 				for (nearbyDriver in nearbyDrivers) {
 					notificationService.notifyDriversOfRideAvailable(nearbyDriver.driverId, nearbyDriver.distance, ride)
 				}
@@ -128,7 +130,6 @@ class RideController {
 				return;
 			} catch (OptimisticLockingFailureException e) {
 				status.setRollbackOnly();
-				//TODO: Refine locking messages
 				render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
 				return;
 			} catch (ValidationException  e) {
@@ -297,7 +298,6 @@ class RideController {
 
 				} catch (OptimisticLockingFailureException e) {
 					status.setRollbackOnly();
-					//TODO: Refine locking messages
 					render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
 					return;
 				} catch (ValidationException  e) {
@@ -389,7 +389,81 @@ class RideController {
 
 				} catch (OptimisticLockingFailureException e) {
 					status.setRollbackOnly();
-					//TODO: Refine locking messages
+					render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
+					return;
+				} catch (ValidationException  e) {
+					status.setRollbackOnly();
+					render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+					return;
+				} catch (Throwable e) {
+					status.setRollbackOnly();
+					render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+					throw e;
+				}
+
+			} //Transaction Close
+
+		} catch (Throwable e) {
+			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			throw e;
+		}
+	}
+
+	/**
+	 * This API logically deletes a <code>Ride</code> and, if a <code>Driver</code> is assigned notifies the <code>Driver</code>.
+	 *
+	 * Example: <server-name>/ride/deleteRide
+	 *
+	 * {id=1, version=2}
+	 */
+	@Secured(['ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'])
+	def deleteRide() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject rideJsonObject = null;
+		try {
+			rideJsonObject = new JSONObject(model);
+
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Passenger passenger = Passenger.get(principal.id);
+			assert passenger != null, "Because this method is secured, a principal/passenger always exist at this point of the code"
+
+
+			Long id = rideJsonObject.getLong("id");
+			Long version = rideJsonObject.getLong("version");
+			
+			
+			Ride.withTransaction { status ->
+				Ride ride = null;
+				try {
+					ride = Ride.get(id);
+
+					//Before proceeding - check that this is a legitimate id
+					if (!ride) {
+						render (new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])) as JSON);
+						return;
+					}
+					//Before deleting - check for concurrency
+					if (ride.version > version) {
+						log.info("Ride version is " + ride.version + "vs." + version);
+						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
+						return;
+					}
+
+					if (ride.rideStatus == RideStatus.ASSIGNED) {
+						notificationService.notifyDriverOfRideDeleted (ride);
+					}
+
+					ride.delete();
+
+					String msg = message(code: 'com.moovt.ride.deleted',
+					args: [ ride.id])
+					render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+
+				} catch (OptimisticLockingFailureException e) {
+					status.setRollbackOnly();
 					render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
 					return;
 				} catch (ValidationException  e) {

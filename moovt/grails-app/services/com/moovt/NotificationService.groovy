@@ -93,7 +93,38 @@ class NotificationService {
 		}
 
 	}
-	
+
+	public void notifyDriverOfRideDeleted (Ride ride) {
+		
+		def webUtils = WebUtils.retrieveGrailsWebRequest();
+		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
+		
+		User driverUser = User.get(ride.driver.id);
+		User passengerUser = User.get(ride.passenger.id);
+		
+		String emailSubject = messageSource.getMessage ('com.moovt.driver.ride.deleted.subject',
+			[ride.pickUpLocation.locationName + " - " + ride.pickUpLocation.politicalName,
+			 ride.dropOffLocation.locationName + " - " + ride.dropOffLocation.politicalName] as Object[],
+			 locale);
+		
+		String emailBody = messageSource.getMessage ('com.moovt.driver.ride.deleted.body',
+													  [driverUser.firstName + " " + driverUser.lastName,
+													   ride.pickUpLocation.locationName + " - " + ride.pickUpLocation.politicalName,
+													   ride.dropOffLocation.locationName + " - " + ride.dropOffLocation.politicalName,
+													   ride.pickupDateTime,
+													   passengerUser.firstName + " " + passengerUser.lastName,
+													   passengerUser.phone,
+													   passengerUser.email] as Object[],
+													   locale);
+		
+		mailService.sendMail {
+			to driverUser.email
+			from "dispatch@moovt.com"
+			subject emailSubject
+			body emailBody
+		}
+
+	}
 	
 	public void notifyPassengerOfRideAssignment (Ride ride) {
 		
@@ -130,8 +161,30 @@ class NotificationService {
 	}
 	
 	
+	public void notifyPasswordChanged (User user, String newPassword) {
+		
+		def webUtils = WebUtils.retrieveGrailsWebRequest();
+		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
+		
+		
+		String emailSubject = messageSource.getMessage ('com.moovt.user.passwordReset.subject', null,locale);
+		
+		String emailBody = messageSource.getMessage ('com.moovt.user.passwordReset.subject',
+													  [user.firstName + " " + user.lastName,
+													   newPassword] as Object[],
+													   locale);
+		
+		mailService.sendMail {
+			to user.email
+			from "dispatcher@moovt.com"
+			subject emailSubject
+			body emailBody
+		}
+
+	}
+
 	
-	
+		
 
 	}
 

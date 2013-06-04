@@ -8,7 +8,6 @@ package com.moovt
 class LocaleUtils {
 
 	public LocaleUtils() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public static String localeToString(Locale l)

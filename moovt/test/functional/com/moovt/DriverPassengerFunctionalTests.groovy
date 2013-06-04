@@ -18,7 +18,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "[{\"code\":\"SEDAN\",\"description\":\"Sedan\"},{\"code\":\"VAN\",\"description\":\"Van\"},{\"code\":\"LIMO\",\"description\":\"Limo\"}]"
+		assertContentContains "[{\"code\":\"A_SEDAN\",\"description\":\"Sedan\"},{\"code\":\"B_VAN\",\"description\":\"Van\"},{\"code\":\"C_LIMO\",\"description\":\"Limo\"}]"
 	}
 
 	void testGetCarTypeEnumPortuguese() {
@@ -34,7 +34,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "[{\"code\":\"SEDAN\",\"description\":\"Sedan\"},{\"code\":\"VAN\",\"description\":\"Van\"},{\"code\":\"LIMO\",\"description\":\"Limo\"}]"
+		assertContentContains "[{\"code\":\"A_SEDAN\",\"description\":\"Sedan\"},{\"code\":\"B_VAN\",\"description\":\"Van\"},{\"code\":\"C_LIMO\",\"description\":\"Limo\"}]"
 	}
 
 	void testGetActiveStatusEnumEnglish() {
@@ -76,7 +76,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"ARua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
+				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"A_SEDAN","servedLocation":{"locationName":"ARua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
 				"""
 			}
 		}
@@ -116,7 +116,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"BRua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
+				{"version":"4","firstName":"John","lastName":"VeryGoodarm","username":"jverygoodarm","password":"Welcome!1","phone":"773-329-1784","email":"jgoodarxm@worldtaxi.com","locale":"en-US","driver":{"carType":"A_SEDAN","servedLocation":{"locationName":"BRua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
 				"""
 			}
 		}
@@ -124,6 +124,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "User jverygoodarm updated"
+		assertContentContains "version"
 	}
 
 	void testUpdateUserPassengerEnglish() {
@@ -141,7 +142,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
+				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"carType":"A_SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
 				"""
 			}
 		}
@@ -149,6 +150,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "User jgoodrider updated"
+		assertContentContains "version"
 	}
 
 	void testRetrieveAllUsersrEnglish() {

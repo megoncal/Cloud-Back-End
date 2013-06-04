@@ -101,11 +101,13 @@ dataSource {
      }
      hibernate {
       show_sql = true
+	  flush.mode = "manual"
+	  //flush.mode = FlushMode.MANUAL
      }
     }
     test {
      dataSource {
-      dbCreate = "create" // one of 'create', 'create-drop','update'
+      dbCreate = "create-drop" // one of 'create', 'create-drop','update'
       url = "jdbc:mysql://localhost/MOOVTTEST?useUnicode=yes&characterEncoding=UTF-8"
       username = "test"
       password = "testpw"

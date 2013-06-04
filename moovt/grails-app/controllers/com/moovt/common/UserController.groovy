@@ -12,6 +12,7 @@ import grails.converters.*
 
 import com.moovt.CallResult;
 import com.moovt.CustomGrailsUser
+import com.moovt.NotificationService
 import com.moovt.QueryUtils
 import com.moovt.TenantAuthenticationToken
 import com.moovt.UUIDWrapper;
@@ -41,6 +42,8 @@ class UserController {
 	MessageSource messageSource; //inject the messageSource bean
 	UtilService utilService; //inject the utilService bean
 	AuthenticationManager authenticationManager; //injection of the authenticationManager required to log in the recently created user
+	NotificationService notificationService;
+
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -50,177 +53,12 @@ class UserController {
 	}
 
 	/**
-	 * This API is not currently supported.
-	 *
-	 * Example: <server-name>/user/upsert
-	 *
-	 */
-	//This method updates or insert an array of JSON objects
-	@Secured([
-		'ROLE_ADMIN',
-		'IS_AUTHENTICATED_FULLY'
-	])
-	def upsert() {
-
-		String models = request.reader.getText();
-
-		//TODO: Error Handling if unable to retrieve models
-
-		log.info("Upserting with params:" + params + "and models: " + models);
-
-		JSONArray jsonArray = new JSONArray(models);
-
-
-		ArrayList returnUsers = new ArrayList();
-
-		jsonArray.each () {
-			JSONObject jsonObject = jsonArray[0];
-
-			//Obtain the id and version from the json object
-			def id = jsonObject.get("id");
-			def version = jsonObject.get("version");
-
-			log.info("JSON Object to update is " + jsonObject + " with id " + id + " and version " + version + ".");
-
-
-			//Create a new user or retrieve the user from the database
-			User userInstance = null;
-
-			if ((id.equals(null)) || (id.equals(''))) {
-				log.info("Creating a new user");
-				userInstance = new User();
-			} else {
-				log.info("Updating and existing user");
-				userInstance = User.get(id);
-			}
-
-			//Check for optimistic locking
-			//TODO: Add a user to user and indicate which user updated the version
-			if (!version.equals(null)) {
-				if (userInstance.version > version) {
-					userInstance.CRUDMessage="Another user udpate this record"''
-				}
-			}
-
-			userInstance.properties = jsonObject;
-
-
-			//Validate and if valid save
-			//This method returns the saved user to the client
-			if (userInstance.validate()) {
-				userInstance.save(flush: true);
-				userInstance.CRUDMessage = 'OK';
-				returnUsers.add(userInstance);
-			} else {
-				//TODO: Create descriptive message
-				userInstance.CRUDMessage = 'NOK';
-			}
-
-		}
-
-		log.info("Rendering saved user as JSON Array " + "${params.callback}(${returnUsers as JSON})");
-		render "${params.callback}(${returnUsers as JSON})";
-
-
-	}
-
-	/**
-	 * This API is not currently supported.
-	 *
-	 * Example: <server-name>/user/delete
-	 *
-	 */
-
-	@Secured(['ROLE_ADMIN',	'IS_AUTHENTICATED_FULLY'])
-	def delete() {
-		log.info("Delete with params:" + params + "and request: " + request.reader.getText());
-		//Assume that the parameters contain a Kendo UI array of models
-		String modelParam = params.get("models");
-		Boolean arrayMode = true;
-		if (!modelParam) {
-			arrayMode = true;
-		}
-
-		//Obtain one json object directly or through the array
-		JSONObject jsonObject;
-
-		if (arrayMode) {
-			JSONArray jsonArray = new JSONArray(modelParam);
-			jsonObject = jsonArray[0];
-		} else {
-			jsonObject = request.JSON;
-		}
-
-		//Obtain the id and version from the json object
-		def id = jsonObject.get("id");
-		def version = jsonObject.get("version");
-
-		log.info("JSON Object to delete is " + jsonObject + " with id " + id + " and version " + version + ".");
-
-
-		//Create a new user or retrieve the user from the database
-		User userInstance = User.get(id);
-
-		if (!userInstance) {
-			def error = ['error':"User invalid " + userInstance.toString()]
-			render "${params.callback}(${error as JSON})"
-		}
-
-		//Check for optimistic locking
-		//TODO: Add a user to user and indicate which user updated the version
-		if (!version.equals(null)) {
-			if (userInstance.version > version) {
-				def error = ['error':"Another user udpate "]
-				render "${params.callback}(${error as JSON})"
-			}
-		}
-
-
-		//If we got to this point, delete user
-		try {
-			userInstance.delete(flush: true)
-			render "${params.callback}(${userInstance as JSON})"
-		}
-		catch (DataIntegrityViolationException e) {
-			def error = ['error':"User invalid " + userInstance.toString()]
-			render "${params.callback}(${error as JSON})"
-		}
-
-
-	}
-
-	/**
-	 * This API is not currently supported.
-	 *
-	 * Example: <server-name>/user/saveImage
-	 *
-	 */
-	@Secured(['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'])
-	def saveImage={
-
-		log.info(request.contentType);
-		CommonsMultipartFile file = request.getFile('image');
-		String path = grailsApplication.config.imageStoreDir;
-		UUID uuid = UUID.randomUUID();
-		UUIDWrapper uuidWrapper = new UUIDWrapper(uuid);
-		String fileName = path+uuid+".jpg";
-
-		log.info("Storing File  " + fileName);
-		if (file && !file.empty) {
-			file.transferTo(new File(fileName));
-			//TODO: Determine the difference between these two statements
-			//render "${params.callback}(${uuidWrapper as JSON})"
-			render "${uuidWrapper as JSON}"
-		}
-	}
-
-	/**
 	 * This API creates a <code>User</code>, signin the user and returns JSESSIONID.
 	 * The User can be either a <code>Passenger</code> or a <code>Driver</code>. It does not require the user to be
 	 * signed in.
 	 * 
 	 * @param  url   <server-name>/user/createUser
-	 * @param  input-sample-1 {"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
+	 * @param  input-sample-1 {"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType":"A_SEDAN","servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":"ENABLED"}}
 	 * @param  input-sample-2 {"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
 	 * @return output-sample {"type":"USER","code":"SUCCESS","message":"User dultrxafast created","JSESSIONID":"6317F9E37E0F499399A3F89DDA6D5723"}
 	 *
@@ -233,14 +71,14 @@ class UserController {
 			userJsonObject = new JSONObject(model);
 		} catch (Exception e) {
 			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			throw e;
+			e.printStackTrace();
 		}
 
 
 
 		//For methods without the need of authentication, verify if the tenant exists
 		String tenantname = userJsonObject.optString("tenantname","");
-		
+
 		Tenant tenant = Tenant.findByName(tenantname);
 		if (!tenant) {
 			String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
@@ -248,10 +86,14 @@ class UserController {
 			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist) as JSON);
 			return;
 		}
-		
+
 		//Before any further operation, capture the password in its raw format
 		String password = userJsonObject.optString("password","");
 
+		//These next two variables are needed for the final rendering
+		String sessionId = "";
+		String msg = "";
+		
 		//Start a transaction to insert or update based on the existence of an id
 		User.withTransaction { status ->
 			try {
@@ -260,12 +102,12 @@ class UserController {
 				user.tenantId = tenant.id;
 				user.createdBy = 1;
 				user.lastUpdatedBy = 1;
-				user.save(flush:true, failOnError:true);
+				user.save(failOnError:true);
 
 				//Update the createdBy and lastUpdatedBy to self
 				user.createdBy = user.id;
 				user.lastUpdatedBy = user.id;
-				user.save(flush:true, failOnError:true)
+				user.save(failOnError:true)
 
 				//Handle Driver type
 				JSONObject driverJSON = userJsonObject.opt("driver");
@@ -276,19 +118,19 @@ class UserController {
 						status.setRollbackOnly();
 						render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON') as JSON);
 						return;
-					} 
+					}
 					Location servedLocation = new Location (servedLocationJSON);
 					servedLocation.tenantId = tenant.id;
 					servedLocation.createdBy = user.id;
 					servedLocation.lastUpdatedBy = user.id;
-					servedLocation.save(flush:true, failOnError:true);
-					
+					servedLocation.save(failOnError:true);
+
 					user.driver = new Driver (driverJSON);
 					user.driver.servedLocation = servedLocation;
 					user.driver.tenantId = tenant.id;
 					user.driver.createdBy = user.id;
 					user.driver.lastUpdatedBy = user.id;
-					
+
 					def driverRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_DRIVER')
 					UserRole.create (tenant.id, user, driverRole, user.createdBy, user.lastUpdatedBy);
 				}
@@ -306,44 +148,40 @@ class UserController {
 					UserRole.create (tenant.id, user, passengerRole, user.createdBy, user.lastUpdatedBy);
 				}
 
-				user.save(flush:true, failOnError:true);
+				user.save(failOnError:true);
 
 				//Authenticate this user, please note the use of password in its non-encoded format
 				TenantAuthenticationToken token = new TenantAuthenticationToken(user.username, password,user.tenantname, user.locale);
 				Authentication auth = authenticationManager.authenticate(token);
 				SecurityContextHolder.getContext().setAuthentication(auth);
-				String sessionId = session.getId();
-
-				String msg = message(code: 'default.created.message',
-				args: [message(code: 'User.label', default: 'User'), user.username ])
-
-				render([type: CallResult.USER, code: CallResult.SUCCESS, message: msg, JSESSIONID: sessionId] as JSON);
-				return;
 				
+				sessionId = session.getId();
+				msg = message(code: 'default.created.message',
+					args: [message(code: 'User.label', default: 'User'), user.username ])
+		
 			} catch (OptimisticLockingFailureException e) {
 				status.setRollbackOnly();
-				//TODO: Refine locking messages
-				render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
-				throw e;
-				return;
-			} catch (ValidationException  e)  {
-				status.setRollbackOnly();
-				render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
-				throw e;
-				return;
+				render "{\"result\":" + (new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update'))).encodeAsJSON() + "}"
+			e.printStackTrace();
 			}  catch (AuthenticationException e) {
 				status.setRollbackOnly();
-				render(new CallResult(CallResult.USER, CallResult.ERROR, e.message) as JSON);
-				throw e;
-				return;
-			}
-			catch (Throwable e) {
+				render "{\"result\":" + (new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message)).encodeAsJSON() + "}"
+				e.printStackTrace();
+
+			} catch (ValidationException  e)  {
 				status.setRollbackOnly();
-				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-				throw e;
+				render "{\"result\":" + utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).encodeAsJSON() + "}"
+				e.printStackTrace();
+			} catch (Throwable e) {
+				status.setRollbackOnly();
+				render "{\"result\":" + (new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message)).encodeAsJSON() + "}"
+				e.printStackTrace();
 			}
 
-		}
+		} //End of the transaction
+		
+		render([type: CallResult.USER, code: CallResult.SUCCESS, message: msg, JSESSIONID: sessionId] as JSON);
+		return;
 	}
 
 	/**
@@ -372,11 +210,13 @@ class UserController {
 		CustomGrailsUser principal = auth.getPrincipal();
 		Tenant tenant = Tenant.get(principal.tenantId);
 
+		User user;
 
 		//Start a transaction to update based on the existence of an id
-		User.withTransaction { status ->
-			try {
-				User user = User.get(principal.id);
+		try {
+			User.withTransaction { status ->
+
+				user = User.get(principal.id);
 				assert user != null, "Because this method is secured, a principal/user always exist at this point of the code"
 
 				log.info("Retrieved User " + user.dump());
@@ -395,11 +235,11 @@ class UserController {
 					//Handle the driver's served location inside the driver JSON
 					JSONObject servedLocationJSON = driverJSON.opt("servedLocation");
 					if (!servedLocationJSON) {
-							status.setRollbackOnly();
-								render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON') as JSON);
-								return;
-							}
-					
+						status.setRollbackOnly();
+						render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON') as JSON);
+						return;
+					}
+
 					Driver driver = user.driver;
 					if (!driver) {
 						driver = new Driver(driverJSON);
@@ -408,13 +248,11 @@ class UserController {
 						driver.servedLocation = servedLocation;
 						driver.user = user
 					} else {
-					    driver.servedLocation.properties = servedLocationJSON;
+						driver.servedLocation.properties = servedLocationJSON;
 						driver.properties = driverJSON;
 					}
 
-					log.info("Driver being saved " + driver.dump());			
-					
-					driver.save(flush:true, failOnError:true);
+					log.info("Driver being saved " + driver.dump());
 
 					user.driver = driver;
 
@@ -438,9 +276,6 @@ class UserController {
 					}
 
 					log.info("Passenger being saved " + driver.dump());
-					
-					passenger.save(flush:true, failOnError:true);
-
 					user.passenger = passenger;
 
 
@@ -450,31 +285,28 @@ class UserController {
 						UserRole.create ( tenanat.id, user, passengerRole)
 					}
 				}
-
 				log.info("User being saved " + user.dump());
-				user.save(flush:true, failOnError:true)
+				
+			} //Closing the transaction and saving
 
-				String msg = message(code: 'default.updated.message',
-				args: [message(code: 'User.label', default: 'User'), user.username])
-				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+			String msg = message(code: 'default.updated.message',
+			args: [message(code: 'User.label', default: 'User'), user.username])
+			render "{\"result\":" + (new CallResult(CallResult.USER, CallResult.SUCCESS, msg)).encodeAsJSON() + ", " +"\"user\":" + user.encodeAsJSON() + "}"
 
-
-			} catch (OptimisticLockingFailureException e) {
-				status.setRollbackOnly();
-				//TODO: Refine locking messages
-				render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
-				return;
-			} catch (ValidationException  e)  {
-				status.setRollbackOnly();
-				render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
-				return;
-			} catch (Throwable e) {
-				status.setRollbackOnly();
-				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-				throw e;
-			}
-
+		} catch (OptimisticLockingFailureException e) {
+			render "{\"result\":" + (new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update'))).encodeAsJSON() + "}"
+			throw e;
+		} catch (ValidationException  e)  {
+            log.info("Validation Exception indeed")
+			render "{\"result\":" + utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).encodeAsJSON() + "}"
+			log.info("Validation Exception X")
+			log.info("Validation Exception " + utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).encodeAsJSON())
+			e.printStackTrace();
+		} catch (Throwable e) {
+			render "{\"result\":" + (new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message)).encodeAsJSON() + "}"
+			throw e;
 		}
+
 	}
 
 	/**
@@ -523,44 +355,6 @@ class UserController {
 		}
 	}
 
-	/**
-	 * This API retrieves all Users. This API is only available to users with the Administrator privilege.
-	 *
-	 * The return users using the JSONP convention. Please use retrieveAllUsers instead.
-	 *
-	 */
-	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
-	def retrieveAllUsersAsJSONP() {
-
-		String model = request.reader.getText();
-		log.info(this.actionName + " params are: " + params + " and model is : " + model);
-
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomGrailsUser principal = auth.getPrincipal();
-		Tenant tenant = Tenant.get(principal.tenantId);
-
-		try {
-			def c = User.createCriteria();
-
-			def users = c.list {
-				and {
-					eq("tenantId",tenant.id)
-				}
-				order("lastUpdated", "desc")
-			}
-
-			if(!users) {
-				def error = ['error':'No Users Found']
-				render "${error as JSON}"
-			} else {
-				render "${params.callback}(${users as JSON})"
-			}
-		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
-		}
-	}
 
 	/**
 	 * This API is retrieves a User by id. This API is only available to users with the Administrator privilege.
@@ -570,7 +364,9 @@ class UserController {
 	 * @return output-sample {"user":{"id":6,"version":1,"firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedMetro":"Chicago-Naperville-Joliet, IL","carType":"VAN"}}}
 	 */
 
-//	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+	//TODO: Create test conditions for this
+
+	//	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def retrieveUserDetailById() {
 
 		String model = request.reader.getText();
@@ -657,7 +453,85 @@ class UserController {
 
 	}
 
+	/**
+	 * This API updates the password and sends an email to the user.
+	 *
+	 * @param  url   <server-name>/user/resetPassword
+	 * @param  input-sample-1 {"tenantname":"WorldTaxi","email":"dultrafast@worldtaxi.com"}
+	 * @return output-sample {"type":"SYSTEM","code":"SUCCESS","message":"User dultrxafast created","JSESSIONID":"6317F9E37E0F499399A3F89DDA6D5723"}
+	 *
+	 */
+	def resetPassword() {
+
+		//Obtain tenantname and email from input message
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		String tenantname = "";
+		String email = "";
+		try {
+			JSONObject jsonObject = new JSONObject(model);
+			tenantname = jsonObject.getString("tenantname");
+			email = jsonObject.getString("email");
+		} catch (Exception e) {
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
+			throw e;
+		}
 
 
+
+		//For methods without the need of authentication, verify if the tenant exists
+		Tenant tenant = Tenant.findByName(tenantname);
+		if (!tenant) {
+			String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
+			log.warn (msgTenantDoesNotExist)
+			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist) as JSON);
+			return;
+		}
+
+		//Find the user
+		def c = User.createCriteria();
+
+		User user = c.get {
+			and {
+				eq("tenantId",tenant.id)
+				eq("email",email)
+			}
+		}
+
+		if (!user) {
+			String msgEmailDoesNotExist = message(code: 'com.moovt.UserController.emailNotFound',args: [ email ])
+			log.warn (msgEmailDoesNotExist)
+			render(new CallResult(CallResult.USER, CallResult.ERROR, msgEmailDoesNotExist) as JSON);
+			return;
+		}
+
+		//Update the user and notify
+		String resetPassword = grailsApplication.config.moovt.resetPassword;
+		user.password = resetPassword;
+		User.withTransaction { status ->
+
+			try {
+				user.save()
+			} catch (OptimisticLockingFailureException e) {
+				status.setRollbackOnly();
+				render "{\"result\":" + (new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update'))).encodeAsJSON() + "}"
+				throw e;
+			} catch (ValidationException  e)  {
+				status.setRollbackOnly();
+				render "{\"result\":" + utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).encodeAsJSON() + "}"
+				throw e;
+			} catch (Throwable e) {
+				status.setRollbackOnly();
+				render "{\"result\":" + (new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message)).encodeAsJSON() + "}"
+				throw e;
+			}
+		}//end of Transaction
+		notificationService.notifyPasswordChanged (user, resetPassword);
+		String msg = message(code: 'com.moovt.UserController.newPasswordSent',
+		args: [ email ])
+		render "{\"result\":" + (new CallResult(CallResult.USER, CallResult.SUCCESS, msg)).encodeAsJSON() + "}"
+
+
+	}
 }
 

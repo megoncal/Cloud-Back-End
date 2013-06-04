@@ -11,7 +11,6 @@ class DriverDistance {
 		this.distance = distance;
 	}
 	public DriverDistance() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

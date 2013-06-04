@@ -1,6 +1,7 @@
 package com.moovt
 
 import com.grailsrocks.functionaltest.*
+import com.dumbster.smtp.*
 
 class UserFunctionalTests extends BrowserTestCase {
 	void testCreateUserBadMessage() {
@@ -46,7 +47,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "USER"
 		assertContentContains "User moovieGoer created"
 	}
-	
+
 	void testCreateUserSuccessPortuquese() {
 		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
@@ -60,7 +61,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
-		assertContentContains "Usuário moovieLover criado"
+		assertContentContains "Usu‡rio moovieLover criado"
 	}
 
 	void testCreateUserNoUserNameEnglish() {
@@ -92,9 +93,9 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "O nome do usuário deve ser preenchido"
+		assertContentContains "O nome do usu‡rio deve ser preenchido"
 	}
-	
+
 	void testCreateUserNoPasswordEnglish() {
 		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
@@ -110,7 +111,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "USER"
 		assertContentContains "The password must be provided"
 	}
-	
+
 	void testCreateUserNoPasswordPortuguese() {
 		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
@@ -126,7 +127,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "USER"
 		assertContentContains "A senha deve ser preenchida."
 	}
-	
+
 	void testCreateUserNoEmailEnglish() {
 		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
@@ -142,7 +143,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "USER"
 		assertContentContains "The email must be provided"
 	}
-	
+
 	void testCreateUserNoEmailPortuguese() {
 		post('/user/createUser') {
 			headers['Content-Type'] = 'application/json'
@@ -188,7 +189,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Este usuário (duplicateUser) já existe"
+		assertContentContains "Este usu‡rio (duplicateUser) j‡ existe"
 	}
 
 	void testCreateUserDuplicateEmailEnglish() {
@@ -220,9 +221,122 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Este email (existingEmail@test.com) já existe"
+		assertContentContains "Este email (existingEmail@test.com) j‡ existe"
 	}
 
+	void testResetPasswordSuccessEnglish() {
+		
+		
+		SimpleSmtpServer server = SimpleSmtpServer.start();
+		
+		post('/user/resetPassword') {
+			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
+			body {
+				"""
+				{"tenantname": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "SUCCESS"
+		assertContentContains "USER"
+		assertContentContains "Your new password was sent to "
+		
+		server.stop();
+		Iterator emailIter = server.getReceivedEmail();
+		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
+		//assertTrue(email.getBody().equals("Test Body"));
+		}
+
+	void testResetPasswordSuccessPortuguese() {
+		
+		
+		SimpleSmtpServer server = SimpleSmtpServer.start();
+		
+		post('/user/resetPassword') {
+			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
+			body {
+				"""
+				{"tenantname": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "SUCCESS"
+		assertContentContains "USER"
+		assertContentContains "A sua nova senha foi enviada para "
+		server.stop();
+		Iterator emailIter = server.getReceivedEmail();
+		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
+		//assertTrue(email.getBody().equals("Test Body"));
+		
+		}
+
+	void testResetPasswordBadMessageNoTenante() {
+		post('/user/resetPassword') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"tenantXame": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "ERROR"
+		assertContentContains "SYSTEM"
+		assertContentContains "JSONObject[\\\"tenantname\\\"] not found"
+	}
+
+	void testResetPasswordBadMessageNoEmail() {
+		post('/user/resetPassword') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"tenantname": "WorldTaxi", "emailX":"jforgetful@worldtaxi.com"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "ERROR"
+		assertContentContains "SYSTEM"
+		assertContentContains "JSONObject[\\\"email\\\"] not found"
+	}
+
+	void testResetPasswordBadMessageTenantEmailNotFoundEnglish() {
+		post('/user/resetPassword') {
+			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
+			body {
+				"""
+				{"tenantname": "WorldTaxi", "email":"jforgetfulx@worldtaxi.com"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "ERROR"
+		assertContentContains "USER"
+		assertContentContains "This email (jforgetfulx@worldtaxi.com) was not found in the system."
+	}
+
+	void testResetPasswordBadMessageTenantEmailNotFoundPortuguese() {
+		post('/user/resetPassword') {
+			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
+			body {
+				"""
+				{"tenantname": "WorldTaxi", "email":"jforgetfulx@worldtaxi.com"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "ERROR"
+		assertContentContains "USER"
+		assertContentContains "Este email (jforgetfulx@worldtaxi.com) n‹o foi encontrado no sistema."
+	}
 }
 
 

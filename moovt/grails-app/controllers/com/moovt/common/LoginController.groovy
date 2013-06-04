@@ -45,7 +45,6 @@ class LoginController {
 	 }
 	
 	def signout = {
-			//TODO: Investigate / Test signout
 		    log.info ('Signout requested');
 			redirect url: SpringSecurityUtils.securityConfig.logout.filterProcessesUrl;
 	}

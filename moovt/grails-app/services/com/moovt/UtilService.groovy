@@ -14,8 +14,8 @@ class UtilService {
 				for (error in errors.getAllErrors()) {
 						message = messageSource.getMessage(error, locale);
 				}
-		
-				return new CallResult(CallResult.USER,CallResult.ERROR,message);
+				//The front end should perform validations
+				return new CallResult(CallResult.SYSTEM,CallResult.ERROR,message);
 			}
 }
-
+ 

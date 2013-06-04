@@ -4,8 +4,8 @@ grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
-grails.dependency.cache.dir = "c:\\study\\grails-ivy-cache"
-grails.project.plugins.dir = 'C:\\study\\grails-plugins'
+grails.dependency.cache.dir = '/study/grails-ivy-cache'
+grails.project.plugins.dir = '/study/grails-plugins'
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.dependency.resolution = {

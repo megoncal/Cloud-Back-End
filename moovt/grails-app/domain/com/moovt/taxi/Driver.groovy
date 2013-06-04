@@ -4,8 +4,9 @@ import com.moovt.MultiTenantAudit;
 import com.moovt.common.Location;
 import com.moovt.common.User;
 
+//TODO: Make Car Type more intelligent
 enum CarType {
-	SEDAN, VAN, LIMO
+	A_SEDAN, B_VAN, C_LIMO
 }
 
 

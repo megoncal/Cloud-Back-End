@@ -3,8 +3,6 @@ import grails.converters.JSON
 import java.text.SimpleDateFormat
 
 import com.moovt.DynamicEnum
-import com.moovt.common.Address
-import com.moovt.common.AddressType
 import com.moovt.common.Location
 import com.moovt.common.LocationType;
 import com.moovt.common.Role
@@ -29,25 +27,18 @@ class BootStrap {
 			def returnArray = [:]
 			returnArray['id'] = it.id
 			returnArray['version'] = it.version
-			returnArray['rideStatus'] = it.rideStatus.toString()
+			returnArray['rideStatus'] = dynEnumService.getDynEnum (it.rideStatus)
+			returnArray['carType'] = dynEnumService.getDynEnum (it.carType)
 			returnArray['driver'] = it.driver
 			returnArray['passenger'] = it.passenger
-			returnArray['pickupDateTime'] = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(it.pickupDateTime)
-			returnArray['pickUpAddress'] = it.pickUpLocation
-			returnArray['dropOffAddress'] = it.dropOffLocation
+			returnArray['pickUpDateTime'] = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(it.pickupDateTime)
+			returnArray['pickUpLocation'] = it.pickUpLocation
+			returnArray['dropOffLocation'] = it.dropOffLocation
 			returnArray['rating'] = it.rating
 			returnArray['comments'] = it.comments
 			return returnArray
 		}
-		JSON.registerObjectMarshaller(Address) {
-			def returnArray = [:]
-			returnArray['street'] = it.street
-			returnArray['city'] = it.city
-			returnArray['state'] = it.state
-			returnArray['zip'] = it.zip
-			returnArray['addressType'] = it.addressType.toString()
-			return returnArray
-		}
+
 		JSON.registerObjectMarshaller(User) {
 			def returnArray = [:]
 			returnArray['id'] = it.id
@@ -114,7 +105,6 @@ class BootStrap {
 			return returnArray
 		}
 		
-		//TODO: Add CallResult marshaller
 		
 		//Moovt
 		def moovtAdminUser = new User(
@@ -225,8 +215,6 @@ class BootStrap {
 		}
 
 
-		Address address = new Address (street: "123 Main St", city: "Wheanton", state: "IL", zip: "00001", addressType: AddressType.HOME);
-
 		User worldTaxiPassengerUser = new User(
 				tenantId: worldTaxiTenant.id,
 				createdBy: worldTaxiAdminUser.id,
@@ -264,65 +252,57 @@ class BootStrap {
 													 
 												 												 
 		//Drivers for the citeis above										 
-		User worldTaxiDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'jgoodarm',	password: 'Welcome!1',	email: 'jgoodarm@worldtaxi.com', firstName: 'John', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true))).save(failOnError: true);
+		User worldTaxiDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'jgoodarm',	password: 'Welcome!1',	email: 'jgoodarm@worldtaxi.com', firstName: 'John', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true))).save(failOnError: true);
 		if (!worldTaxiDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, worldTaxiDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!worldTaxiDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, worldTaxiDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
-		User worldTaxiDriverSpeedy = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'jspeedy',	password: 'Welcome!1',	email: 'jspeedy@worldtaxi.com', firstName: 'John', lastName: 'Speedy', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true))).save(failOnError: true);
+		User worldTaxiDriverSpeedy = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'jspeedy',	password: 'Welcome!1',	email: 'jspeedy@worldtaxi.com', firstName: 'John', lastName: 'Speedy', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true))).save(failOnError: true);
 		if (!worldTaxiDriverSpeedy.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, worldTaxiDriverSpeedy, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!worldTaxiDriverSpeedy.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, worldTaxiDriverSpeedy, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
+		User worldTaxiDriverForgetful = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'jforgetful',	password: 'Welcome!1',	email: 'jforgetful@worldtaxi.com', firstName: 'John', lastName: 'Forgetful', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true))).save(failOnError: true);
+		if (!worldTaxiDriverForgetful.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, worldTaxiDriverForgetful, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
+		if (!worldTaxiDriverForgetful.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, worldTaxiDriverForgetful, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
+
 		
-		User napervilleCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'napervilleCityDriverUser',	password: 'Welcome!1',	email: 'napervilleCityDriverUser@worldtaxi.com', firstName: 'napervilleCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),	)).save(failOnError: true);
+		User napervilleCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'napervilleCityDriverUser',	password: 'Welcome!1',	email: 'napervilleCityDriverUser@worldtaxi.com', firstName: 'napervilleCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),	)).save(failOnError: true);
 		if (!napervilleCityDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, napervilleCityDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!napervilleCityDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, napervilleCityDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 		
-		User wheatonCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'wheatonCityDriverUser',	password: 'Welcome!1',	email: 'wheatonCityDriverUser@worldtaxi.com', firstName: 'wheatonCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: wheatonCity,	)).save(failOnError: true);
+		User wheatonCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'wheatonCityDriverUser',	password: 'Welcome!1',	email: 'wheatonCityDriverUser@worldtaxi.com', firstName: 'wheatonCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: wheatonCity,	)).save(failOnError: true);
 		if (!wheatonCityDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, wheatonCityDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!wheatonCityDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, wheatonCityDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
-		User auroraCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'auroraCityDriverUser',	password: 'Welcome!1',	email: 'auroraCityDriverUser@worldtaxi.com', firstName: 'auroraCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: auroraCity,	)).save(failOnError: true);
+		User auroraCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'auroraCityDriverUser',	password: 'Welcome!1',	email: 'auroraCityDriverUser@worldtaxi.com', firstName: 'auroraCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: auroraCity,	)).save(failOnError: true);
 		if (!auroraCityDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, auroraCityDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!auroraCityDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, auroraCityDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
-		User plainfieldCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'plainfieldCityDriverUser',	password: 'Welcome!1',	email: 'plainfieldCityDriverUser@worldtaxi.com', firstName: 'plainfieldCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: plainfieldCity,	)).save(failOnError: true);
+		User plainfieldCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'plainfieldCityDriverUser',	password: 'Welcome!1',	email: 'plainfieldCityDriverUser@worldtaxi.com', firstName: 'plainfieldCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: plainfieldCity,	)).save(failOnError: true);
 		if (!plainfieldCityDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, plainfieldCityDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!plainfieldCityDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, plainfieldCityDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
-		User detroitCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'detroitCityDriverUser',	password: 'Welcome!1',	email: 'detroitCityDriverUser@worldtaxi.com', firstName: 'detroitCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: detroitCity,	)).save(failOnError: true);
+		User detroitCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'detroitCityDriverUser',	password: 'Welcome!1',	email: 'detroitCityDriverUser@worldtaxi.com', firstName: 'detroitCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: detroitCity,	)).save(failOnError: true);
 		if (!detroitCityDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, detroitCityDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!detroitCityDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, detroitCityDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
 		
 		
 		
-		User contagemCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'contagemCityDriverUser',	password: 'Welcome!1',	email: 'contagemCityDriverUser@worldtaxi.com', firstName: 'contagemCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: contagemCity,	)).save(failOnError: true);
+		User contagemCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'contagemCityDriverUser',	password: 'Welcome!1',	email: 'contagemCityDriverUser@worldtaxi.com', firstName: 'contagemCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: contagemCity,	)).save(failOnError: true);
 		if (!contagemCityDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, contagemCityDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!contagemCityDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, contagemCityDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
-		User vespasianoCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'vespasianoCityDriverUser',	password: 'Welcome!1',	email: 'vespasianoCityDriverUser@worldtaxi.com', firstName: 'vespasianoCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: vespasianoCity,	)).save(failOnError: true);
+		User vespasianoCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'vespasianoCityDriverUser',	password: 'Welcome!1',	email: 'vespasianoCityDriverUser@worldtaxi.com', firstName: 'vespasianoCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: vespasianoCity,	)).save(failOnError: true);
 		if (!vespasianoCityDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, vespasianoCityDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!vespasianoCityDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, vespasianoCityDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
-		User carmoDoCajuruCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'carmoDoCajuruCityDriverUser',	password: 'Welcome!1',	email: 'carmoDoCajuruCityDriverUser@worldtaxi.com', firstName: 'carmoDoCajuruCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.VAN, servedLocation: carmoDoCajuruCity,	)).save(failOnError: true);
+		User carmoDoCajuruCityDriverUser = new User(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, username: 'carmoDoCajuruCityDriverUser',	password: 'Welcome!1',	email: 'carmoDoCajuruCityDriverUser@worldtaxi.com', firstName: 'carmoDoCajuruCityDriverUser', lastName: 'Goodarm', phone: '800-800-2020', driver: new Driver(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, carType: CarType.B_VAN, servedLocation: carmoDoCajuruCity,	)).save(failOnError: true);
 		if (!carmoDoCajuruCityDriverUser.authorities.contains(worldTaxiDriverRole)) { UserRole.create ( worldTaxiTenant.id, carmoDoCajuruCityDriverUser, worldTaxiDriverRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id)	}
 		if (!carmoDoCajuruCityDriverUser.authorities.contains(worldTaxiRideMgrRole)) {	UserRole.create ( worldTaxiTenant.id, carmoDoCajuruCityDriverUser, worldTaxiRideMgrRole, worldTaxiAdminUser.id, worldTaxiAdminUser.id) }
 
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		//Rides 
+			
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date pickupDateTime = simpleDateFormat.parse("2013-03-13 20:10");
 		
@@ -334,7 +314,8 @@ class BootStrap {
 				pickupDateTime: pickupDateTime,
 				pickUpLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
 				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
-				rideStatus: RideStatus.UNASSIGNED).save(failOnError: true);
+				rideStatus: RideStatus.UNASSIGNED,
+				carType: CarType.A_SEDAN).save(failOnError: true);
 
 			def rideTwo = new Ride(
 				tenantId: worldTaxiTenant.id,
@@ -344,7 +325,8 @@ class BootStrap {
 				pickupDateTime: pickupDateTime,
 				pickUpLocation: wheatonCity,
 				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
-				rideStatus: RideStatus.UNASSIGNED).save(failOnError: true);
+				rideStatus: RideStatus.UNASSIGNED,
+				carType: CarType.A_SEDAN).save(failOnError: true);
 
 			def rideThree = new Ride(
 				tenantId: worldTaxiTenant.id,
@@ -354,7 +336,8 @@ class BootStrap {
 				pickupDateTime: pickupDateTime,
 				pickUpLocation: contagemCity,
 				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
-				rideStatus: RideStatus.UNASSIGNED).save(failOnError: true);
+				rideStatus: RideStatus.UNASSIGNED,
+				carType: CarType.A_SEDAN).save(failOnError: true);
 
 			def rideFour = new Ride(
 				tenantId: worldTaxiTenant.id,
@@ -364,7 +347,8 @@ class BootStrap {
 				pickupDateTime: pickupDateTime,
 				pickUpLocation: contagemCity,
 				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
-				rideStatus: RideStatus.ASSIGNED).save(failOnError: true);
+				rideStatus: RideStatus.ASSIGNED,
+				carType: CarType.A_SEDAN).save(failOnError: true);
 			
 			def rideFive = new Ride(
 				tenantId: worldTaxiTenant.id,
@@ -374,72 +358,31 @@ class BootStrap {
 				pickupDateTime: pickupDateTime,
 				pickUpLocation: contagemCity,
 				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
-				rideStatus: RideStatus.COMPLETED).save(failOnError: true);
-		//		if (Item.count()==0) {
-		//			Item item = new Item (
-		//					tenantId: naSavassiTenant.id,
-		//					title: 'Dadiva',
-		//					shortDescription: 'Very Good Restaurant',
-		//					longDescription: 'Very Good Restaurant',
-		//					type: 'com.moovt.Item.type.RESTAURANT',
-		//					createdBy: naSavassiAdminUser.id,
-		//					lastUpdatedBy: naSavassiAdminUser.id,
-		//					latitude:41.757437,
-		//					longitude:-88.073585
-		//					);
-		//			item.save();
-		//
-		//			new Item (
-		//					tenantId: naSavassiTenant.id,
-		//					title: 'Meu Restaurante 2',
-		//					shortDescription: 'Very Good Restaurant',
-		//					longDescription: 'Very Good Restaurant',
-		//					type: 'com.moovt.Item.type.RESTAURANT',
-		//					createdBy: naSavassiAdminUser.id,
-		//					lastUpdatedBy: naSavassiAdminUser.id,
-		//					latitude:80.757437,
-		//					longitude:88.073585
-		//					).save();
-		//
-		//			new Item (
-		//					tenantId: naSavassiTenant.id,
-		//					title: 'Meu Bar 1',
-		//					shortDescription: 'Very Good Bar',
-		//					longDescription: 'Very Good Bar',
-		//					type: 'com.moovt.Item.type.BAR',
-		//					createdBy: naSavassiAdminUser.id,
-		//					lastUpdatedBy: naSavassiAdminUser.id,
-		//					latitude:45.757437,
-		//					longitude:-80.073585
-		//					).save();
-		//
-		//			new Item (
-		//					tenantId: naSavassiTenant.id,
-		//					title: 'Meu Bar 2',
-		//					shortDescription: 'Very Good Bar',
-		//					longDescription: 'Very Good Bar',
-		//					type: 'com.moovt.Item.type.BAR',
-		//					createdBy: naSavassiAdminUser.id,
-		//					lastUpdatedBy: naSavassiAdminUser.id,
-		//					latitude:35.757437,
-		//					longitude:-80.073585
-		//					).save();
-		//		}
+				rideStatus: RideStatus.COMPLETED,
+				carType: CarType.A_SEDAN).save(failOnError: true);
 
-		//		if (Asset.count() == 0) {
-		//
-		//			for (int i = 0; i < 3; i++) {
-		//
-		//				String a = 'Short Description ' + i;
-		//				String b = 'Long Description ' + i;
-		//
-		//				new Asset(
-		//						tenantId: moovtTenant.id,
-		//						shortDescription: a, longDescription: b
-		//						).save();
-		//			}
-		//		}
+			def rideSix = new Ride(
+				tenantId: worldTaxiTenant.id,
+				createdBy: worldTaxiAdminUser.id,
+				lastUpdatedBy: worldTaxiAdminUser.id,
+				passenger: worldTaxiPassengerUser.passenger,
+				pickupDateTime: pickupDateTime,
+				pickUpLocation: contagemCity,
+				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
+				rideStatus: RideStatus.UNASSIGNED,
+				carType: CarType.A_SEDAN).save(failOnError: true);
 
+			
+			def rideSeven = new Ride(
+				tenantId: worldTaxiTenant.id,
+				createdBy: worldTaxiAdminUser.id,
+				lastUpdatedBy: worldTaxiAdminUser.id,
+				passenger: worldTaxiPassengerUser.passenger,
+				pickupDateTime: pickupDateTime,
+				pickUpLocation: contagemCity,
+				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
+				rideStatus: RideStatus.UNASSIGNED,
+				carType: CarType.A_SEDAN).save(failOnError: true);
 	}
 	def destroy = {
 	}

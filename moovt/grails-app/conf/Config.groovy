@@ -59,7 +59,6 @@ environments {
 	}
 	production {
 		grails.logging.jul.usebridge = false
-		// TODO: grails.serverURL = "http://www.changeme.com"
 		grails.serverURL = "http://localhost:8080/moovt"
 		imageStoreDir="/usr/share/tomcat6/webapps/moovt/images/"
 	}
@@ -134,11 +133,19 @@ grails.plugins.springsecurity.filterChain.filterNames = [
    'exceptionTranslationFilter', 'filterInvocationInterceptor'
 ]
 
-grails.gorm.save.failOnError = true
-
+grails.gorm.failOnError=true
+grails.gorm.autoFlush=false
 
 moovt.driver.search.radius=66
 
-//TODO: Finish RetrieveNearByRides
-//TODO: Enhance AssignRide **********************
-//TODO: Complete Ride and Review (5 stars)
+
+grails {
+	mail {
+	  host = "localhost"
+	  //TODO: Development 25, Test 1025, Production google
+	  port = 1025
+	}
+}
+
+//TODO: Clean error messages in the log
+//TODO: Test content of emails

@@ -11,7 +11,6 @@ class RideDistance {
 		this.distance = distance;
 	}
 	public RideDistance() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

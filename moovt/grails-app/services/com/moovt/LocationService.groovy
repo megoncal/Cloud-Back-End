@@ -3,6 +3,7 @@ package com.moovt
 import com.moovt.common.Location;
 import com.moovt.common.LocationType;
 import com.moovt.common.User
+import com.moovt.taxi.CarType
 import com.moovt.taxi.Driver;
 import com.moovt.taxi.Passenger
 import com.moovt.taxi.Ride
@@ -165,13 +166,12 @@ class LocationService {
 		return l;
 	}
 
-	public List<DriverDistance> findNearbyDrivers(Location pickUpLocation) {
+	public List<DriverDistance> findNearbyDrivers(Location pickUpLocation, CarType carType) {
 
 		List<DriverDistance> l = new ArrayList<DriverDistance>();
 
 		//Determine the rectangle of 66 radius
-		//TODO: Make the 100 Km (66 miles) a parameter
-		//Drivers within 66 minles or 100 Km of the pickup location will be called
+		//Drivers within 66 miles or 100 Km of the pickup location will be called
 
 		Double dist = grailsApplication.config.moovt.driver.search.radius;
 		Double lon1 = pickUpLocation.longitude-dist/Math.abs(Math.cos(Math.toRadians(pickUpLocation.latitude))*69);
@@ -180,7 +180,7 @@ class LocationService {
 		Double lat2 = pickUpLocation.latitude+(dist/69);
 
 
-		String sql = "SELECT d.user_id as driverId, 3956 * 2 * ASIN(SQRT( POWER(SIN((:lat - latitude) * pi()/180 / 2), 2) +COS(:lat * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((:lon - longitude) * pi()/180 / 2), 2) )) as distance FROM  driver d, location l WHERE d.served_location_id = l.id AND l.longitude between :lon1 and :lon2 and l.latitude between :lat1 and :lat2 having distance < :dist ORDER BY distance limit 10"
+		String sql = "SELECT d.user_id as driverId, 3956 * 2 * ASIN(SQRT( POWER(SIN((:lat - latitude) * pi()/180 / 2), 2) +COS(:lat * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((:lon - longitude) * pi()/180 / 2), 2) )) as distance FROM  driver d, location l WHERE d.served_location_id = l.id AND l.longitude between :lon1 and :lon2 and l.latitude between :lat1 and :lat2 and d.car_type >= :carType having distance < :dist ORDER BY distance limit 10"
 		Session dbSession =  sessionFactory.getCurrentSession();
 		Query query = dbSession.createSQLQuery(sql);
 		query.setDouble('lat', pickUpLocation.latitude);
@@ -190,6 +190,8 @@ class LocationService {
 		query.setDouble('lat1', lat1);
 		query.setDouble('lat2', lat2);
 		query.setDouble('dist', dist);
+		query.setString('carType', carType.toString());
+		
 		List rows = query.list();
 
 		Integer numberOfDrivers = 0;
@@ -205,7 +207,6 @@ class LocationService {
 		return l;
 	}
 
-	//TODO: Implement findNearbyRides
 	public List<RideDistance> findNearbyRides(Location servedLocation) {
 		
 				List<RideDistance> l = new ArrayList<RideDistance>();
@@ -213,7 +214,6 @@ class LocationService {
 				log.info("Finding Nearby Rides for " + servedLocation.dump())
 		
 				//Determine the rectangle of 66 radius
-				//TODO: Make the 100 Km (66 miles) a parameter
 				//Rides within 66 miles or 100 Km of the driver location will be displayed
 		
 				Double dist = grailsApplication.config.moovt.driver.search.radius;

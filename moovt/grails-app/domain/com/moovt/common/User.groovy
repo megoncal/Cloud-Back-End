@@ -23,8 +23,7 @@ enum UserType  {
 class User  {     
 	          
 	transient  springSecurityService
-	//TODO: Should this be transient
-	def domainService
+	transient domainService
 	
 	//DB properties
 	String username
@@ -40,7 +39,6 @@ class User  {
 	String locale = "en_US"
 	
 	//0 or 1 relationship with he possible user types
-	//TODO: Make this more scalable
 	static hasOne = [ passenger: Passenger,
 						driver: Driver ]
 				     
@@ -50,13 +48,15 @@ class User  {
 	static transients = [ "tenantname"]  ; 
 
 		static constraints = {
+		firstName nullable:false, blank: false
+		lastName nullable:false, blank: false
+		phone nullable:false, blank: false
 		username nullable:false, blank: false, unique: ['tenantId'] 
 		password nullable:false, blank: false
 		email nullable:false, blank: false, unique: true
 		tenantname bindable: true
 		passenger nullable:true
 		driver nullable:true
-		//TODO: Other user types
 	}
 
 	static mapping = {
@@ -67,6 +67,7 @@ class User  {
 
 	
 	def beforeValidate () {
+		log.info("User before validate");
 		domainService.setAuditAttributes(this);
 	}
 	

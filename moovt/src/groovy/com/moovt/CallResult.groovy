@@ -37,7 +37,6 @@ class CallResult {
 	}
 
 	public CallResult() {
-		// TODO Auto-generated constructor stub
 
 
 	}

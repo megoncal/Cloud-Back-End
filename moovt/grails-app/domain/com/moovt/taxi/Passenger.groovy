@@ -1,7 +1,6 @@
 package com.moovt.taxi
 
 import com.moovt.MultiTenantAudit;
-import com.moovt.common.Address;
 import com.moovt.common.User
 
 /**

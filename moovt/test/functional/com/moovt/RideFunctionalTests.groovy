@@ -2,7 +2,8 @@ package com.moovt
 
 //TODO: Rationalize Queries check test testCreateUserDuplicateUsernameEnglish
 
-import com.grailsrocks.functionaltest.*
+import com.grailsrocks.functionaltest.*;
+import com.dumbster.smtp.*;
 
 class RideFunctionalTests extends BrowserTestCase {
 
@@ -29,6 +30,7 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "id\":1"
 		assertContentContains "passenger\":{\"id\":5}"
+		assertContentContains "carType"
 	}
 
 	void testRetrieveUnassignedRideInServedAreaEnglish() {
@@ -58,6 +60,8 @@ class RideFunctionalTests extends BrowserTestCase {
 
 	void testAssignRideToDriverEnglish() {
 
+		SimpleSmtpServer server = SimpleSmtpServer.start();
+		
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
 			body {
@@ -77,7 +81,14 @@ class RideFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "updated"
-	}
+		
+		server.stop();
+		Iterator emailIter = server.getReceivedEmail();
+		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
+		//assertTrue(email.getBody().equals("Test Body"));
+		
+		}
 
 	void testRetrieveAllRidesEnglish() {
 
@@ -104,7 +115,9 @@ class RideFunctionalTests extends BrowserTestCase {
 
 
 	void testCreateRideENglish() {
-
+		
+		SimpleSmtpServer server = SimpleSmtpServer.start();
+		
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
 			body {
@@ -120,8 +133,8 @@ class RideFunctionalTests extends BrowserTestCase {
 				"""
 {"pickupDateTime":"2013-03-15 06:30",
  "pickUpLocation":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
- "dropOffLocation":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"}
-}
+ "dropOffLocation":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
+ "carType":"B_VAN"}
 				"""
 			}
 		}
@@ -129,6 +142,13 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "created"
+		
+		server.stop();
+		Iterator emailIter = server.getReceivedEmail();
+		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
+		//assertTrue(email.getBody().equals("Test Body"));
+		
 	}
 
 
@@ -152,7 +172,7 @@ class RideFunctionalTests extends BrowserTestCase {
 				}
 				assertStatus 200
 				assertContentContains "\"driver\":null"
-				assertContentContains "\"rideStatus\":\"UNASSIGNED\""
+				assertContentContains "rideStatus\":{\"code\":\"UNASSIGNED\""
 			}
 	
 	void testCloneRideBadMessage() {
@@ -207,6 +227,7 @@ class RideFunctionalTests extends BrowserTestCase {
 
 
 
+		
 
 	void testCloseRideSuccessPortuguese() {
 
@@ -280,7 +301,7 @@ class RideFunctionalTests extends BrowserTestCase {
 		post('/ride/closeRide') {
 			headers['Content-Type'] = 'application/json'
 			body {
-				"""
+				"""	
 				{"id":"5","version":"1","rating":"5","comments":"Great ride!"}
 				"""
 			}
@@ -290,6 +311,105 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertContentContains "USER"
 		assertContentContains "This ride has already been completed. Unable to add comment"
 	}
+	
+	void testDeleteRideSuccessEnglish() {
+		
+				post('/login/authenticateUser') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				"""
+					}
+				}
+		
+				post('/ride/deleteRide') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"id":"6","version":"1"}
+				"""
+					}
+				}
+				assertStatus 200
+				assertContentContains "SUCCESS"
+				assertContentContains "Ride #6 deleted"
+			}
+		
+	void testDeleteRideSuccessPortuguese() {
+		
+				post('/login/authenticateUser') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				"""
+					}
+				}
+		
+				post('/ride/deleteRide') {
+					headers['Content-Type'] = 'application/json'
+					headers['Accept-Language'] = 'pt-BR'
+					body {
+						"""
+				{"id":"7","version":"1"}
+				"""
+					}
+				}
+				assertStatus 200
+				assertContentContains "SUCCESS"
+				assertContentContains "Corrida #7 removida."
+			}
+		
+	void testDeleteRideNotFoundEnglish() {
+		
+				post('/login/authenticateUser') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				"""
+					}
+				}
+		
+				post('/ride/deleteRide') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"id":"40","version":"1"}
+				"""
+					}
+				}
+				assertStatus 200
+				assertContentContains "ERROR"
+				assertContentContains "Ride #40 not found"
+			}
+		
+	void testDeleteRideNotFoundPortuguese() {
+		
+				post('/login/authenticateUser') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				"""
+					}
+				}
+		
+				post('/ride/deleteRide') {
+					headers['Content-Type'] = 'application/json'
+					headers['Accept-Language'] = 'pt-BR'
+					body {
+						"""
+				{"id":"40","version":"1"}
+				"""
+					}
+				}
+				assertStatus 200
+				assertContentContains "ERROR"
+				assertContentContains "Corrida #40 n‹o foi encontrada"
+			}
+
 
 
 }
