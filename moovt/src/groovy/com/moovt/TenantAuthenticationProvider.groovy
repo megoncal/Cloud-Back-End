@@ -56,24 +56,24 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 
 		if (tenantName == "") {
 			String [] args = {};
-			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.blank.company", args, "Company/Tenant is blank", locale));
+			throw new BadDataAuthenticationException(messageSource.getMessage("com.moovt.blank.company", args, "Company/Tenant is blank", locale));
 		}
 		
 		Tenant tenant = Tenant.findByName (tenantName);
 		
 		if (!tenant) {
 			String [] args = [ tenantName ];
-			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.company.notFound", args, "Company/Tenant not found", locale));
+			throw new BadDataAuthenticationException(messageSource.getMessage("com.moovt.company.notFound", args, "Company/Tenant not found", locale));
 		}
 
 		if (username == "") {
 			String [] args = {};
-			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.blank.username", args, "Username is blank", locale));
+			throw new BadDataAuthenticationException(messageSource.getMessage("com.moovt.blank.username", args, "Username is blank", locale));
 		}
 
 		if (password == "") {
 			String [] args = {};
-			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.blank.password", args, "Password is blank", locale));
+			throw new BadDataAuthenticationException(messageSource.getMessage("com.moovt.blank.password", args, "Password is blank", locale));
 		}
 		
 		CustomGrailsUser userDetails

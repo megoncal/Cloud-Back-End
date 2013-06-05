@@ -160,6 +160,73 @@ class NotificationService {
 
 	}
 	
+
+	public void notifyDriverOfRideClosed (Ride ride) {
+		
+		def webUtils = WebUtils.retrieveGrailsWebRequest();
+		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
+		
+		User driverUser = User.get(ride.driver.id);
+		User passengerUser = User.get(ride.passenger.id);
+		
+		String emailSubject = messageSource.getMessage ('com.moovt.driver.ride.closed.subject',
+			[ride.pickUpLocation.locationName + " - " + ride.pickUpLocation.politicalName,
+			 ride.dropOffLocation.locationName + " - " + ride.dropOffLocation.politicalName,
+			 ride.pickupDateTime] as Object[],
+			 locale);
+		
+		String emailBody = messageSource.getMessage ('com.moovt.driver.ride.closed.body',
+													  [driverUser.firstName + " " + driverUser.lastName,
+													   ride.pickUpLocation.locationName + " - " + ride.pickUpLocation.politicalName,
+													   ride.dropOffLocation.locationName + " - " + ride.dropOffLocation.politicalName,
+													   ride.pickupDateTime,
+													   passengerUser.firstName + " " + passengerUser.lastName,
+													   passengerUser.phone,
+													   passengerUser.email] as Object[],
+													   locale);
+		
+		mailService.sendMail {
+			to driverUser.email
+			from "dispatch@moovt.com"
+			subject emailSubject
+			body emailBody
+		}
+
+	}
+
+	public void notifyPassengerOfRideClosed (Ride ride) {
+		
+		def webUtils = WebUtils.retrieveGrailsWebRequest();
+		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
+		
+		User driverUser = User.get(ride.driver.id);
+		User passengerUser = User.get(ride.passenger.id);
+	
+		
+		String emailSubject = messageSource.getMessage ('com.moovt.passenger.ride.closed.subject',
+			[ride.pickUpLocation.locationName + " - " + ride.pickUpLocation.politicalName,
+			 ride.dropOffLocation.locationName + " - " + ride.dropOffLocation.politicalName,
+			 ride.pickupDateTime] as Object[],
+			 locale);
+		
+		String emailBody = messageSource.getMessage ('com.moovt.passenger.ride.closed.body',
+													  [passengerUser.firstName + " " + passengerUser.lastName,
+													   ride.pickUpLocation.locationName + " - " + ride.pickUpLocation.politicalName,
+													   ride.dropOffLocation.locationName + " - " + ride.dropOffLocation.politicalName,
+													   ride.pickupDateTime,
+													   driverUser.firstName + " " + passengerUser.lastName,
+													   driverUser.phone,
+													   driverUser.email] as Object[],
+													   locale);
+		
+		mailService.sendMail {
+			to passengerUser.email
+			from "dispatch@moovt.com"
+			subject emailSubject
+			body emailBody
+		}
+
+	}
 	
 	public void notifyPasswordChanged (User user, String newPassword) {
 		

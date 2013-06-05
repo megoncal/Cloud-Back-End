@@ -23,6 +23,8 @@ import org.springframework.security.core.Authentication
 import org.springframework.web.servlet.support.RequestContextUtils;
 import grails.plugins.springsecurity.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
+import com.moovt.LogUtils
+
 
 /**
  * The RideController is responsible for managing the lifecycle of a <code>Ride</code>
@@ -33,7 +35,7 @@ class RideController {
 	LocationService locationService;
 	NotificationService notificationService;
 	UtilService utilService;
-	
+
 
 
 
@@ -66,84 +68,74 @@ class RideController {
 		JSONObject rideJsonObject = null;
 		try {
 			rideJsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			throw e;
-		}
 
-		//Start a transaction to insert or update based on the existence of an id
-		Ride.withTransaction { status ->
 			Ride ride = null;
-			try {
-				log.info("Creating a new ride");
 
-				ride = new Ride();
 
-				try {
-					String dateTimeStr = rideJsonObject.optString("pickupDateTime");
-					if (!dateTimeStr) {
-						render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,"Please make sure you have a field called pickupDateTime with format yyyy-MM-dd HH:mm in your JSON") as JSON);
-						return;
-					}
-					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-					ride.pickupDateTime = simpleDateFormat.parse(dateTimeStr);
-				} catch (ParseException e){
-					render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,"DateTime must always use the format: yyyy-MM-dd HH:mm") as JSON);
-					throw e;
-				} catch (Throwable e) {
-					render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-					throw e;
-				}
+			log.info("Creating a new ride");
 
-				//Rides are created unassigned
-				ride.rideStatus = RideStatus.UNASSIGNED;
+			ride = new Ride();
 
-				//
-				ride.carType = rideJsonObject.optString("carType", "SEDAN");
-				
-				//Passenger
-				assert principal.id != null, "Because this method is secured, a principal always exist at this point of the code"
-				ride.passenger = Passenger.get(principal.id);
-				
-				//Addresses
-
-				JSONObject pickUpLocationJsonObject = rideJsonObject.opt("pickUpLocation");
-				log.info(pickUpLocationJsonObject);
-				Location pickUpLocation = new Location(pickUpLocationJsonObject).save(flush:true, failOnError:true);
-				ride.pickUpLocation = pickUpLocation;
-
-				JSONObject dropOffLocationJsonObject = rideJsonObject.opt("dropOffLocation");
-				log.info(dropOffLocationJsonObject);
-				Location dropOffLocation = new Location(dropOffLocationJsonObject).save(flush:true, failOnError:true);
-				ride.dropOffLocation = dropOffLocation;
-
-				ride.save(flush:true, failOnError:true);
-
-				List<DriverDistance> nearbyDrivers = locationService.findNearbyDrivers (pickUpLocation, ride.carType);
-				for (nearbyDriver in nearbyDrivers) {
-					notificationService.notifyDriversOfRideAvailable(nearbyDriver.driverId, nearbyDriver.distance, ride)
-				}
-
-				String msg = message(code: 'ride.created.message',
-				args: [ride.id, nearbyDrivers.size() ])
-				render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+			String dateTimeStr = rideJsonObject.getString("pickUpDateTime");
+			if (!dateTimeStr) {
+				render new CallResult(CallResult.SYSTEM,CallResult.ERROR,"Please make sure you have a field called pickUpDateTime with format yyyy-MM-dd HH:mm in your JSON").getJSON();
 				return;
-			} catch (OptimisticLockingFailureException e) {
-				status.setRollbackOnly();
-				render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
-				return;
-			} catch (ValidationException  e) {
-				status.setRollbackOnly();
-				render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
-				return;
-			} catch (Throwable e) {
-				status.setRollbackOnly();
-				render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-				throw e;
+			}
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			ride.pickupDateTime = simpleDateFormat.parse(dateTimeStr);
+
+
+			//Rides are created unassigned
+			ride.rideStatus = RideStatus.UNASSIGNED;
+
+			//
+			JSONObject carTypeJsonObject = rideJsonObject.get("carType");
+			ride.carType = carTypeJsonObject.get("code");
+
+			//Passenger
+			assert principal.id != null, "Because this method is secured, a principal always exist at this point of the code"
+			ride.passenger = Passenger.get(principal.id);
+
+			//Addresses
+
+			JSONObject pickUpLocationJsonObject = rideJsonObject.get("pickUpLocation");
+			log.info(pickUpLocationJsonObject);
+			Location pickUpLocation = new Location(pickUpLocationJsonObject).save(flush:true, failOnError:true);
+			ride.pickUpLocation = pickUpLocation;
+
+			JSONObject dropOffLocationJsonObject = rideJsonObject.get("dropOffLocation");
+			log.info(dropOffLocationJsonObject);
+			Location dropOffLocation = new Location(dropOffLocationJsonObject).save(flush:true, failOnError:true);
+			ride.dropOffLocation = dropOffLocation;
+
+			ride.save(flush:true, failOnError:true);
+
+			List<DriverDistance> nearbyDrivers = locationService.findNearbyDrivers (pickUpLocation, ride.carType);
+			for (nearbyDriver in nearbyDrivers) {
+				notificationService.notifyDriversOfRideAvailable(nearbyDriver.driverId, nearbyDriver.distance, ride)
 			}
 
+			String msg = message(code: 'ride.created.message',
+			args: [ride.id, nearbyDrivers.size() ])
+			render new CallResult(CallResult.USER, CallResult.SUCCESS, msg).getJSON();
+			return;
+
+		} catch (OptimisticLockingFailureException e) {
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')).getJSON();
+		} catch (ValidationException  e) {
+			LogUtils.printStackTrace(e);
+			render utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).getJSON();
+		} catch (ParseException e){
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,"DateTime must always use the format: yyyy-MM-dd HH:mm").getJSON();
+		} catch (Throwable e) {
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
+
 	}
+
 
 	/**
 	 * This API retrieves all Rides created by the <code>Passenger</code> currently logged in.  Please note that a <code>User</code> 
@@ -186,8 +178,8 @@ class RideController {
 				render "{\"rides\":" + rides.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
 	}
 
@@ -213,11 +205,11 @@ class RideController {
 			CustomGrailsUser principal = auth.getPrincipal();
 			Driver driver = Driver.get(principal.id);
 			assert driver != null, "Because this method is secured, a principal/driver always exist at this point of the code"
-			
+
 			log.info("About to compile list of nearby rides for " + driver.dump())
 			log.info("The served location is " + driver.servedLocation.dump())
 			log.info("The served location is " + Location.get(driver.servedLocation.id).dump())
-			
+
 			List<Ride> rides = new ArrayList<Ride>();
 			List<RideDistance> nearbyRides = locationService.findNearbyRides (driver.servedLocation);
 			for (nearbyRide in nearbyRides) {
@@ -227,13 +219,13 @@ class RideController {
 
 
 			if(!rides) {
-				render (new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'No Rides Found') as JSON);
+				render new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'No Rides Found').getJSON();
 			} else {
 				render "{\"rides\":" + rides.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
 	}
 
@@ -251,6 +243,7 @@ class RideController {
 		String model = request.reader.getText();
 		log.info(this.actionName + " params are: " + params + " and model is : " + model);
 		JSONObject rideJsonObject = null;
+
 		try {
 			rideJsonObject = new JSONObject(model);
 
@@ -262,63 +255,54 @@ class RideController {
 			Long id = rideJsonObject.getLong("id");
 			Long version = rideJsonObject.getLong("version");
 
+			Ride ride = null;
 			Ride.withTransaction { status ->
-				Ride ride = null;
-				try {
-					ride = Ride.get(id);
 
-					//Before proceeding - check that this is a legitimate id
-					if (!ride) {
-						render (new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])) as JSON);
-						return;
-					}
-					//Before updating - check for concurrency
-					if (ride.version > version) {
-						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
-						return;
-					}
+				ride = Ride.get(id);
 
-					if ((ride.rideStatus == RideStatus.ASSIGNED) || (ride.rideStatus == RideStatus.COMPLETED)) {
-						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.ride.already.assigned')) as JSON);
-						return;
-					}
-
-					log.info("HERE");
-					ride.driver = driver;
-					ride.rideStatus = RideStatus.ASSIGNED;
-
-					ride.save(flush:true, failOnError:true);
-					notificationService.notifyDriverOfRideAssignment(ride);
-					notificationService.notifyPassengerOfRideAssignment(ride);
-
-
-					String msg = message(code: 'default.updated.message',
-					args: [message(code: 'Ride.label', default: 'Ride'), ride.id])
-					render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
-
-				} catch (OptimisticLockingFailureException e) {
-					status.setRollbackOnly();
-					render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
+				//Before proceeding - check that this is a legitimate id
+				if (!ride) {
+					render new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])).getJSON();
 					return;
-				} catch (ValidationException  e) {
-					status.setRollbackOnly();
-
-					render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
+				}
+				//Before updating - check for concurrency
+				if (ride.version > version) {
+					render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
 					return;
-				} catch (Throwable e) {
-					status.setRollbackOnly();
-					render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-					throw e;
 				}
 
-			}
+				if ((ride.rideStatus == RideStatus.ASSIGNED) || (ride.rideStatus == RideStatus.COMPLETED)) {
+					render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.ride.already.assigned')).getJSON();
+					return;
+				}
 
+				ride.driver = driver;
+				ride.rideStatus = RideStatus.ASSIGNED;
+
+				ride.save(failOnError:true);
+				notificationService.notifyDriverOfRideAssignment(ride);
+				notificationService.notifyPassengerOfRideAssignment(ride);
+
+			} // End of the transaction
+
+			String msg = message(code: 'default.updated.message',
+			args: [message(code: 'Ride.label', default: 'Ride'), ride.id])
+			render new CallResult(CallResult.USER, CallResult.SUCCESS, msg).getJSON();
+
+		} catch (OptimisticLockingFailureException e) {
+		    LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')).getJSON();
+		} catch (ValidationException  e) {
+			LogUtils.printStackTrace(e);
+			render utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).getJSON();
 		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
 
 	}
+
+
 
 	/**
 	 * This API retrieves assigns a <code>Ride</code> to the <code>Driver</code> currently logged in.  Please note that a <code>User</code>
@@ -350,63 +334,53 @@ class RideController {
 				throw new Exception ("Rating must be between 0 and 5")
 			}
 			String comments = rideJsonObject.optString("comments","");
-
-			Ride.withTransaction { status ->
-				Ride ride = null;
-				try {
+			Ride ride = null;
+			
 					ride = Ride.get(id);
 
 					//Before proceeding - check that this is a legitimate id
 					if (!ride) {
-						render (new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])) as JSON);
+						render new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])).getJSON();
 						return;
 					}
 					//Before updating - check for concurrency
 					if (ride.version > version) {
 						log.info("Ride version is " + ride.version + "vs." + version);
-						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
+						render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
 						return;
 					}
 
 					if (ride.rideStatus == RideStatus.COMPLETED) {
-						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.ride.already.completed')) as JSON);
+						render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.ride.already.completed')).getJSON();
 						return;
 					}
 
-					log.info("HERE");
 					ride.rating = rating;
 					ride.comments = comments;
 					ride.rideStatus = RideStatus.COMPLETED;
 
+					Ride.withTransaction { status ->
+						
 					ride.save(flush:true, failOnError:true);
-					//notificationService.notifyDriverOfRideClosed(ride);
-					//notificationService.notifyPassengerOfRideClosed(ride);
+					notificationService.notifyDriverOfRideClosed(ride);
+					notificationService.notifyPassengerOfRideClosed(ride);
 
+					}
 
 					String msg = message(code: 'default.updated.message',
 					args: [message(code: 'Ride.label', default: 'Ride'), ride.id])
-					render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+					render new CallResult(CallResult.USER, CallResult.SUCCESS, msg).getJSON();
 
 				} catch (OptimisticLockingFailureException e) {
-					status.setRollbackOnly();
-					render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
-					return;
+					LogUtils.printStackTrace(e);
+					render new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')).getJSON();
 				} catch (ValidationException  e) {
-					status.setRollbackOnly();
-					render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
-					return;
+					LogUtils.printStackTrace(e);
+					render utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).getJSON();
 				} catch (Throwable e) {
-					status.setRollbackOnly();
-					render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-					throw e;
+					LogUtils.printStackTrace(e);
+					render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 				}
-
-			} //Transaction Close
-
-		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
-		}
 	}
 
 	/**
@@ -433,55 +407,43 @@ class RideController {
 
 			Long id = rideJsonObject.getLong("id");
 			Long version = rideJsonObject.getLong("version");
-			
-			
-			Ride.withTransaction { status ->
-				Ride ride = null;
-				try {
-					ride = Ride.get(id);
+
+					Ride ride = Ride.get(id);
 
 					//Before proceeding - check that this is a legitimate id
 					if (!ride) {
-						render (new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])) as JSON);
+						render new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])).getJSON();
 						return;
 					}
 					//Before deleting - check for concurrency
 					if (ride.version > version) {
 						log.info("Ride version is " + ride.version + "vs." + version);
-						render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
+						render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
 						return;
 					}
+					Ride.withTransaction { status ->
+						
+					
+					ride.delete();
 
 					if (ride.rideStatus == RideStatus.ASSIGNED) {
 						notificationService.notifyDriverOfRideDeleted (ride);
 					}
-
-					ride.delete();
-
+					}
 					String msg = message(code: 'com.moovt.ride.deleted',
 					args: [ ride.id])
-					render(new CallResult(CallResult.USER, CallResult.SUCCESS, msg) as JSON);
+					render new CallResult(CallResult.USER, CallResult.SUCCESS, msg).getJSON();
 
 				} catch (OptimisticLockingFailureException e) {
-					status.setRollbackOnly();
-					render(new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')) as JSON);
-					return;
+					LogUtils.printStackTrace(e);
+					render new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')).getJSON();
 				} catch (ValidationException  e) {
-					status.setRollbackOnly();
-					render(utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)) as JSON);
-					return;
+					LogUtils.printStackTrace(e);
+					render utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).getJSON();
 				} catch (Throwable e) {
-					status.setRollbackOnly();
-					render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-					throw e;
+					LogUtils.printStackTrace(e);
+					render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 				}
-
-			} //Transaction Close
-
-		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
-		}
 	}
 
 
@@ -513,7 +475,7 @@ class RideController {
 
 			//Before proceeding - check that this is a legitimate id
 			if (!ride) {
-				render (new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])) as JSON);
+				render new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])).getJSON();
 				return;
 			}
 
@@ -521,12 +483,12 @@ class RideController {
 			clonedRide.properties = ride.properties;
 			clonedRide.rideStatus = RideStatus.UNASSIGNED;
 
-			render clonedRide.encodeAsJSON()
+			render "{\"ride\":" + clonedRide.encodeAsJSON() + "}";
 
 
 		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
 
 	}
@@ -549,11 +511,7 @@ class RideController {
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.SYSTEM, e.message) as JSON);
-			return;
-		}
-		try {
+		
 			def c = Ride.createCriteria();
 
 			def rides = Ride.list();
@@ -565,9 +523,9 @@ class RideController {
 				render "{\"rides\":" + rides.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			status.setRollbackOnly();
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
 
 	}
@@ -598,9 +556,8 @@ class RideController {
 				render "${params.callback}(${rides as JSON})"
 			}
 		} catch (Throwable e) {
-			status.setRollbackOnly();
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
 
 	}

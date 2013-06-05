@@ -3,6 +3,8 @@ package com.moovt.common
 import com.moovt.CallResult
 import com.moovt.CustomGrailsUser
 import com.moovt.taxi.Passenger
+import com.moovt.LogUtils
+
 import grails.converters.JSON
 import org.codehaus.groovy.grails.web.json.JSONObject
 import org.springframework.dao.OptimisticLockingFailureException;
@@ -32,26 +34,26 @@ class LocationController {
 		try {
 			jsonObject = new JSONObject(model);
 		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 			return;
 		}
 		
 		String locationStr = jsonObject.opt("location");
 		
 		if (!locationStr) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,"Input JSON must contain a location element") as JSON);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,"Input JSON must contain a location element").getJSON(); 
 		}
 		
 		
 		
 		//Call Service
 		try {
-			//List<Location> locations = locationService.searchLocation (locationStr);
-			Location locations = new Location(locationName:'Wheaton',  politicalName:'Illinois, United States', latitude: 41.8661403, longitude: -88.1070127, locationType: LocationType.APPROXIMATE);	
+			List<Location> locations = locationService.searchLocation (locationStr);
+			//Location locations = new Location(locationName:'Wheaton',  politicalName:'Illinois, United States', latitude: 41.8661403, longitude: -88.1070127, locationType: LocationType.APPROXIMATE);	
 			render "{\"locations\":[" + locations.encodeAsJSON() + "]}"
 		} catch (Throwable e) {
-		    render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			LogUtils.printStackTrace(e);
+		    render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
 		
 		
@@ -74,10 +76,7 @@ class LocationController {
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, e.message) as JSON);
-			return;
-		}
+
 
 		//Passenger
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -86,12 +85,11 @@ class LocationController {
 		Passenger passenger = Passenger.get(principal.id);
 		
 		//Call Service
-		try {
 			List<Location> locations = locationService.getMostFrequentLocations(passenger);
 			render "{\"locations\":" + locations.encodeAsJSON() + "}"
 		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR, e.message).getJSON();
 		}
 		
 		

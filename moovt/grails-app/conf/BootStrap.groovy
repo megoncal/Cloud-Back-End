@@ -322,10 +322,11 @@ class BootStrap {
 				createdBy: worldTaxiAdminUser.id,
 				lastUpdatedBy: worldTaxiAdminUser.id,
 				passenger: worldTaxiPassengerUser.passenger,
+				driver:worldTaxiDriverUser.driver,
 				pickupDateTime: pickupDateTime,
 				pickUpLocation: wheatonCity,
 				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),
-				rideStatus: RideStatus.UNASSIGNED,
+				rideStatus: RideStatus.ASSIGNED,
 				carType: CarType.A_SEDAN).save(failOnError: true);
 
 			def rideThree = new Ride(
@@ -344,6 +345,7 @@ class BootStrap {
 				createdBy: worldTaxiAdminUser.id,
 				lastUpdatedBy: worldTaxiAdminUser.id,
 				passenger: worldTaxiPassengerUser.passenger,
+				driver:worldTaxiDriverUser.driver,
 				pickupDateTime: pickupDateTime,
 				pickUpLocation: contagemCity,
 				dropOffLocation: new Location(tenantId: worldTaxiTenant.id, createdBy: worldTaxiAdminUser.id,	lastUpdatedBy: worldTaxiAdminUser.id, locationName:'Naperville',  politicalName:'Illinois, United States', latitude: 41.78586290, longitude: -88.14728930, locationType: LocationType.APPROXIMATE).save(failOnError: true),

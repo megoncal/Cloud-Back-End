@@ -1,0 +1,15 @@
+--Output from testRetrievePassengerRidesEnglish--
+--Output from testRetrieveUnassignedRideInServedAreaEnglish--
+--Output from testAssignRideToDriverEnglish--
+--Output from testRetrieveAllRidesEnglish--
+--Output from testCreateRideENglish--
+--Output from testCloneRide--
+--Output from testCloneRideBadMessage--
+--Output from testCloseRideSuccessEnglish--
+--Output from testCloseRideSuccessPortuguese--
+--Output from testCloseRideBadMessage--
+--Output from testCloseRideAlreadyClosed--
+--Output from testDeleteRideSuccessEnglish--
+--Output from testDeleteRideSuccessPortuguese--
+--Output from testDeleteRideNotFoundEnglish--
+--Output from testDeleteRideNotFoundPortuguese--

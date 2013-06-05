@@ -61,7 +61,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "Authentication failed because no company was provided. Please enter a company."
 	}
 
@@ -76,7 +76,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "ERROR"
 		assertContentContains "A companhia deve ser preenchida"
 	}
@@ -93,7 +93,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "This company (BadTenant) was not found"
 	}
 
@@ -108,7 +108,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "ERROR"
 		assertContentContains "Esta companhia (BadTenant) n‹o foi encontrada"
 	}
@@ -125,7 +125,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "Authentication failed because no password was provided. Please enter a password."
 	}
 	
@@ -141,7 +141,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "Authentication failed because no username was provided. Please enter a username."
 	}
 	
@@ -173,7 +173,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "A senha deve ser preenchida."
 	}
 	
@@ -189,7 +189,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "O nome do usu‡rio deve ser preenchido."
 	}
 	

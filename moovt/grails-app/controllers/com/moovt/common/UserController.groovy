@@ -23,6 +23,7 @@ import com.moovt.common.User;
 import com.moovt.common.UserRole;
 import com.moovt.taxi.Driver
 import com.moovt.taxi.Passenger
+import com.moovt.LogUtils
 
 import grails.validation.ValidationException
 import java.util.UUID
@@ -69,36 +70,29 @@ class UserController {
 		JSONObject userJsonObject = null;
 		try {
 			userJsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			e.printStackTrace();
-		}
 
 
 
-		//For methods without the need of authentication, verify if the tenant exists
-		String tenantname = userJsonObject.optString("tenantname","");
+			//For methods without the need of authentication, verify if the tenant exists
+			String tenantname = userJsonObject.optString("tenantname","");
 
-		Tenant tenant = Tenant.findByName(tenantname);
-		if (!tenant) {
-			String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
-			log.warn (msgTenantDoesNotExist)
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist) as JSON);
-			return;
-		}
+			Tenant tenant = Tenant.findByName(tenantname);
+			if (!tenant) {
+				String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
+				log.warn (msgTenantDoesNotExist)
+				render new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist).getJSON();
+				return;
+			}
 
-		//Before any further operation, capture the password in its raw format
-		String password = userJsonObject.optString("password","");
+			//Before any further operation, capture the password in its raw format
+			String password = userJsonObject.optString("password","");
 
-		//These next two variables are needed for the final rendering
-		String sessionId = "";
-		String msg = "";
-		
-		//Start a transaction to insert or update based on the existence of an id
-		User.withTransaction { status ->
-			try {
+			//Upon successful completion of the transaction below, this user will be populated
+			User user;
+
+			User.withTransaction { status ->
 				log.info("Creating a new user and/or driver and/or passenger");
-				User user = new User(userJsonObject);
+				user = new User(userJsonObject);
 				user.tenantId = tenant.id;
 				user.createdBy = 1;
 				user.lastUpdatedBy = 1;
@@ -116,7 +110,7 @@ class UserController {
 					JSONObject servedLocationJSON = driverJSON.opt("servedLocation");
 					if (!servedLocationJSON) {
 						status.setRollbackOnly();
-						render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON') as JSON);
+						render new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON').getJSON();
 						return;
 					}
 					Location servedLocation = new Location (servedLocationJSON);
@@ -154,34 +148,19 @@ class UserController {
 				TenantAuthenticationToken token = new TenantAuthenticationToken(user.username, password,user.tenantname, user.locale);
 				Authentication auth = authenticationManager.authenticate(token);
 				SecurityContextHolder.getContext().setAuthentication(auth);
-				
-				sessionId = session.getId();
-				msg = message(code: 'default.created.message',
-					args: [message(code: 'User.label', default: 'User'), user.username ])
-		
-			} catch (OptimisticLockingFailureException e) {
-				status.setRollbackOnly();
-				render "{\"result\":" + (new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update'))).encodeAsJSON() + "}"
-			e.printStackTrace();
-			}  catch (AuthenticationException e) {
-				status.setRollbackOnly();
-				render "{\"result\":" + (new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message)).encodeAsJSON() + "}"
-				e.printStackTrace();
 
-			} catch (ValidationException  e)  {
-				status.setRollbackOnly();
-				render "{\"result\":" + utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).encodeAsJSON() + "}"
-				e.printStackTrace();
-			} catch (Throwable e) {
-				status.setRollbackOnly();
-				render "{\"result\":" + (new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message)).encodeAsJSON() + "}"
-				e.printStackTrace();
-			}
 
-		} //End of the transaction
-		
-		render([type: CallResult.USER, code: CallResult.SUCCESS, message: msg, JSESSIONID: sessionId] as JSON);
-		return;
+			}// End of the Transaction
+
+			String sessionId = session.getId();
+			String msg = message(code: 'default.created.message',
+			args: [message(code: 'User.label', default: 'User'), user.username ])
+
+			utilService.handleSuccessWithSessionId(msg, sessionId);
+
+		} catch (Throwable e) {
+			utilService.handleException(e);
+		}
 	}
 
 	/**
@@ -198,22 +177,18 @@ class UserController {
 		JSONObject userJsonObject = null;
 		try {
 			userJsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			throw e;
-		}
 
-		//Obtain version from the json object
-		Long version = userJsonObject.optLong("version",0);
+			//Obtain version from the json object
+			Long version = userJsonObject.optLong("version",0);
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomGrailsUser principal = auth.getPrincipal();
-		Tenant tenant = Tenant.get(principal.tenantId);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Tenant tenant = Tenant.get(principal.tenantId);
 
-		User user;
+			User user;
 
-		//Start a transaction to update based on the existence of an id
-		try {
+			//Start a transaction to update based on the existence of an id
+
 			User.withTransaction { status ->
 
 				user = User.get(principal.id);
@@ -223,7 +198,7 @@ class UserController {
 
 				//Before updating - check for concurrency
 				if (user.version > version) {
-					render (new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')) as JSON);
+					render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
 					return;
 				}
 				user.properties = userJsonObject;
@@ -236,7 +211,7 @@ class UserController {
 					JSONObject servedLocationJSON = driverJSON.opt("servedLocation");
 					if (!servedLocationJSON) {
 						status.setRollbackOnly();
-						render(new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON') as JSON);
+						render new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON').getJSON();
 						return;
 					}
 
@@ -244,7 +219,7 @@ class UserController {
 					if (!driver) {
 						driver = new Driver(driverJSON);
 						Location servedLocation = new Location(servedLocationJSON);
-						servedLocation.save(flush:true, failOnError:true);
+						servedLocation.save(failOnError:true);
 						driver.servedLocation = servedLocation;
 						driver.user = user
 					} else {
@@ -253,7 +228,8 @@ class UserController {
 					}
 
 					log.info("Driver being saved " + driver.dump());
-
+					driver.save(failOnError:true);
+					
 					user.driver = driver;
 
 					//Assign the driver role
@@ -276,6 +252,7 @@ class UserController {
 					}
 
 					log.info("Passenger being saved " + driver.dump());
+					passenger.save(failOnError:true);
 					user.passenger = passenger;
 
 
@@ -286,27 +263,16 @@ class UserController {
 					}
 				}
 				log.info("User being saved " + user.dump());
-				
+
 			} //Closing the transaction and saving
 
 			String msg = message(code: 'default.updated.message',
 			args: [message(code: 'User.label', default: 'User'), user.username])
-			render "{\"result\":" + (new CallResult(CallResult.USER, CallResult.SUCCESS, msg)).encodeAsJSON() + ", " +"\"user\":" + user.encodeAsJSON() + "}"
+			render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, msg).encodeAsJSON() + ", " +"\"user\":" + user.encodeAsJSON() + "}";
 
-		} catch (OptimisticLockingFailureException e) {
-			render "{\"result\":" + (new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update'))).encodeAsJSON() + "}"
-			throw e;
-		} catch (ValidationException  e)  {
-            log.info("Validation Exception indeed")
-			render "{\"result\":" + utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).encodeAsJSON() + "}"
-			log.info("Validation Exception X")
-			log.info("Validation Exception " + utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).encodeAsJSON())
-			e.printStackTrace();
 		} catch (Throwable e) {
-			render "{\"result\":" + (new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message)).encodeAsJSON() + "}"
-			throw e;
+			utilService.handleException(e);
 		}
-
 	}
 
 	/**
@@ -324,16 +290,11 @@ class UserController {
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			throw e;
-		}
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomGrailsUser principal = auth.getPrincipal();
-		Tenant tenant = Tenant.get(principal.tenantId);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Tenant tenant = Tenant.get(principal.tenantId);
 
-		try {
 			def c = User.createCriteria();
 
 			def users = c.list {
@@ -344,14 +305,12 @@ class UserController {
 			}
 
 			if(!users) {
-				def error = ['error':'No Users Found']
-				render "${error as JSON}"
+				utilService.handleUserError(message (code: 'com.moovt.common.User.notFound'));
 			} else {
 				render "{\"users\":" + users.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			utilService.handleException(e);
 		}
 	}
 
@@ -374,16 +333,6 @@ class UserController {
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			throw e;
-		}
-
-		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		//CustomGrailsUser principal = auth.getPrincipal();
-		//Tenant tenant = Tenant.get(principal.tenantId);
-
-		try {
 
 			Long id = jsonObject.optLong("id",0);
 
@@ -400,13 +349,12 @@ class UserController {
 
 			if(!user) {
 				def error = ['error':'No User Found']
-				render "${error as JSON}"
+				utilService.handleUserError(message (code: 'com.moovt.common.User.notFound'));
 			} else {
 				render "{\"user\":" + user.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			utilService.handleException(e);
 		}
 
 
@@ -429,25 +377,18 @@ class UserController {
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(model);
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			throw e;
-		}
 
 
-		//The User
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomGrailsUser principal = auth.getPrincipal();
-
-		try {
+			//The User
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
 
 			User user = User.get(principal.id);
 			assert user != null, "Because this method is secured, a principal always exist at this point of the code"
 
 			render "{\"user\":" + user.encodeAsJSON() + "}"
 		} catch (Throwable e) {
-			render(new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message) as JSON);
-			throw e;
+			utilService.handleException(e);
 		}
 
 
@@ -472,66 +413,49 @@ class UserController {
 			JSONObject jsonObject = new JSONObject(model);
 			tenantname = jsonObject.getString("tenantname");
 			email = jsonObject.getString("email");
-		} catch (Exception e) {
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR,  e.message) as JSON);
-			throw e;
-		}
 
-
-
-		//For methods without the need of authentication, verify if the tenant exists
-		Tenant tenant = Tenant.findByName(tenantname);
-		if (!tenant) {
-			String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
-			log.warn (msgTenantDoesNotExist)
-			render(new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist) as JSON);
-			return;
-		}
-
-		//Find the user
-		def c = User.createCriteria();
-
-		User user = c.get {
-			and {
-				eq("tenantId",tenant.id)
-				eq("email",email)
+			//For methods without the need of authentication, verify if the tenant exists
+			Tenant tenant = Tenant.findByName(tenantname);
+			if (!tenant) {
+				String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
+				log.warn (msgTenantDoesNotExist)
+				render new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist).getJSON();
+				return;
 			}
-		}
 
-		if (!user) {
-			String msgEmailDoesNotExist = message(code: 'com.moovt.UserController.emailNotFound',args: [ email ])
-			log.warn (msgEmailDoesNotExist)
-			render(new CallResult(CallResult.USER, CallResult.ERROR, msgEmailDoesNotExist) as JSON);
-			return;
-		}
+			//Find the user
+			def c = User.createCriteria();
 
-		//Update the user and notify
-		String resetPassword = grailsApplication.config.moovt.resetPassword;
-		user.password = resetPassword;
-		User.withTransaction { status ->
+			User user = c.get {
+				and {
+					eq("tenantId",tenant.id)
+					eq("email",email)
+				}
+			}
 
-			try {
+			if (!user) {
+				String msgEmailDoesNotExist = message(code: 'com.moovt.UserController.emailNotFound',args: [ email ])
+				utilService.handleUserError(msgEmailDoesNotExist);
+				return;
+			}
+
+			//Update the user and notify
+			String resetPassword = grailsApplication.config.moovt.resetPassword;
+			user.password = resetPassword;
+
+			User.withTransaction { status ->
 				user.save()
-			} catch (OptimisticLockingFailureException e) {
-				status.setRollbackOnly();
-				render "{\"result\":" + (new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update'))).encodeAsJSON() + "}"
-				throw e;
-			} catch (ValidationException  e)  {
-				status.setRollbackOnly();
-				render "{\"result\":" + utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).encodeAsJSON() + "}"
-				throw e;
-			} catch (Throwable e) {
-				status.setRollbackOnly();
-				render "{\"result\":" + (new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message)).encodeAsJSON() + "}"
-				throw e;
+
+				notificationService.notifyPasswordChanged (user, resetPassword);
 			}
-		}//end of Transaction
-		notificationService.notifyPasswordChanged (user, resetPassword);
-		String msg = message(code: 'com.moovt.UserController.newPasswordSent',
-		args: [ email ])
-		render "{\"result\":" + (new CallResult(CallResult.USER, CallResult.SUCCESS, msg)).encodeAsJSON() + "}"
-
-
+			String msg = message(code: 'com.moovt.UserController.newPasswordSent',
+			args: [ email ])
+			utilService.handleSuccess(msg);
+		} catch (Throwable e) {
+			utilService.handleException(e);
+		}
 	}
+
 }
+
 

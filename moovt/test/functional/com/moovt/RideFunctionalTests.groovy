@@ -131,10 +131,33 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-{"pickupDateTime":"2013-03-15 06:30",
- "pickUpLocation":{"locationName":"Rua PickUp Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
- "dropOffLocation":{"locationName":"Rua DropOff Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},
- "carType":"B_VAN"}
+{
+  "id" : 0,
+  "pickUpLocation" : {
+    "locationName" : "Naperville",
+    "longitude" : -88.14729,
+    "latitude" : 41.78586,
+    "politicalName" : "Illinois, United States",
+    "locationType" : "APPROXIMATE"
+  },
+  "pickUpLocationComplement" : "",
+  "comments" : "",
+  "rating" : "",
+  "dropOffLocation" : {
+    "locationName" : "Wheaton",
+    "longitude" : -88.10701,
+    "latitude" : 41.86614,
+    "politicalName" : "Illinois, United States",
+    "locationType" : "APPROXIMATE"
+  },
+  "version" : 0,
+  "messageToTheDriver" : "",
+  "carType" : {
+    "code" : "B_VAN",
+    "description" : "Van"
+  },
+  "pickUpDateTime" : "2013-06-05 23:04"
+}
 				"""
 			}
 		}
@@ -203,6 +226,8 @@ class RideFunctionalTests extends BrowserTestCase {
 	
 	void testCloseRideSuccessEnglish() {
 
+		SimpleSmtpServer server = SimpleSmtpServer.start();
+		
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
 			body {
@@ -223,6 +248,13 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "Ride 4 updated"
+		
+		server.stop();
+		Iterator emailIter = server.getReceivedEmail();
+		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
+		//assertTrue(email.getBody().equals("Test Body"));
+		
 	}
 
 
@@ -231,6 +263,8 @@ class RideFunctionalTests extends BrowserTestCase {
 
 	void testCloseRideSuccessPortuguese() {
 
+		SimpleSmtpServer server = SimpleSmtpServer.start();
+		
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
 			body {
@@ -252,6 +286,12 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "Corrida 2 atualizado"
+		
+		server.stop();
+		Iterator emailIter = server.getReceivedEmail();
+		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
+		//assertTrue(email.getBody().equals("Test Body"));
 	}
 
 

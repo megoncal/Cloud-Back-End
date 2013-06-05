@@ -15,13 +15,13 @@ class DriverController {
 	
 	def getCarTypeEnum() {
 		def carTypes = dynEnumService.getDynamicEnums(CarType);
-		render (carTypes as JSON);
+		render "{\"carTypes\":" + carTypes.encodeAsJSON() + "}";
 		
 	}
 	
 	def getActiveStatusEnum() {
-		def activeStatus = dynEnumService.getDynamicEnums(ActiveStatus);
-		render (activeStatus as JSON);
+		def activeStatuses = dynEnumService.getDynamicEnums(ActiveStatus);
+		render "{\"activeStatuses\":" + activeStatuses.encodeAsJSON() + "}";
 		
 	}
 	

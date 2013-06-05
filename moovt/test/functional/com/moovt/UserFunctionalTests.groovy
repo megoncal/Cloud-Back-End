@@ -76,7 +76,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "The user name must be provided"
 	}
 
@@ -92,7 +92,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "O nome do usu‡rio deve ser preenchido"
 	}
 
@@ -108,7 +108,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "The password must be provided"
 	}
 
@@ -124,7 +124,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "A senha deve ser preenchida."
 	}
 
@@ -140,7 +140,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "The email must be provided"
 	}
 
@@ -156,7 +156,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "O email deve ser preenchido"
 	}
 
@@ -306,7 +306,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "JSONObject[\\\"email\\\"] not found"
 	}
 
-	void testResetPasswordBadMessageTenantEmailNotFoundEnglish() {
+	void testResetPasswordTenantEmailNotFoundEnglish() {
 		post('/user/resetPassword') {
 			headers['Content-Type'] = 'application/json'
 			headers['Accept-Language'] = 'en-US'
@@ -322,7 +322,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "This email (jforgetfulx@worldtaxi.com) was not found in the system."
 	}
 
-	void testResetPasswordBadMessageTenantEmailNotFoundPortuguese() {
+	void testResetPasswordTenantEmailNotFoundPortuguese() {
 		post('/user/resetPassword') {
 			headers['Content-Type'] = 'application/json'
 			headers['Accept-Language'] = 'pt-BR'

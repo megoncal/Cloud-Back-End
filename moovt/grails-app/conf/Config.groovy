@@ -143,7 +143,7 @@ grails {
 	mail {
 	  host = "localhost"
 	  //TODO: Development 25, Test 1025, Production google
-	  port = 1025
+	  port = 1033
 	}
 }
 

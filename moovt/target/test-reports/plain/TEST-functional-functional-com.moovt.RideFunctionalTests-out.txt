@@ -1,0 +1,932 @@
+--Output from testRetrievePassengerRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"BC124B2EEDFA4B0AC072449D61948420","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrievePassengerRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.id as id0_2_, this_.version as version0_2_, this_.car_type as car3_0_2_, this_.comments as comments0_2_, this_.created_by as created5_0_2_, this_.date_created as date6_0_2_, this_.driver_id as driver7_0_2_, this_.drop_off_location_id as drop8_0_2_, this_.last_updated as last9_0_2_, this_.last_updated_by as last10_0_2_, this_.passenger_id as passenger11_0_2_, this_.pick_up_location_id as pick12_0_2_, this_.pickup_date_time as pickup13_0_2_, this_.rating as rating0_2_, this_.ride_status as ride15_0_2_, this_.tenant_id as tenant16_0_2_, driver2_.user_id as user1_6_0_, driver2_.version as version6_0_, driver2_.active_status as active3_6_0_, driver2_.car_type as car4_6_0_, driver2_.created_by as created5_6_0_, driver2_.date_created as date6_6_0_, driver2_.last_updated as last7_6_0_, driver2_.last_updated_by as last8_6_0_, driver2_.served_location_id as served9_6_0_, driver2_.tenant_id as tenant10_6_0_, passenger3_.user_id as user1_2_1_, passenger3_.version as version2_1_, passenger3_.created_by as created3_2_1_, passenger3_.date_created as date4_2_1_, passenger3_.last_updated as last5_2_1_, passenger3_.last_updated_by as last6_2_1_, passenger3_.tenant_id as tenant7_2_1_ from ride this_ left outer join driver driver2_ on this_.driver_id=driver2_.user_id inner join passenger passenger3_ on this_.passenger_id=passenger3_.user_id where (this_.passenger_id=?) order by this_.last_updated asc limit ?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":6,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":1,"version":1,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":2,"version":1,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":6,"servedLocation":{"locationName":"BRua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"A_SEDAN","description":"Sedan"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Wheaton","politicalName":"Illinois, United States","latitude":41.8661403,"longitude":-88.1070127,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":3,"version":1,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":4,"version":1,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":6,"servedLocation":{"locationName":"BRua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"A_SEDAN","description":"Sedan"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":5,"version":1,"rideStatus":{"code":"COMPLETED","description":"Completed"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":7,"version":1,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
+================================================================================
+#
+--Output from testRetrieveUnassignedRideInServedAreaEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jspeedy","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"BB70D454CEB80897550F6764399816D0","userType":"DRIVER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: SELECT r.id as rideId, 3956 * 2 * ASIN(SQRT( POWER(SIN((? - latitude) * pi()/180 / 2), 2) +COS(? * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((? - longitude) * pi()/180 / 2), 2) )) as distance FROM  ride r, location l WHERE r.pick_up_location_id = l.id AND r.ride_status = 'UNASSIGNED' AND l.longitude between ? and ? and l.latitude between ? and ? having distance < ? ORDER BY distance limit 10
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":1,"version":1,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
+================================================================================
+#
+--Output from testAssignRideToDriverEnglish--
+Running
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jspeedy","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"C6352B6FB9516A00A360D2CC1FD5CC62","userType":"DRIVER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/assignRideToDriver parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"3","version":"1"}
+				
+================================================================================
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: update ride set version=?, car_type=?, comments=?, created_by=?, date_created=?, driver_id=?, drop_off_location_id=?, last_updated=?, last_updated_by=?, passenger_id=?, pick_up_location_id=?, pickup_date_time=?, rating=?, ride_status=?, tenant_id=? where id=? and version=?
+Hibernate: update ride set version=?, car_type=?, comments=?, created_by=?, date_created=?, driver_id=?, drop_off_location_id=?, last_updated=?, last_updated_by=?, passenger_id=?, pick_up_location_id=?, pickup_date_time=?, rating=?, ride_status=?, tenant_id=? where id=? and version=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Ride 3 updated"}}
+================================================================================
+#
+--Output from testRetrieveAllRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"admin","password":"admin"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_ADMIN
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"97CF3D69FB25E538D6C84E882079CD70","userType":"NO_TYPE"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveAllRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+Hibernate: select this_.id as id0_2_, this_.version as version0_2_, this_.car_type as car3_0_2_, this_.comments as comments0_2_, this_.created_by as created5_0_2_, this_.date_created as date6_0_2_, this_.driver_id as driver7_0_2_, this_.drop_off_location_id as drop8_0_2_, this_.last_updated as last9_0_2_, this_.last_updated_by as last10_0_2_, this_.passenger_id as passenger11_0_2_, this_.pick_up_location_id as pick12_0_2_, this_.pickup_date_time as pickup13_0_2_, this_.rating as rating0_2_, this_.ride_status as ride15_0_2_, this_.tenant_id as tenant16_0_2_, driver2_.user_id as user1_6_0_, driver2_.version as version6_0_, driver2_.active_status as active3_6_0_, driver2_.car_type as car4_6_0_, driver2_.created_by as created5_6_0_, driver2_.date_created as date6_6_0_, driver2_.last_updated as last7_6_0_, driver2_.last_updated_by as last8_6_0_, driver2_.served_location_id as served9_6_0_, driver2_.tenant_id as tenant10_6_0_, passenger3_.user_id as user1_2_1_, passenger3_.version as version2_1_, passenger3_.created_by as created3_2_1_, passenger3_.date_created as date4_2_1_, passenger3_.last_updated as last5_2_1_, passenger3_.last_updated_by as last6_2_1_, passenger3_.tenant_id as tenant7_2_1_ from ride this_ left outer join driver driver2_ on this_.driver_id=driver2_.user_id inner join passenger passenger3_ on this_.passenger_id=passenger3_.user_id
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":1,"version":1,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":2,"version":1,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":6,"servedLocation":{"locationName":"BRua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"A_SEDAN","description":"Sedan"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Wheaton","politicalName":"Illinois, United States","latitude":41.8661403,"longitude":-88.1070127,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":3,"version":3,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":4,"version":1,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":6,"servedLocation":{"locationName":"BRua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"A_SEDAN","description":"Sedan"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":5,"version":1,"rideStatus":{"code":"COMPLETED","description":"Completed"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":6,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null},{"id":7,"version":1,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}]}
+================================================================================
+#
+--Output from testCreateRideENglish--
+Running
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"AFCCFA051B4301402BFE304548D64AE9","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/createRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{
+  "id" : 0,
+  "pickUpLocation" : {
+    "locationName" : "Naperville",
+    "longitude" : -88.14729,
+    "latitude" : 41.78586,
+    "politicalName" : "Illinois, United States",
+    "locationType" : "APPROXIMATE"
+  },
+  "pickUpLocationComplement" : "",
+  "comments" : "",
+  "rating" : "",
+  "dropOffLocation" : {
+    "locationName" : "Wheaton",
+    "longitude" : -88.10701,
+    "latitude" : 41.86614,
+    "politicalName" : "Illinois, United States",
+    "locationType" : "APPROXIMATE"
+  },
+  "version" : 0,
+  "messageToTheDriver" : "",
+  "carType" : {
+    "code" : "B_VAN",
+    "description" : "Van"
+  },
+  "pickUpDateTime" : "2013-06-05 23:04"
+}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: insert into location (version, created_by, date_created, last_updated, last_updated_by, latitude, location_name, location_type, longitude, political_name, tenant_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into location (version, created_by, date_created, last_updated, last_updated_by, latitude, location_name, location_type, longitude, political_name, tenant_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: insert into ride (version, car_type, comments, created_by, date_created, driver_id, drop_off_location_id, last_updated, last_updated_by, passenger_id, pick_up_location_id, pickup_date_time, rating, ride_status, tenant_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: update ride set version=?, car_type=?, comments=?, created_by=?, date_created=?, driver_id=?, drop_off_location_id=?, last_updated=?, last_updated_by=?, passenger_id=?, pick_up_location_id=?, pickup_date_time=?, rating=?, ride_status=?, tenant_id=? where id=? and version=?
+Hibernate: SELECT d.user_id as driverId, 3956 * 2 * ASIN(SQRT( POWER(SIN((? - latitude) * pi()/180 / 2), 2) +COS(? * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((? - longitude) * pi()/180 / 2), 2) )) as distance FROM  driver d, location l WHERE d.served_location_id = l.id AND l.longitude between ? and ? and l.latitude between ? and ? and d.car_type >= ? having distance < ? ORDER BY distance limit 10
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Ride #8 created and sent to 6 drivers. "}}
+================================================================================
+#
+--Output from testCloneRide--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"5ACDB324756BF0D0ED9AB65C4F9AF570","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/cloneRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"id":"5"}				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"ride":{"id":null,"version":null,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":5},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null}}
+================================================================================
+#
+--Output from testCloneRideBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"1903095F6625AB12F79489548702438D","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/cloneRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"idx":"5"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"JSONObject[\"id\"] not found."}}
+================================================================================
+#
+--Output from testCloseRideSuccessEnglish--
+Running
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"5ED7C4DED52C997EF49B35800CAD0787","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"4","version":"1","rating":"5","comments":"Great ride!"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Hibernate: update ride set version=?, car_type=?, comments=?, created_by=?, date_created=?, driver_id=?, drop_off_location_id=?, last_updated=?, last_updated_by=?, passenger_id=?, pick_up_location_id=?, pickup_date_time=?, rating=?, ride_status=?, tenant_id=? where id=? and version=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: update ride set version=?, car_type=?, comments=?, created_by=?, date_created=?, driver_id=?, drop_off_location_id=?, last_updated=?, last_updated_by=?, passenger_id=?, pick_up_location_id=?, pickup_date_time=?, rating=?, ride_status=?, tenant_id=? where id=? and version=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Ride 4 updated"}}
+================================================================================
+#
+--Output from testCloseRideSuccessPortuguese--
+Running
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"71147E59AD4422EBBBDB78CE862BD72F","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"2","version":"1","rating":"5","comments":"Bom motorista"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Hibernate: update ride set version=?, car_type=?, comments=?, created_by=?, date_created=?, driver_id=?, drop_off_location_id=?, last_updated=?, last_updated_by=?, passenger_id=?, pick_up_location_id=?, pickup_date_time=?, rating=?, ride_status=?, tenant_id=? where id=? and version=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select user0_.id as id7_0_, user0_.version as version7_0_, user0_.account_expired as account3_7_0_, user0_.account_locked as account4_7_0_, user0_.created_by as created5_7_0_, user0_.date_created as date6_7_0_, user0_.email as email7_0_, user0_.enabled as enabled7_0_, user0_.first_name as first9_7_0_, user0_.last_name as last10_7_0_, user0_.last_updated as last11_7_0_, user0_.last_updated_by as last12_7_0_, user0_.locale as locale7_0_, user0_.`password` as password14_7_0_, user0_.password_expired as password15_7_0_, user0_.phone as phone7_0_, user0_.tenant_id as tenant17_7_0_, user0_.username as username7_0_ from user user0_ where user0_.id=?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: select location0_.id as id5_0_, location0_.version as version5_0_, location0_.created_by as created3_5_0_, location0_.date_created as date4_5_0_, location0_.last_updated as last5_5_0_, location0_.last_updated_by as last6_5_0_, location0_.latitude as latitude5_0_, location0_.location_name as location8_5_0_, location0_.location_type as location9_5_0_, location0_.longitude as longitude5_0_, location0_.political_name as political11_5_0_, location0_.tenant_id as tenant12_5_0_ from location location0_ where location0_.id=?
+Hibernate: update ride set version=?, car_type=?, comments=?, created_by=?, date_created=?, driver_id=?, drop_off_location_id=?, last_updated=?, last_updated_by=?, passenger_id=?, pick_up_location_id=?, pickup_date_time=?, rating=?, ride_status=?, tenant_id=? where id=? and version=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Corrida 2 atualizado"}}
+================================================================================
+#
+--Output from testCloseRideBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"FE71E6E941EF79F086E63603F06892CB","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"3","version":"1"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"JSONObject[\"rating\"] not found."}}
+================================================================================
+#
+--Output from testCloseRideAlreadyClosed--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"B0D119FDA0966C33F366F4AA1A3B2AD4","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+	
+				{"id":"5","version":"1","rating":"5","comments":"Great ride!"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"This ride has already been completed. Unable to add comment."}}
+================================================================================
+#
+--Output from testDeleteRideSuccessEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"072B2BCCD06BE1CB9842A4E5D0988E68","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/deleteRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"6","version":"1"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Hibernate: delete from ride where id=? and version=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Ride #6 deleted."}}
+================================================================================
+#
+--Output from testDeleteRideSuccessPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"6F8BF8669980E06EF96F8EF8894E0DC5","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/deleteRide parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"7","version":"1"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Hibernate: delete from ride where id=? and version=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Corrida #7 removida."}}
+================================================================================
+#
+--Output from testDeleteRideNotFoundEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"3D8EF9318246F3ADA2549FC8E39BA4B8","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/deleteRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"40","version":"1"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"Ride #40 not found"}}
+================================================================================
+#
+--Output from testDeleteRideNotFoundPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id4_0_, this_.version as version4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.name as name4_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id7_0_, this_.version as version7_0_, this_.account_expired as account3_7_0_, this_.account_locked as account4_7_0_, this_.created_by as created5_7_0_, this_.date_created as date6_7_0_, this_.email as email7_0_, this_.enabled as enabled7_0_, this_.first_name as first9_7_0_, this_.last_name as last10_7_0_, this_.last_updated as last11_7_0_, this_.last_updated_by as last12_7_0_, this_.locale as locale7_0_, this_.`password` as password14_7_0_, this_.password_expired as password15_7_0_, this_.phone as phone7_0_, this_.tenant_id as tenant17_7_0_, this_.username as username7_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_6_0_, driver0_.version as version6_0_, driver0_.active_status as active3_6_0_, driver0_.car_type as car4_6_0_, driver0_.created_by as created5_6_0_, driver0_.date_created as date6_6_0_, driver0_.last_updated as last7_6_0_, driver0_.last_updated_by as last8_6_0_, driver0_.served_location_id as served9_6_0_, driver0_.tenant_id as tenant10_6_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id1_0_, role0_.version as version1_0_, role0_.authority as authority1_0_, role0_.created_by as created4_1_0_, role0_.date_created as date5_1_0_, role0_.last_updated as last6_1_0_, role0_.last_updated_by as last7_1_0_, role0_.tenant_id as tenant8_1_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_3_0_, this_.user_id as user2_3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.tenant_id as tenant7_3_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"A639B43D697C3150217D11018A67C06A","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/deleteRide parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"40","version":"1"}
+				
+================================================================================
+Hibernate: select passenger0_.user_id as user1_2_0_, passenger0_.version as version2_0_, passenger0_.created_by as created3_2_0_, passenger0_.date_created as date4_2_0_, passenger0_.last_updated as last5_2_0_, passenger0_.last_updated_by as last6_2_0_, passenger0_.tenant_id as tenant7_2_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select ride0_.id as id0_2_, ride0_.version as version0_2_, ride0_.car_type as car3_0_2_, ride0_.comments as comments0_2_, ride0_.created_by as created5_0_2_, ride0_.date_created as date6_0_2_, ride0_.driver_id as driver7_0_2_, ride0_.drop_off_location_id as drop8_0_2_, ride0_.last_updated as last9_0_2_, ride0_.last_updated_by as last10_0_2_, ride0_.passenger_id as passenger11_0_2_, ride0_.pick_up_location_id as pick12_0_2_, ride0_.pickup_date_time as pickup13_0_2_, ride0_.rating as rating0_2_, ride0_.ride_status as ride15_0_2_, ride0_.tenant_id as tenant16_0_2_, driver1_.user_id as user1_6_0_, driver1_.version as version6_0_, driver1_.active_status as active3_6_0_, driver1_.car_type as car4_6_0_, driver1_.created_by as created5_6_0_, driver1_.date_created as date6_6_0_, driver1_.last_updated as last7_6_0_, driver1_.last_updated_by as last8_6_0_, driver1_.served_location_id as served9_6_0_, driver1_.tenant_id as tenant10_6_0_, passenger2_.user_id as user1_2_1_, passenger2_.version as version2_1_, passenger2_.created_by as created3_2_1_, passenger2_.date_created as date4_2_1_, passenger2_.last_updated as last5_2_1_, passenger2_.last_updated_by as last6_2_1_, passenger2_.tenant_id as tenant7_2_1_ from ride ride0_ left outer join driver driver1_ on ride0_.driver_id=driver1_.user_id inner join passenger passenger2_ on ride0_.passenger_id=passenger2_.user_id where ride0_.id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"Corrida #40 n‹o foi encontrada."}}
+================================================================================
+#

@@ -38,7 +38,11 @@ class CallResult {
 
 	public CallResult() {
 
-
 	}
+	
+	public String getJSON() {
+		return "{\"result\":" + this.encodeAsJSON() + "}";
+	}
+
 	
 }
