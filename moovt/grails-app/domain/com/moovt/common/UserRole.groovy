@@ -1,8 +1,11 @@
 package com.moovt.common
 
+import java.util.Date;
+
 import org.apache.commons.lang.builder.HashCodeBuilder
 
 import com.moovt.MultiTenantAudit;
+import com.moovt.DomainHelper;
 
 /**
  * This class represents the many-to-many association between <code>User</code> and its authorities (i.e. Roles).
@@ -10,24 +13,37 @@ import com.moovt.MultiTenantAudit;
  * @author egoncalves
  *
  */
-@MultiTenantAudit
+//@MultiTenantAudit
 class UserRole implements Serializable {
 
-	def domainService;
+	Long tenantId;
+	Long createdBy;
+	Long lastUpdatedBy;
+	Date lastUpdated;
+	Date dateCreated;
 	
 	User user
 	Role role
 
 	static constraints = {
+		tenantId nullable: true
+		createdBy nullable: true
+		lastUpdatedBy nullable: true
+		lastUpdated nullable: true
+		dateCreated nullable: true
+		
 		user nullable: false
 		role nullable: false
 
 	}
 
-	def beforeValidate () {
-		domainService.setAuditAttributes(this);
-	}	
-		
+	def beforeInsert () {
+		DomainHelper.setAuditAttributes(this);
+	}
+	
+	def beforeUpdate () {
+		DomainHelper.setAuditAttributes(this);
+	}		
 	boolean equals(other) {
 		if (!(other instanceof UserRole)) {
 			return false

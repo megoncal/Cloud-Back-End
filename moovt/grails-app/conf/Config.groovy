@@ -134,7 +134,7 @@ grails.plugins.springsecurity.filterChain.filterNames = [
 ]
 
 grails.gorm.failOnError=true
-grails.gorm.autoFlush=false
+grails.gorm.autoFlush=true
 
 moovt.driver.search.radius=66
 
@@ -143,7 +143,7 @@ grails {
 	mail {
 	  host = "localhost"
 	  //TODO: Development 25, Test 1025, Production google
-	  port = 1033
+	  port = 1035
 	}
 }
 

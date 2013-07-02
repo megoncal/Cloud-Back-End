@@ -1,7 +1,10 @@
 package com.moovt.taxi
 
+import java.util.Date;
+
 import com.moovt.MultiTenantAudit;
 import com.moovt.common.User
+import com.moovt.DomainHelper
 
 /**
  * This class represents a <code>Passenger</code>. A <code>Passenger</code> has the same id as its associated <code>User</code>.
@@ -9,10 +12,15 @@ import com.moovt.common.User
  * @author egoncalves
  *
  */
-@MultiTenantAudit
+//@MultiTenantAudit
 class Passenger {
+	
+	Long tenantId;
+	Long createdBy;
+	Long lastUpdatedBy;
+	Date lastUpdated;
+	Date dateCreated;
 
-	def domainService
 	
 	static belongsTo = [ user: User ]
 	
@@ -20,9 +28,20 @@ class Passenger {
         id column: 'user_id', generator: 'foreign',
             params: [ property: 'user' ]
         user insertable: false, updateable: false
+		//, fetch: 'join'
+		
+		tenantId nullable: true
+		createdBy nullable: true
+		lastUpdatedBy nullable: true
+		lastUpdated nullable: true
+		dateCreated nullable: true
     }
 	
-	def beforeValidate () {
-		domainService.setAuditAttributes(this);
+	def beforeInsert () {
+		DomainHelper.setAuditAttributes(this);
+	}
+	
+	def beforeUpdate () {
+		DomainHelper.setAuditAttributes(this);
 	}
 }

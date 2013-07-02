@@ -29,7 +29,6 @@ class RideFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "id\":1"
-		assertContentContains "passenger\":{\"id\":5}"
 		assertContentContains "carType"
 	}
 
@@ -54,7 +53,6 @@ class RideFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "id\":1"
-		assertContentContains "passenger\":{\"id\":5}"
 		assertContentContains "UNASSIGNED"
 	}
 
@@ -113,7 +111,30 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertContentContains "pickupDateTime\":\"2013-03-13 20:10"
 	}
 
-
+	void testRetrieveAssignedRidesEnglish() {
+		
+				post('/login/authenticateUser') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+                        {"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
+				"""
+					}
+				}
+		
+				post('/ride/retrieveAssignedRides') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{}
+				"""
+					}
+				}
+				assertStatus 200
+				//TODO: Include more tests
+			}
+		
+	
 	void testCreateRideENglish() {
 		
 		SimpleSmtpServer server = SimpleSmtpServer.start();
@@ -161,12 +182,14 @@ class RideFunctionalTests extends BrowserTestCase {
 				"""
 			}
 		}
+		
+		server.stop();
+		
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "created"
 		
-		server.stop();
 		Iterator emailIter = server.getReceivedEmail();
 		SmtpMessage email = (SmtpMessage)emailIter.next();
 		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
@@ -348,10 +371,35 @@ class RideFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "USER"
+		assertContentContains "SYSTEM"
 		assertContentContains "This ride has already been completed. Unable to add comment"
 	}
-	
+
+	void testCloseRideUnsassignedError() {
+		
+				post('/login/authenticateUser') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				"""
+					}
+				}
+		
+				post('/ride/closeRide') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"id":"8","version":"1","rating":"5","comments":"Great ride!"}
+				"""
+					}
+				}
+				assertStatus 200
+				assertContentContains "ERROR"
+				assertContentContains "SYSTEM"
+				assertContentContains "This ride is unassigned and can't be completed"
+			}
+		
 	void testDeleteRideSuccessEnglish() {
 		
 				post('/login/authenticateUser') {

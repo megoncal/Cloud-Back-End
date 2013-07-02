@@ -1,5 +1,7 @@
 package com.moovt.common
 
+import com.moovt.DomainHelper;
+
 /**
  * This class represents a <code>Tenant</code> in this multi-tenant application.
  * 
@@ -8,7 +10,6 @@ package com.moovt.common
  */
 class Tenant{
 
-	def domainService;
 	
 	String name
 	
@@ -21,9 +22,13 @@ class Tenant{
     static constraints = {
         name blank: false, unique: true
     }
+
+	def beforeInsert () {
+		DomainHelper.setTenantAuditAttributes(this);
+	}
 	
-	def beforeValidate () {
-		domainService.setTenantAuditAttributes(this);
+	def beforeUpdate () {
+		DomainHelper.setTenantAuditAttributes(this);
 	}
     
     Integer tenantId() {

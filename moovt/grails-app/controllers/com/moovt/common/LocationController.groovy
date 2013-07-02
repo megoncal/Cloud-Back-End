@@ -50,7 +50,13 @@ class LocationController {
 		try {
 			List<Location> locations = locationService.searchLocation (locationStr);
 			//Location locations = new Location(locationName:'Wheaton',  politicalName:'Illinois, United States', latitude: 41.8661403, longitude: -88.1070127, locationType: LocationType.APPROXIMATE);	
-			render "{\"locations\":[" + locations.encodeAsJSON() + "]}"
+			log.info("About to render locations (1/2)");
+			log.info("Rendering locations " + locations.encodeAsJSON());
+			log.info("About to render locations (2/2)");
+			
+			render "{\"locations\":" + locations.encodeAsJSON() + "}";
+			log.info("Locations rendered");
+			
 		} catch (Throwable e) {
 			LogUtils.printStackTrace(e);
 		    render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();

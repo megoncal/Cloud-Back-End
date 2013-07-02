@@ -1,5 +1,7 @@
 package com.moovt.common
- 
+
+import java.util.Date;
+
 import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
@@ -7,6 +9,8 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import com.moovt.MultiTenantAudit;
 import com.moovt.taxi.Passenger;
 import com.moovt.taxi.Driver;
+
+import com.moovt.DomainHelper;
 
 enum UserType  {
 	DRIVER, PASSENGER, DRIVER_PASSENGER, NO_TYPE
@@ -19,15 +23,20 @@ enum UserType  {
  * @author egoncalves
  *
  */
-@MultiTenantAudit
-class User  {     
-	          
+//@MultiTenantAudit
+class User  {
+
 	transient  springSecurityService
-	transient domainService
-	
+
+	Long tenantId;
+	Long createdBy;
+	Long lastUpdatedBy;
+	Date lastUpdated;
+	Date dateCreated;
+
 	//DB properties
 	String username
-	String password 
+	String password
 	String firstName
 	String lastName
 	String phone
@@ -37,21 +46,29 @@ class User  {
 	boolean accountLocked = false
 	boolean passwordExpired = false
 	String locale = "en_US"
-	
-	//0 or 1 relationship with he possible user types
-	static hasOne = [ passenger: Passenger,
-						driver: Driver ]
-				     
-	 
-	//Transient properties 
-	String tenantname
-	static transients = [ "tenantname"]  ; 
+	//Passenger passenger;
+	//Driver driver;
 
-		static constraints = {
+	//0 or 1 relationship with the possible user types
+	static hasOne = [ passenger: Passenger,
+		driver: Driver ]
+
+
+	//Transient properties
+	String tenantname
+	static transients = [ "tenantname"]  ;
+
+	static constraints = {
+		tenantId nullable: true
+		createdBy nullable: true
+		lastUpdatedBy nullable: true
+		lastUpdated nullable: true
+		dateCreated nullable: true
+
 		firstName nullable:false, blank: false
 		lastName nullable:false, blank: false
 		phone nullable:false, blank: false
-		username nullable:false, blank: false, unique: ['tenantId'] 
+		username nullable:false, blank: false, unique: ['tenantId']
 		password nullable:false, blank: false
 		email nullable:false, blank: false, unique: true
 		tenantname bindable: true
@@ -62,15 +79,10 @@ class User  {
 	static mapping = {
 		//table "usr"
 		password column: '`password`'
-		
+
 	}
 
-	
-	def beforeValidate () {
-		log.info("User before validate");
-		domainService.setAuditAttributes(this);
-	}
-	
+
 	Set<Role> getAuthorities() {
 		log.info("Getting Authorities (tenantId: " + this.tenantId + ", and User: " + this.id + ") ");
 		log.info(UserRole.findAllByTenantIdAndUser(tenantId,this));
@@ -79,16 +91,18 @@ class User  {
 
 	def beforeInsert() {
 		encodePassword()
+		DomainHelper.setAuditAttributes(this);
 	}
 
 	def beforeUpdate() {
 		if (isDirty('password')) {
 			encodePassword()
 		}
+		DomainHelper.setAuditAttributes(this);
 	}
 
 	protected void encodePassword() {
-			password = springSecurityService.encodePassword(password, username)
+		password = springSecurityService.encodePassword(password, username)
 	}
-	
+
 }

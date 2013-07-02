@@ -3,6 +3,7 @@ package com.moovt.common
 import java.util.Date;
 
 import com.moovt.MultiTenantAudit;
+import com.moovt.DomainHelper;
 
 /**
  * This class represents a <code>Role</code> that is used to assign authority to a given <code>User</code>.
@@ -10,10 +11,14 @@ import com.moovt.MultiTenantAudit;
  * @author egoncalves
  *
  */
-@MultiTenantAudit
+//@MultiTenantAudit
 class Role {
 
-	def domainService;
+	Long tenantId;
+	Long createdBy;
+	Long lastUpdatedBy;
+	Date lastUpdated;
+	Date dateCreated;
 	
 	String authority
 	
@@ -23,12 +28,21 @@ class Role {
 
 	
 	static constraints = {
-		authority blank: false, unique: ['tenantId']
+		tenantId nullable: true
+		createdBy nullable: true
+		lastUpdatedBy nullable: true
+		lastUpdated nullable: true
+		dateCreated nullable: true
 		
+		authority blank: false, unique: ['tenantId']
+
 	}
 	
 	
-	def beforeValidate () {
-		domainService.setAuditAttributes(this);
-	} 
-}
+	def beforeInsert () {
+		DomainHelper.setAuditAttributes(this);
+	}
+	
+	def beforeUpdate () {
+		DomainHelper.setAuditAttributes(this);
+	}}

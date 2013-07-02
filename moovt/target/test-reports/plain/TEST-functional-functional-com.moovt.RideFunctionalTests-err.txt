@@ -2,6 +2,7 @@
 --Output from testRetrieveUnassignedRideInServedAreaEnglish--
 --Output from testAssignRideToDriverEnglish--
 --Output from testRetrieveAllRidesEnglish--
+--Output from testRetrieveAssignedRidesEnglish--
 --Output from testCreateRideENglish--
 --Output from testCloneRide--
 --Output from testCloneRideBadMessage--
@@ -9,6 +10,7 @@
 --Output from testCloseRideSuccessPortuguese--
 --Output from testCloseRideBadMessage--
 --Output from testCloseRideAlreadyClosed--
+--Output from testCloseRideUnsassignedError--
 --Output from testDeleteRideSuccessEnglish--
 --Output from testDeleteRideSuccessPortuguese--
 --Output from testDeleteRideNotFoundEnglish--

@@ -1,27 +1,12 @@
-2013-06-04 22:23:38,980 [http-bio-8080-exec-7] ERROR StackTrace  - Full Stack Trace:
-org.hibernate.exception.ConstraintViolationException: Could not execute JDBC batch update
-	at org.grails.datastore.gorm.GormStaticApi.withTransaction(GormStaticApi.groovy:687)
-	at com.moovt.common.UserController.updateLoggedUser(UserController.groovy:192)
+2013-06-28 21:49:16,452 [http-bio-8080-exec-5] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationNotAllowedException: Error creating bean with name 'org.grails.internal.SESSION_FACTORY_HOLDER': Singleton bean creation not allowed while the singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)
 	at com.moovt.CustomExceptionTranslationFilter.doFilter(CustomExceptionTranslationFilter.groovy:53)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
 	at java.lang.Thread.run(Thread.java:680)
-Caused by: java.sql.BatchUpdateException: Column 'created_by' cannot be null
-	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:2045)
-	at com.mysql.jdbc.PreparedStatement.executeBatch(PreparedStatement.java:1468)
-	at org.apache.commons.dbcp.DelegatingStatement.executeBatch(DelegatingStatement.java:297)
-	at org.apache.commons.dbcp.DelegatingStatement.executeBatch(DelegatingStatement.java:297)
-	... 6 more
-Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'created_by' cannot be null
-	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
-	at com.mysql.jdbc.Util.getInstance(Util.java:386)
-	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1039)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4096)
-	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4028)
-	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2490)
-	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2651)
-	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2683)
-	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2144)
-	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2444)
-	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:1997)
-	... 9 more
+2013-06-28 21:49:16,564 [http-bio-8080-exec-5] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationNotAllowedException: Error creating bean with name 'org.grails.internal.SESSION_FACTORY_HOLDER': Singleton bean creation not allowed while the singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)
+	at com.moovt.CustomExceptionTranslationFilter.doFilter(CustomExceptionTranslationFilter.groovy:53)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)
+	at java.lang.Thread.run(Thread.java:680)

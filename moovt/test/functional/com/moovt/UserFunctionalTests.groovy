@@ -238,12 +238,14 @@ class UserFunctionalTests extends BrowserTestCase {
 				"""
 			}
 		}
+		
+		server.stop();
+		
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "Your new password was sent to "
 		
-		server.stop();
 		Iterator emailIter = server.getReceivedEmail();
 		SmtpMessage email = (SmtpMessage)emailIter.next();
 		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
@@ -252,9 +254,11 @@ class UserFunctionalTests extends BrowserTestCase {
 
 	void testResetPasswordSuccessPortuguese() {
 		
-		
+		System.out.println("Before Start of the Server");
 		SimpleSmtpServer server = SimpleSmtpServer.start();
+		System.out.println("After Start of the Server");
 		
+				
 		post('/user/resetPassword') {
 			headers['Content-Type'] = 'application/json'
 			headers['Accept-Language'] = 'pt-BR'
@@ -264,11 +268,12 @@ class UserFunctionalTests extends BrowserTestCase {
 				"""
 			}
 		}
+		server.stop();
+
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "A sua nova senha foi enviada para "
-		server.stop();
 		Iterator emailIter = server.getReceivedEmail();
 		SmtpMessage email = (SmtpMessage)emailIter.next();
 		//assertTrue(email.getHeaderValue("Subject").equals("Test"));

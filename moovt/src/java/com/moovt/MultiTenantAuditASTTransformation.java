@@ -1,18 +1,31 @@
 package com.moovt;
 
-import org.codehaus.groovy.transform.ASTTransformation;
-import org.codehaus.groovy.transform.GroovyASTTransformation;
-import org.codehaus.groovy.control.CompilePhase;
-import org.codehaus.groovy.control.SourceUnit;
-import org.codehaus.groovy.ast.*;
-import org.codehaus.groovy.ast.expr.*;
-
 import static org.springframework.asm.Opcodes.ACC_PUBLIC;
 import static org.springframework.asm.Opcodes.ACC_STATIC;
 
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Modifier;
-import java.io.*;
+import java.util.List;
+
+import org.codehaus.groovy.ast.ASTNode;
+import org.codehaus.groovy.ast.ClassNode;
+import org.codehaus.groovy.ast.FieldNode;
+import org.codehaus.groovy.ast.expr.ClosureExpression;
+import org.codehaus.groovy.ast.expr.ConstantExpression;
+import org.codehaus.groovy.ast.expr.ListExpression;
+import org.codehaus.groovy.ast.expr.MethodCallExpression;
+import org.codehaus.groovy.ast.expr.NamedArgumentListExpression;
+import org.codehaus.groovy.ast.expr.VariableExpression;
+import org.codehaus.groovy.ast.stmt.BlockStatement;
+import org.codehaus.groovy.ast.stmt.ExpressionStatement;
+import org.codehaus.groovy.ast.stmt.Statement;
+import org.codehaus.groovy.control.CompilePhase;
+import org.codehaus.groovy.control.SourceUnit;
+import org.codehaus.groovy.transform.ASTTransformation;
+import org.codehaus.groovy.transform.GroovyASTTransformation;
 
 /**
  * This class performs the AST Transformation that adds a tenantId, createdBy, lastUpdatedBy, lastUpdated, dateCreated and CRUD Message to
@@ -56,6 +69,12 @@ public class MultiTenantAuditASTTransformation implements ASTTransformation {
 				classNode.addProperty(CRUDMessageField, Modifier.PUBLIC,
 						new ClassNode(java.lang.String.class), null, null, null);
 
+				addNullableConstraint(classNode,"tenantId");
+				addNullableConstraint(classNode,"createdBy");
+				addNullableConstraint(classNode,"lastUpdatedBy");
+				addNullableConstraint(classNode,"lastUpdated");
+				addNullableConstraint(classNode,"dateCreated");
+				
 				//Make CRUD Message Transient
 				
 				// If there is already a transients field, capture the pre existing Expression and remove the transients field
@@ -75,6 +94,7 @@ public class MultiTenantAuditASTTransformation implements ASTTransformation {
 							classNode, list);
 				transients.setDeclaringClass(classNode);
 				classNode.addField(transients);
+		
 				
 				//Add a method
 				
@@ -136,55 +156,55 @@ public class MultiTenantAuditASTTransformation implements ASTTransformation {
 	// }
 	// //System.out.println(block.toString());
 	// }
+	
+	 public void addNullableConstraint(ClassNode classNode,String fieldName){
+	 FieldNode closure = classNode.getDeclaredField("constraints");
+	
+	 if(closure!=null){
+		 
+	 ClosureExpression exp =
+	 (ClosureExpression)closure.getInitialExpression();
+	 BlockStatement block = (BlockStatement) exp.getCode();
+	
+	 if(!hasFieldInClosure(closure,fieldName)){
+	 NamedArgumentListExpression namedarg = new NamedArgumentListExpression();
+	 namedarg.addMapEntryExpression(new ConstantExpression("nullable"), new
+	 ConstantExpression(true));
+	 MethodCallExpression constExpr = new MethodCallExpression(
+	 VariableExpression.THIS_EXPRESSION,
+	 new ConstantExpression(fieldName),
+	 namedarg
+	 );
+	 block.addStatement(new ExpressionStatement(constExpr));
+	 System.out.println(classNode.getName() +
+	 " - Added nullabel constraint for "+ fieldName);
+	 }
+	 }
+	 //System.out.println(block.toString());
+	 }
 
-	// public void addNullableConstraint(ClassNode classNode,String fieldName){
-	// FieldNode closure = classNode.getDeclaredField("constraints");
-	//
-	// if(closure!=null){
-	//
-	// ClosureExpression exp =
-	// (ClosureExpression)closure.getInitialExpression();
-	// BlockStatement block = (BlockStatement) exp.getCode();
-	//
-	// if(!hasFieldInClosure(closure,fieldName)){
-	// NamedArgumentListExpression namedarg = new NamedArgumentListExpression();
-	// namedarg.addMapEntryExpression(new ConstantExpression("nullable"), new
-	// ConstantExpression(true));
-	// MethodCallExpression constExpr = new MethodCallExpression(
-	// VariableExpression.THIS_EXPRESSION,
-	// new ConstantExpression(fieldName),
-	// namedarg
-	// );
-	// block.addStatement(new ExpressionStatement(constExpr));
-	// //System.out.println(classNode.getName() +
-	// " - Added nullabel constraint for "+ fieldName);
-	// }
-	// }
-	// //System.out.println(block.toString());
-	// }
-
-	//
-	// public boolean hasFieldInClosure(FieldNode closure, String fieldName){
-	// if(closure != null){
-	// ClosureExpression exp = (ClosureExpression)
-	// closure.getInitialExpression();
-	// BlockStatement block = (BlockStatement) exp.getCode();
-	// List<Statement> ments = block.getStatements();
-	// for(Statement expstat : ments){
-	// if(expstat instanceof ExpressionStatement &&
-	// ((ExpressionStatement)expstat).getExpression() instanceof
-	// MethodCallExpression){
-	// MethodCallExpression methexp =
-	// (MethodCallExpression)((ExpressionStatement)expstat).getExpression();
-	// ConstantExpression conexp = (ConstantExpression)methexp.getMethod();
-	// if(conexp.getValue().equals(fieldName)){
-	// return true;
-	// }
-	// }
-	// }
-	// }
-	// return false;
-	// }
+	
+	 public boolean hasFieldInClosure(FieldNode closure, String fieldName){
+	 if(closure != null){
+	 ClosureExpression exp = (ClosureExpression)
+	 closure.getInitialExpression();
+	 BlockStatement block = (BlockStatement) exp.getCode();
+	 List<Statement> ments = block.getStatements();
+	 for(Statement expstat : ments){
+	 if(expstat instanceof ExpressionStatement &&
+	 ((ExpressionStatement)expstat).getExpression() instanceof
+	 MethodCallExpression){
+	 MethodCallExpression methexp =
+	 (MethodCallExpression)((ExpressionStatement)expstat).getExpression();
+	 ConstantExpression conexp = (ConstantExpression)methexp.getMethod();
+	 if(conexp.getValue().equals(fieldName)){
+	 return true;
+	 }
+	 }
+	 }
+	 }
+	 return false;
+	 }
 
 	static public String getContents(File aFile) {
 		// ...checks on aFile are elided

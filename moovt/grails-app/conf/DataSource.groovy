@@ -86,7 +86,7 @@ dataSource {
 	}
 	
    hibernate {
-	cache.use_second_level_cache = false
+	cache.use_second_level_cache = true
 	cache.use_query_cache = false
 	cache.provider_class = 'net.sf.ehcache.hibernate.EhCacheProvider'
    } // environment specific settings
@@ -101,8 +101,9 @@ dataSource {
      }
      hibernate {
       show_sql = true
-	  flush.mode = "manual"
+	  //flush.mode = "manual"
 	  //flush.mode = FlushMode.MANUAL
+	  flush.mode = FlushMode.COMMIT
      }
     }
     test {

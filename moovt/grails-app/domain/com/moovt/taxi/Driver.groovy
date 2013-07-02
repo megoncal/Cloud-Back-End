@@ -1,8 +1,11 @@
 package com.moovt.taxi
 
+import java.util.Date;
+
 import com.moovt.MultiTenantAudit;
 import com.moovt.common.Location;
 import com.moovt.common.User;
+import com.moovt.DomainHelper;
 
 //TODO: Make Car Type more intelligent
 enum CarType {
@@ -20,10 +23,14 @@ enum ActiveStatus  {
  * @author egoncalves
  *
  */
-@MultiTenantAudit
+//@MultiTenantAudit
 class Driver {
 
-	def domainService
+	Long tenantId;
+	Long createdBy;
+	Long lastUpdatedBy;
+	Date lastUpdated;
+	Date dateCreated;
 	
 	ActiveStatus activeStatus = ActiveStatus.ENABLED
 	CarType carType
@@ -31,14 +38,24 @@ class Driver {
 	static belongsTo = [ user: User ]
 	
 	static constraints = {
+		tenantId nullable: true
+		createdBy nullable: true
+		lastUpdatedBy nullable: true
+		lastUpdated nullable: true
+		dateCreated nullable: true
 	}
 	
 	static mapping = {
 		id column: 'user_id', generator: 'foreign',
 			params: [ property: 'user' ]
 		user insertable: false, updateable: false
+		//, fetch: 'join'
 	}
-	def beforeValidate () {
-		domainService.setAuditAttributes(this);
+	def beforeInsert () {
+		DomainHelper.setAuditAttributes(this);
+	}
+	
+	def beforeUpdate () {
+		DomainHelper.setAuditAttributes(this);
 	}
 }

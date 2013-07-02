@@ -165,7 +165,6 @@ class RideController {
 				and {
 					eq("passenger", passenger)
 				}
-				maxResults(10)
 				order("lastUpdated", "asc")
 			}
 
@@ -183,6 +182,43 @@ class RideController {
 		}
 	}
 
+	@Secured(['ROLE_DRIVER','IS_AUTHENTICATED_FULLY'	])
+	def retrieveAssignedRides() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+
+
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Driver driver = Driver.get(principal.id);
+			assert driver != null, "Because this method is secured, a principal/driver always exist at this point of the code"
+
+			def c = Ride.createCriteria();
+
+			def rides = c.list {
+				and {
+					eq("driver", driver)
+				}
+				order("lastUpdated", "asc")
+			}
+
+
+
+			if(!rides) {
+				def error = ['error':'No Rides Found']
+				render "${error as JSON}"
+			} else {
+				render "{\"rides\":" + rides.encodeAsJSON() + "}"
+			}
+		} catch (Throwable e) {
+			LogUtils.printStackTrace(e);
+			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
+		}
+	}
 
 	/**
 	 * This API retrieves all unassigned in the Metro Area of the <code>Driver</code> currently logged in.  Please note that a <code>User</code>
@@ -351,10 +387,15 @@ class RideController {
 					}
 
 					if (ride.rideStatus == RideStatus.COMPLETED) {
-						render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.ride.already.completed')).getJSON();
+						render new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.already.completed')).getJSON();
 						return;
 					}
 
+					if (ride.rideStatus == RideStatus.UNASSIGNED) {
+						render new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.unassigned')).getJSON();
+						return;
+					}
+					
 					ride.rating = rating;
 					ride.comments = comments;
 					ride.rideStatus = RideStatus.COMPLETED;

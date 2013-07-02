@@ -40,7 +40,7 @@ public class SimpleSmtpServer implements Runnable {
   /**
    * Default SMTP port is 1025.
    */
-  public static final int DEFAULT_SMTP_PORT = 1033;
+  public static final int DEFAULT_SMTP_PORT = 1035;
 
   /**
    * Indicates whether this server is stopped or not.

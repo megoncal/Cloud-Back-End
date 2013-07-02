@@ -1,7 +1,10 @@
 package com.moovt.taxi
 
+import java.util.Date;
+
 import com.moovt.MultiTenantAudit;
-import com.moovt.common.Location
+import com.moovt.common.Location;
+import com.moovt.DomainHelper;
 
 enum RideStatus {
 	UNASSIGNED, ASSIGNED, COMPLETED, DELETED
@@ -13,11 +16,15 @@ enum RideStatus {
  * @author egoncalves
  *
  */
-@MultiTenantAudit
+//@MultiTenantAudit
 class Ride {
 
-	def domainService
-	
+	Long tenantId;
+	Long createdBy;
+	Long lastUpdatedBy;
+	Date lastUpdated;
+	Date dateCreated;
+
     RideStatus rideStatus  
 	Driver driver
 	Passenger passenger
@@ -27,23 +34,25 @@ class Ride {
 	CarType carType
 	Double rating
 	String comments
-
+	
 	static constraints = {
+		tenantId nullable: true
+		createdBy nullable: true
+		lastUpdatedBy nullable: true
+		lastUpdated nullable: true
+		dateCreated nullable: true
+
 		driver nullable: true
 		rating nullable: true
 		comments nullable: true
 	}
 	
-	
-	static mapping = {
-		pickUpAddress fetch: 'join'
-		dropOffAddress fetch: 'join'
-		driver fetch: 'join'
-		passenger fetch: 'join'
+	def beforeInsert () {
+		DomainHelper.setAuditAttributes(this);
 	}
 	
-	def beforeValidate () {
-		domainService.setAuditAttributes(this);
+	def beforeUpdate () {
+		DomainHelper.setAuditAttributes(this);
 	}
 	
 }

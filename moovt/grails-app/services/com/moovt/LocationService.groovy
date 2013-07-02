@@ -54,10 +54,10 @@ class LocationService {
 
 				// response handler for a success response code:
 				response.success = { resp, json ->
-					println resp.statusLine
+					//println resp.statusLine
 
 					// parse the JSON response object:
-					println json.results;
+					//println json.results;
 					json.results.each {
 						Location location = new Location();
 						String locationName = "";
@@ -79,7 +79,7 @@ class LocationService {
 							String longName = it.long_name;
 
 							it.types.each {
-								println it;
+								//println it;
 								if (it == "establishment") {
 									establishment = longName;
 								}

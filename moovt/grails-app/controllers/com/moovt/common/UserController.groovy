@@ -11,11 +11,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile
 import grails.converters.*
 
 import com.moovt.CallResult;
+import com.moovt.ConcurrencyException
 import com.moovt.CustomGrailsUser
 import com.moovt.NotificationService
 import com.moovt.QueryUtils
 import com.moovt.TenantAuthenticationToken
 import com.moovt.UUIDWrapper;
+import com.moovt.UserService
 import com.moovt.UtilService
 import com.moovt.common.Role;
 import com.moovt.common.Tenant;
@@ -40,6 +42,7 @@ import org.springframework.security.core.AuthenticationException
 
 class UserController {
 
+	UserService userService;
 	MessageSource messageSource; //inject the messageSource bean
 	UtilService utilService; //inject the utilService bean
 	AuthenticationManager authenticationManager; //injection of the authenticationManager required to log in the recently created user
@@ -48,6 +51,48 @@ class UserController {
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	def ok() {
+		MyTest myTest = new MyTest();
+		myTest.tenantId = 1;
+		myTest.createdBy = 1;
+		myTest.lastUpdatedBy = 1;
+		myTest.a = 'aValue';
+		myTest.b = 'bValue';
+		myTest.save();
+	}
+	def test() {
+	
+	User user;
+	//try {
+	//User.withTransaction { status ->
+			log.info ("HERE");
+			int i = 0;
+			//MyTest myTest = MyTest.get(1);
+			//myTest.a = 'asx';
+			//int j = 1/i;
+			user = User.get(6);
+			user.firstName = 'TESTxxxsss';
+			//log.info ("HERE1" + user.isDirty());
+			//User user1 = User.get(6);
+			//log.info ("HERE2" + user.firstName);
+			//String a = user.encodeAsJSON();
+			log.info ("HERE3")
+			user.save();
+			//myTest.save();
+			log.info ("HERE3.1")
+			
+			//userService.updateUser(user);
+			
+	//}
+	log.info ("HERE4");
+	String a = user.encodeAsJSON();
+	//String a = myTest.encodeAsJSON();
+		//			} catch (ConcurrencyException e) {
+		//log.info ("HERE1");
+		
+			//		}
+		
+	}
 
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def main() {
@@ -121,6 +166,15 @@ class UserController {
 
 					user.driver = new Driver (driverJSON);
 					user.driver.servedLocation = servedLocation;
+
+					//Handle car Type
+					JSONObject carTypeJsonObject = driverJSON.get("carType");
+					user.driver.carType = carTypeJsonObject.get("code");
+		
+					//Handle Active Status
+					JSONObject activeStatusJsonObject = driverJSON.get("activeStatus");
+					user.driver.activeStatus = activeStatusJsonObject.get("code");
+
 					user.driver.tenantId = tenant.id;
 					user.driver.createdBy = user.id;
 					user.driver.lastUpdatedBy = user.id;
@@ -174,105 +228,39 @@ class UserController {
 	def updateLoggedUser() {
 		String model = request.reader.getText();
 		log.info(this.actionName + " params are: " + params + " and model is : " + model);
-		JSONObject userJsonObject = null;
+		JSONObject userJSON = null;
 		try {
-			userJsonObject = new JSONObject(model);
-
-			//Obtain version from the json object
-			Long version = userJsonObject.optLong("version",0);
+			userJSON = new JSONObject(model);
 
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			CustomGrailsUser principal = auth.getPrincipal();
 			Tenant tenant = Tenant.get(principal.tenantId);
 
-			User user;
+			User user = User.get(principal.id);
+			assert user != null, "Because this method is secured, a principal/user always exist at this point of the code"
 
+			
 			//Start a transaction to update based on the existence of an id
+			
+			userService.updateUser(user, userJSON);
 
-			User.withTransaction { status ->
-
-				user = User.get(principal.id);
-				assert user != null, "Because this method is secured, a principal/user always exist at this point of the code"
-
-				log.info("Retrieved User " + user.dump());
-
-				//Before updating - check for concurrency
-				if (user.version > version) {
-					render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
-					return;
-				}
-				user.properties = userJsonObject;
-
-				//Handle Driver type
-				JSONObject driverJSON = userJsonObject.opt("driver");
-
-				if (driverJSON) {
-					//Handle the driver's served location inside the driver JSON
-					JSONObject servedLocationJSON = driverJSON.opt("servedLocation");
-					if (!servedLocationJSON) {
-						status.setRollbackOnly();
-						render new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON').getJSON();
-						return;
-					}
-
-					Driver driver = user.driver;
-					if (!driver) {
-						driver = new Driver(driverJSON);
-						Location servedLocation = new Location(servedLocationJSON);
-						servedLocation.save(failOnError:true);
-						driver.servedLocation = servedLocation;
-						driver.user = user
-					} else {
-						driver.servedLocation.properties = servedLocationJSON;
-						driver.properties = driverJSON;
-					}
-
-					log.info("Driver being saved " + driver.dump());
-					driver.save(failOnError:true);
-					
-					user.driver = driver;
-
-					//Assign the driver role
-					def driverRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_DRIVER')
-					if (!user.authorities.contains(driverRole)) {
-						UserRole.create ( tenant.id, user, driverRole)
-					}
-
-				}
-
-				//Handle Passenger type
-				JSONObject passengerJSON = userJsonObject.opt("passenger");
-				if (passengerJSON) {
-					Passenger passenger = user.passenger;
-					if (!passenger) {
-						passenger = new Passenger(passengerJSON);
-						passenger.user = user
-					} else {
-						passenger.properties = passengerJSON
-					}
-
-					log.info("Passenger being saved " + driver.dump());
-					passenger.save(failOnError:true);
-					user.passenger = passenger;
-
-
-					// Assign the passenger role
-					def passengerRole = Role.findByTenantIdAndAuthority(tenant.id, 'ROLE_PASSENGER')
-					if (!user.authorities.contains(passengerRole)) {
-						UserRole.create ( tenanat.id, user, passengerRole)
-					}
-				}
-				log.info("User being saved " + user.dump());
-
-			} //Closing the transaction and saving
-
+			log.info("Before message rendered");
+			
 			String msg = message(code: 'default.updated.message',
-			args: [message(code: 'User.label', default: 'User'), user.username])
-			render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, msg).encodeAsJSON() + ", " +"\"user\":" + user.encodeAsJSON() + "}";
-
+				args: [message(code: 'User.label', default: 'User'), user.username])
+				render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, msg).encodeAsJSON() + ", " +"\"user\":" + user.encodeAsJSON() + "}";
+				//render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, "ok").encodeAsJSON();
+			
+			log.info("Message rendered");
+			
+		} catch (ConcurrencyException e) {
+			log.info("A concurrency Exception occurred");
+			render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
 		} catch (Throwable e) {
 			utilService.handleException(e);
 		}
+		
+
 	}
 
 	/**
