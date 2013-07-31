@@ -7,7 +7,7 @@ import com.moovt.common.Location;
 import com.moovt.DomainHelper;
 
 enum RideStatus {
-	UNASSIGNED, ASSIGNED, COMPLETED, DELETED
+	UNASSIGNED, ASSIGNED, COMPLETED, CANCELED
  }
 
 /**
@@ -34,6 +34,8 @@ class Ride {
 	CarType carType
 	Double rating
 	String comments
+	String pickUpLocationComplement
+	String messageToTheDriver
 	
 	static constraints = {
 		tenantId nullable: true
@@ -45,6 +47,8 @@ class Ride {
 		driver nullable: true
 		rating nullable: true
 		comments nullable: true
+		pickUpLocationComplement nullable: true
+		messageToTheDriver nullable: true
 	}
 	
 	def beforeInsert () {

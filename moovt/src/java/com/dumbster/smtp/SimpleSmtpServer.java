@@ -40,7 +40,7 @@ public class SimpleSmtpServer implements Runnable {
   /**
    * Default SMTP port is 1025.
    */
-  public static final int DEFAULT_SMTP_PORT = 1035;
+  public static final int DEFAULT_SMTP_PORT = 1025;
 
   /**
    * Indicates whether this server is stopped or not.
@@ -76,7 +76,7 @@ public class SimpleSmtpServer implements Runnable {
    */
   public void run() {
     stopped = false;
-    System.out.println("Running");
+    System.out.println("Running on port " + port);
     try {
       try {
         serverSocket = new ServerSocket(port);

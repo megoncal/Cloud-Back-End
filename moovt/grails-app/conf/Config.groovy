@@ -6,18 +6,18 @@ grails.project.groupId = appName // change this to alter the default package nam
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
 grails.mime.types = [
-    all:           '*/*',
-    atom:          'application/atom+xml',
-    css:           'text/css',
-    csv:           'text/csv',
-    form:          'application/x-www-form-urlencoded',
-    html:          ['text/html','application/xhtml+xml'],
-    js:            'text/javascript',
-    json:          ['application/json', 'text/json'],
-    multipartForm: 'multipart/form-data',
-    rss:           'application/rss+xml',
-    text:          'text/plain',
-    xml:           ['text/xml', 'application/xml']
+	all:           '*/*',
+	atom:          'application/atom+xml',
+	css:           'text/css',
+	csv:           'text/csv',
+	form:          'application/x-www-form-urlencoded',
+	html:          ['text/html','application/xhtml+xml'],
+	js:            'text/javascript',
+	json:          ['application/json', 'text/json'],
+	multipartForm: 'multipart/form-data',
+	rss:           'application/rss+xml',
+	text:          'text/plain',
+	xml:           ['text/xml', 'application/xml']
 ]
 
 // URL Mapping Cache Max Size, defaults to 5000
@@ -66,11 +66,11 @@ environments {
 
 // log4j configuration
 //log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+// Example of changing the log pattern for the default console appender:
+//
+//appenders {
+//    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+//}
 
 //    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
 //           'org.codehaus.groovy.grails.web.pages',          // GSP
@@ -92,24 +92,24 @@ log4j = {
 		environments {
 			development {
 				rollingFile name: "mworksAppender", maxFileSize: 1024,
-						file: "c:\\study\\logs\\mworksApp.log"
+				file: "c:\\study\\logs\\mworksApp.log"
 				rollingFile name: "stacktrace", maxFileSize: 1024,
-						file: "c:\\study\\logs\\mworksStackTrace.log"
+				file: "c:\\study\\logs\\mworksStackTrace.log"
 			}
 			production {
 				rollingFile name: "mworksAppender", maxFileSize: 1024,
-						file: "/usr/share/tomcat6/logs/mworksApp.log"
+				file: "/usr/share/tomcat6/logs/mworksApp.log"
 				rollingFile name: "stacktrace", maxFileSize: 1024,
-						file: "/usr/share/tomcat6/logs/mworksStackTrace.log"
+				file: "/usr/share/tomcat6/logs/mworksStackTrace.log"
 			}
 		}
 	}
 
-		// other shared config
+	// other shared config
 	root {
-			info '*'
+		info '*'
 	}
-			
+
 }
 
 grails.stamp.audit.createdBy = createdBy
@@ -127,25 +127,101 @@ grails.plugins.springsecurity.authority.className = 'com.moovt.common.Role'
 grails.plugins.springsecurity.dao.reflectionSaltSourceProperty = 'username'
 grails.plugins.springsecurity.password.encodeHashAsBase64 = true
 grails.plugins.springsecurity.filterChain.filterNames = [
-   'securityContextPersistenceFilter', 'logoutFilter',
-   'authenticationProcessingFilter', 'securityContextHolderAwareRequestFilter',
-   'anonymousAuthenticationFilter', 'rememberMeAuthenticationFilter', 
-   'exceptionTranslationFilter', 'filterInvocationInterceptor'
+	'securityContextPersistenceFilter', 'logoutFilter',
+	'authenticationProcessingFilter', 'securityContextHolderAwareRequestFilter',
+	'anonymousAuthenticationFilter',
+	'exceptionTranslationFilter', 'filterInvocationInterceptor'
 ]
+
+//'rememberMeAuthenticationFilter',
 
 grails.gorm.failOnError=true
 grails.gorm.autoFlush=true
 
 moovt.driver.search.radius=66
 
+//Grails mail configuration
+//environments {
+//	development {
+//		grails {
+//			mail {
+//				host = "localhost"
+//				//TODO: Development 25, Test 1025, Production google
+//				port = 1025
+//			}
+//		}
+//	}
+//	test {
+//		grails {
+//			mail {
+//				host = "localhost"
+//				//TODO: Development 25, Test 1025, Production google
+//				port = 1035
+//			}
+//		}
+//	}
+//	production {
+//		grails {
+//			mail {
+//				host = "smtp.gmail.com"
+//				port = 465
+//				username = "egoncalves@moovt.com"
+//				password = "Viviane!1"
+//				props = ["mail.smtp.auth":"true",
+//					"mail.smtp.socketFactory.port":"465",
+//					"mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+//					"mail.smtp.socketFactory.fallback":"false"]
+//			}
+//
+//		}
+//	}
+//}
 
 grails {
 	mail {
-	  host = "localhost"
-	  //TODO: Development 25, Test 1025, Production google
-	  port = 1035
+		host = "smtp.gmail.com"
+		port = 465
+		username = "egoncalves@moovt.com"
+		password = "Viviane!1"
+		props = ["mail.smtp.auth":"true",
+			"mail.smtp.socketFactory.port":"465",
+			"mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			"mail.smtp.socketFactory.fallback":"false"]
 	}
 }
+//
+//pathToCertificate = "/study/docs/PushChatPrivateKey.p12"
+//password = "Viviane!1"
+//environment = "sandbox"
 
-//TODO: Clean error messages in the log
-//TODO: Test content of emails
+	//Grails APN Configuration
+	environments {
+		development {
+			apns {
+				pathToCertificate = "/study/docs/certificates/aps_development.p12"
+				password = "vilela1983"
+				environment = "sandbox"
+			}
+		}
+		test {
+			apns {
+				pathToCertificate = "/usr/local/myapp/APNs_development_certificates.p12"
+				password = "Viviane!1"
+				environment = "sandbox"
+			}
+		}
+
+		production {
+			apns {
+				pathToCertificate = "/usr/local/myapp/APNs_production_certificates.p12"
+				password = "Viviane!1"
+				//environment = "production"
+				environment = "sandbox"
+			}
+		}
+	}
+
+
+
+	//TODO: Clean error messages in the log
+	//TODO: Test content of emails

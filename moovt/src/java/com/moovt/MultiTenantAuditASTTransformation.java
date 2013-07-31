@@ -47,10 +47,10 @@ public class MultiTenantAuditASTTransformation implements ASTTransformation {
 		String dateCreatedField = "dateCreated";
 		String CRUDMessageField = "CRUDMessage";
 
-		// static transients = [ "CRUDMessage" ];
 		// Call the setAttributes setAuditAttributes(this);
 
 		for (ASTNode astNode : astNodes) {
+			
 			if (astNode instanceof ClassNode) {
 				ClassNode classNode = (ClassNode) astNode;
 				classNode.addProperty(tenantIdField, Modifier.PUBLIC,
@@ -69,6 +69,8 @@ public class MultiTenantAuditASTTransformation implements ASTTransformation {
 				classNode.addProperty(CRUDMessageField, Modifier.PUBLIC,
 						new ClassNode(java.lang.String.class), null, null, null);
 
+				System.out.println();
+				
 				addNullableConstraint(classNode,"tenantId");
 				addNullableConstraint(classNode,"createdBy");
 				addNullableConstraint(classNode,"lastUpdatedBy");

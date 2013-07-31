@@ -42,6 +42,7 @@ grails.project.dependency.resolution = {
 
     plugins {
         runtime ":hibernate:$grailsVersion"
+		runtime ":apns:1.0"
         //runtime ":jquery:1.8.0"
         //runtime ":resources:1.1.6"
 
@@ -53,7 +54,8 @@ grails.project.dependency.resolution = {
         build ":tomcat:$grailsVersion"
 		compile ":spring-security-core:1.2.7.3"
 		compile ":mail:1.0.1"
-        //runtime ":database-migration:1.1"
+		//compile ":executor:0.3"
+		//runtime ":database-migration:1.1"
 
         //compile ':cache:1.0.0'
 		compile ":functional-test:2.0.RC1"

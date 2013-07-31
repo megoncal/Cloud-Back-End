@@ -40,6 +40,11 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import org.springframework.security.core.AuthenticationException
 
+import com.notnoop.apns.APNS
+import com.notnoop.apns.PayloadBuilder
+import com.notnoop.apns.SimpleApnsNotification
+import com.notnoop.apns.ApnsService
+
 class UserController {
 
 	UserService userService;
@@ -47,10 +52,33 @@ class UserController {
 	UtilService utilService; //inject the utilService bean
 	AuthenticationManager authenticationManager; //injection of the authenticationManager required to log in the recently created user
 	NotificationService notificationService;
+	
+	ApnsService apnsService
 
+	//9a1cd758 47e20f1a 27132790 dfe1a0cb 4107f42d a1a39c01 9dd1a082 0fc5c504
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	def apns() {
+		try {
+			PayloadBuilder payloadBuilder = APNS.newPayload();
+		payloadBuilder.alertBody("Can't be simpler than this!");
+		String payload = payloadBuilder.build();
+		
+		String token = "9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504";
+		                //9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504
+		log.info("Now pushing");
+		
+		apnsService.push(token, payload);
+		
+						log.info("Pushed");
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Could not connect to APNs to send the notification - " + e.message)
+		}
+	}
+
+	
 	def ok() {
 		MyTest myTest = new MyTest();
 		myTest.tenantId = 1;
@@ -61,39 +89,40 @@ class UserController {
 		myTest.save();
 	}
 	def test() {
-	
-	User user;
-	//try {
-	//User.withTransaction { status ->
-			log.info ("HERE");
-			int i = 0;
-			//MyTest myTest = MyTest.get(1);
-			//myTest.a = 'asx';
-			//int j = 1/i;
-			user = User.get(6);
-			user.firstName = 'TESTxxxsss';
-			//log.info ("HERE1" + user.isDirty());
-			//User user1 = User.get(6);
-			//log.info ("HERE2" + user.firstName);
-			//String a = user.encodeAsJSON();
-			log.info ("HERE3")
-			user.save();
-			//myTest.save();
-			log.info ("HERE3.1")
-			
-			//userService.updateUser(user);
-			
-	//}
-	log.info ("HERE4");
-	String a = user.encodeAsJSON();
-	//String a = myTest.encodeAsJSON();
+
+		User user;
+		//try {
+		//User.withTransaction { status ->
+		log.info ("HERE");
+		int i = 0;
+		//MyTest myTest = MyTest.get(1);
+		//myTest.a = 'asx';
+		//int j = 1/i;
+		user = User.get(6);
+		user.firstName = 'TESTxxxsss';
+		//log.info ("HERE1" + user.isDirty());
+		//User user1 = User.get(6);
+		//log.info ("HERE2" + user.firstName);
+		//String a = user.encodeAsJSON();
+		log.info ("HERE3")
+		user.save();
+		//myTest.save();
+		log.info ("HERE3.1")
+
+		//userService.updateUser(user);
+
+		//}
+		log.info ("HERE4");
+		String a = user.encodeAsJSON();
+		//String a = myTest.encodeAsJSON();
 		//			} catch (ConcurrencyException e) {
 		//log.info ("HERE1");
-		
-			//		}
-		
+
+		//		}
+
 	}
 
+	
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def main() {
 	}
@@ -170,7 +199,7 @@ class UserController {
 					//Handle car Type
 					JSONObject carTypeJsonObject = driverJSON.get("carType");
 					user.driver.carType = carTypeJsonObject.get("code");
-		
+
 					//Handle Active Status
 					JSONObject activeStatusJsonObject = driverJSON.get("activeStatus");
 					user.driver.activeStatus = activeStatusJsonObject.get("code");
@@ -239,27 +268,27 @@ class UserController {
 			User user = User.get(principal.id);
 			assert user != null, "Because this method is secured, a principal/user always exist at this point of the code"
 
-			
+
 			//Start a transaction to update based on the existence of an id
-			
+
 			userService.updateUser(user, userJSON);
 
 			log.info("Before message rendered");
-			
+
 			String msg = message(code: 'default.updated.message',
-				args: [message(code: 'User.label', default: 'User'), user.username])
-				render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, msg).encodeAsJSON() + ", " +"\"user\":" + user.encodeAsJSON() + "}";
-				//render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, "ok").encodeAsJSON();
-			
+			args: [message(code: 'User.label', default: 'User'), user.username])
+			render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, msg).encodeAsJSON() + ", " +"\"user\":" + user.encodeAsJSON() + "}";
+			//render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, "ok").encodeAsJSON();
+
 			log.info("Message rendered");
-			
+
 		} catch (ConcurrencyException e) {
 			log.info("A concurrency Exception occurred");
 			render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
 		} catch (Throwable e) {
 			utilService.handleException(e);
 		}
-		
+
 
 	}
 

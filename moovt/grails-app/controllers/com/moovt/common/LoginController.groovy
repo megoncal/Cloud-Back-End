@@ -235,8 +235,15 @@ class LoginController {
 					}
 				}
 			}
-
-			//Change the default language to the user's language
+			
+			//If an apnsToken exists, update the user for subsequent pushes
+			User loggedUser = User.get(principal.id);
+			if (!(loggedUser.apnsToken.equals(userInstance.apnsToken))) {
+				log.warn("A user has a new apns token. The user id is " + principal.id);
+				loggedUser.apnsToken = userInstance.apnsToken;
+				loggedUser.save(failOnError:true);
+			}
+			
 			utilService.handleSuccessWithSessionIdAndUserType(message(code: 'com.moovt.Login.success'), sessionId, userType);
 		} catch (Throwable e) {
 			utilService.handleException(e);
