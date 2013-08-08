@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="Eduardo-Goncalvess-MacBook-Pro.local" name="com.moovt.LocationFunctionalTests" tests="5" time="1.572" timestamp="2013-08-01T04:17:17">
+  <properties />
+  <testcase classname="com.moovt.LocationFunctionalTests" name="testSearchBadJSON" time="0.099" />
+  <testcase classname="com.moovt.LocationFunctionalTests" name="testSearchNoLocation" time="0.214" />
+  <testcase classname="com.moovt.LocationFunctionalTests" name="testSearchCity" time="0.841" />
+  <testcase classname="com.moovt.LocationFunctionalTests" name="testSearchStreet" time="0.22" />
+  <testcase classname="com.moovt.LocationFunctionalTests" name="testState" time="0.186" />
+  <system-out><![CDATA[--Output from testSearchBadJSON--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}}
+================================================================================
+#
+--Output from testSearchNoLocation--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"thisMustBeLocation":"Rua Major Lopes 55, Belo Horizonte, MG"}				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"Input JSON must contain a location element"}}{"result":{"type":"SYSTEM","code":"ERROR","message":"Cannot invoke method toUpperCase() on null object"}}
+================================================================================
+#
+--Output from testSearchCity--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"location":"Belo Horizonte, MG"}	
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"locations":[{"locationName":"Belo Horizonte","politicalName":"Minas Gerais, Brazil","latitude":-19.9190677,"longitude":-43.9385747,"locationType":"APPROXIMATE"}]}
+================================================================================
+#
+--Output from testSearchStreet--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"location":"Rua Major Lopes 55, Belo Horizonte, MG"}	
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"locations":[{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413629,"longitude":-43.9373061,"locationType":"RANGE_INTERPOLATED"}]}
+================================================================================
+#
+--Output from testState--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"location":"MG"}	
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"locations":[]}
+================================================================================
+#
+]]></system-out>
+  <system-err><![CDATA[--Output from testSearchBadJSON--
+--Output from testSearchNoLocation--
+--Output from testSearchCity--
+--Output from testSearchStreet--
+--Output from testState--
+]]></system-err>
+</testsuite>

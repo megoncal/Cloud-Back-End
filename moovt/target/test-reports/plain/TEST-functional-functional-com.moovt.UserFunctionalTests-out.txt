@@ -1,0 +1,642 @@
+--Output from testCreateUserBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}}
+================================================================================
+#
+--Output from testCreateUserBadTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user."}}
+================================================================================
+#
+--Output from testCreateUserSuccessEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: insert into user (version, account_expired, account_locked, apns_token, created_by, date_created, email, enabled, first_name, last_name, last_updated, last_updated_by, locale, `password`, password_expired, phone, tenant_id, username) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: update user set version=?, account_expired=?, account_locked=?, apns_token=?, created_by=?, date_created=?, email=?, enabled=?, first_name=?, last_name=?, last_updated=?, last_updated_by=?, locale=?, `password`=?, password_expired=?, phone=?, tenant_id=?, username=? where id=? and version=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"User moovieGoer created"}, "additionalInfo":{"JSESSIONID":"2FBB98F7A715B155B17C9E9D8EA472DF"}}
+================================================================================
+#
+--Output from testCreateUserSuccessPortuquese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: insert into user (version, account_expired, account_locked, apns_token, created_by, date_created, email, enabled, first_name, last_name, last_updated, last_updated_by, locale, `password`, password_expired, phone, tenant_id, username) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: update user set version=?, account_expired=?, account_locked=?, apns_token=?, created_by=?, date_created=?, email=?, enabled=?, first_name=?, last_name=?, last_updated=?, last_updated_by=?, locale=?, `password`=?, password_expired=?, phone=?, tenant_id=?, username=? where id=? and version=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Usu‡rio moovieLover criado"}, "additionalInfo":{"JSESSIONID":"72DDA3F24F7BE1DE9B45110259BC4EBA"}}
+================================================================================
+#
+--Output from testCreateUserNoUserNameEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"The user name must be provided."}}
+================================================================================
+#
+--Output from testCreateUserNoUserNamePortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"O nome do usu‡rio deve ser preenchido."}}
+================================================================================
+#
+--Output from testCreateUserNoPasswordEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"The password must be provided."}}
+================================================================================
+#
+--Output from testCreateUserNoPasswordPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"A senha deve ser preenchida."}}
+================================================================================
+#
+--Output from testCreateUserNoEmailEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"The email must be provided."}}
+================================================================================
+#
+--Output from testCreateUserNoEmailPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", "lastName": "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"O email deve ser preenchido."}}
+================================================================================
+#
+--Output from testCreateUserDuplicateUsernameEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestEnglish@test.com", "username": "duplicateUser", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"This user (duplicateUser) already exists."}}
+================================================================================
+#
+--Output from testCreateUserDuplicateUsernamePortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"duplicateUsernameTestPortuguese@test.com", "username": "duplicateUser", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}				
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Este usu‡rio (duplicateUser) j‡ existe."}}
+================================================================================
+#
+--Output from testCreateUserDuplicateEmailEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: insert into user (version, account_expired, account_locked, apns_token, created_by, date_created, email, enabled, first_name, last_name, last_updated, last_updated_by, locale, `password`, password_expired, phone, tenant_id, username) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: update user set version=?, account_expired=?, account_locked=?, apns_token=?, created_by=?, date_created=?, email=?, enabled=?, first_name=?, last_name=?, last_updated=?, last_updated_by=?, locale=?, `password`=?, password_expired=?, phone=?, tenant_id=?, username=? where id=? and version=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"User userWithSameEmail created"}, "additionalInfo":{"JSESSIONID":"CDF980A1210FEFF06238DBD5338BFD45"}}
+================================================================================
+#
+Failed: Expected content to loosely contain [ERROR] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [ERROR] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserDuplicateEmailEnglish(UserFunctionalTests.groovy:206)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
+--Output from testCreateUserDuplicateEmailPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/createUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Este usu‡rio (userWithSameEmail) j‡ existe."}}
+================================================================================
+#
+Failed: Expected content to loosely contain [Este email (existingEmail@test.com) j‡ existe] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [Este email (existingEmail@test.com) j‡ existe] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserDuplicateEmailPortuguese(UserFunctionalTests.groovy:224)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
+--Output from testResetPasswordSuccessEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/resetPassword parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where (this_.tenant_id=? and this_.email=?)
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: update user set version=?, account_expired=?, account_locked=?, apns_token=?, created_by=?, date_created=?, email=?, enabled=?, first_name=?, last_name=?, last_updated=?, last_updated_by=?, locale=?, `password`=?, password_expired=?, phone=?, tenant_id=?, username=? where id=? and version=?
+Hibernate: insert into notification_task (version, created_by, date_created, failed_reason, last_updated, last_updated_by, message, notification_from, notification_to, process_date, subject, task_status, task_type, tenant_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Your new password was sent to jforgetful@worldtaxi.com."}}
+================================================================================
+#
+--Output from testResetPasswordSuccessPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/resetPassword parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where (this_.tenant_id=? and this_.email=?)
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.username=? and this_.tenant_id=?
+Hibernate: update user set version=?, account_expired=?, account_locked=?, apns_token=?, created_by=?, date_created=?, email=?, enabled=?, first_name=?, last_name=?, last_updated=?, last_updated_by=?, locale=?, `password`=?, password_expired=?, phone=?, tenant_id=?, username=? where id=? and version=?
+Hibernate: insert into notification_task (version, created_by, date_created, failed_reason, last_updated, last_updated_by, message, notification_from, notification_to, process_date, subject, task_status, task_type, tenant_id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"A sua nova senha foi enviada para jforgetful@worldtaxi.com."}}
+================================================================================
+#
+--Output from testResetPasswordBadMessageNoTenante--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/resetPassword parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantXame": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"JSONObject[\"tenantname\"] not found."}}
+================================================================================
+#
+--Output from testResetPasswordBadMessageNoEmail--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/resetPassword parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "WorldTaxi", "emailX":"jforgetful@worldtaxi.com"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"JSONObject[\"email\"] not found."}}
+================================================================================
+#
+--Output from testResetPasswordTenantEmailNotFoundEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/resetPassword parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "WorldTaxi", "email":"jforgetfulx@worldtaxi.com"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where (this_.tenant_id=? and this_.email=?)
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"This email (jforgetfulx@worldtaxi.com) was not found in the system."}}
+================================================================================
+#
+--Output from testResetPasswordTenantEmailNotFoundPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/user/resetPassword parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"tenantname": "WorldTaxi", "email":"jforgetfulx@worldtaxi.com"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where (this_.tenant_id=? and this_.email=?)
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Este email (jforgetfulx@worldtaxi.com) n‹o foi encontrado no sistema."}}
+================================================================================
+#

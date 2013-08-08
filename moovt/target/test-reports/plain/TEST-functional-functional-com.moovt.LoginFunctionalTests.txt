@@ -1,0 +1,432 @@
+Testsuite: com.moovt.LoginFunctionalTests
+Tests run: 15, Failures: 0, Errors: 0, Time elapsed: 2.017 sec
+------------- Standard Output ---------------
+--Output from testLoginBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}}
+================================================================================
+#
+--Output from testLoginSuccessEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_DRIVER
+ROLE_PASSENGER
+ROLE_RIDE_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"36D632ACCB84E0912BBFCCE09EC9415E","userType":"PASSENGER"}}
+================================================================================
+#
+--Output from testLoginSuccessPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select role0_.id as id6_0_, role0_.version as version6_0_, role0_.authority as authority6_0_, role0_.created_by as created4_6_0_, role0_.date_created as date5_6_0_, role0_.last_updated as last6_6_0_, role0_.last_updated_by as last7_6_0_, role0_.tenant_id as tenant8_6_0_ from role role0_ where role0_.id=?
+Hibernate: select role0_.id as id6_0_, role0_.version as version6_0_, role0_.authority as authority6_0_, role0_.created_by as created4_6_0_, role0_.date_created as date5_6_0_, role0_.last_updated as last6_6_0_, role0_.last_updated_by as last7_6_0_, role0_.tenant_id as tenant8_6_0_ from role role0_ where role0_.id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_ADMIN
+ROLE_ITEM_MGR
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"D620646E816C243F23EC85E3704ED7AE","userType":"NO_TYPE"}}
+================================================================================
+#
+--Output from testLoginNoTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company."}}
+================================================================================
+#
+--Output from testLoginNoTenantPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+================================================================================
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"A companhia deve ser preenchida."}}
+================================================================================
+#
+--Output from testLoginTenantNotFoundEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"This company (BadTenant) was not found. Please enter a valid company name."}}
+================================================================================
+#
+--Output from testLoginTenantNotFoundPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"Esta companhia (BadTenant) n‹o foi encontrada."}}
+================================================================================
+#
+--Output from testLoginNoPasswordEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password."}}
+================================================================================
+#
+--Output from testLoginNoUsernamedEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"Authentication failed because no username was provided. Please enter a username."}}
+================================================================================
+#
+--Output from testLoginFailedEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"User name and or password is invalid. Please try again."}}
+================================================================================
+#
+--Output from testLoginNoPasswordPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"A senha deve ser preenchida."}}
+================================================================================
+#
+--Output from testLoginNoUsernamedPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"O nome do usu‡rio deve ser preenchido."}}
+================================================================================
+#
+--Output from testLoginFailedPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Usu‡rio e senha inv‡lidos."}}
+================================================================================
+#
+--Output from testLoginWithApnsToken--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jWillGainApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
+
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_NO_ROLES
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"6D3D1E80897D27C08F75423679A7BB5F","userType":"NO_TYPE"}}
+================================================================================
+#
+--Output from testLoginKeepApnsToken--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"WorldTaxi","username":"jKeepApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
+
+				
+================================================================================
+Hibernate: select this_.id as id3_0_, this_.version as version3_0_, this_.created_by as created3_3_0_, this_.date_created as date4_3_0_, this_.last_updated as last5_3_0_, this_.last_updated_by as last6_3_0_, this_.name as name3_0_ from tenant this_ where this_.name=? limit ?
+Hibernate: select this_.id as id8_0_, this_.version as version8_0_, this_.account_expired as account3_8_0_, this_.account_locked as account4_8_0_, this_.apns_token as apns5_8_0_, this_.created_by as created6_8_0_, this_.date_created as date7_8_0_, this_.email as email8_0_, this_.enabled as enabled8_0_, this_.first_name as first10_8_0_, this_.last_name as last11_8_0_, this_.last_updated as last12_8_0_, this_.last_updated_by as last13_8_0_, this_.locale as locale8_0_, this_.`password` as password15_8_0_, this_.password_expired as password16_8_0_, this_.phone as phone8_0_, this_.tenant_id as tenant18_8_0_, this_.username as username8_0_ from user this_ where this_.tenant_id=? and this_.username=? limit ?
+Hibernate: select driver0_.user_id as user1_2_0_, driver0_.version as version2_0_, driver0_.active_status as active3_2_0_, driver0_.car_type as car4_2_0_, driver0_.created_by as created5_2_0_, driver0_.date_created as date6_2_0_, driver0_.last_updated as last7_2_0_, driver0_.last_updated_by as last8_2_0_, driver0_.served_location_id as served9_2_0_, driver0_.tenant_id as tenant10_2_0_ from driver driver0_ where driver0_.user_id=?
+Hibernate: select passenger0_.user_id as user1_1_0_, passenger0_.version as version1_0_, passenger0_.created_by as created3_1_0_, passenger0_.date_created as date4_1_0_, passenger0_.last_updated as last5_1_0_, passenger0_.last_updated_by as last6_1_0_, passenger0_.tenant_id as tenant7_1_0_ from passenger passenger0_ where passenger0_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+Hibernate: select this_.role_id as role1_4_0_, this_.user_id as user2_4_0_, this_.created_by as created3_4_0_, this_.date_created as date4_4_0_, this_.last_updated as last5_4_0_, this_.last_updated_by as last6_4_0_, this_.tenant_id as tenant7_4_0_ from user_role this_ where this_.tenant_id=? and this_.user_id=?
+ROLE_NO_ROLES
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"DBE2F61C8BF96B47136901F212417FFF","userType":"NO_TYPE"}}
+================================================================================
+#
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+--Output from testLoginBadMessage--
+--Output from testLoginSuccessEnglish--
+--Output from testLoginSuccessPortuguese--
+--Output from testLoginNoTenantEnglish--
+--Output from testLoginNoTenantPortuguese--
+--Output from testLoginTenantNotFoundEnglish--
+--Output from testLoginTenantNotFoundPortuguese--
+--Output from testLoginNoPasswordEnglish--
+--Output from testLoginNoUsernamedEnglish--
+--Output from testLoginFailedEnglish--
+--Output from testLoginNoPasswordPortuguese--
+--Output from testLoginNoUsernamedPortuguese--
+--Output from testLoginFailedPortuguese--
+--Output from testLoginWithApnsToken--
+--Output from testLoginKeepApnsToken--
+------------- ---------------- ---------------
+
+Testcase: testLoginBadMessage took 0.088 sec
+Testcase: testLoginSuccessEnglish took 0.143 sec
+Testcase: testLoginSuccessPortuguese took 0.158 sec
+Testcase: testLoginNoTenantEnglish took 0.165 sec
+Testcase: testLoginNoTenantPortuguese took 0.092 sec
+Testcase: testLoginTenantNotFoundEnglish took 0.142 sec
+Testcase: testLoginTenantNotFoundPortuguese took 0.104 sec
+Testcase: testLoginNoPasswordEnglish took 0.197 sec
+Testcase: testLoginNoUsernamedEnglish took 0.087 sec
+Testcase: testLoginFailedEnglish took 0.226 sec
+Testcase: testLoginNoPasswordPortuguese took 0.077 sec
+Testcase: testLoginNoUsernamedPortuguese took 0.079 sec
+Testcase: testLoginFailedPortuguese took 0.16 sec
+Testcase: testLoginWithApnsToken took 0.184 sec
+Testcase: testLoginKeepApnsToken took 0.086 sec

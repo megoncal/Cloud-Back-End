@@ -1,0 +1,12 @@
+--Output from testGetCarTypeEnumEnglish--
+--Output from testGetCarTypeEnumPortuguese--
+--Output from testGetActiveStatusEnumEnglish--
+--Output from testGetActiveStatusEnumPortugues--
+--Output from testCreateUserDriverEnglish--
+--Output from testCreateUserPassengerEnglish--
+--Output from testCreateUserPassengerWithTokenEnglish--
+--Output from testUpdateUserDriverEnglish--
+--Output from testUpdateUserPassengerEnglish--
+--Output from testRetrieveAllUsersrEnglish--
+--Output from testRetrieveUserDetailByIdEnglish--
+--Output from testRetrieveLoggedUserDetailsIdEnglish--
