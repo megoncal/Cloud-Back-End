@@ -17,12 +17,12 @@ class Location {
 	Long lastUpdatedBy;
 	Date lastUpdated;
 	Date dateCreated;
-	
-	String locationName
-	String politicalName
-	Double latitude
-	Double longitude
-	LocationType locationType
+	 
+	 String locationName
+	 String politicalName
+	 Double latitude
+	 Double longitude
+	 LocationType locationType
 
 	
 	static constraints = {

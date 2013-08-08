@@ -92,15 +92,15 @@ log4j = {
 		environments {
 			development {
 				rollingFile name: "mworksAppender", maxFileSize: 1024,
-				file: "c:\\study\\logs\\mworksApp.log"
+				file: "/study/apache-tomcat-6.0.37/logs/mworksApp.log"
 				rollingFile name: "stacktrace", maxFileSize: 1024,
-				file: "c:\\study\\logs\\mworksStackTrace.log"
+				file: "/usr/share/apache-tomcat-6.0.37/logs/mworksStackTrace.log"
 			}
 			production {
 				rollingFile name: "mworksAppender", maxFileSize: 1024,
-				file: "/usr/share/tomcat6/logs/mworksApp.log"
+				file: "/usr/share/apache-tomcat-6.0.37/logs/mworksApp.log"
 				rollingFile name: "stacktrace", maxFileSize: 1024,
-				file: "/usr/share/tomcat6/logs/mworksStackTrace.log"
+				file: "/usr/share/apache-tomcat-6.0.37/logs/mworksStackTrace.log"
 			}
 		}
 	}
@@ -205,16 +205,16 @@ grails {
 		}
 		test {
 			apns {
-				pathToCertificate = "/usr/local/myapp/APNs_development_certificates.p12"
-				password = "Viviane!1"
+				pathToCertificate = "/study/docs/certificates/aps_development.p12"
+				password = "vilela1983"
 				environment = "sandbox"
 			}
 		}
 
 		production {
 			apns {
-				pathToCertificate = "/usr/local/myapp/APNs_production_certificates.p12"
-				password = "Viviane!1"
+pathToCertificate = "/usr/share/apache-tomcat-6.0.37/shared/certificates/aps_development.p12"
+				password = "vilela1983"
 				//environment = "production"
 				environment = "sandbox"
 			}

@@ -58,7 +58,7 @@ class RideFunctionalTests extends BrowserTestCase {
 
 	void testAssignRideToDriverEnglish() {
 
-		SimpleSmtpServer server = SimpleSmtpServer.start();
+		//SimpleSmtpServer server = SimpleSmtpServer.start();
 		
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
@@ -80,9 +80,9 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "updated"
 		
-		server.stop();
-		Iterator emailIter = server.getReceivedEmail();
-		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//server.stop();
+		//Iterator emailIter = server.getReceivedEmail();
+		//SmtpMessage email = (SmtpMessage)emailIter.next();
 		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
 		//assertTrue(email.getBody().equals("Test Body"));
 		
@@ -137,7 +137,7 @@ class RideFunctionalTests extends BrowserTestCase {
 	
 	void testCreateRideENglish() {
 		
-		SimpleSmtpServer server = SimpleSmtpServer.start();
+		//SimpleSmtpServer server = SimpleSmtpServer.start();
 		
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
@@ -183,15 +183,15 @@ class RideFunctionalTests extends BrowserTestCase {
 			}
 		}
 		
-		server.stop();
+		//server.stop();
 		
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
 		assertContentContains "created"
 		
-		Iterator emailIter = server.getReceivedEmail();
-		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//Iterator emailIter = server.getReceivedEmail();
+		//SmtpMessage email = (SmtpMessage)emailIter.next();
 		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
 		//assertTrue(email.getBody().equals("Test Body"));
 		
@@ -249,7 +249,7 @@ class RideFunctionalTests extends BrowserTestCase {
 	
 	void testCloseRideSuccessEnglish() {
 
-		SimpleSmtpServer server = SimpleSmtpServer.start();
+		//SimpleSmtpServer server = SimpleSmtpServer.start();
 		
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
@@ -272,9 +272,9 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertContentContains "SUCCESS"
 		assertContentContains "Ride 4 updated"
 		
-		server.stop();
-		Iterator emailIter = server.getReceivedEmail();
-		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//server.stop();
+		//Iterator emailIter = server.getReceivedEmail();
+		//SmtpMessage email = (SmtpMessage)emailIter.next();
 		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
 		//assertTrue(email.getBody().equals("Test Body"));
 		
@@ -286,7 +286,7 @@ class RideFunctionalTests extends BrowserTestCase {
 
 	void testCloseRideSuccessPortuguese() {
 
-		SimpleSmtpServer server = SimpleSmtpServer.start();
+		//SimpleSmtpServer server = SimpleSmtpServer.start();
 		
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
@@ -310,9 +310,9 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertContentContains "SUCCESS"
 		assertContentContains "Corrida 2 atualizado"
 		
-		server.stop();
-		Iterator emailIter = server.getReceivedEmail();
-		SmtpMessage email = (SmtpMessage)emailIter.next();
+		//server.stop();
+		//Iterator emailIter = server.getReceivedEmail();
+		//SmtpMessage email = (SmtpMessage)emailIter.next();
 		//assertTrue(email.getHeaderValue("Subject").equals("Test"));
 		//assertTrue(email.getBody().equals("Test Body"));
 	}
@@ -400,7 +400,7 @@ class RideFunctionalTests extends BrowserTestCase {
 				assertContentContains "This ride is unassigned and can't be completed"
 			}
 		
-	void testDeleteRideSuccessEnglish() {
+	void testCancelRideSuccessEnglish() {
 		
 				post('/login/authenticateUser') {
 					headers['Content-Type'] = 'application/json'
@@ -411,7 +411,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					}
 				}
 		
-				post('/ride/deleteRide') {
+				post('/ride/cancelRide') {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
@@ -421,10 +421,10 @@ class RideFunctionalTests extends BrowserTestCase {
 				}
 				assertStatus 200
 				assertContentContains "SUCCESS"
-				assertContentContains "Ride #6 deleted"
+				assertContentContains "Ride #6 canceled"
 			}
 		
-	void testDeleteRideSuccessPortuguese() {
+	void testCancelRideSuccessPortuguese() {
 		
 				post('/login/authenticateUser') {
 					headers['Content-Type'] = 'application/json'
@@ -435,7 +435,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					}
 				}
 		
-				post('/ride/deleteRide') {
+				post('/ride/cancelRide') {
 					headers['Content-Type'] = 'application/json'
 					headers['Accept-Language'] = 'pt-BR'
 					body {
@@ -446,10 +446,10 @@ class RideFunctionalTests extends BrowserTestCase {
 				}
 				assertStatus 200
 				assertContentContains "SUCCESS"
-				assertContentContains "Corrida #7 removida."
+				assertContentContains "Corrida #7 cancelada."
 			}
 		
-	void testDeleteRideNotFoundEnglish() {
+	void testCancelRideNotFoundEnglish() {
 		
 				post('/login/authenticateUser') {
 					headers['Content-Type'] = 'application/json'
@@ -460,7 +460,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					}
 				}
 		
-				post('/ride/deleteRide') {
+				post('/ride/cancelRide') {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
@@ -473,7 +473,7 @@ class RideFunctionalTests extends BrowserTestCase {
 				assertContentContains "Ride #40 not found"
 			}
 		
-	void testDeleteRideNotFoundPortuguese() {
+	void testCancelRideNotFoundPortuguese() {
 		
 				post('/login/authenticateUser') {
 					headers['Content-Type'] = 'application/json'
@@ -484,7 +484,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					}
 				}
 		
-				post('/ride/deleteRide') {
+				post('/ride/cancelRide') {
 					headers['Content-Type'] = 'application/json'
 					headers['Accept-Language'] = 'pt-BR'
 					body {

@@ -101,6 +101,21 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 		assertContentContains "User jairjunkie created"
 	}
 	
+	void testCreateUserPassengerWithTokenEnglish() {
+		post('/user/createUser') {
+			headers['Content-Type'] = 'application/json'
+			body {
+				"""
+				{"tenantname":"WorldTaxi","firstName":"John","lastName":"TestToken","username":"testToken","password":"Welcome!1","phone":"773-329-1784","email":"testToken@moovt.com","locale":"en-US","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504", "passenger":{}}}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "SUCCESS"
+		assertContentContains "USER"
+		assertContentContains "User testToken created"
+	}
+	
 	void testUpdateUserDriverEnglish() {
 		
 		post('/login/authenticateUser') {

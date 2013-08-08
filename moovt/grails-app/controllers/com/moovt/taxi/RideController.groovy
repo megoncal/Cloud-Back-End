@@ -408,15 +408,10 @@ class RideController {
 			args: [message(code: 'Ride.label', default: 'Ride'), ride.id])
 			render new CallResult(CallResult.USER, CallResult.SUCCESS, msg).getJSON();
 
-		} catch (OptimisticLockingFailureException e) {
-			LogUtils.printStackTrace(e);
-			render new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')).getJSON();
-		} catch (ValidationException  e) {
-			LogUtils.printStackTrace(e);
-			render utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).getJSON();
+			utilService.handleSuccess(msg);
+
 		} catch (Throwable e) {
-			LogUtils.printStackTrace(e);
-			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
+			utilService.handleException(e);
 		}
 	}
 
@@ -429,59 +424,69 @@ class RideController {
 	 */
 	@Secured(['ROLE_PASSENGER','IS_AUTHENTICATED_FULLY'])
 	def cancelRide() {
-
-		String model = request.reader.getText();
-		log.info(this.actionName + " params are: " + params + " and model is : " + model);
-		JSONObject rideJsonObject = null;
-		try {
-			rideJsonObject = new JSONObject(model);
-
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			CustomGrailsUser principal = auth.getPrincipal();
-			Passenger passenger = Passenger.get(principal.id);
-			assert passenger != null, "Because this method is secured, a principal/passenger always exist at this point of the code"
-
-
-			Long id = rideJsonObject.getLong("id");
-			Long version = rideJsonObject.getLong("version");
-
-			Ride ride = Ride.get(id);
-
-			//Before proceeding - check that this is a legitimate id
-			if (!ride) {
-				render new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])).getJSON();
-				return;
-			}
-			//Before deleting - check for concurrency
-			if (ride.version > version) {
-				log.info("Ride version is " + ride.version + "vs." + version);
-				render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
-				return;
-			}
-			Ride.withTransaction { status ->
-
-
-				ride.delete();
-
-				if (ride.rideStatus == RideStatus.ASSIGNED) {
-					notificationService.notifyDriverOfRideDeleted (ride);
+		
+			String model = request.reader.getText();
+			log.info(this.actionName + " params are: " + params + " and model is : " + model);
+			JSONObject rideJsonObject = null;
+			try {
+				rideJsonObject = new JSONObject(model);
+	
+				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+				CustomGrailsUser principal = auth.getPrincipal();
+				Passenger passenger = Passenger.get(principal.id);
+				assert passenger != null, "Because this method is secured, a principal/passenger always exist at this point of the code"
+	
+	
+				Long id = rideJsonObject.getLong("id");
+				Long version = rideJsonObject.getLong("version");
+				
+				Ride ride = Ride.get(id);
+	
+				//Before proceeding - check that this is a legitimate id
+				if (!ride) {
+					render new CallResult(CallResult.SYSTEM, CallResult.ERROR, message (code: 'com.moovt.ride.not.found',args:[id])).getJSON();
+					return;
 				}
+				
+				//Before updating - check for concurrency
+				if (ride.version > version) {
+					log.info("Ride version is " + ride.version + "vs." + version);
+					utilService.handlerUserError(message (code: 'com.moovt.concurrent.update'));
+					return;
+				}
+	
+				if (ride.rideStatus == RideStatus.COMPLETED) {
+					utilService.handleUserError(message (code: 'com.moovt.ride.already.completed'));
+					return;
+				}
+				
+				if (ride.rideStatus == RideStatus.CANCELED) {
+					utilService.handleUserError(message (code: 'com.moovt.ride.already.canceled'));
+					return;
+				}
+	
+				ride.rideStatus = RideStatus.CANCELED;
+	
+				Ride.withTransaction { status ->
+	
+					ride.save(flush:true, failOnError:true);
+					if (ride.rideStatus == RideStatus.ASSIGNED) {
+					notificationService.notifyDriverOfRideCanceled(ride);
+					}
+	
+				}
+	
+				String msg = message(code: 'com.moovt.ride.canceled',
+				args: [ride.id])
+				
+				utilService.handleSuccess(msg);
+	
+			} catch (Throwable e) {
+				utilService.handleException(e);
 			}
-			String msg = message(code: 'com.moovt.ride.deleted',
-			args: [ ride.id])
-			render new CallResult(CallResult.USER, CallResult.SUCCESS, msg).getJSON();
-
-		} catch (OptimisticLockingFailureException e) {
-			LogUtils.printStackTrace(e);
-			render new CallResult(CallResult.USER,CallResult.ERROR,message (code: 'com.moovt.concurrent.update')).getJSON();
-		} catch (ValidationException  e) {
-			LogUtils.printStackTrace(e);
-			render utilService.getCallResultFromErrors (e.getErrors(), RequestContextUtils.getLocale(request)).getJSON();
-		} catch (Throwable e) {
-			LogUtils.printStackTrace(e);
-			render new CallResult(CallResult.SYSTEM,CallResult.ERROR,e.message).getJSON();
 		}
-	}
+	
+
 
 
 	/**

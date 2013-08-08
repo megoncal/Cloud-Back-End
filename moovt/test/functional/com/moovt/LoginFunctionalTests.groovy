@@ -208,7 +208,36 @@ class LoginFunctionalTests extends BrowserTestCase {
 		assertContentContains "USER"
 		assertContentContains "Usu‡rio e senha inv‡lidos."
 	} 
+
+	void testLoginWithApnsToken() {
+		post('/login/authenticateUser') {
+			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
+			body {
+				"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jWillGainApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
+
+				"""
+			}
+		}
+		assertStatus 200
+		//TODO: Check that jWillGainApnsToken gains a apnsToken
+	}
 	
+	void testLoginKeepApnsToken() {
+		post('/login/authenticateUser') {
+			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'pt-BR'
+			body {
+				"""
+				{"type":"Self","tenantname":"WorldTaxi","username":"jKeepApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
+
+				"""
+			}
+		}
+		assertStatus 200
+		//TODO: Check that jKeepApnsToken does not loose his apnsToken
+	}
 }
 
 

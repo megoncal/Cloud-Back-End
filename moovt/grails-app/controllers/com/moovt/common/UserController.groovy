@@ -62,7 +62,7 @@ class UserController {
 	def apns() {
 		try {
 			PayloadBuilder payloadBuilder = APNS.newPayload();
-		payloadBuilder.alertBody("Can't be simpler than this!");
+		payloadBuilder.alertBody("Can't be simpler than this!Hey");
 		String payload = payloadBuilder.build();
 		
 		String token = "9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504";

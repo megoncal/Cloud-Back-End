@@ -8,12 +8,14 @@ import com.moovt.taxi.Driver;
 import com.moovt.taxi.Passenger
 import com.moovt.taxi.Ride
 import grails.plugin.mail.MailService
-import groovyx.net.http.*
+import groovyx.net.http.HTTPBuilder
+import groovyx.net.http.ContentType
+import groovyx.net.http.Method
+import groovyx.net.http.RESTClient
 import org.hibernate.Query
 import org.hibernate.Session
 import org.hibernate.SessionFactory
-import static groovyx.net.http.ContentType.*
-import static groovyx.net.http.Method.*
+
 import org.codehaus.groovy.grails.commons.GrailsApplication
 
 
@@ -22,8 +24,6 @@ class LocationService {
 	SessionFactory sessionFactory
 	MailService mailService
 	GrailsApplication grailsApplication
-
-	static transactional = false
 
 	public List<Location> searchLocation(String locationStr) throws LocationSearchException{
 		List<Location> l = new ArrayList<Location>()
@@ -46,7 +46,7 @@ class LocationService {
 		def http = new HTTPBuilder( 'http://maps.googleapis.com/' )
 		try {
 			// perform a GET request, expecting JSON response data
-			http.request( GET, JSON ) {
+			http.request( Method.GET, ContentType.JSON ) {
 				uri.path = '/maps/api/geocode/json'
 				uri.query = [ address: locationStr, sensor: false ]
 
@@ -257,27 +257,22 @@ class LocationService {
 		List<Location> l = new ArrayList<DriverDistance>();
 		
 		//Select the 10 most frequently used locations in the rides of this passenger
-		String sql = "select l.id, l.version, l.latitude, l.location_name, l.location_type, l.longitude, l.political_name, count(*) from ride r, location l where (l.id = r.pick_up_location_id or l.id = r.drop_off_location_id) and passenger_id = :passengerId group by l.id order by count(*) desc limit 10"
+		String sql = "select l.latitude, l.location_name, l.location_type, l.longitude, l.political_name, count(*) from ride r, location l where (l.id = r.pick_up_location_id or l.id = r.drop_off_location_id) and passenger_id = :passengerId group by l.latitude, l.location_name, l.location_type, l.longitude, l.political_name order by count(*) desc limit 10";
 		Session dbSession =  sessionFactory.getCurrentSession();
 		Query query = dbSession.createSQLQuery(sql);
 		query.setLong('passengerId', passenger.id);
 		List rows = query.list();
 		rows.each {
 			Location location = new Location();
-			location.id = it[0];
-			location.version = it[1];
-			location.latitude = it[2];
-			location.locationName = it[3];
-			location.locationType = it[4];
-			location.longitude = it[5];
-			location.politicalName = it[6];
-			
+			location.latitude = it[0];
+			location.locationName = it[1];
+			location.locationType = it[2];
+			location.longitude = it[3];
+			location.politicalName = it[4];
 			l.add(location);
 		}
 		
 		return l;
-		
-		
 	}
 }
 

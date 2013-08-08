@@ -69,17 +69,19 @@ class NotificationService {
 				taskType: TaskType.EMAIL,
 				taskStatus: TaskStatus.INQUEUE,
 				notificationFrom: "dispatch@moovt.com",
-				notificationTo: "egoncalves@moovt.com",
+				notificationTo: driverUser.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
-		//to driverUser.email
-		//		mailService.sendMail {
-		//			to "egoncalves@moovt.com"
-		//			from "dispatch@moovt.com"
-		//			subject emailSubject
-		//			body emailBody
-		//		}
-
+			
+			if (driverUser.apnsToken) {
+				def pushNotification = new NotificationTask(
+						taskType: TaskType.PUSHNOTIF,
+						taskStatus: TaskStatus.INQUEUE,
+						notificationFrom: "N/A",
+						notificationTo: driverUser.apnsToken,
+						subject: emailSubject,
+						message: "N/A").save(failOnError: true);
+			}
 	}
 
 	public void notifyDriverOfRideAssignment (Ride ride) {
@@ -111,12 +113,12 @@ class NotificationService {
 				taskType: TaskType.EMAIL,
 				taskStatus: TaskStatus.INQUEUE,
 				notificationFrom: "dispatch@moovt.com",
-				notificationTo: "egoncalves@moovt.com",
+				notificationTo: driverUser.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
 	}
 
-	public void notifyDriverOfRideDeleted (Ride ride) {
+	public void notifyDriverOfRideCanceled (Ride ride) {
 
 		def webUtils = WebUtils.retrieveGrailsWebRequest();
 		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
@@ -144,7 +146,7 @@ class NotificationService {
 				taskType: TaskType.EMAIL,
 				taskStatus: TaskStatus.INQUEUE,
 				notificationFrom: "dispatch@moovt.com",
-				notificationTo: "egoncalves@moovt.com",
+				notificationTo: driverUser.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
 
@@ -155,7 +157,7 @@ class NotificationService {
 					notificationFrom: "N/A",
 					notificationTo: driverUser.apnsToken,
 					subject: emailSubject,
-					message: emailBody).save(failOnError: true);
+					message: "N/A").save(failOnError: true);
 		}
 
 	}
@@ -190,9 +192,19 @@ class NotificationService {
 				taskType: TaskType.EMAIL,
 				taskStatus: TaskStatus.INQUEUE,
 				notificationFrom: "dispatch@moovt.com",
-				notificationTo: "egoncalves@moovt.com",
+				notificationTo: passengerUser.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
+			
+			if (passengerUser.apnsToken) {
+				def pushNotification = new NotificationTask(
+						taskType: TaskType.PUSHNOTIF,
+						taskStatus: TaskStatus.INQUEUE,
+						notificationFrom: "N/A",
+						notificationTo: passengerUser.apnsToken,
+						subject: emailSubject,
+						message: "N/A").save(failOnError: true);
+			}
 
 	}
 
@@ -226,10 +238,20 @@ class NotificationService {
 				taskType: TaskType.EMAIL,
 				taskStatus: TaskStatus.INQUEUE,
 				notificationFrom: "dispatch@moovt.com",
-				notificationTo: "egoncalves@moovt.com",
+				notificationTo: driverUser.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
 
+			if (driverUser.apnsToken) {
+				def pushNotification = new NotificationTask(
+						taskType: TaskType.PUSHNOTIF,
+						taskStatus: TaskStatus.INQUEUE,
+						notificationFrom: "N/A",
+						notificationTo: driverUser.apnsToken,
+						subject: emailSubject,
+						message: "N/A").save(failOnError: true);
+			}
+			
 	}
 
 	public void notifyPassengerOfRideClosed (Ride ride) {
@@ -262,7 +284,7 @@ class NotificationService {
 				taskType: TaskType.EMAIL,
 				taskStatus: TaskStatus.INQUEUE,
 				notificationFrom: "dispatch@moovt.com",
-				notificationTo: "egoncalves@moovt.com",
+				notificationTo: passengerUser.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
 
@@ -284,10 +306,13 @@ class NotificationService {
 
 		//Insert into the notification task table
 		def emailNotification = new NotificationTask(
+				tenantId: TaxiAppConstant.TENANTID,
+				createdBy: TaxiAppConstant.ADMINUSER,
+				lastUpdatedBy: TaxiAppConstant.ADMINUSER,
 				taskType: TaskType.EMAIL,
 				taskStatus: TaskStatus.INQUEUE,
 				notificationFrom: "dispatch@moovt.com",
-				notificationTo: "egoncalves@moovt.com",
+				notificationTo: user.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
 
@@ -328,11 +353,9 @@ class NotificationService {
 						String payload = payloadBuilder.build();
 
 						String token = notificationTask.notificationTo;
-						log.info("Now pushing");
-
+						log.info("Now pushing to APNS " + token + " - " + payload);
 						apnsService.push(token, payload);
-
-						log.info("Pushed");
+						log.info("Pushed to APNS");
 					} catch (Exception e) {
 						e.printStackTrace();
 						log.error("Could not connect to APNs to send the notification - " + e.message)
