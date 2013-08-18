@@ -406,8 +406,7 @@ class RideController {
 
 			String msg = message(code: 'default.updated.message',
 			args: [message(code: 'Ride.label', default: 'Ride'), ride.id])
-			render new CallResult(CallResult.USER, CallResult.SUCCESS, msg).getJSON();
-
+		
 			utilService.handleSuccess(msg);
 
 		} catch (Throwable e) {

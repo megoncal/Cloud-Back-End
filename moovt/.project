@@ -28,5 +28,10 @@
 			<type>2</type>
 			<location>/study/grails-plugins</location>
 		</link>
+		<link>
+			<name>grails-conf</name>
+			<type>2</type>
+			<location>/study/grails-conf</location>
+		</link>
 	</linkedResources>
 </projectDescription>

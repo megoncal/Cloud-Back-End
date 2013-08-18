@@ -31,7 +31,7 @@ class NotificationService {
 
 	SessionFactory sessionFactory
 	MailService mailService
-	ApnsService apnsService
+	//ApnsService apnsService
 	MessageSource messageSource;
 
 	static transactional = false
@@ -346,22 +346,22 @@ class NotificationService {
 					}
 				}
 
-				if (notificationTask.taskType.equals(TaskType.PUSHNOTIF)) {
-					try {
-						PayloadBuilder payloadBuilder = APNS.newPayload();
-						payloadBuilder.alertBody(notificationTask.subject);
-						String payload = payloadBuilder.build();
-
-						String token = notificationTask.notificationTo;
-						log.info("Now pushing to APNS " + token + " - " + payload);
-						apnsService.push(token, payload);
-						log.info("Pushed to APNS");
-					} catch (Exception e) {
-						e.printStackTrace();
-						log.error("Could not connect to APNs to send the notification - " + e.message)
-					}
-
-				}
+//				if (notificationTask.taskType.equals(TaskType.PUSHNOTIF)) {
+//					try {
+//						PayloadBuilder payloadBuilder = APNS.newPayload();
+//						payloadBuilder.alertBody(notificationTask.subject);
+//						String payload = payloadBuilder.build();
+//
+//						String token = notificationTask.notificationTo;
+//						log.info("Now pushing to APNS " + token + " - " + payload);
+//						apnsService.push(token, payload);
+//						log.info("Pushed to APNS");
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//						log.error("Could not connect to APNs to send the notification - " + e.message)
+//					}
+//
+//				}
 
 				NotificationTask.withTransaction {
 					notificationTask.taskStatus = TaskStatus.PROCESSED;
