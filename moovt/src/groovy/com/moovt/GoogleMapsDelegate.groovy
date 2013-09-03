@@ -3,13 +3,14 @@ package com.moovt
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
 import groovyx.net.http.Method
+
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.moovt.common.LocationType;
 
-
-import com.moovt.common.Location;
+import com.moovt.taxi.Location;
+import com.moovt.taxi.LocationType;
 
 
 class GoogleMapsDelegate {

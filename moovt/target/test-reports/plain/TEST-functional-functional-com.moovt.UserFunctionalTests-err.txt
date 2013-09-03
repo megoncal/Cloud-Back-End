@@ -16,5 +16,6 @@
 --Output from testResetPasswordSuccessPortuguese--
 --Output from testResetPasswordBadMessageNoTenante--
 --Output from testResetPasswordBadMessageNoEmail--
+--Output from testResetPasswordTenantNotFound--
 --Output from testResetPasswordTenantEmailNotFoundEnglish--
 --Output from testResetPasswordTenantEmailNotFoundPortuguese--

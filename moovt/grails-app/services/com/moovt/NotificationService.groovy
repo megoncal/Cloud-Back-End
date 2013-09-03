@@ -1,23 +1,26 @@
 package com.moovt
 
-import com.moovt.common.Location;
-import com.moovt.common.LocationType;
-import com.moovt.common.User
+import com.moovt.common.User;
 import com.moovt.taxi.Driver;
+import com.moovt.taxi.Location;
+import com.moovt.taxi.LocationType;
+import com.moovt.taxi.NotificationTask;
 import com.moovt.taxi.Passenger
 import com.moovt.taxi.Ride
-import com.moovt.common.NotificationTask
-import com.moovt.common.TaskType
-import com.moovt.common.TaskStatus
-import grails.plugin.mail.MailService
+import com.moovt.taxi.TaskStatus;
+import com.moovt.taxi.TaskType;
 
+import grails.plugin.mail.MailService
 import groovyx.net.http.*
+
 import org.hibernate.Query
 import org.hibernate.Session
 import org.hibernate.SessionFactory
 import org.springframework.context.MessageSource
+
 import static groovyx.net.http.ContentType.*
 import static groovyx.net.http.Method.*
+
 import org.codehaus.groovy.grails.web.util.WebUtils
 import org.springframework.web.servlet.support.RequestContextUtils
 
@@ -31,7 +34,7 @@ class NotificationService {
 
 	SessionFactory sessionFactory
 	MailService mailService
-	//ApnsService apnsService
+	ApnsService apnsService
 	MessageSource messageSource;
 
 	static transactional = false
@@ -72,16 +75,16 @@ class NotificationService {
 				notificationTo: driverUser.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
-			
-			if (driverUser.apnsToken) {
-				def pushNotification = new NotificationTask(
-						taskType: TaskType.PUSHNOTIF,
-						taskStatus: TaskStatus.INQUEUE,
-						notificationFrom: "N/A",
-						notificationTo: driverUser.apnsToken,
-						subject: emailSubject,
-						message: "N/A").save(failOnError: true);
-			}
+
+		if (driverUser.apnsToken) {
+			def pushNotification = new NotificationTask(
+					taskType: TaskType.PUSHNOTIF,
+					taskStatus: TaskStatus.INQUEUE,
+					notificationFrom: "N/A",
+					notificationTo: driverUser.apnsToken,
+					subject: emailSubject,
+					message: "N/A").save(failOnError: true);
+		}
 	}
 
 	public void notifyDriverOfRideAssignment (Ride ride) {
@@ -195,16 +198,16 @@ class NotificationService {
 				notificationTo: passengerUser.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
-			
-			if (passengerUser.apnsToken) {
-				def pushNotification = new NotificationTask(
-						taskType: TaskType.PUSHNOTIF,
-						taskStatus: TaskStatus.INQUEUE,
-						notificationFrom: "N/A",
-						notificationTo: passengerUser.apnsToken,
-						subject: emailSubject,
-						message: "N/A").save(failOnError: true);
-			}
+
+		if (passengerUser.apnsToken) {
+			def pushNotification = new NotificationTask(
+					taskType: TaskType.PUSHNOTIF,
+					taskStatus: TaskStatus.INQUEUE,
+					notificationFrom: "N/A",
+					notificationTo: passengerUser.apnsToken,
+					subject: emailSubject,
+					message: "N/A").save(failOnError: true);
+		}
 
 	}
 
@@ -242,16 +245,16 @@ class NotificationService {
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);
 
-			if (driverUser.apnsToken) {
-				def pushNotification = new NotificationTask(
-						taskType: TaskType.PUSHNOTIF,
-						taskStatus: TaskStatus.INQUEUE,
-						notificationFrom: "N/A",
-						notificationTo: driverUser.apnsToken,
-						subject: emailSubject,
-						message: "N/A").save(failOnError: true);
-			}
-			
+		if (driverUser.apnsToken) {
+			def pushNotification = new NotificationTask(
+					taskType: TaskType.PUSHNOTIF,
+					taskStatus: TaskStatus.INQUEUE,
+					notificationFrom: "N/A",
+					notificationTo: driverUser.apnsToken,
+					subject: emailSubject,
+					message: "N/A").save(failOnError: true);
+		}
+
 	}
 
 	public void notifyPassengerOfRideClosed (Ride ride) {
@@ -336,34 +339,30 @@ class NotificationService {
 
 			log.info("Processing message " + notificationTask.subject);
 			log.info("Mechanism is " + notificationTask.taskType);
+
 			try {
-				if (notificationTask.taskType.equals(TaskType.EMAIL)) {
-					mailService.sendMail {
-						to notificationTask.notificationTo
-						from notificationTask.notificationFrom
-						subject notificationTask.subject
-						body notificationTask.message
-					}
-				}
-
-//				if (notificationTask.taskType.equals(TaskType.PUSHNOTIF)) {
-//					try {
-//						PayloadBuilder payloadBuilder = APNS.newPayload();
-//						payloadBuilder.alertBody(notificationTask.subject);
-//						String payload = payloadBuilder.build();
-//
-//						String token = notificationTask.notificationTo;
-//						log.info("Now pushing to APNS " + token + " - " + payload);
-//						apnsService.push(token, payload);
-//						log.info("Pushed to APNS");
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//						log.error("Could not connect to APNs to send the notification - " + e.message)
-//					}
-//
-//				}
-
 				NotificationTask.withTransaction {
+					if (notificationTask.taskType.equals(TaskType.EMAIL)) {
+						mailService.sendMail {
+							to notificationTask.notificationTo
+							from notificationTask.notificationFrom
+							subject notificationTask.subject
+							body notificationTask.message
+						}
+					}
+
+					if (notificationTask.taskType.equals(TaskType.PUSHNOTIF)) {
+						PayloadBuilder payloadBuilder = APNS.newPayload();
+						payloadBuilder.alertBody(notificationTask.subject);
+						String payload = payloadBuilder.build();
+
+						String token = notificationTask.notificationTo;
+						log.info("Now pushing to APNS " + token + " - " + payload);
+						apnsService.push(token, payload);
+						log.info("Pushed to APNS");
+
+					}
+
 					notificationTask.taskStatus = TaskStatus.PROCESSED;
 					notificationTask.processDate = new Date();
 					notificationTask.save (failOnError:true);

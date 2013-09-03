@@ -16,5 +16,8 @@ class TenantUserPasswordAuthenticationException extends AuthenticationException 
 		super(msg);
 	}
 
+	public TenantUserPasswordAuthenticationException() {
+		super('Tenant/Username/Password invalid');
+	}
 	
 }

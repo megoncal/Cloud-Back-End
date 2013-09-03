@@ -14,7 +14,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -28,8 +28,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "id\":1"
-		assertContentContains "carType"
+		assertContentContains "{\"rides\":[{\"id\":1,\"version\":0,\"rideStatus\":"
 	}
 
 	void testRetrieveUnassignedRideInServedAreaEnglish() {
@@ -38,7 +37,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jspeedy","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -56,6 +55,29 @@ class RideFunctionalTests extends BrowserTestCase {
 		assertContentContains "UNASSIGNED"
 	}
 
+	void testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish() {
+		
+				post('/login/authenticateUser') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{"type":"Self","tenantname":"MTaxi","username":"detroitCityDriverUser","password":"Welcome!1"}
+				"""
+					}
+				}
+		
+				post('/ride/retrieveUnassignedRideInServedArea') {
+					headers['Content-Type'] = 'application/json'
+					body {
+						"""
+				{}
+				"""
+					}
+				}
+				assertStatus 200
+//TODO: assert more specific
+			}
+	
 	void testAssignRideToDriverEnglish() {
 
 		//SimpleSmtpServer server = SimpleSmtpServer.start();
@@ -64,7 +86,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jspeedy","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -94,7 +116,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"admin","password":"admin"}
+				{"type":"Self","tenantname":"MTaxi","username":"admin","password":"911admin"}
 				"""
 			}
 		}
@@ -117,7 +139,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-                        {"type":"Self","tenantname":"WorldTaxi","username":"jgoodarm","password":"Welcome!1"}
+                        {"type":"Self","tenantname":"MTaxi","username":"jgoodarm","password":"Welcome!1"}
 				"""
 					}
 				}
@@ -143,7 +165,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -204,7 +226,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 					}
 				}
@@ -227,7 +249,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 					}
 				}
@@ -255,7 +277,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -292,7 +314,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -327,7 +349,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -356,7 +378,7 @@ class RideFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -371,7 +393,7 @@ class RideFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "This ride has already been completed. Unable to add comment"
 	}
 
@@ -381,7 +403,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 					}
 				}
@@ -396,7 +418,7 @@ class RideFunctionalTests extends BrowserTestCase {
 				}
 				assertStatus 200
 				assertContentContains "ERROR"
-				assertContentContains "SYSTEM"
+				assertContentContains "USER"
 				assertContentContains "This ride is unassigned and can't be completed"
 			}
 		
@@ -406,7 +428,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 					}
 				}
@@ -430,7 +452,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 					}
 				}
@@ -455,7 +477,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 					}
 				}
@@ -479,7 +501,7 @@ class RideFunctionalTests extends BrowserTestCase {
 					headers['Content-Type'] = 'application/json'
 					body {
 						"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 					}
 				}
@@ -495,7 +517,7 @@ class RideFunctionalTests extends BrowserTestCase {
 				}
 				assertStatus 200
 				assertContentContains "ERROR"
-				assertContentContains "Corrida #40 não foi encontrada"
+				assertContentContains "Corrida #40 n√£o foi encontrada"
 			}
 
 

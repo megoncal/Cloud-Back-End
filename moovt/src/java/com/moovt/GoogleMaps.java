@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moovt.common.Location;
-import com.moovt.common.LocationType;
+import com.moovt.taxi.Location;
+import com.moovt.taxi.LocationType;
 
 public class GoogleMaps {
 
 	public static List<Location> searchLocation(String locationStr) throws LocationSearchException{
 		List<Location> l = new ArrayList<Location>();
 
+		System.out.println("............................");
 		try {
 
 			//Some know issues with the Google API
@@ -118,16 +119,18 @@ public class GoogleMaps {
 				location.setLatitude(new Double(aResult.geometry.location.lat));
 				location.setLongitude(new Double(aResult.geometry.location.lng));
 				String locationType = aResult.geometry.location_type;
-				if (locationType == "ROOFTOP") {
+				System.out.println("locationType " + locationType);
+				
+				if (locationType.equals("ROOFTOP")) {
 					location.setLocationType(LocationType.ROOFTOP);
 				}
-				if (locationType == "RANGE_INTERPOLATED") {
+				if (locationType.equals("RANGE_INTERPOLATED")) {
 					location.setLocationType(LocationType.RANGE_INTERPOLATED);
 				}
-				if (locationType == "GEOMETRIC_CENTER") {
+				if (locationType.equals("GEOMETRIC_CENTER")) {
 					location.setLocationType(LocationType.GEOMETRIC_CENTER);
 				}
-				if (locationType == "APPROXIMATE") {
+				if (locationType.equals("APPROXIMATE")) {
 					location.setLocationType(LocationType.APPROXIMATE);
 				}
 				if (city!="") {

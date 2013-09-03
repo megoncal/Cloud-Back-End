@@ -45,6 +45,7 @@ class DomainHelper {
 
 	static setTenantAuditAttributes(Object aDomainObject) {
 		
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		CustomGrailsUser principal = null;
 		if (auth) {

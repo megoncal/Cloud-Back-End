@@ -2,29 +2,25 @@ package com.moovt.common
 
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils;
 import grails.converters.JSON
-import org.codehaus.groovy.grails.web.json.JSONObject
-import java.security.Principal
+
 import javax.servlet.http.HttpServletResponse
+
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import org.codehaus.groovy.grails.web.json.JSONObject
 import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.CredentialsExpiredException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.LockedException
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import org.springframework.security.core.AuthenticationException
 
-import com.moovt.CallResult;
+import com.moovt.BadDataAuthenticationException
 import com.moovt.CustomGrailsUser
-import com.moovt.TenantAuthenticationToken;
-import com.moovt.UtilService;
-import com.moovt.common.User;
-import com.moovt.LocaleUtils;
-import com.moovt.common.UserType;
-import com.moovt.UtilService;
+import com.moovt.HandlerService
+import com.moovt.TenantAuthenticationToken
+import com.moovt.TenantUserPasswordAuthenticationException
 
 
 /**
@@ -37,7 +33,7 @@ import com.moovt.UtilService;
 class LoginController {
 
 	def authenticationManager
-	UtilService utilService; //inject the utilService bean
+	HandlerService handlerService; //inject the utilService bean
 
 	def index() {
 		log.info ('index');
@@ -158,7 +154,7 @@ class LoginController {
 		}
 
 		if (springSecurityService.isAjax(request)) {
-			render new CallResult(CallResult.SYSTEM, CallResult.ERROR, msg).getJSON();
+			handlerService.handleSystemError(msg);
 		}
 		else {
 			flash.message = msg
@@ -171,7 +167,8 @@ class LoginController {
 	 */
 	def ajaxSuccess = {
 		log.info("ajaxSuccess action called");
-		render new CallResult(CallResult.SYSTEM, CallResult.SUCCESS, "User signed in successfully").getJSON();
+		handlerService.handleSuccess('com.moovt.Login.success', null);
+
 	}
 
 	/**
@@ -205,9 +202,31 @@ class LoginController {
 			log.info("Authenticating user with params:" + params + "and model: " + model);
 			User userInstance = new User(jsonObject);
 
-			Locale authenticationLocale = LocaleUtils.stringToLocale(userInstance.locale ? userInstance.locale : "en_US");
+			TenantAuthenticationToken token = new TenantAuthenticationToken(userInstance.username, userInstance.password,userInstance.tenantname);
 
-			TenantAuthenticationToken token = new TenantAuthenticationToken(userInstance.username, userInstance.password,userInstance.tenantname, userInstance.locale);
+			if (token.tenantName == "") {
+				handlerService.handleUserError('com.moovt.blank.tenantname');
+				return;
+			}
+			
+			//Verify if this token is good
+			Tenant tenant = Tenant.findByName(token.tenantName);
+			if (!tenant) {
+				handlerService.handleUserError('com.moovt.company.notFound', [token.tenantName] as Object[])
+				return;
+			}
+
+
+			if (token.name == "") {
+				handlerService.handleUserError('com.moovt.blank.username');
+				return;
+			}
+
+			if (token.credentials == "") {
+				handlerService.handleUserError('com.moovt.blank.password');
+				return;
+			}
+
 
 			Authentication auth = null;
 			auth = authenticationManager.authenticate(token);
@@ -219,7 +238,6 @@ class LoginController {
 			log.info("User has been successfully authenticated " + principal.getAuthorities());
 			String userType = UserType.NO_TYPE;
 			for (grantedAuthority in principal.getAuthorities()) {
-				println grantedAuthority;
 				if (grantedAuthority.equals('ROLE_PASSENGER')) {
 					if (userType == UserType.DRIVER) {
 						userType = UserType.DRIVER_PASSENGER
@@ -235,7 +253,7 @@ class LoginController {
 					}
 				}
 			}
-			
+
 			//If an apnsToken exists, update the user for subsequent pushes
 			User loggedUser = User.get(principal.id);
 			if (!(loggedUser.apnsToken.equals(userInstance.apnsToken))) {
@@ -243,10 +261,12 @@ class LoginController {
 				loggedUser.apnsToken = userInstance.apnsToken;
 				loggedUser.save(failOnError:true);
 			}
-			
-			utilService.handleSuccessWithSessionIdAndUserType(message(code: 'com.moovt.Login.success'), sessionId, userType);
+
+			handlerService.handleSuccess('com.moovt.Login.success', null, "\"additionalInfo\":" + ([JSESSIONID: sessionId, userType: userType] as JSON));
+		} catch (TenantUserPasswordAuthenticationException e) {
+			handlerService.handleUserError('com.moovt.invalid.usernamepassword', null);
 		} catch (Throwable e) {
-			utilService.handleException(e);
+			handlerService.handleException(e);
 		}
 
 

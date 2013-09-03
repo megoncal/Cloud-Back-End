@@ -13,37 +13,21 @@ import com.moovt.DomainHelper;
  * @author egoncalves
  *
  */
-//@MultiTenantAudit
+@MultiTenantAudit
 class UserRole implements Serializable {
 
-	Long tenantId;
-	Long createdBy;
-	Long lastUpdatedBy;
-	Date lastUpdated;
-	Date dateCreated;
 	
 	User user
 	Role role
 
 	static constraints = {
-		tenantId nullable: true
-		createdBy nullable: true
-		lastUpdatedBy nullable: true
-		lastUpdated nullable: true
-		dateCreated nullable: true
+
 		
 		user nullable: false
 		role nullable: false
 
 	}
 
-	def beforeInsert () {
-		DomainHelper.setAuditAttributes(this);
-	}
-	
-	def beforeUpdate () {
-		DomainHelper.setAuditAttributes(this);
-	}		
 	boolean equals(other) {
 		if (!(other instanceof UserRole)) {
 			return false

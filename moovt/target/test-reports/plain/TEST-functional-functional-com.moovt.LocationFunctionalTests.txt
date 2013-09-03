@@ -1,5 +1,5 @@
 Testsuite: com.moovt.LocationFunctionalTests
-Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 1.572 sec
+Tests run: 5, Failures: 0, Errors: 0, Time elapsed: 5.786 sec
 ------------- Standard Output ---------------
 --Output from testSearchBadJSON--
 Switching to browser client [default]
@@ -13,6 +13,8 @@ Accept: */*
 == Content =====================================================================
 
 ================================================================================
+2013-09-03 04:51:08,811 [http-bio-8080-exec-3] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
@@ -34,12 +36,15 @@ Accept: */*
 
 {"thisMustBeLocation":"Rua Major Lopes 55, Belo Horizonte, MG"}				
 ================================================================================
+2013-09-03 04:51:08,869 [http-bio-8080-exec-6] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+{"thisMustBeLocation":"Rua Major Lopes 55, Belo Horizonte, MG"}				
+
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"SYSTEM","code":"ERROR","message":"Input JSON must contain a location element"}}{"result":{"type":"SYSTEM","code":"ERROR","message":"Cannot invoke method toUpperCase() on null object"}}
+{"result":{"type":"SYSTEM","code":"ERROR","message":"Input JSON must contain a location element"}}{"result":{"type":"SYSTEM","code":"ERROR","message":"Unable to call googlemaps null"}}
 ================================================================================
 #
 --Output from testSearchCity--
@@ -56,12 +61,24 @@ Accept: */*
 {"location":"Belo Horizonte, MG"}	
 				
 ================================================================================
+2013-09-03 04:51:08,956 [http-bio-8080-exec-4] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+{"location":"Belo Horizonte, MG"}	
+				
+
+2013-09-03 04:51:13,662 [http-bio-8080-exec-4] INFO  taxi.LocationController  - About to render locations (1/2)
+
+2013-09-03 04:51:13,664 [http-bio-8080-exec-4] INFO  taxi.LocationController  - Rendering locations [{"locationName":"Belo Horizonte","politicalName":"Minas Gerais, Brazil","latitude":-19.9190677,"longitude":-43.9385747,"locationType":"null"}]
+
+2013-09-03 04:51:13,664 [http-bio-8080-exec-4] INFO  taxi.LocationController  - About to render locations (2/2)
+
+2013-09-03 04:51:13,665 [http-bio-8080-exec-4] INFO  taxi.LocationController  - Locations rendered
+
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"locations":[{"locationName":"Belo Horizonte","politicalName":"Minas Gerais, Brazil","latitude":-19.9190677,"longitude":-43.9385747,"locationType":"APPROXIMATE"}]}
+{"locations":[{"locationName":"Belo Horizonte","politicalName":"Minas Gerais, Brazil","latitude":-19.9190677,"longitude":-43.9385747,"locationType":"null"}]}
 ================================================================================
 #
 --Output from testSearchStreet--
@@ -78,12 +95,24 @@ Accept: */*
 {"location":"Rua Major Lopes 55, Belo Horizonte, MG"}	
 				
 ================================================================================
+2013-09-03 04:51:13,907 [http-bio-8080-exec-5] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+{"location":"Rua Major Lopes 55, Belo Horizonte, MG"}	
+				
+
+2013-09-03 04:51:14,227 [http-bio-8080-exec-5] INFO  taxi.LocationController  - About to render locations (1/2)
+
+2013-09-03 04:51:14,228 [http-bio-8080-exec-5] INFO  taxi.LocationController  - Rendering locations [{"locationName":"","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413629,"longitude":-43.9373061,"locationType":"null"}]
+
+2013-09-03 04:51:14,228 [http-bio-8080-exec-5] INFO  taxi.LocationController  - About to render locations (2/2)
+
+2013-09-03 04:51:14,228 [http-bio-8080-exec-5] INFO  taxi.LocationController  - Locations rendered
+
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"locations":[{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413629,"longitude":-43.9373061,"locationType":"RANGE_INTERPOLATED"}]}
+{"locations":[{"locationName":"","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413629,"longitude":-43.9373061,"locationType":"null"}]}
 ================================================================================
 #
 --Output from testState--
@@ -100,6 +129,18 @@ Accept: */*
 {"location":"MG"}	
 				
 ================================================================================
+2013-09-03 04:51:14,276 [http-bio-8080-exec-1] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+{"location":"MG"}	
+				
+
+2013-09-03 04:51:14,426 [http-bio-8080-exec-1] INFO  taxi.LocationController  - About to render locations (1/2)
+
+2013-09-03 04:51:14,427 [http-bio-8080-exec-1] INFO  taxi.LocationController  - Rendering locations []
+
+2013-09-03 04:51:14,427 [http-bio-8080-exec-1] INFO  taxi.LocationController  - About to render locations (2/2)
+
+2013-09-03 04:51:14,427 [http-bio-8080-exec-1] INFO  taxi.LocationController  - Locations rendered
+
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
@@ -117,8 +158,8 @@ Content of web window [TopLevelWindow[name=""]] changed
 --Output from testState--
 ------------- ---------------- ---------------
 
-Testcase: testSearchBadJSON took 0.099 sec
-Testcase: testSearchNoLocation took 0.214 sec
-Testcase: testSearchCity took 0.841 sec
-Testcase: testSearchStreet took 0.22 sec
-Testcase: testState took 0.186 sec
+Testcase: testSearchBadJSON took 0.185 sec
+Testcase: testSearchNoLocation took 0.09 sec
+Testcase: testSearchCity took 4.745 sec
+Testcase: testSearchStreet took 0.564 sec
+Testcase: testState took 0.193 sec

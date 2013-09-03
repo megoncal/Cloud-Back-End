@@ -3,7 +3,6 @@ package com.moovt.taxi
 import java.util.Date;
 
 import com.moovt.MultiTenantAudit;
-import com.moovt.common.Location;
 import com.moovt.DomainHelper;
 
 enum RideStatus {
@@ -16,14 +15,9 @@ enum RideStatus {
  * @author egoncalves
  *
  */
-//@MultiTenantAudit
+@MultiTenantAudit
 class Ride {
 
-	Long tenantId;
-	Long createdBy;
-	Long lastUpdatedBy;
-	Date lastUpdated;
-	Date dateCreated;
 
     RideStatus rideStatus  
 	Driver driver
@@ -38,11 +32,6 @@ class Ride {
 	String messageToTheDriver
 	
 	static constraints = {
-		tenantId nullable: true
-		createdBy nullable: true
-		lastUpdatedBy nullable: true
-		lastUpdated nullable: true
-		dateCreated nullable: true
 
 		driver nullable: true
 		rating nullable: true
@@ -51,12 +40,5 @@ class Ride {
 		messageToTheDriver nullable: true
 	}
 	
-	def beforeInsert () {
-		DomainHelper.setAuditAttributes(this);
-	}
-	
-	def beforeUpdate () {
-		DomainHelper.setAuditAttributes(this);
-	}
 	
 }

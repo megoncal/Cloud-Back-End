@@ -1,7 +1,7 @@
---Output from testGetCarTypeEnumEnglish--
---Output from testGetCarTypeEnumPortuguese--
 --Output from testGetActiveStatusEnumEnglish--
 --Output from testGetActiveStatusEnumPortugues--
+--Output from testGetCarTypeEnumEnglish--
+--Output from testGetCarTypeEnumPortuguese--
 --Output from testCreateUserDriverEnglish--
 --Output from testCreateUserPassengerEnglish--
 --Output from testCreateUserPassengerWithTokenEnglish--

@@ -1,128 +1,67 @@
 package com.moovt.common
 
-import org.codehaus.groovy.grails.web.json.JSONObject
-import org.codehaus.groovy.grails.web.json.JSONArray
-import org.springframework.context.MessageSource
-import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.core.Authentication
-import org.springframework.validation.FieldError
-import org.springframework.web.multipart.commons.CommonsMultipartFile
-import grails.converters.*
-
-import com.moovt.CallResult;
-import com.moovt.ConcurrencyException
-import com.moovt.CustomGrailsUser
-import com.moovt.NotificationService
-import com.moovt.QueryUtils
-import com.moovt.TenantAuthenticationToken
-import com.moovt.UUIDWrapper;
-import com.moovt.UserService
-import com.moovt.UtilService
-import com.moovt.common.Role;
-import com.moovt.common.Tenant;
-import com.moovt.common.User;
-import com.moovt.common.UserRole;
-import com.moovt.taxi.Driver
-import com.moovt.taxi.Passenger
-import com.moovt.LogUtils
-
-import grails.validation.ValidationException
-import java.util.UUID
+import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
 
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.codehaus.groovy.grails.web.json.JSONObject
+import org.springframework.context.MessageSource
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 
-import org.codehaus.groovy.grails.web.json.JSONObject;
-import org.springframework.dao.OptimisticLockingFailureException;
-
-import org.springframework.web.servlet.support.RequestContextUtils;
-
-import org.springframework.security.core.AuthenticationException
-
+import com.moovt.ConcurrencyException
+import com.moovt.CustomGrailsUser
+import com.moovt.HandlerService
+import com.moovt.NotificationService
+import com.moovt.TenantAuthenticationToken
+import com.moovt.taxi.Driver
+import com.moovt.taxi.Location
+import com.moovt.taxi.Passenger
 import com.notnoop.apns.APNS
-import com.notnoop.apns.PayloadBuilder
-import com.notnoop.apns.SimpleApnsNotification
 import com.notnoop.apns.ApnsService
+import com.notnoop.apns.PayloadBuilder
 
 class UserController {
 
-	UserService userService;
 	MessageSource messageSource; //inject the messageSource bean
-	UtilService utilService; //inject the utilService bean
+	HandlerService handlerService; //inject the utilService bean
 	AuthenticationManager authenticationManager; //injection of the authenticationManager required to log in the recently created user
 	NotificationService notificationService;
-	
 	ApnsService apnsService
 
 	//9a1cd758 47e20f1a 27132790 dfe1a0cb 4107f42d a1a39c01 9dd1a082 0fc5c504
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	def test() {
+		def moovtAdminUser = new MyTest(
+			tenantId: 1,
+			createdBy: 1,
+			lastUpdatedBy: 1,
+			test: 'admin',
+			test2: '911admin').save(failOnError: true);
+			render "DONE";
+	}
 	def apns() {
 		try {
 			PayloadBuilder payloadBuilder = APNS.newPayload();
-		payloadBuilder.alertBody("Can't be simpler than this!Hey");
-		String payload = payloadBuilder.build();
-		
-		String token = "9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504";
-		                //9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504
-		log.info("Now pushing");
-		
-		apnsService.push(token, payload);
-		
-						log.info("Pushed");
+			payloadBuilder.alertBody("Can't be simpler than this!Hey");
+			String payload = payloadBuilder.build();
+
+			String token = "9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504";
+			//9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504
+			log.info("Now pushing");
+
+			apnsService.push(token, payload);
+
+			log.info("Pushed");
+			render "OK";
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Could not connect to APNs to send the notification - " + e.message)
 		}
 	}
 
-	
-	def ok() {
-		MyTest myTest = new MyTest();
-		myTest.tenantId = 1;
-		myTest.createdBy = 1;
-		myTest.lastUpdatedBy = 1;
-		myTest.a = 'aValue';
-		myTest.b = 'bValue';
-		myTest.save();
-	}
-	def test() {
-
-		User user;
-		//try {
-		//User.withTransaction { status ->
-		log.info ("HERE");
-		int i = 0;
-		//MyTest myTest = MyTest.get(1);
-		//myTest.a = 'asx';
-		//int j = 1/i;
-		user = User.get(6);
-		user.firstName = 'TESTxxxsss';
-		//log.info ("HERE1" + user.isDirty());
-		//User user1 = User.get(6);
-		//log.info ("HERE2" + user.firstName);
-		//String a = user.encodeAsJSON();
-		log.info ("HERE3")
-		user.save();
-		//myTest.save();
-		log.info ("HERE3.1")
-
-		//userService.updateUser(user);
-
-		//}
-		log.info ("HERE4");
-		String a = user.encodeAsJSON();
-		//String a = myTest.encodeAsJSON();
-		//			} catch (ConcurrencyException e) {
-		//log.info ("HERE1");
-
-		//		}
-
-	}
-
-	
 	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
 	def main() {
 	}
@@ -145,16 +84,12 @@ class UserController {
 		try {
 			userJsonObject = new JSONObject(model);
 
-
-
 			//For methods without the need of authentication, verify if the tenant exists
 			String tenantname = userJsonObject.optString("tenantname","");
 
 			Tenant tenant = Tenant.findByName(tenantname);
 			if (!tenant) {
-				String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
-				log.warn (msgTenantDoesNotExist)
-				render new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist).getJSON();
+				handlerService.handleSystemError('This tenant does not exist ('+ tenantname + ')');
 				return;
 			}
 
@@ -163,6 +98,7 @@ class UserController {
 
 			//Upon successful completion of the transaction below, this user will be populated
 			User user;
+
 
 			User.withTransaction { status ->
 				log.info("Creating a new user and/or driver and/or passenger");
@@ -182,11 +118,6 @@ class UserController {
 				if (driverJSON) {
 					//Handle the driver's served location inside the driver JSON
 					JSONObject servedLocationJSON = driverJSON.opt("servedLocation");
-					if (!servedLocationJSON) {
-						status.setRollbackOnly();
-						render new CallResult(CallResult.SYSTEM,CallResult.ERROR, 'A servedLocation JSON element must existing inside a driver JSON').getJSON();
-						return;
-					}
 					Location servedLocation = new Location (servedLocationJSON);
 					servedLocation.tenantId = tenant.id;
 					servedLocation.createdBy = user.id;
@@ -228,7 +159,7 @@ class UserController {
 				user.save(failOnError:true);
 
 				//Authenticate this user, please note the use of password in its non-encoded format
-				TenantAuthenticationToken token = new TenantAuthenticationToken(user.username, password,user.tenantname, user.locale);
+				TenantAuthenticationToken token = new TenantAuthenticationToken(user.username, password,user.tenantname);
 				Authentication auth = authenticationManager.authenticate(token);
 				SecurityContextHolder.getContext().setAuthentication(auth);
 
@@ -236,13 +167,10 @@ class UserController {
 			}// End of the Transaction
 
 			String sessionId = session.getId();
-			String msg = message(code: 'default.created.message',
-			args: [message(code: 'User.label', default: 'User'), user.username ])
-
-			utilService.handleSuccessWithSessionId(msg, sessionId);
+			handlerService.handleSuccess('default.created.message', [message(code: 'User.label', default: 'User'), user.username ] as Object[], "\"additionalInfo\":" + ([JSESSIONID: sessionId] as JSON))
 
 		} catch (Throwable e) {
-			utilService.handleException(e);
+			handlerService.handleException(e);
 		}
 	}
 
@@ -269,26 +197,102 @@ class UserController {
 			assert user != null, "Because this method is secured, a principal/user always exist at this point of the code"
 
 
-			//Start a transaction to update based on the existence of an id
 
-			userService.updateUser(user, userJSON);
 
-			log.info("Before message rendered");
+			log.info("Retrieved User: " + user.dump());
 
-			String msg = message(code: 'default.updated.message',
-			args: [message(code: 'User.label', default: 'User'), user.username])
-			render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, msg).encodeAsJSON() + ", " +"\"user\":" + user.encodeAsJSON() + "}";
-			//render "{\"result\":" + new CallResult(CallResult.USER, CallResult.SUCCESS, "ok").encodeAsJSON();
+			//Obtain version from the json object
+			Long version = userJSON.optLong("version",0);
 
-			log.info("Message rendered");
+			//Before updating - check for concurrency
+			log.info("Comparing retrieved User Version " + user.version + " with JSON Version " + version);
 
-		} catch (ConcurrencyException e) {
-			log.info("A concurrency Exception occurred");
-			render new CallResult(CallResult.USER, CallResult.ERROR, message (code: 'com.moovt.concurrent.update')).getJSON();
+			if (user.version > version) {
+				handlerService.handleUserError('com.moovt.concurrent.update',null);
+				return;
+			}
+			user.properties = userJSON;
+
+			User.withTransaction { status ->
+				//Handle Driver type
+				JSONObject driverJSON = userJSON.opt("driver");
+
+
+
+				if (driverJSON) {
+					//Handle the driver's served location inside the driver JSON
+					JSONObject servedLocationJSON = driverJSON.get("servedLocation");
+
+					//Handle car Type
+					JSONObject carTypeJSON = driverJSON.get("carType");
+
+
+					//Handle Active Status
+					JSONObject activeStatusJsonObject = driverJSON.get("activeStatus");
+
+					if (!user.driver) {
+						log.info("Creating driver");
+						Driver driver = new Driver(driverJSON);
+						Location servedLocation = new Location(servedLocationJSON);
+						servedLocation.save(failOnError:true);
+						driver.servedLocation = servedLocation;
+						driver.carType = carTypeJSON.get("code");
+						driver.activeStatus = activeStatusJsonObject.get("code");
+						driver.user = user
+						user.driver = driver;
+					} else {
+						log.info("Updating servedLocation, carType, and activeStatus");
+						user.driver.servedLocation.properties = servedLocationJSON;
+						user.driver.carType = carTypeJSON.get("code");
+						user.driver.activeStatus = activeStatusJsonObject.get("code");
+						user.lastUpdated = new Date(); //This forces the update of user
+					}
+
+					log.info("Driver being saved " + user.driver.dump());
+					user.driver.save(failOnError:true);
+
+
+					//Assign the driver role
+					def driverRole = Role.findByTenantIdAndAuthority(user.tenantId, 'ROLE_DRIVER')
+					if (!user.authorities.contains(driverRole)) {
+						UserRole.create ( user.tenantId, user, driverRole)
+					}
+
+				}
+
+				//Handle Passenger type
+				JSONObject passengerJSON = userJSON.opt("passenger");
+				if (passengerJSON) {
+					Passenger passenger = user.passenger;
+					if (!passenger) {
+						passenger = new Passenger(passengerJSON);
+						passenger.user = user
+						user.passenger = passenger;
+
+					} else {
+						passenger.properties = passengerJSON
+					}
+
+					log.info("Passenger being saved " + driver.dump());
+					passenger.save(failOnError:true);
+
+
+					// Assign the passenger role
+					def passengerRole = Role.findByTenantIdAndAuthority(user.tenantId, 'ROLE_PASSENGER')
+					if (!user.authorities.contains(passengerRole)) {
+						UserRole.create ( user.tenantId, user, passengerRole)
+					}
+				}
+
+				log.info("User being saved " + user.dump());
+				user.save(failOnError:true);
+			}
+
+
+			handlerService.handleSuccess('default.updated.message', [message(code: 'User.label', default: 'User'), user.username] as Object[], "\"user\":" + user.encodeAsJSON());
 		} catch (Throwable e) {
-			utilService.handleException(e);
+			handlerService.handleException(e);
 		}
-
 
 	}
 
@@ -322,12 +326,12 @@ class UserController {
 			}
 
 			if(!users) {
-				utilService.handleUserError(message (code: 'com.moovt.common.User.notFound'));
+				handlerService.handleUserError('com.moovt.common.User.notFound',null);
 			} else {
 				render "{\"users\":" + users.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			utilService.handleException(e);
+			handlerService.handleException(e);
 		}
 	}
 
@@ -366,12 +370,12 @@ class UserController {
 
 			if(!user) {
 				def error = ['error':'No User Found']
-				utilService.handleUserError(message (code: 'com.moovt.common.User.notFound'));
+				handlerService.handleUserError('com.moovt.common.User.notFound', null);
 			} else {
 				render "{\"user\":" + user.encodeAsJSON() + "}"
 			}
 		} catch (Throwable e) {
-			utilService.handleException(e);
+			handlerService.handleException(e);
 		}
 
 
@@ -405,7 +409,7 @@ class UserController {
 
 			render "{\"user\":" + user.encodeAsJSON() + "}"
 		} catch (Throwable e) {
-			utilService.handleException(e);
+			handlerService.handleException(e);
 		}
 
 
@@ -436,7 +440,7 @@ class UserController {
 			if (!tenant) {
 				String msgTenantDoesNotExist = message(code: 'com.moovt.UserController.badTenant',args: [ tenantname ])
 				log.warn (msgTenantDoesNotExist)
-				render new CallResult(CallResult.SYSTEM, CallResult.ERROR, msgTenantDoesNotExist).getJSON();
+				handlerService.handleSystemError('This tenant does not exist ('+ tenantname + ')');
 				return;
 			}
 
@@ -451,8 +455,7 @@ class UserController {
 			}
 
 			if (!user) {
-				String msgEmailDoesNotExist = message(code: 'com.moovt.UserController.emailNotFound',args: [ email ])
-				utilService.handleUserError(msgEmailDoesNotExist);
+				handlerService.handleUserError('com.moovt.UserController.emailNotFound',[email] as Object[]);
 				return;
 			}
 
@@ -462,14 +465,11 @@ class UserController {
 
 			User.withTransaction { status ->
 				user.save()
-
 				notificationService.notifyPasswordChanged (user, resetPassword);
 			}
-			String msg = message(code: 'com.moovt.UserController.newPasswordSent',
-			args: [ email ])
-			utilService.handleSuccess(msg);
+			handlerService.handleSuccess('com.moovt.UserController.newPasswordSent', [email] as Object[]);
 		} catch (Throwable e) {
-			utilService.handleException(e);
+			handlerService.handleException(e);
 		}
 	}
 

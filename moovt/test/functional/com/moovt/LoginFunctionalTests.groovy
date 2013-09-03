@@ -19,7 +19,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -37,7 +37,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"admin"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				"""
 			}
 		}
@@ -61,7 +61,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "Authentication failed because no company was provided. Please enter a company."
 	}
 
@@ -76,8 +76,8 @@ class LoginFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "SYSTEM"
 		assertContentContains "ERROR"
+		assertContentContains "USER"
 		assertContentContains "A companhia deve ser preenchida"
 	}
 	
@@ -93,14 +93,15 @@ class LoginFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
-		assertContentContains "This company (BadTenant) was not found"
+		assertContentContains "USER"
+		assertContentContains "This company (BadTenant) was not found. Please enter a valid company name."
 	}
 
 	void testLoginTenantNotFoundPortuguese() {
 		post('/login/authenticateUser') {
 			headers['Content-Type'] = 'application/json'
 			headers['Accept-Language'] = 'pt-BR'
+			headers['Accept-Charset'] = 'UTF-8'
 			body {
 				"""
 				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
@@ -108,9 +109,9 @@ class LoginFunctionalTests extends BrowserTestCase {
 			}
 		}
 		assertStatus 200
-		assertContentContains "SYSTEM"
 		assertContentContains "ERROR"
-		assertContentContains "Esta companhia (BadTenant) não foi encontrada"
+		assertContentContains "USER"
+		assertContentContains "Esta companhia (BadTenant) n√£o foi encontrada"
 	}
 
 	void testLoginNoPasswordEnglish() {
@@ -119,13 +120,13 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":""}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "Authentication failed because no password was provided. Please enter a password."
 	}
 	
@@ -135,13 +136,13 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
+				{"type":"Self","tenantname": "MTaxi", "username": "", "password":"admin"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "Authentication failed because no username was provided. Please enter a username."
 	}
 	
@@ -151,7 +152,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"badPw"}
 				"""
 			}
 		}
@@ -167,13 +168,13 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":""}
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":""}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "A senha deve ser preenchida."
 	}
 	
@@ -183,14 +184,14 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "", "password":"admin"}
+				{"type":"Self","tenantname": "MTaxi", "username": "", "password":"admin"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
-		assertContentContains "O nome do usuário deve ser preenchido."
+		assertContentContains "USER"
+		assertContentContains "O nome do usu√°rio deve ser preenchido."
 	}
 	
 	void testLoginFailedPortuguese() {
@@ -199,14 +200,14 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname": "naSavassi", "username": "admin", "password":"badPw"}
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"badPw"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Usuário e senha inválidos."
+		assertContentContains "Usu√°rio e senha inv√°lidos."
 	} 
 
 	void testLoginWithApnsToken() {
@@ -215,7 +216,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jWillGainApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
+				{"type":"Self","tenantname":"MTaxi","username":"jWillGainApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
 
 				"""
 			}
@@ -230,7 +231,7 @@ class LoginFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jKeepApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
+				{"type":"Self","tenantname":"MTaxi","username":"jKeepApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
 
 				"""
 			}

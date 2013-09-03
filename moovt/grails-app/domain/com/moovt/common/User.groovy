@@ -7,10 +7,9 @@ import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import com.moovt.MultiTenantAudit;
-import com.moovt.taxi.Passenger;
-import com.moovt.taxi.Driver;
-
 import com.moovt.DomainHelper;
+import com.moovt.taxi.Driver;
+import com.moovt.taxi.Passenger;
 
 enum UserType  {
 	DRIVER, PASSENGER, DRIVER_PASSENGER, NO_TYPE
@@ -23,16 +22,10 @@ enum UserType  {
  * @author egoncalves
  *
  */
-//@MultiTenantAudit
+@MultiTenantAudit
 class User  {
 
 	transient  springSecurityService
-
-	Long tenantId;
-	Long createdBy;
-	Long lastUpdatedBy;
-	Date lastUpdated;
-	Date dateCreated;
 
 	//DB properties
 	String username
@@ -60,18 +53,14 @@ class User  {
 	static transients = [ "tenantname"]  ;
 
 	static constraints = {
-		tenantId nullable: true
-		createdBy nullable: true
-		lastUpdatedBy nullable: true
-		lastUpdated nullable: true
-		dateCreated nullable: true
+
 
 		firstName nullable:false, blank: false
 		lastName nullable:false, blank: false
 		phone nullable:false, blank: false
 		username nullable:false, blank: false, unique: ['tenantId']
 		password nullable:false, blank: false
-		email nullable:false, blank: false //, unique: true
+		email nullable:false, blank: false, unique: true
 		tenantname bindable: true
 		passenger nullable:true
 		driver nullable:true
@@ -86,21 +75,17 @@ class User  {
 
 
 	Set<Role> getAuthorities() {
-		log.info("Getting Authorities (tenantId: " + this.tenantId + ", and User: " + this.id + ") ");
-		log.info(UserRole.findAllByTenantIdAndUser(tenantId,this));
 		UserRole.findAllByTenantIdAndUser(tenantId, this).collect { it.role } as Set
 	}
 
 	def beforeInsert() {
 		encodePassword()
-		DomainHelper.setAuditAttributes(this);
 	}
 
 	def beforeUpdate() {
 		if (isDirty('password')) {
 			encodePassword()
 		}
-		DomainHelper.setAuditAttributes(this);
 	}
 
 	protected void encodePassword() {

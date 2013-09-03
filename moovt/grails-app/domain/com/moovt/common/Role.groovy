@@ -11,15 +11,9 @@ import com.moovt.DomainHelper;
  * @author egoncalves
  *
  */
-//@MultiTenantAudit
+@MultiTenantAudit
 class Role {
-
-	Long tenantId;
-	Long createdBy;
-	Long lastUpdatedBy;
-	Date lastUpdated;
-	Date dateCreated;
-	
+	 
 	String authority
 	
 	static mapping = {
@@ -28,21 +22,11 @@ class Role {
 
 	
 	static constraints = {
-		tenantId nullable: true
-		createdBy nullable: true
-		lastUpdatedBy nullable: true
-		lastUpdated nullable: true
-		dateCreated nullable: true
+
 		
 		authority blank: false, unique: ['tenantId']
 
 	}
 	
 	
-	def beforeInsert () {
-		DomainHelper.setAuditAttributes(this);
-	}
-	
-	def beforeUpdate () {
-		DomainHelper.setAuditAttributes(this);
-	}}
+}

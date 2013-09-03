@@ -1,5 +1,12 @@
+--Output from testCloseRideAlreadyClosed--
+--Output from testCloseRideUnsassignedError--
+--Output from testCancelRideSuccessEnglish--
+--Output from testCancelRideSuccessPortuguese--
+--Output from testCancelRideNotFoundEnglish--
+--Output from testCancelRideNotFoundPortuguese--
 --Output from testRetrievePassengerRidesEnglish--
 --Output from testRetrieveUnassignedRideInServedAreaEnglish--
+--Output from testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish--
 --Output from testAssignRideToDriverEnglish--
 --Output from testRetrieveAllRidesEnglish--
 --Output from testRetrieveAssignedRidesEnglish--
@@ -9,9 +16,3 @@
 --Output from testCloseRideSuccessEnglish--
 --Output from testCloseRideSuccessPortuguese--
 --Output from testCloseRideBadMessage--
---Output from testCloseRideAlreadyClosed--
---Output from testCloseRideUnsassignedError--
---Output from testCancelRideSuccessEnglish--
---Output from testCancelRideSuccessPortuguese--
---Output from testCancelRideNotFoundEnglish--
---Output from testCancelRideNotFoundPortuguese--

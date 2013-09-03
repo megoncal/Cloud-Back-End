@@ -1,21 +1,22 @@
 package com.moovt
 
-import com.moovt.common.Location;
-import com.moovt.common.LocationType;
-import com.moovt.common.User
+import com.moovt.common.User;
 import com.moovt.taxi.CarType
 import com.moovt.taxi.Driver;
+import com.moovt.taxi.Location;
+import com.moovt.taxi.LocationType;
 import com.moovt.taxi.Passenger
 import com.moovt.taxi.Ride
+
 import grails.plugin.mail.MailService
 import groovyx.net.http.HTTPBuilder
 import groovyx.net.http.ContentType
 import groovyx.net.http.Method
 import groovyx.net.http.RESTClient
+
 import org.hibernate.Query
 import org.hibernate.Session
 import org.hibernate.SessionFactory
-
 import org.codehaus.groovy.grails.commons.GrailsApplication
 
 

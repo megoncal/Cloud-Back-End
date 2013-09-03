@@ -1,4 +1,3 @@
---Output from testLoginBadMessage--
 --Output from testLoginSuccessEnglish--
 --Output from testLoginSuccessPortuguese--
 --Output from testLoginNoTenantEnglish--
@@ -13,3 +12,4 @@
 --Output from testLoginFailedPortuguese--
 --Output from testLoginWithApnsToken--
 --Output from testLoginKeepApnsToken--
+--Output from testLoginBadMessage--

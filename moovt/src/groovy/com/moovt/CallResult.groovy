@@ -1,12 +1,5 @@
 package com.moovt
 
-import grails.validation.ValidationErrors
-import org.apache.commons.logging.Log
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.MessageSource
-import org.springframework.context.MessageSourceResolvable
 
 /**
  * Encapsulates the results of a JSON call. It is used in the return of several JSON call to indicate the code, message and type of message (i.e. USER or SYSTEM).
@@ -27,8 +20,6 @@ class CallResult {
 	static String USER = "USER"
 	static String SYSTEM = "SYSTEM"
 
-	protected static final Logger log = LoggerFactory.getLogger(getClass());
-
 	public CallResult(String type, String code, String message) {
 		super();
 		this.type = type;
@@ -40,9 +31,8 @@ class CallResult {
 
 	}
 	
-	public String getJSON() {
-		return "{\"result\":" + this.encodeAsJSON() + "}";
-	}
-
-	
+//	public String getJSON() {
+//		//return "{\"type\":\"" + this.type + "\",\"code\":\"" + this.code + "\",\"message\":\"" + this.message + "\"}";
+//		return ([type: this.type, code: this.code, message: this.message] as JSON);
+//	}	
 }

@@ -29,7 +29,7 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "SYSTEM"
-		assertContentContains "This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user."
+		assertContentContains "This tenant does not exist (TheBadTenant)"
 	}
 
 	void testCreateUserSuccessEnglish() {
@@ -38,7 +38,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				{"tenantname": "Moovt", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
@@ -54,15 +54,45 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				{"tenantname": "Moovt", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "SUCCESS"
 		assertContentContains "USER"
-		assertContentContains "Usuário moovieLover criado"
+		assertContentContains "Usu√°rio moovieLover criado"
 	}
+
+//	void testUtf1() {
+//		post('/user/utfwork') {
+//			headers['Content-Type'] = 'application/json'
+//			headers['Accept-Language'] = 'pt-BR'
+//			body {
+//				"""
+//				"""
+//			}
+//		}
+//		assertStatus 200
+//		assertContentContains "√°"
+//		assertContentContains "√£"
+//
+//	}
+//
+//	void testUtf2() {
+//		post('/user/utfbroke') {
+//			headers['Content-Type'] = 'application/json'
+//			headers['Accept-Language'] = 'pt-BR'
+//			body {
+//				"""
+//				"""
+//			}
+//		}
+//		assertStatus 200
+//		assertContentContains "√°"
+//		assertContentContains "√£"
+//
+//	}
 
 	void testCreateUserNoUserNameEnglish() {
 		post('/user/createUser') {
@@ -70,13 +100,13 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				{"tenantname": "Moovt", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "The user name must be provided"
 	}
 
@@ -86,14 +116,14 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				{"tenantname": "Moovt", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
-		assertContentContains "O nome do usuário deve ser preenchido"
+		assertContentContains "USER"
+		assertContentContains "O nome do usu√°rio deve ser preenchido"
 	}
 
 	void testCreateUserNoPasswordEnglish() {
@@ -102,13 +132,13 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				{"tenantname": "Moovt", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "The password must be provided"
 	}
 
@@ -118,13 +148,13 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				{"tenantname": "Moovt", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "A senha deve ser preenchida."
 	}
 
@@ -134,13 +164,13 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				{"tenantname": "Moovt","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "The email must be provided"
 	}
 
@@ -150,13 +180,13 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", "lastName": "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				{"tenantname": "Moovt","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", "lastName": "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
-		assertContentContains "SYSTEM"
+		assertContentContains "USER"
 		assertContentContains "O email deve ser preenchido"
 	}
 
@@ -166,7 +196,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"duplicateUsernameTestEnglish@test.com", "username": "duplicateUser", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				{"tenantname": "Moovt", "email":"duplicateUser@test.com", "username": "duplicateUser", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
@@ -182,14 +212,14 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"duplicateUsernameTestPortuguese@test.com", "username": "duplicateUser", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}				
+				{"tenantname": "Moovt", "email":"duplicateUser@test.com", "username": "duplicateUser", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}				
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Este usuário (duplicateUser) já existe"
+		assertContentContains "Este usu√°rio (duplicateUser) j√° existe"
 	}
 
 	void testCreateUserDuplicateEmailEnglish() {
@@ -198,14 +228,14 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
+				{"tenantname": "Moovt", "email":"existingEmail@moovt.com", "username": "userWithSameEmail", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "This email (existingEmail@test.com) already exists"
+		assertContentContains "This email (existingEmail@moovt.com) already exists"
 	}
 
 	void testCreateUserDuplicateEmailPortuguese() {
@@ -214,14 +244,14 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "naSavassi", "email":"existingEmail@test.com", "username": "userWithSameEmail", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
+				{"tenantname": "Moovt", "email":"existingEmail@moovt.com", "username": "userWithSameEmail", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Este email (existingEmail@test.com) já existe"
+		assertContentContains "Este email (existingEmail@moovt.com) j√° existe"
 	}
 
 	void testResetPasswordSuccessEnglish() {
@@ -232,7 +262,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				{"tenantname": "Moovt", "email":"jforgetful@moovt.com"}
 				"""
 			}
 		}
@@ -257,7 +287,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				{"tenantname": "Moovt", "email":"jforgetful@moovt.com"}
 				"""
 			}
 		}
@@ -274,7 +304,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantXame": "WorldTaxi", "email":"jforgetful@worldtaxi.com"}
+				{"tenantXame": "Moovt", "email":"jforgetful@moovt.com"}
 				"""
 			}
 		}
@@ -289,7 +319,7 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname": "WorldTaxi", "emailX":"jforgetful@worldtaxi.com"}
+				{"tenantname": "Moovt", "emailX":"jforgetful@moovt.com"}
 				"""
 			}
 		}
@@ -299,20 +329,36 @@ class UserFunctionalTests extends BrowserTestCase {
 		assertContentContains "JSONObject[\\\"email\\\"] not found"
 	}
 
+	void testResetPasswordTenantNotFound() {
+		post('/user/resetPassword') {
+			headers['Content-Type'] = 'application/json'
+			headers['Accept-Language'] = 'en-US'
+			body {
+				"""
+				{"tenantname": "TheBadTenant", "email":"jforgetful@moovt.com"}
+				"""
+			}
+		}
+		assertStatus 200
+		assertContentContains "ERROR"
+		assertContentContains "SYSTEM"
+		assertContentContains "This tenant does not exist (TheBadTenant)"
+	}
+	
 	void testResetPasswordTenantEmailNotFoundEnglish() {
 		post('/user/resetPassword') {
 			headers['Content-Type'] = 'application/json'
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname": "WorldTaxi", "email":"jforgetfulx@worldtaxi.com"}
+				{"tenantname": "Moovt", "email":"jforgetfulx@moovt.com"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "This email (jforgetfulx@worldtaxi.com) was not found in the system."
+		assertContentContains "This email (jforgetfulx@moovt.com) was not found in the system."
 	}
 
 	void testResetPasswordTenantEmailNotFoundPortuguese() {
@@ -321,14 +367,14 @@ class UserFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'pt-BR'
 			body {
 				"""
-				{"tenantname": "WorldTaxi", "email":"jforgetfulx@worldtaxi.com"}
+				{"tenantname": "Moovt", "email":"jforgetfulx@moovt.com"}
 				"""
 			}
 		}
 		assertStatus 200
 		assertContentContains "ERROR"
 		assertContentContains "USER"
-		assertContentContains "Este email (jforgetfulx@worldtaxi.com) não foi encontrado no sistema."
+		assertContentContains "Este email (jforgetfulx@moovt.com) n√£o foi encontrado no sistema."
 	}
 }
 

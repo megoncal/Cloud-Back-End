@@ -15,7 +15,6 @@ import org.springframework.security.core.authority.GrantedAuthorityImpl
 import org.springframework.security.core.userdetails.UserDetailsChecker
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.codehaus.groovy.grails.commons.GrailsApplication
-
 import org.codehaus.groovy.grails.web.util.WebUtils
 import org.springframework.web.context.request.ServletWebRequest
 import org.springframework.web.servlet.support.RequestContextUtils
@@ -46,34 +45,13 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 		String password = authentication.credentials
 		String username = authentication.name
 		String tenantName = authentication.tenantName
-		//The local variable locale will be used to get messages from Message Source
-		def webUtils = WebUtils.retrieveGrailsWebRequest();
-		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
-		
-		MessageSource messageSource = grailsApplication.getMainContext().getBean('messageSource')
 		
 		log.info("Authenticating user: " + username + " tenant: " + tenantName + " password: " + password);
-
-		if (tenantName == "") {
-			String [] args = {};
-			throw new BadDataAuthenticationException(messageSource.getMessage("com.moovt.blank.company", args, "Company/Tenant is blank", locale));
-		}
 		
 		Tenant tenant = Tenant.findByName (tenantName);
 		
-		if (!tenant) {
-			String [] args = [ tenantName ];
-			throw new BadDataAuthenticationException(messageSource.getMessage("com.moovt.company.notFound", args, "Company/Tenant not found", locale));
-		}
-
-		if (username == "") {
-			String [] args = {};
-			throw new BadDataAuthenticationException(messageSource.getMessage("com.moovt.blank.username", args, "Username is blank", locale));
-		}
-
-		if (password == "") {
-			String [] args = {};
-			throw new BadDataAuthenticationException(messageSource.getMessage("com.moovt.blank.password", args, "Password is blank", locale));
+		if ((!tenant) || (username == "") || (password == "")) {
+			throw new BadDataAuthenticationException();
 		}
 		
 		CustomGrailsUser userDetails
@@ -85,7 +63,7 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 
 		if (!user) {
 			String [] args = {};
-			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.invalid.usernamepassword", args, "User was not found", locale));
+			throw new TenantUserPasswordAuthenticationException();
 		}
 
 			authorities = user.authorities.collect { new GrantedAuthorityImpl(it.authority) }
@@ -93,7 +71,7 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 
 			userDetails = new CustomGrailsUser(user.username, user.password,
 				user.enabled, !user.accountExpired, !user.passwordExpired,
-				!user.accountLocked, authorities, user.id, user.tenantId, user.locale)
+				!user.accountLocked, authorities, user.id, user.tenantId)
 		}
 
 		preAuthenticationChecks.check userDetails
@@ -108,17 +86,12 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 
 	protected void additionalAuthenticationChecks(GrailsUser userDetails,
 			  TenantAuthenticationToken authentication) throws AuthenticationException {
-			  
-
-		MessageSource messageSource = grailsApplication.getMainContext().getBean('messageSource')
-		def webUtils = WebUtils.retrieveGrailsWebRequest();
-		Locale locale = RequestContextUtils.getLocale(webUtils.getCurrentRequest());
-		
+			  		
 		def salt = saltSource.getSalt(userDetails)
 
 		if (authentication.credentials == null) {
 			String [] args = {};
-			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.invalid.usernamepassword", args, "User was not found", locale));
+			throw new TenantUserPasswordAuthenticationException();
 		}
 
 		String presentedPassword = authentication.credentials
@@ -126,8 +99,7 @@ class TenantAuthenticationProvider implements AuthenticationProvider {
 		log.info ("Checking password. Presented password is " + presentedPassword + " vs. Stored password " + userDetails.password + " with salt as " + salt);
 		
 		if (!passwordEncoder.isPasswordValid(userDetails.password, presentedPassword, salt)) {
-			String [] args = {};
-			throw new TenantUserPasswordAuthenticationException(messageSource.getMessage("com.moovt.invalid.usernamepassword", args, "User was not found", locale));
+				throw new TenantUserPasswordAuthenticationException();
 		}
 	}
 

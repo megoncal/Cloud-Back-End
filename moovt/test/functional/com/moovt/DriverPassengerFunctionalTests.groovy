@@ -76,7 +76,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Accept-Language'] = 'en-US'
 			body {
 				"""
-				{"tenantname":"WorldTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@worldtaxi.com","locale":"en-US","driver":{"carType" : {"code" : "A_SEDAN","description" : "Sedan"},"servedLocation":{"locationName":"ARua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":{"code" : "ENABLED"}}}
+				{"tenantname":"MTaxi","firstName":"David","lastName":"Ultrafast","username":"dultrafast","password":"Welcome!1","phone":"773-329-1784","email":"dultrafast@mtaxi.com","locale":"en-US","driver":{"carType" : {"code" : "A_SEDAN","description" : "Sedan"},"servedLocation":{"locationName":"ARua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"activeStatus":{"code" : "ENABLED"}}}
 				"""
 			}
 		}
@@ -91,7 +91,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname":"WorldTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@worldtaxi.com","locale":"en-US","passenger":{}}}
+				{"tenantname":"MTaxi","firstName":"John","lastName":"Airjunkie","username":"jairjunkie","password":"Welcome!1","phone":"773-329-1784","email":"jairjunkie@mtaxi.com","locale":"en-US","passenger":{}}}
 				"""
 			}
 		}
@@ -106,7 +106,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"tenantname":"WorldTaxi","firstName":"John","lastName":"TestToken","username":"testToken","password":"Welcome!1","phone":"773-329-1784","email":"testToken@moovt.com","locale":"en-US","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504", "passenger":{}}}
+				{"tenantname":"MTaxi","firstName":"John","lastName":"TestToken","username":"testToken","password":"Welcome!1","phone":"773-329-1784","email":"testToken@moovt.com","locale":"en-US","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504", "passenger":{}}}
 				"""
 			}
 		}
@@ -122,7 +122,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"wheatonCityDriverUser","password":"Welcome!1",locale:"pt_BR"}
+				{"type":"Self","tenantname":"MTaxi","username":"wheatonCityDriverUser","password":"Welcome!1",locale:"pt_BR"}
 				"""
 			}
 		}
@@ -131,7 +131,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"version":"4","firstName":"John","lastName":"OldWeathon","username":"wheatonCityDriverUser","password":"Welcome!1","phone":"773-329-1784","email":"oldWheaton@worldtaxi.com","locale":"en-US","driver":{"servedLocation":{"locationName":"Functional Test Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}
+				{"version":"4","firstName":"John","lastName":"OldWeathon","username":"wheatonCityDriverUser","password":"Welcome!1","phone":"773-329-1784","email":"oldWheaton@mtaxi.com","locale":"en-US","driver":{"servedLocation":{"locationName":"Functional Test Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}
 				"""
 			}
 		}
@@ -148,7 +148,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
 				"""
 			}
 		}
@@ -157,7 +157,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@worldtaxi.com","locale":"en-US","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}
+				{"version":"7","firstName":"John","lastName":"DecidedToBeADriver","username":"jgoodrider","password":"Welcome!1","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","locale":"en-US","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}}
 				"""
 			}
 		}
@@ -174,7 +174,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"911admin","locale":"en_US"}
 				"""
 			}
 		}
@@ -189,8 +189,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "users"
-		assertContentContains "firstName\":\"Admin"
-		assertContentContains "firstName\":\"John"
+		assertContentContains "firstName\":"
 	}
 
 	void testRetrieveUserDetailByIdEnglish() {
@@ -199,7 +198,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname": "WorldTaxi", "username": "admin", "password":"admin","locale":"en_US"}
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"911admin","locale":"en_US"}
 				"""
 			}
 		}
@@ -214,7 +213,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 		}
 		assertStatus 200
 		assertContentContains "user"
-		assertContentContains "firstName\":\"John"
+		assertContentContains "firstName\":"
 	}
 	
 	
@@ -224,7 +223,7 @@ class DriverPassengerFunctionalTests extends BrowserTestCase {
 			headers['Content-Type'] = 'application/json'
 			body {
 				"""
-				{"type":"Self","tenantname":"WorldTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1",locale:"pt_BR"}
 				"""
 			}
 		}
