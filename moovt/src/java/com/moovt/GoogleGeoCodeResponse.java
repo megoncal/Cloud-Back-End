@@ -13,6 +13,7 @@ class results{
 	public String formatted_address ;
 	public geometry geometry ;
 	public String[] types;
+	public boolean partial_match;
 	public address_component[] address_components;
 }
 

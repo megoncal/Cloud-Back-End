@@ -3,18 +3,18 @@
 		<form>
 			<div class="clSigninRow">
 					<input class="k-textbox clInputMedium" id="tenantname" name="tenantname"
-						type="text" tabindex="1" placeholder="Company Name" value="WorldTaxi"/> 
+						type="text" tabindex="1" placeholder="Company Name" value=""/> 
 					<input
 						class="k-textbox clInputMedium" id="username" name="username"
-						type="text" tabindex="2" placeholder="User Name" value="admin"/> 
+						type="text" tabindex="2" placeholder="User Name" value=""/> 
 					<input
 						class="k-textbox clInputMedium" id="password" name="password"
-						type="password" tabindex="3" placeholder="Password" value="admin"/>
+						type="password" tabindex="3" placeholder="Password" value=""/>
 			<input
 				onclick="signinUser(this); return false;"
 				type="submit" value="Sign In" tabindex="4" class="k-button" /> 
 			<input
-				type="submit" class="k-button" name="btn-signup"
+				type="submit" class="k-button" name="btn-signup" disabled=true
 				onclick="signupUser(); return false;" id="btn-signin" tabindex="5" value="Sign Up" />
 			<div id="signinMessageArea" class="clSigninMessage"></div>	
 			</div>
@@ -59,7 +59,7 @@
 	        //	 error:function(XMLHttpRequest,textStatus,errorThrown){log.info("Error from login call"+errorThrown)}});
 	        
 	        //Build and stringify a user object
-	        var userInstance =  { "tenantname" : $("#tenantname").val(), "username" : $("#username").val(), "password" : $("#password").val()} 	        	 			
+	        var userInstance =  { "type" : "Self", "tenantname" : $("#tenantname").val(), "username" : $("#username").val(), "password" : $("#password").val()} 	        	 			
 	        jQuery.ajax({type:'POST',
 	        	 data: JSON.stringify(userInstance),
 	        	 contentType: 'application/json',
@@ -75,16 +75,18 @@
 		 */
 		function handleSigninResponse(data, textStatus) {
 
-			log.info("Handling Signin Response : "+ data.code);
+			log.info("Handling Signin Response : "+ data);
+			var pdata = JSON.parse(data);
+			log.info("Handling Signin Response : "+ pdata.result.code);
 			//TODO: Why is this initialization Required? 
 			$("#tbsMain").kendoTabStrip();
 			var tabStrip = $("#tbsMain").data("kendoTabStrip");
 
-			if (data.code == "ERROR") {
-				$("#signinMessageArea").text(data.message);
+			if (pdata.result.code == "ERROR") {
+				$("#signinMessageArea").text(pdata.result.message);
 			}
 
-			if (data.code == "SUCCESS") {
+			if (pdata.result.code == "SUCCESS") {
 				removeTab("signin");
 				removeTab("news");
 				removeTab("signup");

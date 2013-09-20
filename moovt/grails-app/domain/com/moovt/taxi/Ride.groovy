@@ -2,8 +2,8 @@ package com.moovt.taxi
 
 import java.util.Date;
 
-import com.moovt.MultiTenantAudit;
-import com.moovt.DomainHelper;
+import com.moovt.audit.DomainHelper;
+import com.moovt.audit.MultiTenantAudit;
 
 enum RideStatus {
 	UNASSIGNED, ASSIGNED, COMPLETED, CANCELED

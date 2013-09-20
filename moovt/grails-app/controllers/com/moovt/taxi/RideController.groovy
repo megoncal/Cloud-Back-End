@@ -1,13 +1,15 @@
 package com.moovt.taxi
 
 import com.moovt.CallResult;
-import com.moovt.CustomGrailsUser
 import com.moovt.DriverDistance
 import com.moovt.LocationService
 import com.moovt.NotificationService;
 import com.moovt.RideDistance
 import com.moovt.HandlerService
-import com.moovt.common.User
+import com.moovt.audit.CustomGrailsUser;
+import com.moovt.audit.Tenant
+import com.moovt.audit.User;
+
 import grails.converters.JSON;
 
 import java.text.ParseException
@@ -298,7 +300,7 @@ class RideController {
 				if (ride.version > version) {
 					handlerService.handleUserError('com.moovt.concurrent.update',null);
 					return;
-	
+
 				}
 
 				if ((ride.rideStatus == RideStatus.ASSIGNED) || (ride.rideStatus == RideStatus.COMPLETED)) {
@@ -317,7 +319,7 @@ class RideController {
 
 
 			handlerService.handleSuccess('default.updated.message', [message(code: 'Ride.label', default: 'Ride'), ride.id] as Object[])
-			
+
 		} catch (Throwable e) {
 			handlerService.handleException(e);
 		}
@@ -366,7 +368,7 @@ class RideController {
 				return;
 			}
 			//Before updating - check for concurrency
-			if (ride.version > version) {				
+			if (ride.version > version) {
 				handlerService.handleUserError('com.moovt.concurrent.update',null);
 				return;
 
@@ -378,7 +380,7 @@ class RideController {
 			}
 
 			if (ride.rideStatus == RideStatus.UNASSIGNED) {
-				
+
 				handlerService.handleUserError('com.moovt.ride.unassigned', null);
 				return;
 			}
@@ -511,8 +513,8 @@ class RideController {
 			render "{\"ride\":" + clonedRide.encodeAsJSON() + "}";
 
 		} catch (Throwable e) {
-		handlerService.handleException(e);
-	}
+			handlerService.handleException(e);
+		}
 
 	}
 
@@ -565,11 +567,24 @@ class RideController {
 
 		String model = request.reader.getText();
 		log.info(this.actionName + " params are: " + params + " and model is : " + model);
-
+		JSONObject jsonObject = null;
 		try {
+			
+			jsonObject = new JSONObject(model);
+ 
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Tenant tenant = Tenant.get(principal.tenantId);
+			
 			def c = Ride.createCriteria();
 
-			def rides = Ride.list();
+			def rides = c.list {
+				and {
+					eq("tenantId",tenant.id)
+				}
+				order("lastUpdated", "desc")
+			}
 
 			if(!rides) {
 				def error = ['error':'No Rides Found']
@@ -579,7 +594,6 @@ class RideController {
 			}
 		} catch (Throwable e) {
 			handlerService.handleException(e);
-			}
-
+		}
 	}
 }

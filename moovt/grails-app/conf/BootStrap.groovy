@@ -6,10 +6,10 @@ import org.springframework.security.core.context.SecurityContextHolder
 
 import com.moovt.CallResult
 import com.moovt.DynamicEnum
-import com.moovt.common.Role
-import com.moovt.common.Tenant
-import com.moovt.common.User
-import com.moovt.common.UserRole
+import com.moovt.audit.Role;
+import com.moovt.audit.Tenant;
+import com.moovt.audit.User;
+import com.moovt.audit.UserRole;
 import com.moovt.taxi.CarType
 import com.moovt.taxi.Driver
 import com.moovt.taxi.Location

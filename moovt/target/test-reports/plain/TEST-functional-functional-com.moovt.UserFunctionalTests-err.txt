@@ -1,4 +1,6 @@
 --Output from testCreateUserBadMessage--
+2013-09-17 23:23:08,072 [http-bio-8080-exec-19] ERROR moovt.HandlerService  - A generic exception occurred A JSONObject text must begin with '{' at character 0 of 
+
 --Output from testCreateUserBadTenantEnglish--
 --Output from testCreateUserSuccessEnglish--
 --Output from testCreateUserSuccessPortuquese--
@@ -15,7 +17,11 @@
 --Output from testResetPasswordSuccessEnglish--
 --Output from testResetPasswordSuccessPortuguese--
 --Output from testResetPasswordBadMessageNoTenante--
+2013-09-17 23:23:16,908 [http-bio-8080-exec-10] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["tenantname"] not found.
+
 --Output from testResetPasswordBadMessageNoEmail--
+2013-09-17 23:23:16,960 [http-bio-8080-exec-15] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["email"] not found.
+
 --Output from testResetPasswordTenantNotFound--
 --Output from testResetPasswordTenantEmailNotFoundEnglish--
 --Output from testResetPasswordTenantEmailNotFoundPortuguese--

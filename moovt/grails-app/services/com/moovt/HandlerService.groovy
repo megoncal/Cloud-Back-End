@@ -153,6 +153,7 @@ class HandlerService {
 			ObjectError error = getFirstError (e.getErrors());
 			handleUserError(error);
 		} else {
+			log.error ("A generic exception occurred " + e.message);
 			handleSystemError(e.message);
 			boolean printStackTrace = grailsApplication.config.moovt.display.stacktrace;
 			if (printStackTrace) {

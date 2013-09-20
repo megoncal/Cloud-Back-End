@@ -19,7 +19,7 @@
                         tests
                     
                         with
-                        2 failures
+                        14 failures
                         .
                     </p>
 </div>
@@ -52,7 +52,7 @@
                         tests
                     
                         with
-                        2 failures
+                        10 failures
                         .
                     </h3>
 </div>
@@ -61,7 +61,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserBadMessage</b>
 </p>
-<p class="summary">Executed in 0.049 seconds.</p>
+<p class="summary">Executed in 0.204 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -71,7 +71,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserBadTenantEnglish</b>
 </p>
-<p class="summary">Executed in 0.04 seconds.</p>
+<p class="summary">Executed in 0.173 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -81,7 +81,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserSuccessEnglish</b>
 </p>
-<p class="summary">Executed in 0.088 seconds.</p>
+<p class="summary">Executed in 0.703 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -91,89 +91,169 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testCreateUserSuccessPortuquese</b>
 </p>
-<p class="summary">Executed in 0.083 seconds.</p>
+<p class="summary">Executed in 4.652 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserNoUserNameEnglish">
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserNoUserNameEnglish">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testCreateUserNoUserNameEnglish</b>
+<span class="icon failure"></span><b class="testname message failure">testCreateUserNoUserNameEnglish</b>
 </p>
-<p class="summary">Executed in 0.273 seconds.</p>
+<p class="summary">Executed in 0.598 seconds.</p>
 </div>
-<div class="grid_5 omega outputinfo"></div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [The user name must be provided] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [The user name must be provided] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.UserFunctionalTests.testCreateUserNoUserNameEnglish(UserFunctionalTests.groovy:110)
+</pre>
+</div>
+</div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserNoUserNamePortuguese">
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserNoUserNamePortuguese">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testCreateUserNoUserNamePortuguese</b>
+<span class="icon failure"></span><b class="testname message failure">testCreateUserNoUserNamePortuguese</b>
 </p>
-<p class="summary">Executed in 0.088 seconds.</p>
+<p class="summary">Executed in 0.1 seconds.</p>
 </div>
-<div class="grid_5 omega outputinfo"></div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [O nome do usu&aacute;rio deve ser preenchido] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [O nome do usu&aacute;rio deve ser preenchido] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.UserFunctionalTests.testCreateUserNoUserNamePortuguese(UserFunctionalTests.groovy:126)
+</pre>
+</div>
+</div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserNoPasswordEnglish">
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserNoPasswordEnglish">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testCreateUserNoPasswordEnglish</b>
+<span class="icon failure"></span><b class="testname message failure">testCreateUserNoPasswordEnglish</b>
 </p>
-<p class="summary">Executed in 0.058 seconds.</p>
+<p class="summary">Executed in 0.157 seconds.</p>
 </div>
-<div class="grid_5 omega outputinfo"></div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [The password must be provided] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [The password must be provided] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.UserFunctionalTests.testCreateUserNoPasswordEnglish(UserFunctionalTests.groovy:142)
+</pre>
+</div>
+</div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserNoPasswordPortuguese">
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserNoPasswordPortuguese">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testCreateUserNoPasswordPortuguese</b>
+<span class="icon failure"></span><b class="testname message failure">testCreateUserNoPasswordPortuguese</b>
 </p>
-<p class="summary">Executed in 0.062 seconds.</p>
+<p class="summary">Executed in 0.097 seconds.</p>
 </div>
-<div class="grid_5 omega outputinfo"></div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [A senha deve ser preenchida.] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [A senha deve ser preenchida.] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.UserFunctionalTests.testCreateUserNoPasswordPortuguese(UserFunctionalTests.groovy:158)
+</pre>
+</div>
+</div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserNoEmailEnglish">
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserNoEmailEnglish">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testCreateUserNoEmailEnglish</b>
+<span class="icon failure"></span><b class="testname message failure">testCreateUserNoEmailEnglish</b>
 </p>
-<p class="summary">Executed in 0.066 seconds.</p>
+<p class="summary">Executed in 0.172 seconds.</p>
 </div>
-<div class="grid_5 omega outputinfo"></div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [The email must be provided] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [The email must be provided] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.UserFunctionalTests.testCreateUserNoEmailEnglish(UserFunctionalTests.groovy:174)
+</pre>
+</div>
+</div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserNoEmailPortuguese">
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserNoEmailPortuguese">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testCreateUserNoEmailPortuguese</b>
+<span class="icon failure"></span><b class="testname message failure">testCreateUserNoEmailPortuguese</b>
 </p>
-<p class="summary">Executed in 0.056 seconds.</p>
+<p class="summary">Executed in 0.153 seconds.</p>
 </div>
-<div class="grid_5 omega outputinfo"></div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [O email deve ser preenchido] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [O email deve ser preenchido] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.UserFunctionalTests.testCreateUserNoEmailPortuguese(UserFunctionalTests.groovy:190)
+</pre>
+</div>
+</div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserDuplicateUsernameEnglish">
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserDuplicateUsernameEnglish">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testCreateUserDuplicateUsernameEnglish</b>
+<span class="icon failure"></span><b class="testname message failure">testCreateUserDuplicateUsernameEnglish</b>
 </p>
-<p class="summary">Executed in 0.106 seconds.</p>
+<p class="summary">Executed in 0.22 seconds.</p>
 </div>
-<div class="grid_5 omega outputinfo"></div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [This user (duplicateUser) already exist] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [This user (duplicateUser) already exist] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.UserFunctionalTests.testCreateUserDuplicateUsernameEnglish(UserFunctionalTests.groovy:206)
+</pre>
+</div>
+</div>
 <div class="clear"></div>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testCreateUserDuplicateUsernamePortuguese">
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserDuplicateUsernamePortuguese">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">testCreateUserDuplicateUsernamePortuguese</b>
+<span class="icon failure"></span><b class="testname message failure">testCreateUserDuplicateUsernamePortuguese</b>
 </p>
-<p class="summary">Executed in 0.065 seconds.</p>
+<p class="summary">Executed in 0.131 seconds.</p>
 </div>
-<div class="grid_5 omega outputinfo"></div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [Este usu&aacute;rio (duplicateUser) j&aacute; existe] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [Este usu&aacute;rio (duplicateUser) j&aacute; existe] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.UserFunctionalTests.testCreateUserDuplicateUsernamePortuguese(UserFunctionalTests.groovy:222)
+</pre>
+</div>
+</div>
 <div class="clear"></div>
 </div>
 <div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateUserDuplicateEmailEnglish">
@@ -181,7 +261,7 @@
 <p>
 <span class="icon failure"></span><b class="testname message failure">testCreateUserDuplicateEmailEnglish</b>
 </p>
-<p class="summary">Executed in 0.333 seconds.</p>
+<p class="summary">Executed in 0.547 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo">
 <div class="details">
@@ -201,7 +281,7 @@
 <p>
 <span class="icon failure"></span><b class="testname message failure">testCreateUserDuplicateEmailPortuguese</b>
 </p>
-<p class="summary">Executed in 0.101 seconds.</p>
+<p class="summary">Executed in 0.221 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo">
 <div class="details">
@@ -221,7 +301,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testResetPasswordSuccessEnglish</b>
 </p>
-<p class="summary">Executed in 0.237 seconds.</p>
+<p class="summary">Executed in 0.624 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -231,7 +311,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testResetPasswordSuccessPortuguese</b>
 </p>
-<p class="summary">Executed in 0.091 seconds.</p>
+<p class="summary">Executed in 0.206 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -241,7 +321,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testResetPasswordBadMessageNoTenante</b>
 </p>
-<p class="summary">Executed in 0.042 seconds.</p>
+<p class="summary">Executed in 0.056 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -251,7 +331,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testResetPasswordBadMessageNoEmail</b>
 </p>
-<p class="summary">Executed in 0.043 seconds.</p>
+<p class="summary">Executed in 0.048 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -261,7 +341,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testResetPasswordTenantNotFound</b>
 </p>
-<p class="summary">Executed in 0.143 seconds.</p>
+<p class="summary">Executed in 0.265 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -271,7 +351,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testResetPasswordTenantEmailNotFoundEnglish</b>
 </p>
-<p class="summary">Executed in 0.044 seconds.</p>
+<p class="summary">Executed in 0.056 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -281,7 +361,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testResetPasswordTenantEmailNotFoundPortuguese</b>
 </p>
-<p class="summary">Executed in 0.044 seconds.</p>
+<p class="summary">Executed in 0.058 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -301,7 +381,7 @@ Accept: */*
 == Content =====================================================================
 
 ================================================================================
-2013-09-03 04:51:20,139 [http-bio-8080-exec-17] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:08,070 [http-bio-8080-exec-19] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
@@ -326,7 +406,7 @@ Accept: */*
 				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080"}
 				
 ================================================================================
-2013-09-03 04:51:20,184 [http-bio-8080-exec-8] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:08,246 [http-bio-8080-exec-1] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "TheBadTenant", "email":"movieGoer@test.com","username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080"}
 				
 
@@ -353,18 +433,18 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 ================================================================================
-2013-09-03 04:51:20,235 [http-bio-8080-exec-9] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:08,363 [http-bio-8080-exec-14] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"movieGoer@test.com", "username": "moovieGoer", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 
-2013-09-03 04:51:20,239 [http-bio-8080-exec-9] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:08,367 [http-bio-8080-exec-14] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"User moovieGoer created"}, "additionalInfo":{"JSESSIONID":"F63A9EE813537B7A8128D3973360366A"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"User moovieGoer created"}, "additionalInfo":{"JSESSIONID":"24229EC4814EBE72A1D489E815F6D37B"}}
 ================================================================================
 #
 --Output from testCreateUserSuccessPortuquese--
@@ -382,18 +462,18 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 ================================================================================
-2013-09-03 04:51:20,316 [http-bio-8080-exec-15] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:09,088 [http-bio-8080-exec-20] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"movieLover@test.com", "username": "moovieLover", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 
-2013-09-03 04:51:20,320 [http-bio-8080-exec-15] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:09,093 [http-bio-8080-exec-20] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Usu&aacute;rio moovieLover criado"}, "additionalInfo":{"JSESSIONID":"B49FF206192A0DE6D1030E7F82213F7D"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Usu&aacute;rio moovieLover criado"}, "additionalInfo":{"JSESSIONID":"DCA8B9503C92B681DBF19B08ECDBDADC"}}
 ================================================================================
 #
 --Output from testCreateUserNoUserNameEnglish--
@@ -411,20 +491,74 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 ================================================================================
-2013-09-03 04:51:20,398 [http-bio-8080-exec-18] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:14,167 [http-bio-8080-exec-23] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 
-2013-09-03 04:51:20,402 [http-bio-8080-exec-18] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:14,171 [http-bio-8080-exec-23] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"The user name must be provided."}}
+{"result":{"type":"USER","code":"ERROR","message":"Property [username] of class [class com.moovt.audit.User] cannot be blank"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [The user name must be provided] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [The user name must be provided] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserNoUserNameEnglish(UserFunctionalTests.groovy:110)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
 --Output from testCreateUserNoUserNamePortuguese--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -440,20 +574,74 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 ================================================================================
-2013-09-03 04:51:20,672 [http-bio-8080-exec-22] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:14,244 [http-bio-8080-exec-26] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"noUserName@test.com", "username": "", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 
-2013-09-03 04:51:20,675 [http-bio-8080-exec-22] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:14,248 [http-bio-8080-exec-26] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"O nome do usu&aacute;rio deve ser preenchido."}}
+{"result":{"type":"USER","code":"ERROR","message":"O campo [username] da classe [class com.moovt.audit.User] n&atilde;o pode ficar em branco"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [O nome do usu&aacute;rio deve ser preenchido] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [O nome do usu&aacute;rio deve ser preenchido] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserNoUserNamePortuguese(UserFunctionalTests.groovy:126)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
 --Output from testCreateUserNoPasswordEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -469,20 +657,74 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 ================================================================================
-2013-09-03 04:51:20,760 [http-bio-8080-exec-25] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:14,419 [http-bio-8080-exec-25] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 
-2013-09-03 04:51:20,763 [http-bio-8080-exec-25] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:14,423 [http-bio-8080-exec-25] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"The password must be provided."}}
+{"result":{"type":"USER","code":"ERROR","message":"Property [password] of class [class com.moovt.audit.User] cannot be blank"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [The password must be provided] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [The password must be provided] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserNoPasswordEnglish(UserFunctionalTests.groovy:142)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
 --Output from testCreateUserNoPasswordPortuguese--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -498,20 +740,74 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 ================================================================================
-2013-09-03 04:51:20,822 [http-bio-8080-exec-27] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:14,510 [http-bio-8080-exec-27] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"noPasswordUser@test.com", "username": "movieFan", "password":"", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 
-2013-09-03 04:51:20,826 [http-bio-8080-exec-27] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:14,513 [http-bio-8080-exec-27] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"A senha deve ser preenchida."}}
+{"result":{"type":"USER","code":"ERROR","message":"O campo [password] da classe [class com.moovt.audit.User] n&atilde;o pode ficar em branco"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [A senha deve ser preenchida.] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [A senha deve ser preenchida.] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserNoPasswordPortuguese(UserFunctionalTests.groovy:158)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
 --Output from testCreateUserNoEmailEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -527,20 +823,74 @@ Accept: */*
 				{"tenantname": "Moovt","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 ================================================================================
-2013-09-03 04:51:20,890 [http-bio-8080-exec-14] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:14,693 [http-bio-8080-exec-12] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 
-2013-09-03 04:51:20,894 [http-bio-8080-exec-14] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:14,697 [http-bio-8080-exec-12] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"The email must be provided."}}
+{"result":{"type":"USER","code":"ERROR","message":"Property [email] of class [class com.moovt.audit.User] cannot be blank"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [The email must be provided] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [The email must be provided] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserNoEmailEnglish(UserFunctionalTests.groovy:174)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
 --Output from testCreateUserNoEmailPortuguese--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -556,20 +906,74 @@ Accept: */*
 				{"tenantname": "Moovt","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", "lastName": "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 ================================================================================
-2013-09-03 04:51:20,948 [http-bio-8080-exec-4] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:14,785 [http-bio-8080-exec-3] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt","email":"", "username": "movieFan", "password":"Welcome!1", "firstName":"TestFirstName", "lastName": "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 
-2013-09-03 04:51:20,952 [http-bio-8080-exec-4] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:14,789 [http-bio-8080-exec-3] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"O email deve ser preenchido."}}
+{"result":{"type":"USER","code":"ERROR","message":"O campo [email] da classe [class com.moovt.audit.User] n&atilde;o pode ficar em branco"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [O email deve ser preenchido] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [O email deve ser preenchido] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserNoEmailPortuguese(UserFunctionalTests.groovy:190)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
 --Output from testCreateUserDuplicateUsernameEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -585,20 +989,74 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"duplicateUser@test.com", "username": "duplicateUser", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 ================================================================================
-2013-09-03 04:51:21,013 [http-bio-8080-exec-5] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:15,063 [http-bio-8080-exec-13] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"duplicateUser@test.com", "username": "duplicateUser", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 
-2013-09-03 04:51:21,017 [http-bio-8080-exec-5] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:15,067 [http-bio-8080-exec-13] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"This user (duplicateUser) already exists."}}
+{"result":{"type":"USER","code":"ERROR","message":"Property [username] of class [class com.moovt.audit.User] with value [duplicateUser] must be unique"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [This user (duplicateUser) already exist] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [This user (duplicateUser) already exist] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserDuplicateUsernameEnglish(UserFunctionalTests.groovy:206)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
 --Output from testCreateUserDuplicateUsernamePortuguese--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -614,20 +1072,74 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"duplicateUser@test.com", "username": "duplicateUser", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}				
 				
 ================================================================================
-2013-09-03 04:51:21,116 [http-bio-8080-exec-2] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:15,197 [http-bio-8080-exec-5] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"duplicateUser@test.com", "username": "duplicateUser", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}				
 				
 
-2013-09-03 04:51:21,120 [http-bio-8080-exec-2] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:15,201 [http-bio-8080-exec-5] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"Este usu&aacute;rio (duplicateUser) j&aacute; existe."}}
+{"result":{"type":"USER","code":"ERROR","message":"O campo [username] da classe [class com.moovt.audit.User] com o valor [duplicateUser] deve ser &uacute;nico"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [Este usu&aacute;rio (duplicateUser) j&aacute; existe] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [Este usu&aacute;rio (duplicateUser) j&aacute; existe] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.UserFunctionalTests.testCreateUserDuplicateUsernamePortuguese(UserFunctionalTests.groovy:222)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/user/createUser
+
+
 --Output from testCreateUserDuplicateEmailEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -643,18 +1155,18 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"existingEmail@moovt.com", "username": "userWithSameEmail", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 ================================================================================
-2013-09-03 04:51:21,190 [http-bio-8080-exec-29] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:15,284 [http-bio-8080-exec-17] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"existingEmail@moovt.com", "username": "userWithSameEmail", "password":"moovieGoer", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "en_US"}
 				
 
-2013-09-03 04:51:21,194 [http-bio-8080-exec-29] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:15,288 [http-bio-8080-exec-17] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"User userWithSameEmail created"}, "additionalInfo":{"JSESSIONID":"0167DBA9301686804EA115C2910E7EAA"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"User userWithSameEmail created"}, "additionalInfo":{"JSESSIONID":"9FD701670DE87008666733920F972A81"}}
 ================================================================================
 #
 Failed: Expected content to loosely contain [ERROR] but it didn't
@@ -726,18 +1238,18 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"existingEmail@moovt.com", "username": "userWithSameEmail", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 ================================================================================
-2013-09-03 04:51:21,515 [http-bio-8080-exec-24] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
+2013-09-17 23:23:15,955 [http-bio-8080-exec-31] INFO  common.UserController  - createUser params are: [action:createUser, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"existingEmail@moovt.com", "username": "userWithSameEmail", "password":"moovieLover", "firstName":"TestFirstName", lastName: "TestLastName","phone":"800-800-8080", "locale": "pt_BR"}
 				
 
-2013-09-03 04:51:21,519 [http-bio-8080-exec-24] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
+2013-09-17 23:23:15,961 [http-bio-8080-exec-31] INFO  common.UserController  - Creating a new user and/or driver and/or passenger
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"Este usu&aacute;rio (userWithSameEmail) j&aacute; existe."}}
+{"result":{"type":"USER","code":"ERROR","message":"O campo [username] da classe [class com.moovt.audit.User] com o valor [userWithSameEmail] deve ser &uacute;nico"}}
 ================================================================================
 #
 Failed: Expected content to loosely contain [Este email (existingEmail@moovt.com) j&aacute; existe] but it didn't
@@ -809,7 +1321,7 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"jforgetful@moovt.com"}
 				
 ================================================================================
-2013-09-03 04:51:21,659 [http-bio-8080-exec-8] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
+2013-09-17 23:23:16,167 [http-bio-8080-exec-22] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"jforgetful@moovt.com"}
 				
 
@@ -836,7 +1348,7 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"jforgetful@moovt.com"}
 				
 ================================================================================
-2013-09-03 04:51:21,889 [http-bio-8080-exec-17] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
+2013-09-17 23:23:16,744 [http-bio-8080-exec-30] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"jforgetful@moovt.com"}
 				
 
@@ -862,7 +1374,7 @@ Accept: */*
 				{"tenantXame": "Moovt", "email":"jforgetful@moovt.com"}
 				
 ================================================================================
-2013-09-03 04:51:21,957 [http-bio-8080-exec-15] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
+2013-09-17 23:23:16,907 [http-bio-8080-exec-10] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
 				{"tenantXame": "Moovt", "email":"jforgetful@moovt.com"}
 				
 
@@ -888,7 +1400,7 @@ Accept: */*
 				{"tenantname": "Moovt", "emailX":"jforgetful@moovt.com"}
 				
 ================================================================================
-2013-09-03 04:51:22,001 [http-bio-8080-exec-12] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
+2013-09-17 23:23:16,958 [http-bio-8080-exec-15] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
 				{"tenantname": "Moovt", "emailX":"jforgetful@moovt.com"}
 				
 
@@ -915,11 +1427,11 @@ Accept: */*
 				{"tenantname": "TheBadTenant", "email":"jforgetful@moovt.com"}
 				
 ================================================================================
-2013-09-03 04:51:22,066 [http-bio-8080-exec-20] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
+2013-09-17 23:23:17,047 [http-bio-8080-exec-20] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
 				{"tenantname": "TheBadTenant", "email":"jforgetful@moovt.com"}
 				
 
-2013-09-03 04:51:22,144 [http-bio-8080-exec-20] WARN  common.UserController  - This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user.
+2013-09-17 23:23:17,224 [http-bio-8080-exec-20] WARN  common.UserController  - This tenant (TheBadTenant) does not exist. Please use an existing tenant to create this user.
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
@@ -944,7 +1456,7 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"jforgetfulx@moovt.com"}
 				
 ================================================================================
-2013-09-03 04:51:22,188 [http-bio-8080-exec-21] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
+2013-09-17 23:23:17,276 [http-bio-8080-exec-1] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"jforgetfulx@moovt.com"}
 				
 
@@ -971,7 +1483,7 @@ Accept: */*
 				{"tenantname": "Moovt", "email":"jforgetfulx@moovt.com"}
 				
 ================================================================================
-2013-09-03 04:51:22,230 [http-bio-8080-exec-23] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
+2013-09-17 23:23:17,332 [http-bio-8080-exec-16] INFO  common.UserController  - resetPassword params are: [action:resetPassword, controller:user] and model is : 
 				{"tenantname": "Moovt", "email":"jforgetfulx@moovt.com"}
 				
 
@@ -988,6 +1500,8 @@ Content of web window [TopLevelWindow[name=""]] changed
 <div class="syserr">
 <h2>System error</h2>
 <pre class="syserr">--Output from testCreateUserBadMessage--
+2013-09-17 23:23:08,072 [http-bio-8080-exec-19] ERROR moovt.HandlerService  - A generic exception occurred A JSONObject text must begin with '{' at character 0 of 
+
 --Output from testCreateUserBadTenantEnglish--
 --Output from testCreateUserSuccessEnglish--
 --Output from testCreateUserSuccessPortuquese--
@@ -1004,10 +1518,1480 @@ Content of web window [TopLevelWindow[name=""]] changed
 --Output from testResetPasswordSuccessEnglish--
 --Output from testResetPasswordSuccessPortuguese--
 --Output from testResetPasswordBadMessageNoTenante--
+2013-09-17 23:23:16,908 [http-bio-8080-exec-10] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["tenantname"] not found.
+
 --Output from testResetPasswordBadMessageNoEmail--
+2013-09-17 23:23:16,960 [http-bio-8080-exec-15] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["email"] not found.
+
 --Output from testResetPasswordTenantNotFound--
 --Output from testResetPasswordTenantEmailNotFoundEnglish--
 --Output from testResetPasswordTenantEmailNotFoundPortuguese--
+</pre>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="testsuite failure">
+<div class="header">
+<h2>RideFunctionalTests</h2>
+<h3>
+                        Executed
+                        18
+                        tests
+                    
+                        with
+                        4 failures
+                        .
+                    </h3>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCancelRideSuccessEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCancelRideSuccessEnglish</b>
+</p>
+<p class="summary">Executed in 0.644 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCancelRideSuccessPortuguese">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCancelRideSuccessPortuguese</b>
+</p>
+<p class="summary">Executed in 0.19 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCancelRideNotFoundEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCancelRideNotFoundEnglish</b>
+</p>
+<p class="summary">Executed in 0.218 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCancelRideNotFoundPortuguese">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCancelRideNotFoundPortuguese</b>
+</p>
+<p class="summary">Executed in 0.202 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testRetrievePassengerRidesEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testRetrievePassengerRidesEnglish</b>
+</p>
+<p class="summary">Executed in 0.508 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testRetrieveUnassignedRideInServedAreaEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testRetrieveUnassignedRideInServedAreaEnglish</b>
+</p>
+<p class="summary">Executed in 2.84 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish</b>
+</p>
+<p class="summary">Executed in 0.593 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testAssignRideToDriverEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon failure"></span><b class="testname message failure">testAssignRideToDriverEnglish</b>
+</p>
+<p class="summary">Executed in 2.039 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [updated] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [updated] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.RideFunctionalTests.testAssignRideToDriverEnglish(RideFunctionalTests.groovy:103)
+</pre>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testRetrieveAllRidesEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testRetrieveAllRidesEnglish</b>
+</p>
+<p class="summary">Executed in 0.708 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testRetrieveAssignedRidesEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testRetrieveAssignedRidesEnglish</b>
+</p>
+<p class="summary">Executed in 0.313 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCreateRideENglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon failure"></span><b class="testname message failure">testCreateRideENglish</b>
+</p>
+<p class="summary">Executed in 2.459 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.RideFunctionalTests.testCreateRideENglish(RideFunctionalTests.groovy:211)
+</pre>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCloneRide">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCloneRide</b>
+</p>
+<p class="summary">Executed in 0.503 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCloneRideBadMessage">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCloneRideBadMessage</b>
+</p>
+<p class="summary">Executed in 0.11 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCloseRideSuccessEnglish">
+<div class="grid_3 alpha">
+<p>
+<span class="icon failure"></span><b class="testname message failure">testCloseRideSuccessEnglish</b>
+</p>
+<p class="summary">Executed in 0.713 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.RideFunctionalTests.testCloseRideSuccessEnglish(RideFunctionalTests.groovy:294)
+</pre>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix failure grid_8 alpha omega" data-name="testCloseRideSuccessPortuguese">
+<div class="grid_3 alpha">
+<p>
+<span class="icon failure"></span><b class="testname message failure">testCloseRideSuccessPortuguese</b>
+</p>
+<p class="summary">Executed in 0.598 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo">
+<div class="details">
+<p>
+<b class="message">com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't</b>
+</p>
+<pre>junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.RideFunctionalTests.testCloseRideSuccessPortuguese(RideFunctionalTests.groovy:332)
+</pre>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCloseRideBadMessage">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCloseRideBadMessage</b>
+</p>
+<p class="summary">Executed in 1.094 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCloseRideAlreadyClosed">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCloseRideAlreadyClosed</b>
+</p>
+<p class="summary">Executed in 0.47 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testCloseRideUnsassignedError">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testCloseRideUnsassignedError</b>
+</p>
+<p class="summary">Executed in 0.235 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="clearfix output footer">
+<div class="sysout">
+<h2>Standard output</h2>
+<pre class="stdout">--Output from testCancelRideSuccessEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:53,718 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:53,743 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"7F6F2877606947F7E5A63120608C2FFF","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/cancelRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"6","version":"1"}
+				
+================================================================================
+2013-09-17 23:22:53,821 [http-bio-8080-exec-27] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
+				{"id":"6","version":"1"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Ride #6 canceled."}}
+================================================================================
+#
+--Output from testCancelRideSuccessPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:54,095 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:54,118 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"737C9E599C0CE2306173C512A6E4CAD4","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/cancelRide parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"7","version":"1"}
+				
+================================================================================
+2013-09-17 23:22:54,162 [http-bio-8080-exec-28] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
+				{"id":"7","version":"1"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Corrida #7 cancelada."}}
+================================================================================
+#
+--Output from testCancelRideNotFoundEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:54,279 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:54,298 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"CF5729EA876D3DF42096575FE9801C47","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/cancelRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"40","version":"1"}
+				
+================================================================================
+2013-09-17 23:22:54,406 [http-bio-8080-exec-29] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
+				{"id":"40","version":"1"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Ride #40 not found"}}
+================================================================================
+#
+--Output from testCancelRideNotFoundPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:54,447 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:54,466 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"C48638CAEBE665B051C201DDBE406177","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/cancelRide parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"40","version":"1"}
+				
+================================================================================
+2013-09-17 23:22:54,606 [http-bio-8080-exec-30] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
+				{"id":"40","version":"1"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Corrida #40 n&atilde;o foi encontrada."}}
+================================================================================
+#
+--Output from testRetrievePassengerRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:54,760 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:54,779 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"67AE8ED24C9A37D3198F7B0E053B485E","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrievePassengerRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+2013-09-17 23:22:54,817 [http-bio-8080-exec-31] INFO  taxi.RideController  - retrievePassengerRides params are: [action:retrievePassengerRides, controller:ride] and model is : 
+				{}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":1,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 1","messageToTheDriver":"Please come fast ride 1"},{"id":2,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Functional Test Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 2","messageToTheDriver":"Please come fast ride 2"},{"id":3,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":4,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":5,"version":0,"rideStatus":{"code":"COMPLETED","description":"Completed"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":3.5,"comments":"Great Driver","pickUpLocationComplement":"Close to Vest Ride 5","messageToTheDriver":"Please come fast Ride 5"},{"id":8,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":6,"version":1,"rideStatus":{"code":"CANCELED","description":"Canceled"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":7,"version":1,"rideStatus":{"code":"CANCELED","description":"Canceled"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null}]}
+================================================================================
+#
+--Output from testRetrieveUnassignedRideInServedAreaEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:55,380 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:55,422 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"1FCDFF6BC1F8EB0F582C3762EBD98B6A","userType":"DRIVER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+2013-09-17 23:22:55,463 [http-bio-8080-exec-4] INFO  taxi.RideController  - retrieveUnassignedRideInServedArea params are: [action:retrieveUnassignedRideInServedArea, controller:ride] and model is : 
+				{}
+				
+
+2013-09-17 23:22:55,475 [http-bio-8080-exec-4] INFO  taxi.RideController  - About to compile list of nearby rides for &lt;com.moovt.taxi.Driver@8aed496 activeStatus=ENABLED carType=B_VAN servedLocation=com.moovt.taxi.Location : 9 tenantId=2 createdBy=2 lastUpdatedBy=2 dateCreated=2013-09-17 23:22:24.0 lastUpdated=2013-09-17 23:22:24.0 CRUDMessage=null errors=null id=8 version=0 user=com.moovt.audit.User : 8&gt;
+
+2013-09-17 23:22:55,476 [http-bio-8080-exec-4] INFO  taxi.RideController  - The served location is &lt;com.moovt.taxi.Location@10d09044 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE CRUDMessage=null errors=null id=9 version=0&gt;
+
+2013-09-17 23:22:55,478 [http-bio-8080-exec-4] INFO  taxi.RideController  - The served location is &lt;com.moovt.taxi.Location@10d09044 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE CRUDMessage=null errors=null id=9 version=0&gt;
+
+2013-09-17 23:22:55,503 [http-bio-8080-exec-4] INFO  moovt.LocationService  - Finding Nearby Rides for &lt;com.moovt.taxi.Location@10d09044 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE CRUDMessage=null errors=null id=9 version=0&gt;
+
+2013-09-17 23:22:55,865 [http-bio-8080-exec-4] INFO  moovt.LocationService  - &lt;org.hibernate.impl.SQLQueryImpl@5db31b74 queryReturns=[] queryReturnBuilders=null autoDiscoverTypes=false querySpaces=null callable=false queryString=SELECT r.id as rideId, 3956 * 2 * ASIN(SQRT( POWER(SIN((:lat - latitude) * pi()/180 / 2), 2) +COS(:lat * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((:lon - longitude) * pi()/180 / 2), 2) )) as distance FROM  ride r, location l WHERE r.pick_up_location_id = l.id AND r.ride_status = 'UNASSIGNED' AND l.longitude between :lon1 and :lon2 and l.latitude between :lat1 and :lat2 having distance &lt; :dist ORDER BY distance limit 10 session=SessionImpl(PersistenceContext[entityKeys=[EntityKey[com.moovt.taxi.Driver#8], EntityKey[com.moovt.audit.User#8], EntityKey[com.moovt.taxi.Location#9]],collectionKeys=[]];ActionQueue[insertions=[] updates=[] deletions=[] collectionCreations=[] collectionRemovals=[] collectionUpdates=[]]) parameterMetadata=org.hibernate.engine.query.ParameterMetadata@5531a60b values=[] types=[] namedParameters=[lon:-88.1472893, lon2:-86.86447027315957, lon1:-89.43010832684043, lat:41.7858629, lat2:42.742384639130435, dist:66.0, lat1:40.82934116086956] namedParameterLists=[:] optionalObject=null optionalId=null optionalEntityName=null selection=org.hibernate.engine.RowSelection@2e8c47df cacheable=false cacheRegion=null comment=dynamic native SQL query flushMode=null cacheMode=null sessionFlushMode=null sessionCacheMode=null collectionKey=null readOnly=null resultTransformer=null&gt;
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":1,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 1","messageToTheDriver":"Please come fast ride 1"}]}
+================================================================================
+#
+--Output from testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"detroitCityDriverUser","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:58,287 [http-bio-8080-exec-7] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"detroitCityDriverUser","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:58,307 [http-bio-8080-exec-7] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
+
+2013-09-17 23:22:58,307 [http-bio-8080-exec-7] WARN  common.LoginController  - A user has a new apns token. The user id is 13
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"854EC7CAF505E7CCF8C076A5744B6EAF","userType":"DRIVER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+2013-09-17 23:22:58,529 [http-bio-8080-exec-7] INFO  taxi.RideController  - retrieveUnassignedRideInServedArea params are: [action:retrieveUnassignedRideInServedArea, controller:ride] and model is : 
+				{}
+				
+
+2013-09-17 23:22:58,545 [http-bio-8080-exec-7] INFO  taxi.RideController  - About to compile list of nearby rides for &lt;com.moovt.taxi.Driver@1138b647 activeStatus=ENABLED carType=B_VAN servedLocation=com.moovt.taxi.Location : 4 tenantId=2 createdBy=2 lastUpdatedBy=2 dateCreated=2013-09-17 23:22:25.0 lastUpdated=2013-09-17 23:22:25.0 CRUDMessage=null errors=null id=13 version=0 user=com.moovt.audit.User : 13&gt;
+
+2013-09-17 23:22:58,546 [http-bio-8080-exec-7] INFO  taxi.RideController  - The served location is &lt;com.moovt.taxi.Location@2d4e753a tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE CRUDMessage=null errors=null id=4 version=0&gt;
+
+2013-09-17 23:22:58,547 [http-bio-8080-exec-7] INFO  taxi.RideController  - The served location is &lt;com.moovt.taxi.Location@2d4e753a tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE CRUDMessage=null errors=null id=4 version=0&gt;
+
+2013-09-17 23:22:58,550 [http-bio-8080-exec-7] INFO  moovt.LocationService  - Finding Nearby Rides for &lt;com.moovt.taxi.Location@2d4e753a tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE CRUDMessage=null errors=null id=4 version=0&gt;
+
+2013-09-17 23:22:58,552 [http-bio-8080-exec-7] INFO  moovt.LocationService  - &lt;org.hibernate.impl.SQLQueryImpl@13ef297a queryReturns=[] queryReturnBuilders=null autoDiscoverTypes=false querySpaces=null callable=false queryString=SELECT r.id as rideId, 3956 * 2 * ASIN(SQRT( POWER(SIN((:lat - latitude) * pi()/180 / 2), 2) +COS(:lat * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((:lon - longitude) * pi()/180 / 2), 2) )) as distance FROM  ride r, location l WHERE r.pick_up_location_id = l.id AND r.ride_status = 'UNASSIGNED' AND l.longitude between :lon1 and :lon2 and l.latitude between :lat1 and :lat2 having distance &lt; :dist ORDER BY distance limit 10 session=SessionImpl(PersistenceContext[entityKeys=[EntityKey[com.moovt.taxi.Location#4], EntityKey[com.moovt.audit.User#13], EntityKey[com.moovt.taxi.Driver#13]],collectionKeys=[]];ActionQueue[insertions=[] updates=[] deletions=[] collectionCreations=[] collectionRemovals=[] collectionUpdates=[]]) parameterMetadata=org.hibernate.engine.query.ParameterMetadata@5531a60b values=[] types=[] namedParameters=[lon:-83.0457538, lon2:-81.75186617305094, lon1:-84.33964142694906, lat:42.331427, lat2:43.287948739130435, dist:66.0, lat1:41.37490526086956] namedParameterLists=[:] optionalObject=null optionalId=null optionalEntityName=null selection=org.hibernate.engine.RowSelection@3a8c12cf cacheable=false cacheRegion=null comment=dynamic native SQL query flushMode=null cacheMode=null sessionFlushMode=null sessionCacheMode=null collectionKey=null readOnly=null resultTransformer=null&gt;
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"No rides found"}}
+================================================================================
+#
+--Output from testAssignRideToDriverEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:58,618 [http-bio-8080-exec-11] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:58,662 [http-bio-8080-exec-11] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"196D75A0796254D30A6C03EEFBA1FA20","userType":"DRIVER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/assignRideToDriver parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"3","version":"1"}
+				
+================================================================================
+2013-09-17 23:22:58,726 [http-bio-8080-exec-11] INFO  taxi.RideController  - assignRideToDriver params are: [action:assignRideToDriver, controller:ride] and model is : 
+				{"id":"3","version":"1"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Property [createdBy] of class [class com.moovt.taxi.NotificationTask] cannot be null"}}
+================================================================================
+#
+Failed: Expected content to loosely contain [updated] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [updated] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.RideFunctionalTests.testAssignRideToDriverEnglish(RideFunctionalTests.groovy:103)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/ride/assignRideToDriver
+
+
+--Output from testRetrieveAllRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"admin","password":"911admin"}
+				
+================================================================================
+2013-09-17 23:23:00,689 [http-bio-8080-exec-1] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"admin","password":"911admin"}
+				
+
+2013-09-17 23:23:00,708 [http-bio-8080-exec-1] INFO  common.LoginController  - User has been successfully authenticated [ROLE_ADMIN]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"91D77AF63F06D60D74736BF88897BE8E","userType":"NO_TYPE"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveAllRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+2013-09-17 23:23:01,103 [http-bio-8080-exec-1] INFO  taxi.RideController  - retrieveAllRides params are: [action:retrieveAllRides, controller:ride] and model is : 
+				{}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":1,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 1","messageToTheDriver":"Please come fast ride 1"},{"id":2,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Functional Test Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 2","messageToTheDriver":"Please come fast ride 2"},{"id":3,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":4,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":5,"version":0,"rideStatus":{"code":"COMPLETED","description":"Completed"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":3.5,"comments":"Great Driver","pickUpLocationComplement":"Close to Vest Ride 5","messageToTheDriver":"Please come fast Ride 5"},{"id":6,"version":1,"rideStatus":{"code":"CANCELED","description":"Canceled"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":7,"version":1,"rideStatus":{"code":"CANCELED","description":"Canceled"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":8,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null}]}
+================================================================================
+#
+--Output from testRetrieveAssignedRidesEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+                        {"type":"Self","tenantname":"MTaxi","username":"jgoodarm","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:01,372 [http-bio-8080-exec-14] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+                        {"type":"Self","tenantname":"MTaxi","username":"jgoodarm","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:01,398 [http-bio-8080-exec-14] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"D1D65EDE651696A066FD9A04072001C5","userType":"DRIVER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/retrieveAssignedRides parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{}
+				
+================================================================================
+2013-09-17 23:23:01,450 [http-bio-8080-exec-14] INFO  taxi.RideController  - retrieveAssignedRides params are: [action:retrieveAssignedRides, controller:ride] and model is : 
+				{}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"rides":[{"id":2,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Functional Test Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 2","messageToTheDriver":"Please come fast ride 2"},{"id":4,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null}]}
+================================================================================
+#
+--Output from testCreateRideENglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:01,683 [http-bio-8080-exec-18] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:01,705 [http-bio-8080-exec-18] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"7FA99301B10AE529E36AFC034EA75724","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/createRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{
+  "id" : 0,
+  "pickUpLocation" : {
+    "locationName" : "Naperville",
+    "longitude" : -88.14729,
+    "latitude" : 41.78586,
+    "politicalName" : "Illinois, United States",
+    "locationType" : "APPROXIMATE"
+  },
+  "pickUpLocationComplement" : "",
+  "comments" : "",
+  "rating" : "",
+  "dropOffLocation" : {
+    "locationName" : "Wheaton",
+    "longitude" : -88.10701,
+    "latitude" : 41.86614,
+    "politicalName" : "Illinois, United States",
+    "locationType" : "APPROXIMATE"
+  },
+  "version" : 0,
+  "messageToTheDriver" : "",
+  "carType" : {
+    "code" : "B_VAN",
+    "description" : "Van"
+  },
+  "pickUpDateTime" : "2013-06-05 23:04"
+}
+				
+================================================================================
+2013-09-17 23:23:01,814 [http-bio-8080-exec-18] INFO  taxi.RideController  - createRide params are: [action:createRide, controller:ride] and model is : 
+{
+  "id" : 0,
+  "pickUpLocation" : {
+    "locationName" : "Naperville",
+    "longitude" : -88.14729,
+    "latitude" : 41.78586,
+    "politicalName" : "Illinois, United States",
+    "locationType" : "APPROXIMATE"
+  },
+  "pickUpLocationComplement" : "",
+  "comments" : "",
+  "rating" : "",
+  "dropOffLocation" : {
+    "locationName" : "Wheaton",
+    "longitude" : -88.10701,
+    "latitude" : 41.86614,
+    "politicalName" : "Illinois, United States",
+    "locationType" : "APPROXIMATE"
+  },
+  "version" : 0,
+  "messageToTheDriver" : "",
+  "carType" : {
+    "code" : "B_VAN",
+    "description" : "Van"
+  },
+  "pickUpDateTime" : "2013-06-05 23:04"
+}
+				
+
+2013-09-17 23:23:01,815 [http-bio-8080-exec-18] INFO  taxi.RideController  - Creating a new ride
+
+2013-09-17 23:23:01,993 [http-bio-8080-exec-18] INFO  taxi.RideController  - {"politicalName":"Illinois, United States","locationType":"APPROXIMATE","longitude":-88.14729,"latitude":41.78586,"locationName":"Naperville"}
+
+2013-09-17 23:23:02,009 [http-bio-8080-exec-18] INFO  taxi.RideController  - {"politicalName":"Illinois, United States","locationType":"APPROXIMATE","longitude":-88.10701,"latitude":41.86614,"locationName":"Wheaton"}
+
+2013-09-17 23:23:02,074 [http-bio-8080-exec-18] INFO  taxi.RideController  - Notifying driver 7
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Property [createdBy] of class [class com.moovt.taxi.NotificationTask] cannot be null"}}
+================================================================================
+#
+Failed: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [SUCCESS] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.RideFunctionalTests.testCreateRideENglish(RideFunctionalTests.groovy:211)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/ride/createRide
+
+
+--Output from testCloneRide--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:04,412 [http-bio-8080-exec-21] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:04,458 [http-bio-8080-exec-21] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"B08E932310F0690596EB00128A25EFA3","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/cloneRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"id":"5"}				
+================================================================================
+2013-09-17 23:23:04,512 [http-bio-8080-exec-21] INFO  taxi.RideController  - cloneRide params are: [action:cloneRide, controller:ride] and model is : 
+{"id":"5"}				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"ride":{"id":null,"version":null,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":3.5,"comments":"Great Driver","pickUpLocationComplement":"Close to Vest Ride 5","messageToTheDriver":"Please come fast Ride 5"}}
+================================================================================
+#
+--Output from testCloneRideBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:04,636 [http-bio-8080-exec-25] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:04,656 [http-bio-8080-exec-25] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"BB87AD25E08A9060D670879899B8ADEA","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/cloneRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+{"idx":"5"}
+				
+================================================================================
+2013-09-17 23:23:04,700 [http-bio-8080-exec-25] INFO  taxi.RideController  - cloneRide params are: [action:cloneRide, controller:ride] and model is : 
+{"idx":"5"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"JSONObject[\"id\"] not found."}}
+================================================================================
+#
+--Output from testCloseRideSuccessEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:05,070 [http-bio-8080-exec-28] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:05,088 [http-bio-8080-exec-28] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"8B55BDB9CD631C5F91B6F89A10967C70","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"4","version":"1","rating":"5","comments":"Great ride!"}
+				
+================================================================================
+2013-09-17 23:23:05,147 [http-bio-8080-exec-28] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
+				{"id":"4","version":"1","rating":"5","comments":"Great ride!"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Property [createdBy] of class [class com.moovt.taxi.NotificationTask] cannot be null"}}
+================================================================================
+#
+Failed: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [SUCCESS] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.RideFunctionalTests.testCloseRideSuccessEnglish(RideFunctionalTests.groovy:294)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/ride/closeRide
+
+
+--Output from testCloseRideSuccessPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:05,575 [http-bio-8080-exec-29] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:05,616 [http-bio-8080-exec-29] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"9C0775061A0310961E1039363A61884B","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"2","version":"1","rating":"5","comments":"Bom motorista"}
+				
+================================================================================
+2013-09-17 23:23:05,676 [http-bio-8080-exec-29] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
+				{"id":"2","version":"1","rating":"5","comments":"Bom motorista"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"O campo [createdBy] da classe [class com.moovt.taxi.NotificationTask] n&atilde;o pode ser vazia"}}
+================================================================================
+#
+Failed: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [SUCCESS] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.RideFunctionalTests.testCloseRideSuccessPortuguese(RideFunctionalTests.groovy:332)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/ride/closeRide
+
+
+--Output from testCloseRideBadMessage--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:06,506 [http-bio-8080-exec-5] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:06,528 [http-bio-8080-exec-5] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"DDFEF90057B7D835AB740592C4A088DD","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"3","version":"1"}
+				
+================================================================================
+2013-09-17 23:23:07,111 [http-bio-8080-exec-5] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
+				{"id":"3","version":"1"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"JSONObject[\"rating\"] not found."}}
+================================================================================
+#
+--Output from testCloseRideAlreadyClosed--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:07,518 [http-bio-8080-exec-9] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:07,541 [http-bio-8080-exec-9] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"E6DC7C618CB42D3114A78D92EDCF19E1","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+	
+				{"id":"5","version":"1","rating":"5","comments":"Great ride!"}
+				
+================================================================================
+2013-09-17 23:23:07,580 [http-bio-8080-exec-9] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 	
+				{"id":"5","version":"1","rating":"5","comments":"Great ride!"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"This ride has already been completed. Unable to add comment."}}
+================================================================================
+#
+--Output from testCloseRideUnsassignedError--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:07,624 [http-bio-8080-exec-15] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:07,644 [http-bio-8080-exec-15] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"4A2D43C562B006506A8AB1A7EFEA0822","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"8","version":"1","rating":"5","comments":"Great ride!"}
+				
+================================================================================
+2013-09-17 23:23:07,818 [http-bio-8080-exec-15] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
+				{"id":"8","version":"1","rating":"5","comments":"Great ride!"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"This ride is unassigned and can't be completed."}}
+================================================================================
+#
+</pre>
+</div>
+<div class="syserr">
+<h2>System error</h2>
+<pre class="syserr">--Output from testCancelRideSuccessEnglish--
+--Output from testCancelRideSuccessPortuguese--
+--Output from testCancelRideNotFoundEnglish--
+--Output from testCancelRideNotFoundPortuguese--
+--Output from testRetrievePassengerRidesEnglish--
+--Output from testRetrieveUnassignedRideInServedAreaEnglish--
+--Output from testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish--
+--Output from testAssignRideToDriverEnglish--
+--Output from testRetrieveAllRidesEnglish--
+--Output from testRetrieveAssignedRidesEnglish--
+--Output from testCreateRideENglish--
+--Output from testCloneRide--
+--Output from testCloneRideBadMessage--
+2013-09-17 23:23:04,703 [http-bio-8080-exec-25] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["id"] not found.
+
+--Output from testCloseRideSuccessEnglish--
+--Output from testCloseRideSuccessPortuguese--
+--Output from testCloseRideBadMessage--
+2013-09-17 23:23:07,114 [http-bio-8080-exec-5] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["rating"] not found.
+
+--Output from testCloseRideAlreadyClosed--
+--Output from testCloseRideUnsassignedError--
 </pre>
 </div>
 </div>

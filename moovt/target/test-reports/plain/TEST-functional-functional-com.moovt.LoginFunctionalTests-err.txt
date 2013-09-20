@@ -1,15 +1,17 @@
---Output from testLoginSuccessEnglish--
---Output from testLoginSuccessPortuguese--
---Output from testLoginNoTenantEnglish--
---Output from testLoginNoTenantPortuguese--
---Output from testLoginTenantNotFoundEnglish--
---Output from testLoginTenantNotFoundPortuguese--
---Output from testLoginNoPasswordEnglish--
---Output from testLoginNoUsernamedEnglish--
---Output from testLoginFailedEnglish--
+--Output from testLoginBadMessage--
+2013-09-17 23:22:51,410 [http-bio-8080-exec-1] ERROR moovt.HandlerService  - A generic exception occurred A JSONObject text must begin with '{' at character 0 of 
+
 --Output from testLoginNoPasswordPortuguese--
 --Output from testLoginNoUsernamedPortuguese--
 --Output from testLoginFailedPortuguese--
 --Output from testLoginWithApnsToken--
 --Output from testLoginKeepApnsToken--
---Output from testLoginBadMessage--
+--Output from testLoginTenantNotFoundEnglish--
+--Output from testLoginTenantNotFoundPortuguese--
+--Output from testLoginNoPasswordEnglish--
+--Output from testLoginNoUsernamedEnglish--
+--Output from testLoginFailedEnglish--
+--Output from testLoginSuccessEnglish--
+--Output from testLoginSuccessPortuguese--
+--Output from testLoginNoTenantEnglish--
+--Output from testLoginNoTenantPortuguese--

@@ -9,7 +9,7 @@ package com.moovt
  *
  * @author egoncalves
  *
- */
+ */ 
 class CallResult {
 
 	String type

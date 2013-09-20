@@ -1,6 +1,6 @@
 package com.moovt
 
-import com.moovt.common.User;
+import com.moovt.audit.User;
 import com.moovt.taxi.CarType
 import com.moovt.taxi.Driver;
 import com.moovt.taxi.Location;

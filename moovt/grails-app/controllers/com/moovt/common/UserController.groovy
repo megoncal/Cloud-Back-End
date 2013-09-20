@@ -10,10 +10,14 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 
 import com.moovt.ConcurrencyException
-import com.moovt.CustomGrailsUser
 import com.moovt.HandlerService
 import com.moovt.NotificationService
-import com.moovt.TenantAuthenticationToken
+import com.moovt.audit.CustomGrailsUser;
+import com.moovt.audit.Role;
+import com.moovt.audit.Tenant;
+import com.moovt.audit.TenantAuthenticationToken;
+import com.moovt.audit.User;
+import com.moovt.audit.UserRole;
 import com.moovt.taxi.Driver
 import com.moovt.taxi.Location
 import com.moovt.taxi.Passenger
@@ -38,7 +42,7 @@ class UserController {
 			tenantId: 1,
 			createdBy: 1,
 			lastUpdatedBy: 1,
-			test: 'admin',
+			test1: 'admin',
 			test2: '911admin').save(failOnError: true);
 			render "DONE";
 	}
@@ -296,45 +300,6 @@ class UserController {
 
 	}
 
-	/**
-	 * This API retrieves all Users. This API is only available to users with the Administrator privilege.
-	 * 
-	 * @param  url   <server-name>/user/retrieveAllUsers
-	 * @param  input-sample {}
-	 * @return output-sample {"users":[{"id":4,"version":1,"firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"},{"id":5,"version":1,"firstName":"John","lastName":"Goodrider","phone":"800-800-8080","email":"jgoodrider@worldtaxi.com","passenger":{"id":5}},{"id":6,"version":1,"firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedMetro":"Chicago-Naperville-Joliet, IL","carType":"VAN"}}]}
-	 */
-	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
-	def retrieveAllUsers() {
-
-		String model = request.reader.getText();
-		log.info(this.actionName + " params are: " + params + " and model is : " + model);
-		JSONObject jsonObject = null;
-		try {
-			jsonObject = new JSONObject(model);
-
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			CustomGrailsUser principal = auth.getPrincipal();
-			Tenant tenant = Tenant.get(principal.tenantId);
-
-			def c = User.createCriteria();
-
-			def users = c.list {
-				and {
-					eq("tenantId",tenant.id)
-				}
-				order("lastUpdated", "desc")
-			}
-
-			if(!users) {
-				handlerService.handleUserError('com.moovt.common.User.notFound',null);
-			} else {
-				render "{\"users\":" + users.encodeAsJSON() + "}"
-			}
-		} catch (Throwable e) {
-			handlerService.handleException(e);
-		}
-	}
-
 
 	/**
 	 * This API is retrieves a User by id. This API is only available to users with the Administrator privilege.
@@ -468,6 +433,85 @@ class UserController {
 				notificationService.notifyPasswordChanged (user, resetPassword);
 			}
 			handlerService.handleSuccess('com.moovt.UserController.newPasswordSent', [email] as Object[]);
+		} catch (Throwable e) {
+			handlerService.handleException(e);
+		}
+	}
+
+	/**
+	 * This API retrieves all Users. This API is only available to users with the Administrator privilege.
+	 *
+	 * @param  url   <server-name>/user/retrieveAllUsers
+	 * @param  input-sample {}
+	 * @return output-sample {"users":[{"id":4,"version":1,"firstName":"Admin","lastName":"Admin","phone":"800-800-8080","email":"admin@worldtaxi.com"},{"id":5,"version":1,"firstName":"John","lastName":"Goodrider","phone":"800-800-8080","email":"jgoodrider@worldtaxi.com","passenger":{"id":5}},{"id":6,"version":1,"firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@worldtaxi.com","driver":{"id":6,"servedMetro":"Chicago-Naperville-Joliet, IL","carType":"VAN"}}]}
+	 */
+	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+	def retrieveAllUsers() {
+
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Tenant tenant = Tenant.get(principal.tenantId);
+
+			def c = User.createCriteria();
+
+			def users = c.list {
+				and {
+					eq("tenantId",tenant.id)
+				}
+				order("lastUpdated", "desc")
+			}
+
+			if(!users) {
+				handlerService.handleUserError('com.moovt.common.User.notFound',null);
+			} else {
+				render "{\"users\":" + users.encodeAsJSON() + "}"
+			}
+		} catch (Throwable e) {
+			handlerService.handleException(e);
+		}
+	}
+
+	
+	/**
+	 * This API retrieves all Users. This API is only available to users with the Administrator privilege.
+	 *
+	 * The return users using the JSONP convention. Please use retrieveAllUsers instead.
+	 *
+	 */
+	@Secured(['ROLE_ADMIN','IS_AUTHENTICATED_FULLY'	])
+	def retrieveAllUsersAsJSONP() {
+		String model = request.reader.getText();
+		log.info(this.actionName + " params are: " + params + " and model is : " + model);
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(model);
+
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			CustomGrailsUser principal = auth.getPrincipal();
+			Tenant tenant = Tenant.get(principal.tenantId);
+
+			def c = User.createCriteria();
+
+			def users = c.list {
+				and {
+					eq("tenantId",tenant.id)
+				}
+				order("lastUpdated", "desc")
+			}
+
+			if(!users) {
+				System.out.println("No user");
+				handlerService.handleUserError('com.moovt.common.User.notFound',null);
+			} else {
+				System.out.println("${params.callback}(${users as JSON})");
+				render "${params.callback}(${users as JSON})"
+			}
 		} catch (Throwable e) {
 			handlerService.handleException(e);
 		}

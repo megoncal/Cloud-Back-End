@@ -1,106 +1,6 @@
 Testsuite: com.moovt.RideFunctionalTests
-Tests run: 18, Failures: 0, Errors: 0, Time elapsed: 4.402 sec
+Tests run: 18, Failures: 4, Errors: 0, Time elapsed: 14.468 sec
 ------------- Standard Output ---------------
---Output from testCloseRideAlreadyClosed--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
-================================================================================
-2013-09-03 04:51:15,766 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
-
-2013-09-03 04:51:15,790 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"02049C8DAEE1F78917C1A857F142743D","userType":"PASSENGER"}}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-	
-				{"id":"5","version":"1","rating":"5","comments":"Great ride!"}
-				
-================================================================================
-2013-09-03 04:51:15,849 [http-bio-8080-exec-24] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 	
-				{"id":"5","version":"1","rating":"5","comments":"Great ride!"}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"This ride has already been completed. Unable to add comment."}}
-================================================================================
-#
---Output from testCloseRideUnsassignedError--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
-================================================================================
-2013-09-03 04:51:15,914 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
-
-2013-09-03 04:51:15,934 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"655686710EBEAB54A59E85D68C83C66D","userType":"PASSENGER"}}
-================================================================================
-#
-== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"id":"8","version":"1","rating":"5","comments":"Great ride!"}
-				
-================================================================================
-2013-09-03 04:51:15,976 [http-bio-8080-exec-25] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
-				{"id":"8","version":"1","rating":"5","comments":"Great ride!"}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"This ride is unassigned and can't be completed."}}
-================================================================================
-#
 --Output from testCancelRideSuccessEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -115,18 +15,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:16,028 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:53,718 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:16,048 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:22:53,743 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"984F9D2329C67AF068FF4BF5B229BE04","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"7F6F2877606947F7E5A63120608C2FFF","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/cancelRide parameters: ==
@@ -139,7 +39,7 @@ Accept: */*
 				{"id":"6","version":"1"}
 				
 ================================================================================
-2013-09-03 04:51:16,079 [http-bio-8080-exec-26] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
+2013-09-17 23:22:53,821 [http-bio-8080-exec-27] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
 				{"id":"6","version":"1"}
 				
 
@@ -165,18 +65,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:16,228 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:54,095 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:16,247 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:22:54,118 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"36FAE02914D0714324FE6B07A0DF80C4","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"737C9E599C0CE2306173C512A6E4CAD4","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/cancelRide parameters: ==
@@ -190,7 +90,7 @@ Accept: */*
 				{"id":"7","version":"1"}
 				
 ================================================================================
-2013-09-03 04:51:16,285 [http-bio-8080-exec-27] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
+2013-09-17 23:22:54,162 [http-bio-8080-exec-28] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
 				{"id":"7","version":"1"}
 				
 
@@ -216,18 +116,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:16,385 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:54,279 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:16,402 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:22:54,298 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"EBA71F801217A62BB99C8DCDE69D7C4D","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"CF5729EA876D3DF42096575FE9801C47","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/cancelRide parameters: ==
@@ -240,7 +140,7 @@ Accept: */*
 				{"id":"40","version":"1"}
 				
 ================================================================================
-2013-09-03 04:51:16,433 [http-bio-8080-exec-28] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
+2013-09-17 23:22:54,406 [http-bio-8080-exec-29] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
 				{"id":"40","version":"1"}
 				
 
@@ -266,18 +166,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:16,481 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:54,447 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:16,498 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:22:54,466 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"93A5B2FBD973AA9DF2A76A25661A0967","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"C48638CAEBE665B051C201DDBE406177","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/cancelRide parameters: ==
@@ -291,7 +191,7 @@ Accept: */*
 				{"id":"40","version":"1"}
 				
 ================================================================================
-2013-09-03 04:51:16,532 [http-bio-8080-exec-29] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
+2013-09-17 23:22:54,606 [http-bio-8080-exec-30] INFO  taxi.RideController  - cancelRide params are: [action:cancelRide, controller:ride] and model is : 
 				{"id":"40","version":"1"}
 				
 
@@ -317,18 +217,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:16,637 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:54,760 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:16,662 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:22:54,779 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"D2727B8637D89D75346E31C4CAB774D9","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"67AE8ED24C9A37D3198F7B0E053B485E","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/retrievePassengerRides parameters: ==
@@ -341,7 +241,7 @@ Accept: */*
 				{}
 				
 ================================================================================
-2013-09-03 04:51:16,698 [http-bio-8080-exec-30] INFO  taxi.RideController  - retrievePassengerRides params are: [action:retrievePassengerRides, controller:ride] and model is : 
+2013-09-17 23:22:54,817 [http-bio-8080-exec-31] INFO  taxi.RideController  - retrievePassengerRides params are: [action:retrievePassengerRides, controller:ride] and model is : 
 				{}
 				
 
@@ -367,18 +267,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:17,032 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:55,380 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:17,048 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
+2013-09-17 23:22:55,422 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"A37A876902DF842F01D8D07E85EA00BD","userType":"DRIVER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"1FCDFF6BC1F8EB0F582C3762EBD98B6A","userType":"DRIVER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
@@ -391,19 +291,19 @@ Accept: */*
 				{}
 				
 ================================================================================
-2013-09-03 04:51:17,084 [http-bio-8080-exec-31] INFO  taxi.RideController  - retrieveUnassignedRideInServedArea params are: [action:retrieveUnassignedRideInServedArea, controller:ride] and model is : 
+2013-09-17 23:22:55,463 [http-bio-8080-exec-4] INFO  taxi.RideController  - retrieveUnassignedRideInServedArea params are: [action:retrieveUnassignedRideInServedArea, controller:ride] and model is : 
 				{}
 				
 
-2013-09-03 04:51:17,096 [http-bio-8080-exec-31] INFO  taxi.RideController  - About to compile list of nearby rides for <com.moovt.taxi.Driver@45480dc0 activeStatus=ENABLED carType=B_VAN servedLocation=com.moovt.taxi.Location : 9 tenantId=2 createdBy=2 lastUpdatedBy=2 dateCreated=2013-09-03 04:50:58.0 lastUpdated=2013-09-03 04:50:58.0 CRUDMessage=null errors=null id=8 version=0 user=com.moovt.common.User : 8>
+2013-09-17 23:22:55,475 [http-bio-8080-exec-4] INFO  taxi.RideController  - About to compile list of nearby rides for <com.moovt.taxi.Driver@8aed496 activeStatus=ENABLED carType=B_VAN servedLocation=com.moovt.taxi.Location : 9 tenantId=2 createdBy=2 lastUpdatedBy=2 dateCreated=2013-09-17 23:22:24.0 lastUpdated=2013-09-17 23:22:24.0 CRUDMessage=null errors=null id=8 version=0 user=com.moovt.audit.User : 8>
 
-2013-09-03 04:51:17,096 [http-bio-8080-exec-31] INFO  taxi.RideController  - The served location is <com.moovt.taxi.Location@2bea1ca2 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-03 04:50:58.0 dateCreated=2013-09-03 04:50:58.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE errors=null id=9 version=0>
+2013-09-17 23:22:55,476 [http-bio-8080-exec-4] INFO  taxi.RideController  - The served location is <com.moovt.taxi.Location@10d09044 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE CRUDMessage=null errors=null id=9 version=0>
 
-2013-09-03 04:51:17,098 [http-bio-8080-exec-31] INFO  taxi.RideController  - The served location is <com.moovt.taxi.Location@2bea1ca2 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-03 04:50:58.0 dateCreated=2013-09-03 04:50:58.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE errors=null id=9 version=0>
+2013-09-17 23:22:55,478 [http-bio-8080-exec-4] INFO  taxi.RideController  - The served location is <com.moovt.taxi.Location@10d09044 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE CRUDMessage=null errors=null id=9 version=0>
 
-2013-09-03 04:51:17,118 [http-bio-8080-exec-31] INFO  moovt.LocationService  - Finding Nearby Rides for <com.moovt.taxi.Location@2bea1ca2 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-03 04:50:58.0 dateCreated=2013-09-03 04:50:58.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE errors=null id=9 version=0>
+2013-09-17 23:22:55,503 [http-bio-8080-exec-4] INFO  moovt.LocationService  - Finding Nearby Rides for <com.moovt.taxi.Location@10d09044 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Naperville politicalName=Illinois, United States latitude=41.7858629 longitude=-88.1472893 locationType=APPROXIMATE CRUDMessage=null errors=null id=9 version=0>
 
-2013-09-03 04:51:17,303 [http-bio-8080-exec-31] INFO  moovt.LocationService  - <org.hibernate.impl.SQLQueryImpl@5269ef20 queryReturns=[] queryReturnBuilders=null autoDiscoverTypes=false querySpaces=null callable=false queryString=SELECT r.id as rideId, 3956 * 2 * ASIN(SQRT( POWER(SIN((:lat - latitude) * pi()/180 / 2), 2) +COS(:lat * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((:lon - longitude) * pi()/180 / 2), 2) )) as distance FROM  ride r, location l WHERE r.pick_up_location_id = l.id AND r.ride_status = 'UNASSIGNED' AND l.longitude between :lon1 and :lon2 and l.latitude between :lat1 and :lat2 having distance < :dist ORDER BY distance limit 10 session=SessionImpl(PersistenceContext[entityKeys=[EntityKey[com.moovt.common.User#8], EntityKey[com.moovt.taxi.Driver#8], EntityKey[com.moovt.taxi.Location#9]],collectionKeys=[]];ActionQueue[insertions=[] updates=[] deletions=[] collectionCreations=[] collectionRemovals=[] collectionUpdates=[]]) parameterMetadata=org.hibernate.engine.query.ParameterMetadata@4f21836f values=[] types=[] namedParameters=[lon:-88.1472893, lon2:-86.86447027315957, lon1:-89.43010832684043, lat:41.7858629, lat2:42.742384639130435, dist:66.0, lat1:40.82934116086956] namedParameterLists=[:] optionalObject=null optionalId=null optionalEntityName=null selection=org.hibernate.engine.RowSelection@213c14ff cacheable=false cacheRegion=null comment=dynamic native SQL query flushMode=null cacheMode=null sessionFlushMode=null sessionCacheMode=null collectionKey=null readOnly=null resultTransformer=null>
+2013-09-17 23:22:55,865 [http-bio-8080-exec-4] INFO  moovt.LocationService  - <org.hibernate.impl.SQLQueryImpl@5db31b74 queryReturns=[] queryReturnBuilders=null autoDiscoverTypes=false querySpaces=null callable=false queryString=SELECT r.id as rideId, 3956 * 2 * ASIN(SQRT( POWER(SIN((:lat - latitude) * pi()/180 / 2), 2) +COS(:lat * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((:lon - longitude) * pi()/180 / 2), 2) )) as distance FROM  ride r, location l WHERE r.pick_up_location_id = l.id AND r.ride_status = 'UNASSIGNED' AND l.longitude between :lon1 and :lon2 and l.latitude between :lat1 and :lat2 having distance < :dist ORDER BY distance limit 10 session=SessionImpl(PersistenceContext[entityKeys=[EntityKey[com.moovt.taxi.Driver#8], EntityKey[com.moovt.audit.User#8], EntityKey[com.moovt.taxi.Location#9]],collectionKeys=[]];ActionQueue[insertions=[] updates=[] deletions=[] collectionCreations=[] collectionRemovals=[] collectionUpdates=[]]) parameterMetadata=org.hibernate.engine.query.ParameterMetadata@5531a60b values=[] types=[] namedParameters=[lon:-88.1472893, lon2:-86.86447027315957, lon1:-89.43010832684043, lat:41.7858629, lat2:42.742384639130435, dist:66.0, lat1:40.82934116086956] namedParameterLists=[:] optionalObject=null optionalId=null optionalEntityName=null selection=org.hibernate.engine.RowSelection@2e8c47df cacheable=false cacheRegion=null comment=dynamic native SQL query flushMode=null cacheMode=null sessionFlushMode=null sessionCacheMode=null collectionKey=null readOnly=null resultTransformer=null>
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
@@ -427,20 +327,20 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"detroitCityDriverUser","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:17,880 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:58,287 [http-bio-8080-exec-7] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"detroitCityDriverUser","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:17,913 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
+2013-09-17 23:22:58,307 [http-bio-8080-exec-7] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
 
-2013-09-03 04:51:17,913 [http-bio-8080-exec-13] WARN  common.LoginController  - A user has a new apns token. The user id is 13
+2013-09-17 23:22:58,307 [http-bio-8080-exec-7] WARN  common.LoginController  - A user has a new apns token. The user id is 13
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"2FD9C5F47F2542DC462748E056C39E2C","userType":"DRIVER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"854EC7CAF505E7CCF8C076A5744B6EAF","userType":"DRIVER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/retrieveUnassignedRideInServedArea parameters: ==
@@ -453,19 +353,19 @@ Accept: */*
 				{}
 				
 ================================================================================
-2013-09-03 04:51:18,070 [http-bio-8080-exec-13] INFO  taxi.RideController  - retrieveUnassignedRideInServedArea params are: [action:retrieveUnassignedRideInServedArea, controller:ride] and model is : 
+2013-09-17 23:22:58,529 [http-bio-8080-exec-7] INFO  taxi.RideController  - retrieveUnassignedRideInServedArea params are: [action:retrieveUnassignedRideInServedArea, controller:ride] and model is : 
 				{}
 				
 
-2013-09-03 04:51:18,078 [http-bio-8080-exec-13] INFO  taxi.RideController  - About to compile list of nearby rides for <com.moovt.taxi.Driver@4a333cbd activeStatus=ENABLED carType=B_VAN servedLocation=com.moovt.taxi.Location : 4 tenantId=2 createdBy=2 lastUpdatedBy=2 dateCreated=2013-09-03 04:50:59.0 lastUpdated=2013-09-03 04:50:59.0 CRUDMessage=null errors=null id=13 version=0 user=com.moovt.common.User : 13>
+2013-09-17 23:22:58,545 [http-bio-8080-exec-7] INFO  taxi.RideController  - About to compile list of nearby rides for <com.moovt.taxi.Driver@1138b647 activeStatus=ENABLED carType=B_VAN servedLocation=com.moovt.taxi.Location : 4 tenantId=2 createdBy=2 lastUpdatedBy=2 dateCreated=2013-09-17 23:22:25.0 lastUpdated=2013-09-17 23:22:25.0 CRUDMessage=null errors=null id=13 version=0 user=com.moovt.audit.User : 13>
 
-2013-09-03 04:51:18,079 [http-bio-8080-exec-13] INFO  taxi.RideController  - The served location is <com.moovt.taxi.Location@55695f36 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-03 04:50:58.0 dateCreated=2013-09-03 04:50:58.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE errors=null id=4 version=0>
+2013-09-17 23:22:58,546 [http-bio-8080-exec-7] INFO  taxi.RideController  - The served location is <com.moovt.taxi.Location@2d4e753a tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE CRUDMessage=null errors=null id=4 version=0>
 
-2013-09-03 04:51:18,079 [http-bio-8080-exec-13] INFO  taxi.RideController  - The served location is <com.moovt.taxi.Location@55695f36 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-03 04:50:58.0 dateCreated=2013-09-03 04:50:58.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE errors=null id=4 version=0>
+2013-09-17 23:22:58,547 [http-bio-8080-exec-7] INFO  taxi.RideController  - The served location is <com.moovt.taxi.Location@2d4e753a tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE CRUDMessage=null errors=null id=4 version=0>
 
-2013-09-03 04:51:18,080 [http-bio-8080-exec-13] INFO  moovt.LocationService  - Finding Nearby Rides for <com.moovt.taxi.Location@55695f36 tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-03 04:50:58.0 dateCreated=2013-09-03 04:50:58.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE errors=null id=4 version=0>
+2013-09-17 23:22:58,550 [http-bio-8080-exec-7] INFO  moovt.LocationService  - Finding Nearby Rides for <com.moovt.taxi.Location@2d4e753a tenantId=2 createdBy=2 lastUpdatedBy=2 lastUpdated=2013-09-17 23:22:24.0 dateCreated=2013-09-17 23:22:24.0 locationName=Detroit politicalName=Michigan, United States latitude=42.331427 longitude=-83.0457538 locationType=APPROXIMATE CRUDMessage=null errors=null id=4 version=0>
 
-2013-09-03 04:51:18,081 [http-bio-8080-exec-13] INFO  moovt.LocationService  - <org.hibernate.impl.SQLQueryImpl@3e9be3a3 queryReturns=[] queryReturnBuilders=null autoDiscoverTypes=false querySpaces=null callable=false queryString=SELECT r.id as rideId, 3956 * 2 * ASIN(SQRT( POWER(SIN((:lat - latitude) * pi()/180 / 2), 2) +COS(:lat * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((:lon - longitude) * pi()/180 / 2), 2) )) as distance FROM  ride r, location l WHERE r.pick_up_location_id = l.id AND r.ride_status = 'UNASSIGNED' AND l.longitude between :lon1 and :lon2 and l.latitude between :lat1 and :lat2 having distance < :dist ORDER BY distance limit 10 session=SessionImpl(PersistenceContext[entityKeys=[EntityKey[com.moovt.taxi.Location#4], EntityKey[com.moovt.common.User#13], EntityKey[com.moovt.taxi.Driver#13]],collectionKeys=[]];ActionQueue[insertions=[] updates=[] deletions=[] collectionCreations=[] collectionRemovals=[] collectionUpdates=[]]) parameterMetadata=org.hibernate.engine.query.ParameterMetadata@4f21836f values=[] types=[] namedParameters=[lon:-83.0457538, lon2:-81.75186617305094, lon1:-84.33964142694906, lat:42.331427, lat2:43.287948739130435, dist:66.0, lat1:41.37490526086956] namedParameterLists=[:] optionalObject=null optionalId=null optionalEntityName=null selection=org.hibernate.engine.RowSelection@6c7e0271 cacheable=false cacheRegion=null comment=dynamic native SQL query flushMode=null cacheMode=null sessionFlushMode=null sessionCacheMode=null collectionKey=null readOnly=null resultTransformer=null>
+2013-09-17 23:22:58,552 [http-bio-8080-exec-7] INFO  moovt.LocationService  - <org.hibernate.impl.SQLQueryImpl@13ef297a queryReturns=[] queryReturnBuilders=null autoDiscoverTypes=false querySpaces=null callable=false queryString=SELECT r.id as rideId, 3956 * 2 * ASIN(SQRT( POWER(SIN((:lat - latitude) * pi()/180 / 2), 2) +COS(:lat * pi()/180) * COS(latitude * pi()/180) *POWER(SIN((:lon - longitude) * pi()/180 / 2), 2) )) as distance FROM  ride r, location l WHERE r.pick_up_location_id = l.id AND r.ride_status = 'UNASSIGNED' AND l.longitude between :lon1 and :lon2 and l.latitude between :lat1 and :lat2 having distance < :dist ORDER BY distance limit 10 session=SessionImpl(PersistenceContext[entityKeys=[EntityKey[com.moovt.taxi.Location#4], EntityKey[com.moovt.audit.User#13], EntityKey[com.moovt.taxi.Driver#13]],collectionKeys=[]];ActionQueue[insertions=[] updates=[] deletions=[] collectionCreations=[] collectionRemovals=[] collectionUpdates=[]]) parameterMetadata=org.hibernate.engine.query.ParameterMetadata@5531a60b values=[] types=[] namedParameters=[lon:-83.0457538, lon2:-81.75186617305094, lon1:-84.33964142694906, lat:42.331427, lat2:43.287948739130435, dist:66.0, lat1:41.37490526086956] namedParameterLists=[:] optionalObject=null optionalId=null optionalEntityName=null selection=org.hibernate.engine.RowSelection@3a8c12cf cacheable=false cacheRegion=null comment=dynamic native SQL query flushMode=null cacheMode=null sessionFlushMode=null sessionCacheMode=null collectionKey=null readOnly=null resultTransformer=null>
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
@@ -489,18 +389,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:18,118 [http-bio-8080-exec-1] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:58,618 [http-bio-8080-exec-11] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jspeedy","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:18,134 [http-bio-8080-exec-1] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
+2013-09-17 23:22:58,662 [http-bio-8080-exec-11] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"A348A0DAE49E3904073111B9CB3B3E0E","userType":"DRIVER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"196D75A0796254D30A6C03EEFBA1FA20","userType":"DRIVER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/assignRideToDriver parameters: ==
@@ -513,7 +413,7 @@ Accept: */*
 				{"id":"3","version":"1"}
 				
 ================================================================================
-2013-09-03 04:51:18,171 [http-bio-8080-exec-1] INFO  taxi.RideController  - assignRideToDriver params are: [action:assignRideToDriver, controller:ride] and model is : 
+2013-09-17 23:22:58,726 [http-bio-8080-exec-11] INFO  taxi.RideController  - assignRideToDriver params are: [action:assignRideToDriver, controller:ride] and model is : 
 				{"id":"3","version":"1"}
 				
 
@@ -522,9 +422,63 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Ride 3 updated"}}
+{"result":{"type":"USER","code":"ERROR","message":"Property [createdBy] of class [class com.moovt.taxi.NotificationTask] cannot be null"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [updated] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [updated] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.RideFunctionalTests.testAssignRideToDriverEnglish(RideFunctionalTests.groovy:103)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/ride/assignRideToDriver
+
+
 --Output from testRetrieveAllRidesEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -539,18 +493,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"admin","password":"911admin"}
 				
 ================================================================================
-2013-09-03 04:51:18,453 [http-bio-8080-exec-12] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:23:00,689 [http-bio-8080-exec-1] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"admin","password":"911admin"}
 				
 
-2013-09-03 04:51:18,469 [http-bio-8080-exec-12] INFO  common.LoginController  - User has been successfully authenticated [ROLE_ADMIN]
+2013-09-17 23:23:00,708 [http-bio-8080-exec-1] INFO  common.LoginController  - User has been successfully authenticated [ROLE_ADMIN]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"4E30E56FC4AB63B1332077814616C4AF","userType":"NO_TYPE"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"91D77AF63F06D60D74736BF88897BE8E","userType":"NO_TYPE"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/retrieveAllRides parameters: ==
@@ -563,7 +517,7 @@ Accept: */*
 				{}
 				
 ================================================================================
-2013-09-03 04:51:18,504 [http-bio-8080-exec-12] INFO  taxi.RideController  - retrieveAllRides params are: [action:retrieveAllRides, controller:ride] and model is : 
+2013-09-17 23:23:01,103 [http-bio-8080-exec-1] INFO  taxi.RideController  - retrieveAllRides params are: [action:retrieveAllRides, controller:ride] and model is : 
 				{}
 				
 
@@ -572,7 +526,7 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"rides":[{"id":1,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 1","messageToTheDriver":"Please come fast ride 1"},{"id":2,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Functional Test Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 2","messageToTheDriver":"Please come fast ride 2"},{"id":3,"version":1,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":8,"version":0,"username":"jspeedy","firstName":"John","lastName":"Speedy","phone":"800-800-2020","email":"jspeedy@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":4,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":5,"version":0,"rideStatus":{"code":"COMPLETED","description":"Completed"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":3.5,"comments":"Great Driver","pickUpLocationComplement":"Close to Vest Ride 5","messageToTheDriver":"Please come fast Ride 5"},{"id":6,"version":1,"rideStatus":{"code":"CANCELED","description":"Canceled"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":7,"version":1,"rideStatus":{"code":"CANCELED","description":"Canceled"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":8,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null}]}
+{"rides":[{"id":1,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 1","messageToTheDriver":"Please come fast ride 1"},{"id":2,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Functional Test Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":"Close to Vest Ride 2","messageToTheDriver":"Please come fast ride 2"},{"id":3,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":4,"version":0,"rideStatus":{"code":"ASSIGNED","description":"Assigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":{"id":7,"version":0,"username":"jgoodarm","firstName":"John","lastName":"Goodarm","phone":"800-800-2020","email":"jgoodarm@mtaxi.com","driver":{"servedLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}}},"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":5,"version":0,"rideStatus":{"code":"COMPLETED","description":"Completed"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":3.5,"comments":"Great Driver","pickUpLocationComplement":"Close to Vest Ride 5","messageToTheDriver":"Please come fast Ride 5"},{"id":6,"version":1,"rideStatus":{"code":"CANCELED","description":"Canceled"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":7,"version":1,"rideStatus":{"code":"CANCELED","description":"Canceled"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null},{"id":8,"version":0,"rideStatus":{"code":"UNASSIGNED","description":"Unassigned"},"carType":{"code":"A_SEDAN","description":"Sedan"},"driver":null,"passenger":{"id":6,"version":1,"username":"jgoodrider","firstName":"John","lastName":"DecidedToBeADriver","phone":"773-329-1784","email":"jgoodrider@mtaxi.com","driver":{"servedLocation":{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413628,"longitude":-43.9373064,"locationType":"RANGE_INTERPOLATED"},"carType":{"code":"B_VAN","description":"Van"},"activeStatus":{"code":"ENABLED","description":"Enabled"}},"passenger":{}},"pickUpDateTime":"2013-03-13 20:10","pickUpLocation":{"locationName":"Contagem","politicalName":"Minas Gerais, Brazil","latitude":-19.9385599,"longitude":-44.0529377,"locationType":"APPROXIMATE"},"dropOffLocation":{"locationName":"Naperville","politicalName":"Illinois, United States","latitude":41.7858629,"longitude":-88.1472893,"locationType":"APPROXIMATE"},"rating":null,"comments":null,"pickUpLocationComplement":null,"messageToTheDriver":null}]}
 ================================================================================
 #
 --Output from testRetrieveAssignedRidesEnglish--
@@ -589,18 +543,18 @@ Accept: */*
                         {"type":"Self","tenantname":"MTaxi","username":"jgoodarm","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:18,718 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:23:01,372 [http-bio-8080-exec-14] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
                         {"type":"Self","tenantname":"MTaxi","username":"jgoodarm","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:18,733 [http-bio-8080-exec-10] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
+2013-09-17 23:23:01,398 [http-bio-8080-exec-14] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"AAC1FFDC3D0D3123ECA8898413BB212E","userType":"DRIVER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"D1D65EDE651696A066FD9A04072001C5","userType":"DRIVER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/retrieveAssignedRides parameters: ==
@@ -613,7 +567,7 @@ Accept: */*
 				{}
 				
 ================================================================================
-2013-09-03 04:51:18,766 [http-bio-8080-exec-10] INFO  taxi.RideController  - retrieveAssignedRides params are: [action:retrieveAssignedRides, controller:ride] and model is : 
+2013-09-17 23:23:01,450 [http-bio-8080-exec-14] INFO  taxi.RideController  - retrieveAssignedRides params are: [action:retrieveAssignedRides, controller:ride] and model is : 
 				{}
 				
 
@@ -639,18 +593,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:18,896 [http-bio-8080-exec-20] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:23:01,683 [http-bio-8080-exec-18] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:18,914 [http-bio-8080-exec-20] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:23:01,705 [http-bio-8080-exec-18] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"75816F5CEB7FDD06959AC7B3EFF2A93F","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"7FA99301B10AE529E36AFC034EA75724","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/createRide parameters: ==
@@ -689,7 +643,7 @@ Accept: */*
 }
 				
 ================================================================================
-2013-09-03 04:51:18,949 [http-bio-8080-exec-20] INFO  taxi.RideController  - createRide params are: [action:createRide, controller:ride] and model is : 
+2013-09-17 23:23:01,814 [http-bio-8080-exec-18] INFO  taxi.RideController  - createRide params are: [action:createRide, controller:ride] and model is : 
 {
   "id" : 0,
   "pickUpLocation" : {
@@ -719,34 +673,76 @@ Accept: */*
 }
 				
 
-2013-09-03 04:51:18,950 [http-bio-8080-exec-20] INFO  taxi.RideController  - Creating a new ride
+2013-09-17 23:23:01,815 [http-bio-8080-exec-18] INFO  taxi.RideController  - Creating a new ride
 
-2013-09-03 04:51:18,976 [http-bio-8080-exec-20] INFO  taxi.RideController  - {"politicalName":"Illinois, United States","locationType":"APPROXIMATE","longitude":-88.14729,"latitude":41.78586,"locationName":"Naperville"}
+2013-09-17 23:23:01,993 [http-bio-8080-exec-18] INFO  taxi.RideController  - {"politicalName":"Illinois, United States","locationType":"APPROXIMATE","longitude":-88.14729,"latitude":41.78586,"locationName":"Naperville"}
 
-2013-09-03 04:51:18,988 [http-bio-8080-exec-20] INFO  taxi.RideController  - {"politicalName":"Illinois, United States","locationType":"APPROXIMATE","longitude":-88.10701,"latitude":41.86614,"locationName":"Wheaton"}
+2013-09-17 23:23:02,009 [http-bio-8080-exec-18] INFO  taxi.RideController  - {"politicalName":"Illinois, United States","locationType":"APPROXIMATE","longitude":-88.10701,"latitude":41.86614,"locationName":"Wheaton"}
 
-2013-09-03 04:51:19,019 [http-bio-8080-exec-20] INFO  taxi.RideController  - Notifying driver 7
-
-2013-09-03 04:51:19,051 [http-bio-8080-exec-20] INFO  taxi.RideController  - Notifying driver 8
-
-2013-09-03 04:51:19,069 [http-bio-8080-exec-20] INFO  taxi.RideController  - Notifying driver 9
-
-2013-09-03 04:51:19,089 [http-bio-8080-exec-20] INFO  taxi.RideController  - Notifying driver 17
-
-2013-09-03 04:51:19,113 [http-bio-8080-exec-20] INFO  taxi.RideController  - Notifying driver 18
-
-2013-09-03 04:51:19,142 [http-bio-8080-exec-20] INFO  taxi.RideController  - Notifying driver 11
-
-2013-09-03 04:51:19,173 [http-bio-8080-exec-20] INFO  taxi.RideController  - Notifying driver 12
+2013-09-17 23:23:02,074 [http-bio-8080-exec-18] INFO  taxi.RideController  - Notifying driver 7
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Ride #9 created and sent to 7 drivers. "}}
+{"result":{"type":"USER","code":"ERROR","message":"Property [createdBy] of class [class com.moovt.taxi.NotificationTask] cannot be null"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [SUCCESS] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.RideFunctionalTests.testCreateRideENglish(RideFunctionalTests.groovy:211)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/ride/createRide
+
+
 --Output from testCloneRide--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -761,18 +757,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:19,282 [http-bio-8080-exec-21] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:23:04,412 [http-bio-8080-exec-21] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:19,302 [http-bio-8080-exec-21] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:23:04,458 [http-bio-8080-exec-21] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"7033199CD70173367A239658696D7923","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"B08E932310F0690596EB00128A25EFA3","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/cloneRide parameters: ==
@@ -784,7 +780,7 @@ Accept: */*
 
 {"id":"5"}				
 ================================================================================
-2013-09-03 04:51:19,332 [http-bio-8080-exec-21] INFO  taxi.RideController  - cloneRide params are: [action:cloneRide, controller:ride] and model is : 
+2013-09-17 23:23:04,512 [http-bio-8080-exec-21] INFO  taxi.RideController  - cloneRide params are: [action:cloneRide, controller:ride] and model is : 
 {"id":"5"}				
 
 Interceptor createPage: TopLevelWindow[name=""]
@@ -809,18 +805,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:19,448 [http-bio-8080-exec-24] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:23:04,636 [http-bio-8080-exec-25] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:19,477 [http-bio-8080-exec-24] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:23:04,656 [http-bio-8080-exec-25] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"C9EFA21263872813660563D5D43EB46C","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"BB87AD25E08A9060D670879899B8ADEA","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/cloneRide parameters: ==
@@ -833,7 +829,7 @@ Accept: */*
 {"idx":"5"}
 				
 ================================================================================
-2013-09-03 04:51:19,520 [http-bio-8080-exec-24] INFO  taxi.RideController  - cloneRide params are: [action:cloneRide, controller:ride] and model is : 
+2013-09-17 23:23:04,700 [http-bio-8080-exec-25] INFO  taxi.RideController  - cloneRide params are: [action:cloneRide, controller:ride] and model is : 
 {"idx":"5"}
 				
 
@@ -859,18 +855,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:19,623 [http-bio-8080-exec-28] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:23:05,070 [http-bio-8080-exec-28] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:19,645 [http-bio-8080-exec-28] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:23:05,088 [http-bio-8080-exec-28] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"66F04D43FB4F0ACF6CF305EC615A04CF","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"8B55BDB9CD631C5F91B6F89A10967C70","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
@@ -883,7 +879,7 @@ Accept: */*
 				{"id":"4","version":"1","rating":"5","comments":"Great ride!"}
 				
 ================================================================================
-2013-09-03 04:51:19,683 [http-bio-8080-exec-28] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
+2013-09-17 23:23:05,147 [http-bio-8080-exec-28] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
 				{"id":"4","version":"1","rating":"5","comments":"Great ride!"}
 				
 
@@ -892,9 +888,63 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Ride 4 updated"}}
+{"result":{"type":"USER","code":"ERROR","message":"Property [createdBy] of class [class com.moovt.taxi.NotificationTask] cannot be null"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [SUCCESS] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.RideFunctionalTests.testCloseRideSuccessEnglish(RideFunctionalTests.groovy:294)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/ride/closeRide
+
+
 --Output from testCloseRideSuccessPortuguese--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -909,18 +959,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:19,786 [http-bio-8080-exec-29] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:23:05,575 [http-bio-8080-exec-29] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:19,807 [http-bio-8080-exec-29] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:23:05,616 [http-bio-8080-exec-29] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"CAC6B6769818752B96EDC276052A83EC","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"9C0775061A0310961E1039363A61884B","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
@@ -934,7 +984,7 @@ Accept: */*
 				{"id":"2","version":"1","rating":"5","comments":"Bom motorista"}
 				
 ================================================================================
-2013-09-03 04:51:19,840 [http-bio-8080-exec-29] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
+2013-09-17 23:23:05,676 [http-bio-8080-exec-29] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
 				{"id":"2","version":"1","rating":"5","comments":"Bom motorista"}
 				
 
@@ -943,9 +993,63 @@ Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Corrida 2 atualizado"}}
+{"result":{"type":"USER","code":"ERROR","message":"O campo [createdBy] da classe [class com.moovt.taxi.NotificationTask] não pode ser vazia"}}
 ================================================================================
 #
+Failed: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: Expected content to loosely contain [SUCCESS] but it didn't
+	at junit.framework.Assert.fail(Assert.java:50)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at com.grailsrocks.functionaltest.TestCaseBase.assertContentContains(TestCaseBase.groovy:298)
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:179)
+	at com.moovt.RideFunctionalTests.testCloseRideSuccessPortuguese(RideFunctionalTests.groovy:332)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.Suite.runChild(Suite.java:128)
+	at org.junit.runners.Suite.runChild(Suite.java:24)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.junit.runners.ParentRunner$run.call(Unknown Source)
+	at _GrailsTest_groovy$_run_closure4.doCall(_GrailsTest_groovy:290)
+	at _GrailsTest_groovy$_run_closure2.doCall(_GrailsTest_groovy:248)
+	at _GrailsTest_groovy$_run_closure1_closure21.doCall(_GrailsTest_groovy:195)
+	at _GrailsTest_groovy$_run_closure1.doCall(_GrailsTest_groovy:184)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at TestApp$_run_closure1.doCall(TestApp.groovy:82)
+	at org.codehaus.gant.GantMetaClass.invokeMethod(GantMetaClass.java:133)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16_closure18.doCall(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding.withTargetEvent(GantBinding.groovy:90)
+	at org.codehaus.gant.GantBinding.this$4$withTargetEvent(GantBinding.groovy)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy:185)
+	at org.codehaus.gant.GantBinding$_initializeGantBinding_closure5_closure16.doCall(GantBinding.groovy)
+URL: http://localhost:8080/moovt/ride/closeRide
+
+
 --Output from testCloseRideBadMessage--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
@@ -960,18 +1064,18 @@ Accept: */*
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 ================================================================================
-2013-09-03 04:51:20,015 [http-bio-8080-exec-6] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:23:06,506 [http-bio-8080-exec-5] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
 				
 
-2013-09-03 04:51:20,043 [http-bio-8080-exec-6] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+2013-09-17 23:23:06,528 [http-bio-8080-exec-5] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"989D8D513527E628C46728AED177B113","userType":"PASSENGER"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"DDFEF90057B7D835AB740592C4A088DD","userType":"PASSENGER"}}
 ================================================================================
 #
 == Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
@@ -984,7 +1088,7 @@ Accept: */*
 				{"id":"3","version":"1"}
 				
 ================================================================================
-2013-09-03 04:51:20,082 [http-bio-8080-exec-6] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
+2013-09-17 23:23:07,111 [http-bio-8080-exec-5] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
 				{"id":"3","version":"1"}
 				
 
@@ -996,10 +1100,108 @@ Content of web window [TopLevelWindow[name=""]] changed
 {"result":{"type":"SYSTEM","code":"ERROR","message":"JSONObject[\"rating\"] not found."}}
 ================================================================================
 #
+--Output from testCloseRideAlreadyClosed--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:07,518 [http-bio-8080-exec-9] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:07,541 [http-bio-8080-exec-9] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"E6DC7C618CB42D3114A78D92EDCF19E1","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+	
+				{"id":"5","version":"1","rating":"5","comments":"Great ride!"}
+				
+================================================================================
+2013-09-17 23:23:07,580 [http-bio-8080-exec-9] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 	
+				{"id":"5","version":"1","rating":"5","comments":"Great ride!"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"This ride has already been completed. Unable to add comment."}}
+================================================================================
+#
+--Output from testCloseRideUnsassignedError--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:23:07,624 [http-bio-8080-exec-15] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:23:07,644 [http-bio-8080-exec-15] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"4A2D43C562B006506A8AB1A7EFEA0822","userType":"PASSENGER"}}
+================================================================================
+#
+== Making request POST http://localhost:8080/moovt/ride/closeRide parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"id":"8","version":"1","rating":"5","comments":"Great ride!"}
+				
+================================================================================
+2013-09-17 23:23:07,818 [http-bio-8080-exec-15] INFO  taxi.RideController  - closeRide params are: [action:closeRide, controller:ride] and model is : 
+				{"id":"8","version":"1","rating":"5","comments":"Great ride!"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"This ride is unassigned and can't be completed."}}
+================================================================================
+#
 ------------- ---------------- ---------------
 ------------- Standard Error -----------------
---Output from testCloseRideAlreadyClosed--
---Output from testCloseRideUnsassignedError--
 --Output from testCancelRideSuccessEnglish--
 --Output from testCancelRideSuccessPortuguese--
 --Output from testCancelRideNotFoundEnglish--
@@ -1013,26 +1215,56 @@ Content of web window [TopLevelWindow[name=""]] changed
 --Output from testCreateRideENglish--
 --Output from testCloneRide--
 --Output from testCloneRideBadMessage--
+2013-09-17 23:23:04,703 [http-bio-8080-exec-25] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["id"] not found.
+
 --Output from testCloseRideSuccessEnglish--
 --Output from testCloseRideSuccessPortuguese--
 --Output from testCloseRideBadMessage--
+2013-09-17 23:23:07,114 [http-bio-8080-exec-5] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["rating"] not found.
+
+--Output from testCloseRideAlreadyClosed--
+--Output from testCloseRideUnsassignedError--
 ------------- ---------------- ---------------
 
-Testcase: testCloseRideAlreadyClosed took 0.192 sec
-Testcase: testCloseRideUnsassignedError took 0.107 sec
-Testcase: testCancelRideSuccessEnglish took 0.201 sec
-Testcase: testCancelRideSuccessPortuguese took 0.113 sec
-Testcase: testCancelRideNotFoundEnglish took 0.134 sec
-Testcase: testCancelRideNotFoundPortuguese took 0.098 sec
-Testcase: testRetrievePassengerRidesEnglish took 0.421 sec
-Testcase: testRetrieveUnassignedRideInServedAreaEnglish took 0.713 sec
-Testcase: testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish took 0.407 sec
-Testcase: testAssignRideToDriverEnglish took 0.334 sec
-Testcase: testRetrieveAllRidesEnglish took 0.264 sec
-Testcase: testRetrieveAssignedRidesEnglish took 0.177 sec
-Testcase: testCreateRideENglish took 0.344 sec
-Testcase: testCloneRide took 0.198 sec
-Testcase: testCloneRideBadMessage took 0.116 sec
-Testcase: testCloseRideSuccessEnglish took 0.221 sec
-Testcase: testCloseRideSuccessPortuguese took 0.158 sec
-Testcase: testCloseRideBadMessage took 0.177 sec
+Testcase: testCancelRideSuccessEnglish took 0.644 sec
+Testcase: testCancelRideSuccessPortuguese took 0.19 sec
+Testcase: testCancelRideNotFoundEnglish took 0.218 sec
+Testcase: testCancelRideNotFoundPortuguese took 0.202 sec
+Testcase: testRetrievePassengerRidesEnglish took 0.508 sec
+Testcase: testRetrieveUnassignedRideInServedAreaEnglish took 2.84 sec
+Testcase: testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish took 0.593 sec
+Testcase: testAssignRideToDriverEnglish took 2.039 sec
+	FAILED
+com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [updated] but it didn't
+junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [updated] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.RideFunctionalTests.testAssignRideToDriverEnglish(RideFunctionalTests.groovy:103)
+
+Testcase: testRetrieveAllRidesEnglish took 0.708 sec
+Testcase: testRetrieveAssignedRidesEnglish took 0.313 sec
+Testcase: testCreateRideENglish took 2.459 sec
+	FAILED
+com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.RideFunctionalTests.testCreateRideENglish(RideFunctionalTests.groovy:211)
+
+Testcase: testCloneRide took 0.503 sec
+Testcase: testCloneRideBadMessage took 0.11 sec
+Testcase: testCloseRideSuccessEnglish took 0.712 sec
+	FAILED
+com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.RideFunctionalTests.testCloseRideSuccessEnglish(RideFunctionalTests.groovy:294)
+
+Testcase: testCloseRideSuccessPortuguese took 0.598 sec
+	FAILED
+com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+junit.framework.AssertionFailedError: com.grailsrocks.functionaltest.FunctionalTestException: Expected content to loosely contain [SUCCESS] but it didn't
+	at com.grailsrocks.functionaltest.TestCaseBase.invokeMethod(TestCaseBase.groovy:184)
+	at com.moovt.RideFunctionalTests.testCloseRideSuccessPortuguese(RideFunctionalTests.groovy:332)
+
+Testcase: testCloseRideBadMessage took 1.094 sec
+Testcase: testCloseRideAlreadyClosed took 0.47 sec
+Testcase: testCloseRideUnsassignedError took 0.235 sec

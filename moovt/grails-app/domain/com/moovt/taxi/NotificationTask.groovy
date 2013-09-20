@@ -1,23 +1,23 @@
-package com.moovt.taxi;
+package com.moovt.taxi; 
+           
+import java.util.Date; 
+ 
+import com.moovt.audit.DomainHelper;
+import com.moovt.audit.MultiTenantAudit;
 
-import java.util.Date;
-
-import com.moovt.MultiTenantAudit;
-import com.moovt.taxi.Location;
-import com.moovt.DomainHelper;
-
+     
 enum TaskStatus {
 	INQUEUE, PROCESSED, FAILED
  }
-
+ 
 enum TaskType {
 	EMAIL, PUSHNOTIF
- }
+ } 
 /**
  * This class represents a <code>Ride</code>. 
  *
  * @author egoncalves
- *
+ * 
  */
 @MultiTenantAudit
 class NotificationTask {
@@ -33,7 +33,6 @@ class NotificationTask {
 	String failedReason;
 	
 	static constraints = {
-
 		processDate nullable: true
 		failedReason nullable: true
 	}

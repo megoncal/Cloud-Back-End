@@ -1,267 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Eduardo-Goncalvess-MacBook-Pro.local" name="com.moovt.LoginFunctionalTests" tests="15" time="1.241" timestamp="2013-09-03T09:51:14">
+<testsuite errors="0" failures="0" hostname="Eduardo-Goncalvess-MacBook-Pro.local" name="com.moovt.LoginFunctionalTests" tests="15" time="2.019" timestamp="2013-09-18T03:22:51">
   <properties />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginSuccessEnglish" time="0.144" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginSuccessPortuguese" time="0.121" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoTenantEnglish" time="0.044" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoTenantPortuguese" time="0.048" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginTenantNotFoundEnglish" time="0.042" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginTenantNotFoundPortuguese" time="0.081" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoPasswordEnglish" time="0.084" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoUsernamedEnglish" time="0.093" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginFailedEnglish" time="0.123" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoPasswordPortuguese" time="0.079" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoUsernamedPortuguese" time="0.08" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginFailedPortuguese" time="0.08" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginWithApnsToken" time="0.063" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginKeepApnsToken" time="0.064" />
-  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginBadMessage" time="0.063" />
-  <system-out><![CDATA[--Output from testLoginSuccessEnglish--
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginBadMessage" time="0.082" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoPasswordPortuguese" time="0.264" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoUsernamedPortuguese" time="0.108" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginFailedPortuguese" time="0.188" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginWithApnsToken" time="0.147" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginKeepApnsToken" time="0.118" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginTenantNotFoundEnglish" time="0.103" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginTenantNotFoundPortuguese" time="0.131" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoPasswordEnglish" time="0.099" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoUsernamedEnglish" time="0.439" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginFailedEnglish" time="0.055" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginSuccessEnglish" time="0.065" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginSuccessPortuguese" time="0.083" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoTenantEnglish" time="0.038" />
+  <testcase classname="com.moovt.LoginFunctionalTests" name="testLoginNoTenantPortuguese" time="0.047" />
+  <system-out><![CDATA[--Output from testLoginBadMessage--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
 == Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
 == Request headers: ============================================================
-Accept-Language: en-US
 Accept-Encoding: gzip, deflate
 Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
-				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
 ================================================================================
-2013-09-03 04:51:14,537 [http-bio-8080-exec-8] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
-
-2013-09-03 04:51:14,576 [http-bio-8080-exec-8] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
-
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"C5A92DA64147F7E9A5D7380E1BEAAE91","userType":"PASSENGER"}}
-================================================================================
-#
---Output from testLoginSuccessPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
-================================================================================
-2013-09-03 04:51:14,623 [http-bio-8080-exec-7] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
-				
-
-2013-09-03 04:51:14,699 [http-bio-8080-exec-7] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"24052C2CA7D5B77F71C4BFE710969D5F","userType":"PASSENGER"}}
-================================================================================
-#
---Output from testLoginNoTenantEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
-				
-================================================================================
-2013-09-03 04:51:14,743 [http-bio-8080-exec-12] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company."}}
-================================================================================
-#
---Output from testLoginNoTenantPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
-				
-================================================================================
-2013-09-03 04:51:14,792 [http-bio-8080-exec-9] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"A companhia deve ser preenchida."}}
-================================================================================
-#
---Output from testLoginTenantNotFoundEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
-				
-================================================================================
-2013-09-03 04:51:14,836 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"This company (BadTenant) was not found. Please enter a valid company name."}}
-================================================================================
-#
---Output from testLoginTenantNotFoundPortuguese--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: pt-BR
-Accept-Charset: UTF-8
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
-				
-================================================================================
-2013-09-03 04:51:14,895 [http-bio-8080-exec-2] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"Esta companhia (BadTenant) não foi encontrada."}}
-================================================================================
-#
---Output from testLoginNoPasswordEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":""}
-				
-================================================================================
-2013-09-03 04:51:14,990 [http-bio-8080-exec-11] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":""}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password."}}
-================================================================================
-#
---Output from testLoginNoUsernamedEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "MTaxi", "username": "", "password":"admin"}
-				
-================================================================================
-2013-09-03 04:51:15,082 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname": "MTaxi", "username": "", "password":"admin"}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"Authentication failed because no username was provided. Please enter a username."}}
-================================================================================
-#
---Output from testLoginFailedEnglish--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
-== Request headers: ============================================================
-Accept-Language: en-US
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"badPw"}
-				
-================================================================================
-2013-09-03 04:51:15,173 [http-bio-8080-exec-11] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
-				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"badPw"}
-				
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"USER","code":"ERROR","message":"User name and or password is invalid. Please try again."}}
+{"result":{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}}
 ================================================================================
 #
 --Output from testLoginNoPasswordPortuguese--
@@ -279,7 +51,7 @@ Accept: */*
 				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":""}
 				
 ================================================================================
-2013-09-03 04:51:15,297 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:51,500 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":""}
 				
 
@@ -306,7 +78,7 @@ Accept: */*
 				{"type":"Self","tenantname": "MTaxi", "username": "", "password":"admin"}
 				
 ================================================================================
-2013-09-03 04:51:15,379 [http-bio-8080-exec-11] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:51,727 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname": "MTaxi", "username": "", "password":"admin"}
 				
 
@@ -333,7 +105,7 @@ Accept: */*
 				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"badPw"}
 				
 ================================================================================
-2013-09-03 04:51:15,451 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:51,905 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"badPw"}
 				
 
@@ -361,19 +133,19 @@ Accept: */*
 
 				
 ================================================================================
-2013-09-03 04:51:15,519 [http-bio-8080-exec-11] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:52,077 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jWillGainApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
 
 				
 
-2013-09-03 04:51:15,538 [http-bio-8080-exec-11] INFO  common.LoginController  - User has been successfully authenticated [ROLE_NO_ROLES]
+2013-09-17 23:22:52,116 [http-bio-8080-exec-10] INFO  common.LoginController  - User has been successfully authenticated [ROLE_NO_ROLES]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"5401AFBC5CEB0D06FC12D6FCFA2DE485","userType":"NO_TYPE"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"8CDCBB3BAFD93836332A2F529C74AA71","userType":"NO_TYPE"}}
 ================================================================================
 #
 --Output from testLoginKeepApnsToken--
@@ -392,56 +164,286 @@ Accept: */*
 
 				
 ================================================================================
-2013-09-03 04:51:15,586 [http-bio-8080-exec-13] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+2013-09-17 23:22:52,203 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
 				{"type":"Self","tenantname":"MTaxi","username":"jKeepApnsToken","password":"Welcome!1","apnsToken":"9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504"}
 
 				
 
-2013-09-03 04:51:15,602 [http-bio-8080-exec-13] INFO  common.LoginController  - User has been successfully authenticated [ROLE_NO_ROLES]
+2013-09-17 23:22:52,240 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_NO_ROLES]
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"FC9E4123AD09B35376CCA67A1DBC2742","userType":"NO_TYPE"}}
+{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"E08A28044C237C22816395514039E1FD","userType":"NO_TYPE"}}
 ================================================================================
 #
---Output from testLoginBadMessage--
+--Output from testLoginTenantNotFoundEnglish--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
 == Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
 == Request headers: ============================================================
+Accept-Language: en-US
 Accept-Encoding: gzip, deflate
 Content-Type: application/json
 Accept: */*
 == Content =====================================================================
 
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
+				
 ================================================================================
+2013-09-17 23:22:52,335 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
+				
+
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
 == Response was 200 (OK) headers: ==============================================
 ================================================================================
 == Content =====================================================================
-{"result":{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}}
+{"result":{"type":"USER","code":"ERROR","message":"This company (BadTenant) was not found. Please enter a valid company name."}}
+================================================================================
+#
+--Output from testLoginTenantNotFoundPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Charset: UTF-8
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
+				
+================================================================================
+2013-09-17 23:22:52,466 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname": "BadTenant", "username": "admin", "password":"admin"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Esta companhia (BadTenant) não foi encontrada."}}
+================================================================================
+#
+--Output from testLoginNoPasswordEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":""}
+				
+================================================================================
+2013-09-17 23:22:52,569 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":""}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Authentication failed because no password was provided. Please enter a password."}}
+================================================================================
+#
+--Output from testLoginNoUsernamedEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "MTaxi", "username": "", "password":"admin"}
+				
+================================================================================
+2013-09-17 23:22:53,047 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname": "MTaxi", "username": "", "password":"admin"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Authentication failed because no username was provided. Please enter a username."}}
+================================================================================
+#
+--Output from testLoginFailedEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"badPw"}
+				
+================================================================================
+2013-09-17 23:22:53,091 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname": "MTaxi", "username": "admin", "password":"badPw"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"User name and or password is invalid. Please try again."}}
+================================================================================
+#
+--Output from testLoginSuccessEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:53,148 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:53,169 [http-bio-8080-exec-4] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login successful."}, "additionalInfo":{"JSESSIONID":"E81C65656AC6195600E0FE9253D45645","userType":"PASSENGER"}}
+================================================================================
+#
+--Output from testLoginSuccessPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+================================================================================
+2013-09-17 23:22:53,231 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname":"MTaxi","username":"jgoodrider","password":"Welcome!1"}
+				
+
+2013-09-17 23:22:53,256 [http-bio-8080-exec-10] INFO  common.LoginController  - User has been successfully authenticated [ROLE_DRIVER, ROLE_PASSENGER]
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"SUCCESS","message":"Login bem sucedido."}, "additionalInfo":{"JSESSIONID":"B3AFC91AF87F75DD67A69074111176D7","userType":"PASSENGER"}}
+================================================================================
+#
+--Output from testLoginNoTenantEnglish--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: en-US
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+================================================================================
+2013-09-17 23:22:53,297 [http-bio-8080-exec-4] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"Authentication failed because no company was provided. Please enter a company."}}
+================================================================================
+#
+--Output from testLoginNoTenantPortuguese--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/login/authenticateUser parameters: ==
+== Request headers: ============================================================
+Accept-Language: pt-BR
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+================================================================================
+2013-09-17 23:22:53,344 [http-bio-8080-exec-10] INFO  common.LoginController  - Authenticating user with params:[action:authenticateUser, controller:login]and model: 
+				{"type":"Self","tenantname": "", "username": "admin", "password":"admin"}
+				
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"USER","code":"ERROR","message":"A companhia deve ser preenchida."}}
 ================================================================================
 #
 ]]></system-out>
-  <system-err><![CDATA[--Output from testLoginSuccessEnglish--
---Output from testLoginSuccessPortuguese--
---Output from testLoginNoTenantEnglish--
---Output from testLoginNoTenantPortuguese--
---Output from testLoginTenantNotFoundEnglish--
---Output from testLoginTenantNotFoundPortuguese--
---Output from testLoginNoPasswordEnglish--
---Output from testLoginNoUsernamedEnglish--
---Output from testLoginFailedEnglish--
+  <system-err><![CDATA[--Output from testLoginBadMessage--
+2013-09-17 23:22:51,410 [http-bio-8080-exec-1] ERROR moovt.HandlerService  - A generic exception occurred A JSONObject text must begin with '{' at character 0 of 
+
 --Output from testLoginNoPasswordPortuguese--
 --Output from testLoginNoUsernamedPortuguese--
 --Output from testLoginFailedPortuguese--
 --Output from testLoginWithApnsToken--
 --Output from testLoginKeepApnsToken--
---Output from testLoginBadMessage--
+--Output from testLoginTenantNotFoundEnglish--
+--Output from testLoginTenantNotFoundPortuguese--
+--Output from testLoginNoPasswordEnglish--
+--Output from testLoginNoUsernamedEnglish--
+--Output from testLoginFailedEnglish--
+--Output from testLoginSuccessEnglish--
+--Output from testLoginSuccessPortuguese--
+--Output from testLoginNoTenantEnglish--
+--Output from testLoginNoTenantPortuguese--
 ]]></system-err>
 </testsuite>

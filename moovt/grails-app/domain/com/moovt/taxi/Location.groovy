@@ -1,15 +1,14 @@
-package com.moovt.taxi
-
-//import com.moovt.MultiTenantAudit;
+package com.moovt.taxi;
+ 
 import java.util.Date;
 
-import com.moovt.DomainHelper;
+import com.moovt.audit.MultiTenantAudit;
 
 enum LocationType {
 	ROOFTOP, RANGE_INTERPOLATED, GEOMETRIC_CENTER, APPROXIMATE
 }
-
-//@MultiTenantAudit
+  
+@MultiTenantAudit
 class Location {
 
 	Long tenantId;
@@ -32,13 +31,4 @@ class Location {
 		lastUpdated nullable: true
 		dateCreated nullable: true
 	}
-	
-	def beforeInsert() {
-		DomainHelper.setAuditAttributes(this);
-	}
-	
-	def beforeUpdate() {
-		DomainHelper.setAuditAttributes(this);
-	}
-
 }

@@ -6,16 +6,47 @@
 	<script>
 
 			$(document).ready(function () {
-                                        
+                              
+                              
+var people =
+  { "programmers": [
+    { "firstName": "Brett", "lastName":"McLaughlin", "email": "brett@newInstance.com" },
+    { "firstName": "Jason", "lastName":"Hunter", "email": "jason@servlets.com" },
+    { "firstName": "Elliotte", "lastName":"Harold", "email": "elharo@macfaq.com" }
+   ],
+  "authors": [
+    { "firstName": "Isaac", "lastName": "Asimov", "genre": "science fiction" },
+    { "firstName": "Tad", "lastName": "Williams", "genre": "fantasy" },
+    { "firstName": "Frank", "lastName": "Peretti", "genre": "christian fiction" }
+   ],
+  "musicians": [
+    { "firstName": "Eric", "lastName": "Clapton", "instrument": "guitar" },
+    { "firstName": "Sergei", "lastName": "Rachmaninoff", "instrument": "piano" }
+   ]
+  }          
+  var sp = JSON.stringify (people);
+  
+  log.info("Here " + sp);
+  
+ 
+  
                     var dataSource = new kendo.data.DataSource({
                             transport: {
                                 read:  {
                                     url: "${g.createLink(controller:'user',action:'retrieveAllUsersAsJSONP')}",
                                     type: "POST",
                                     dataType: "jsonp",
-                                    contentType: 'application/json'
+                                    contentType: "text/plain",
+                                    data: ""
+                                },
+                                parameterMap: function(options, operation) {
+                                    if (operation !== "read" && options.models) {
+                                        return kendo.stringify(options.models);
+                                    } else {
+                                    	return "{}";
+                                    }
                                 }
-                            },
+                             },
                             pageSize: 12,
                             schema: {
                                 model: {

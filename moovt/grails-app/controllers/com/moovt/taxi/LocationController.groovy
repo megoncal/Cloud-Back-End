@@ -1,7 +1,7 @@
 package com.moovt.taxi
 
 import com.moovt.CallResult
-import com.moovt.CustomGrailsUser
+import com.moovt.audit.CustomGrailsUser;
 import com.moovt.taxi.Passenger
 import com.moovt.HandlerService
 import com.moovt.LocationService

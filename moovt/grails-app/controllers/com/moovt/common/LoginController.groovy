@@ -16,11 +16,14 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
-import com.moovt.BadDataAuthenticationException
-import com.moovt.CustomGrailsUser
 import com.moovt.HandlerService
-import com.moovt.TenantAuthenticationToken
-import com.moovt.TenantUserPasswordAuthenticationException
+import com.moovt.audit.BadDataAuthenticationException;
+import com.moovt.audit.CustomGrailsUser;
+import com.moovt.audit.Tenant;
+import com.moovt.audit.TenantAuthenticationToken;
+import com.moovt.audit.TenantUserPasswordAuthenticationException;
+import com.moovt.audit.User;
+import com.moovt.audit.UserType;
 
 
 /**

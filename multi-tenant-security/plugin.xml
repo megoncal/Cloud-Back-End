@@ -1,0 +1,23 @@
+<plugin name='multi-tenant-security' version='0.1' grailsVersion='2.2 &gt; *'>
+  <author>Your name</author>
+  <title>Multi Tenant Security Plugin</title>
+  <description>Brief summary/description of the plugin.
+</description>
+  <documentation>http://grails.org/plugin/multi-tenant-security</documentation>
+  <type>MultiTenantSecurityGrailsPlugin</type>
+  <resources>
+    <resource>spring.resources</resource>
+  </resources>
+  <repositories>
+    <repository name='grailsCentral' url='http://grails.org/plugins' />
+    <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
+  </repositories>
+  <dependencies />
+  <plugins>
+    <compile>
+      <plugin group='org.grails.plugins' name='spring-security-core' version='1.2.7.3' />
+    </compile>
+  </plugins>
+  <runtimePluginRequirements />
+  <behavior />
+</plugin>

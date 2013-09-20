@@ -1,10 +1,10 @@
 package com.moovt.taxi
-
+ 
 import java.util.Date;
 
-import com.moovt.MultiTenantAudit;
-import com.moovt.DomainHelper
-import com.moovt.common.User;
+import com.moovt.audit.DomainHelper;
+import com.moovt.audit.MultiTenantAudit;
+import com.moovt.audit.User;
 
 /**
  * This class represents a <code>Passenger</code>. A <code>Passenger</code> has the same id as its associated <code>User</code>.
@@ -15,7 +15,7 @@ import com.moovt.common.User;
 @MultiTenantAudit
 class Passenger {
 	
-
+   
 	
 	static belongsTo = [ user: User ]
 	

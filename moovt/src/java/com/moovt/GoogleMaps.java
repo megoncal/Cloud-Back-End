@@ -14,7 +14,6 @@ public class GoogleMaps {
 	public static List<Location> searchLocation(String locationStr) throws LocationSearchException{
 		List<Location> l = new ArrayList<Location>();
 
-		System.out.println("............................");
 		try {
 
 			//Some know issues with the Google API
@@ -41,8 +40,12 @@ public class GoogleMaps {
 
 			GoogleGeoCodeResponse result = mapper.readValue(url,GoogleGeoCodeResponse.class);
 
+			if (result.status.equals("ZERO_RESULTS")) {
+				return l;
+			}
+			
 			if (!(result.status.equals("OK"))) {
-				throw new LocationSearchException ();
+				throw new LocationSearchException ("A not OK was return ");
 			}
 
 			for (results aResult : result.results) {
@@ -63,7 +66,8 @@ public class GoogleMaps {
 					String shortName = aAddressComponent.short_name;
 					String longName = aAddressComponent.long_name;
 
-					for (String type : aAddressComponent.types) {
+					for(int i =0; i < aAddressComponent.types.length; i++) {
+						String type = aAddressComponent.types [i];
 						if (type.equals("establishment")) {
 							establishment = longName;
 						}
@@ -90,26 +94,26 @@ public class GoogleMaps {
 					}
 				}
 
-				if (establishment!="") {
+				if (!establishment.equals("")) {
 					locationName = establishment;
 					politicalName = city +", " + stateShort +", "+countryShort;
-				} else if (route!="") {
-					if (countryShort == "US") {
-						if (streetNumber!="") {
+				} else if (!route.equals("")) {
+					if (countryShort.equals("US")) {
+						if (!streetNumber.equals("")) {
 							locationName = streetNumber + " " + route;
 						} else {
 							locationName = route;
 						}
 					}
-					if (countryShort == "BR") {
-						if (streetNumber!="") {
+					if (countryShort.equals("BR")) {
+						if (!streetNumber.equals("")) {
 							locationName = route + ", " + streetNumber;
 						} else {
 							locationName = route;
 						}
 					}
 					politicalName = city +", " + stateShort +", "+countryShort;
-				} else if (city!="") { //No street
+				} else if (!city.equals("")) { //No street
 					locationName = city;
 					politicalName = stateLong +", "+countryLong;
 				}
@@ -119,8 +123,6 @@ public class GoogleMaps {
 				location.setLatitude(new Double(aResult.geometry.location.lat));
 				location.setLongitude(new Double(aResult.geometry.location.lng));
 				String locationType = aResult.geometry.location_type;
-				System.out.println("locationType " + locationType);
-				
 				if (locationType.equals("ROOFTOP")) {
 					location.setLocationType(LocationType.ROOFTOP);
 				}

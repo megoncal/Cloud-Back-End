@@ -1,10 +1,11 @@
 package com.moovt.taxi
-
+ 
 import java.util.Date;
 
-import com.moovt.MultiTenantAudit;
-import com.moovt.DomainHelper;
-import com.moovt.common.User;
+import com.moovt.audit.DomainHelper;
+import com.moovt.audit.MultiTenantAudit;
+import com.moovt.audit.User;
+
 
 //TODO: Make Car Type more intelligent
 enum CarType {
@@ -21,7 +22,7 @@ enum ActiveStatus  {
  * 
  * @author egoncalves
  *
- */
+ */ 
 @MultiTenantAudit
 class Driver { 
 
@@ -30,7 +31,7 @@ class Driver {
 	CarType carType
 	Location servedLocation
 	static belongsTo = [ user: User ] 
-	
+	 
 	
 	static mapping = {
 		id column: 'user_id', generator: 'foreign',
