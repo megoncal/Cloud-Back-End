@@ -37,23 +37,15 @@ class UserController {
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-	def test() {
-		def moovtAdminUser = new MyTest(
-			tenantId: 1,
-			createdBy: 1,
-			lastUpdatedBy: 1,
-			test1: 'admin',
-			test2: '911admin').save(failOnError: true);
-			render "DONE";
-	}
+	
 	def apns() {
 		try {
 			PayloadBuilder payloadBuilder = APNS.newPayload();
 			payloadBuilder.alertBody("Can't be simpler than this!Hey");
 			String payload = payloadBuilder.build();
 
-			String token = "9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504";
-			//9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504
+			//String token = "9a1cd75847e20f1a27132790dfe1a0cb4107f42da1a39c019dd1a0820fc5c504";
+			String token = "d00f3ccc77a79a20caaeb00418997b53c135d04ab2df4ca99ac674b35f5b9636";
 			log.info("Now pushing");
 
 			apnsService.push(token, payload);

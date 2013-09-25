@@ -60,7 +60,7 @@ class User  {
 		phone nullable:false, blank: false
 		username nullable:false, blank: false, unique: ['tenantId']
 		password nullable:false, blank: false
-		email nullable:false, blank: false //,unique: true
+		email nullable:false, blank: false, unique: true
 		tenantname bindable: true
 		passenger nullable:true
 		driver nullable:true

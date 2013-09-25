@@ -24,6 +24,7 @@ class HandlerService {
 
 	public ObjectError getFirstError (ValidationErrors errors) {
 
+		log.info(errors.toString());
 		ObjectError fieldError = errors.getFieldError();
 		ObjectError globalError = errors.getGlobalError();
 		if (globalError) {

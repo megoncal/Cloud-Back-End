@@ -309,12 +309,12 @@ class NotificationService {
 
 		//Insert into the notification task table
 		def emailNotification = new NotificationTask(
-				tenantId: TaxiAppConstant.TENANTID,
-				createdBy: TaxiAppConstant.ADMINUSER,
-				lastUpdatedBy: TaxiAppConstant.ADMINUSER,
+				tenantId: 1,
+				createdBy: 1,
+				lastUpdatedBy: 1,
 				taskType: TaskType.EMAIL,
 				taskStatus: TaskStatus.INQUEUE,
-				notificationFrom: "dispatch@moovt.com",
+				notificationFrom: "mtaxi@moovt.com",
 				notificationTo: user.email,
 				subject: emailSubject,
 				message: emailBody).save(failOnError: true);

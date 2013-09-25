@@ -1,22 +1,22 @@
+--Output from testRetrieveAssignedRidesEnglish--
 --Output from testCancelRideSuccessEnglish--
+--Output from testCloseRideSuccessPortuguese--
+--Output from testCloseRideBadMessage--
+2013-09-20 17:37:52,147 [http-bio-8080-exec-31] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["rating"] not found.
+
+--Output from testCloneRideBadMessage--
+2013-09-20 17:37:52,271 [http-bio-8080-exec-6] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["id"] not found.
+
+--Output from testCloseRideSuccessEnglish--
 --Output from testCancelRideSuccessPortuguese--
 --Output from testCancelRideNotFoundEnglish--
 --Output from testCancelRideNotFoundPortuguese--
+--Output from testCloseRideAlreadyClosed--
+--Output from testCloseRideUnsassignedError--
+--Output from testRetrieveAllRidesEnglish--
 --Output from testRetrievePassengerRidesEnglish--
 --Output from testRetrieveUnassignedRideInServedAreaEnglish--
 --Output from testRetrieveUnassignedRideInServedAreaNoRideFoundEnglish--
 --Output from testAssignRideToDriverEnglish--
---Output from testRetrieveAllRidesEnglish--
---Output from testRetrieveAssignedRidesEnglish--
---Output from testCreateRideENglish--
 --Output from testCloneRide--
---Output from testCloneRideBadMessage--
-2013-09-17 23:23:04,703 [http-bio-8080-exec-25] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["id"] not found.
-
---Output from testCloseRideSuccessEnglish--
---Output from testCloseRideSuccessPortuguese--
---Output from testCloseRideBadMessage--
-2013-09-17 23:23:07,114 [http-bio-8080-exec-5] ERROR moovt.HandlerService  - A generic exception occurred JSONObject["rating"] not found.
-
---Output from testCloseRideAlreadyClosed--
---Output from testCloseRideUnsassignedError--
+--Output from testCreateRideENglish--

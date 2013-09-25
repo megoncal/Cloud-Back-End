@@ -46,22 +46,12 @@
                         without a single error or failure!
                     </h3>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="testSearchBadJSON">
-<div class="grid_3 alpha">
-<p>
-<span class="icon success"></span><b class="testname message success">testSearchBadJSON</b>
-</p>
-<p class="summary">Executed in 0.183 seconds.</p>
-</div>
-<div class="grid_5 omega outputinfo"></div>
-<div class="clear"></div>
-</div>
 <div class="testcase clearfix success grid_8 alpha omega" data-name="testSearchCity">
 <div class="grid_3 alpha">
 <p>
 <span class="icon success"></span><b class="testname message success">testSearchCity</b>
 </p>
-<p class="summary">Executed in 4.088 seconds.</p>
+<p class="summary">Executed in 1.297 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -71,7 +61,17 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testSearchStreet</b>
 </p>
-<p class="summary">Executed in 0.341 seconds.</p>
+<p class="summary">Executed in 0.123 seconds.</p>
+</div>
+<div class="grid_5 omega outputinfo"></div>
+<div class="clear"></div>
+</div>
+<div class="testcase clearfix success grid_8 alpha omega" data-name="testSearchBadJSON">
+<div class="grid_3 alpha">
+<p>
+<span class="icon success"></span><b class="testname message success">testSearchBadJSON</b>
+</p>
+<p class="summary">Executed in 0.063 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -81,7 +81,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testState</b>
 </p>
-<p class="summary">Executed in 0.153 seconds.</p>
+<p class="summary">Executed in 0.147 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -91,7 +91,7 @@
 <p>
 <span class="icon success"></span><b class="testname message success">testSearchNoLocation</b>
 </p>
-<p class="summary">Executed in 0.355 seconds.</p>
+<p class="summary">Executed in 0.065 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -99,29 +99,7 @@
 <div class="clearfix output footer">
 <div class="sysout">
 <h2>Standard output</h2>
-<pre class="stdout">--Output from testSearchBadJSON--
-Switching to browser client [default]
-Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
-
-== Making request POST http://localhost:8080/moovt/location/search parameters: ==
-== Request headers: ============================================================
-Accept-Encoding: gzip, deflate
-Content-Type: application/json
-Accept: */*
-== Content =====================================================================
-
-================================================================================
-2013-09-17 23:22:45,629 [http-bio-8080-exec-7] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
-
-Interceptor createPage: TopLevelWindow[name=""]
-Content of web window [TopLevelWindow[name=""]] changed
-== Response was 200 (OK) headers: ==============================================
-================================================================================
-== Content =====================================================================
-{"result":{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}}
-================================================================================
-#
---Output from testSearchCity--
+<pre class="stdout">--Output from testSearchCity--
 Switching to browser client [default]
 Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
 
@@ -135,17 +113,17 @@ Accept: */*
 {"location":"Belo Horizonte, MG"}	
 				
 ================================================================================
-2013-09-17 23:22:45,688 [http-bio-8080-exec-3] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+2013-09-20 17:37:48,698 [http-bio-8080-exec-9] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
 {"location":"Belo Horizonte, MG"}	
 				
 
-2013-09-17 23:22:49,734 [http-bio-8080-exec-3] INFO  taxi.LocationController  - About to render locations (1/2)
+2013-09-20 17:37:49,877 [http-bio-8080-exec-9] INFO  taxi.LocationController  - About to render locations (1/2)
 
-2013-09-17 23:22:49,735 [http-bio-8080-exec-3] INFO  taxi.LocationController  - Rendering locations [{"locationName":"Belo Horizonte","politicalName":"Minas Gerais, Brazil","latitude":-19.9190677,"longitude":-43.9385747,"locationType":"APPROXIMATE"}]
+2013-09-20 17:37:49,878 [http-bio-8080-exec-9] INFO  taxi.LocationController  - Rendering locations [{"locationName":"Belo Horizonte","politicalName":"Minas Gerais, Brazil","latitude":-19.9190677,"longitude":-43.9385747,"locationType":"APPROXIMATE"}]
 
-2013-09-17 23:22:49,735 [http-bio-8080-exec-3] INFO  taxi.LocationController  - About to render locations (2/2)
+2013-09-20 17:37:49,878 [http-bio-8080-exec-9] INFO  taxi.LocationController  - About to render locations (2/2)
 
-2013-09-17 23:22:49,736 [http-bio-8080-exec-3] INFO  taxi.LocationController  - Locations rendered
+2013-09-20 17:37:49,880 [http-bio-8080-exec-9] INFO  taxi.LocationController  - Locations rendered
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
@@ -169,17 +147,17 @@ Accept: */*
 {"location":"Rua Major Lopes 55, Belo Horizonte, MG"}	
 				
 ================================================================================
-2013-09-17 23:22:49,915 [http-bio-8080-exec-11] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+2013-09-20 17:37:49,921 [http-bio-8080-exec-2] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
 {"location":"Rua Major Lopes 55, Belo Horizonte, MG"}	
 				
 
-2013-09-17 23:22:50,077 [http-bio-8080-exec-11] INFO  taxi.LocationController  - About to render locations (1/2)
+2013-09-20 17:37:50,002 [http-bio-8080-exec-2] INFO  taxi.LocationController  - About to render locations (1/2)
 
-2013-09-17 23:22:50,078 [http-bio-8080-exec-11] INFO  taxi.LocationController  - Rendering locations [{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413629,"longitude":-43.9373061,"locationType":"RANGE_INTERPOLATED"}]
+2013-09-20 17:37:50,003 [http-bio-8080-exec-2] INFO  taxi.LocationController  - Rendering locations [{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413629,"longitude":-43.9373061,"locationType":"RANGE_INTERPOLATED"}]
 
-2013-09-17 23:22:50,078 [http-bio-8080-exec-11] INFO  taxi.LocationController  - About to render locations (2/2)
+2013-09-20 17:37:50,003 [http-bio-8080-exec-2] INFO  taxi.LocationController  - About to render locations (2/2)
 
-2013-09-17 23:22:50,078 [http-bio-8080-exec-11] INFO  taxi.LocationController  - Locations rendered
+2013-09-20 17:37:50,003 [http-bio-8080-exec-2] INFO  taxi.LocationController  - Locations rendered
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
@@ -187,6 +165,28 @@ Content of web window [TopLevelWindow[name=""]] changed
 ================================================================================
 == Content =====================================================================
 {"locations":[{"locationName":"Rua Major Lopes, 55","politicalName":"Belo Horizonte, MG, BR","latitude":-19.9413629,"longitude":-43.9373061,"locationType":"RANGE_INTERPOLATED"}]}
+================================================================================
+#
+--Output from testSearchBadJSON--
+Switching to browser client [default]
+Creating to new client [default] of type [class com.grailsrocks.functionaltest.client.BrowserClient]
+
+== Making request POST http://localhost:8080/moovt/location/search parameters: ==
+== Request headers: ============================================================
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+Accept: */*
+== Content =====================================================================
+
+================================================================================
+2013-09-20 17:37:50,048 [http-bio-8080-exec-5] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+
+Interceptor createPage: TopLevelWindow[name=""]
+Content of web window [TopLevelWindow[name=""]] changed
+== Response was 200 (OK) headers: ==============================================
+================================================================================
+== Content =====================================================================
+{"result":{"type":"SYSTEM","code":"ERROR","message":"A JSONObject text must begin with '{' at character 0 of "}}
 ================================================================================
 #
 --Output from testState--
@@ -203,17 +203,17 @@ Accept: */*
 {"location":"MG"}	
 				
 ================================================================================
-2013-09-17 23:22:50,161 [http-bio-8080-exec-9] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+2013-09-20 17:37:50,117 [http-bio-8080-exec-8] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
 {"location":"MG"}	
 				
 
-2013-09-17 23:22:50,230 [http-bio-8080-exec-9] INFO  taxi.LocationController  - About to render locations (1/2)
+2013-09-20 17:37:50,214 [http-bio-8080-exec-8] INFO  taxi.LocationController  - About to render locations (1/2)
 
-2013-09-17 23:22:50,231 [http-bio-8080-exec-9] INFO  taxi.LocationController  - Rendering locations []
+2013-09-20 17:37:50,215 [http-bio-8080-exec-8] INFO  taxi.LocationController  - Rendering locations []
 
-2013-09-17 23:22:50,231 [http-bio-8080-exec-9] INFO  taxi.LocationController  - About to render locations (2/2)
+2013-09-20 17:37:50,215 [http-bio-8080-exec-8] INFO  taxi.LocationController  - About to render locations (2/2)
 
-2013-09-17 23:22:50,231 [http-bio-8080-exec-9] INFO  taxi.LocationController  - Locations rendered
+2013-09-20 17:37:50,215 [http-bio-8080-exec-8] INFO  taxi.LocationController  - Locations rendered
 
 Interceptor createPage: TopLevelWindow[name=""]
 Content of web window [TopLevelWindow[name=""]] changed
@@ -236,7 +236,7 @@ Accept: */*
 
 {"thisMustBeLocation":"Rua Major Lopes 55, Belo Horizonte, MG"}				
 ================================================================================
-2013-09-17 23:22:50,574 [http-bio-8080-exec-6] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
+2013-09-20 17:37:50,272 [http-bio-8080-exec-6] INFO  taxi.LocationController  - search params are: [action:search, controller:location] and model is : 
 {"thisMustBeLocation":"Rua Major Lopes 55, Belo Horizonte, MG"}				
 
 Interceptor createPage: TopLevelWindow[name=""]
@@ -251,14 +251,14 @@ Content of web window [TopLevelWindow[name=""]] changed
 </div>
 <div class="syserr">
 <h2>System error</h2>
-<pre class="syserr">--Output from testSearchBadJSON--
-2013-09-17 23:22:45,643 [http-bio-8080-exec-7] ERROR moovt.HandlerService  - A generic exception occurred A JSONObject text must begin with '{' at character 0 of 
-
---Output from testSearchCity--
+<pre class="syserr">--Output from testSearchCity--
 --Output from testSearchStreet--
+--Output from testSearchBadJSON--
+2013-09-20 17:37:50,065 [http-bio-8080-exec-5] ERROR moovt.HandlerService  - A generic exception occurred A JSONObject text must begin with '{' at character 0 of 
+
 --Output from testState--
 --Output from testSearchNoLocation--
-2013-09-17 23:22:50,591 [http-bio-8080-exec-6] ERROR moovt.HandlerService  - A generic exception occurred Unable to call googlemaps null
+2013-09-20 17:37:50,284 [http-bio-8080-exec-6] ERROR moovt.HandlerService  - A generic exception occurred Unable to call googlemaps null
 
 </pre>
 </div>
